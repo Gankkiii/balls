@@ -3,10 +3,10 @@ config_version=5
 
 [application]
 
-config/version="0.4.0"
+config/version="0.5.0"
 config/name="Balls Auto Battle"
 config/icon="res://icon.svg"
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="res://scenes/showcase.tscn"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 
 [display]
