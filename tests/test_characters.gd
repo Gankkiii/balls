@@ -195,6 +195,7 @@ func run() -> void:
 	await extended_checks()
 	await load("res://tests/new_roster_cases.gd").new().run(self)
 	load("res://tests/hud_physics_cases.gd").new().run(self)
+	load("res://tests/v04_cases.gd").new().run(self)
 	var wins := {}
 	for seed_value in 20:
 		a = battle(seed_value)
