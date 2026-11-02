@@ -48,7 +48,7 @@ func make_arena() -> Arena:
 	return a
 
 func make_main():
-	var main = load("res://scenes/main.tscn").instantiate()
+	var main = load("res://scenes/baseline.tscn").instantiate()
 	root.add_child(main)
 	main.set_process(false)
 	main.arena.initialize(42)

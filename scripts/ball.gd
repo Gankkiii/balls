@@ -19,3 +19,6 @@ func _draw() -> void:
 	draw_circle(Vector2.ZERO, radius, color)
 	draw_arc(Vector2.ZERO, radius - 1, 0, TAU, 64, color.lightened(0.4), 2, true)
 	draw_circle(Vector2(-radius * 0.3, -radius * 0.3), radius * 0.2, Color(1, 1, 1, 0.45))
+
+func inverse_mass() -> float:
+	return 1.0 / mass

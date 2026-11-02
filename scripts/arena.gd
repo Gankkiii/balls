@@ -79,9 +79,11 @@ func _correct_positions() -> void:
 			var depth := a.radius + b.radius - delta.length()
 			if depth > 0.0:
 				var normal := delta.normalized() if delta.length_squared() > 1e-12 else Vector2.RIGHT
-				var weight := 1.0 / a.mass + 1.0 / b.mass
-				a.position -= normal * depth / a.mass / weight
-				b.position += normal * depth / b.mass / weight
+				var weight := a.inverse_mass() + b.inverse_mass()
+				if weight <= 0.0:
+					continue
+				a.position -= normal * depth * a.inverse_mass() / weight
+				b.position += normal * depth * b.inverse_mass() / weight
 
 func step(dt: float) -> void:
 	if dt <= 0.0:
@@ -133,9 +135,12 @@ func step(dt: float) -> void:
 			var normal := (b.position - a.position).normalized()
 			var relative := (b.velocity - a.velocity).dot(normal)
 			if relative < -VEL_EPS:
-				var impulse := -2.0 * relative / (1.0 / a.mass + 1.0 / b.mass)
-				a.velocity -= normal * impulse / a.mass
-				b.velocity += normal * impulse / b.mass
+				var inverse_total := a.inverse_mass() + b.inverse_mass()
+				if inverse_total <= 0.0:
+					continue
+				var impulse := -2.0 * relative / inverse_total
+				a.velocity -= normal * impulse * a.inverse_mass()
+				b.velocity += normal * impulse * b.inverse_mass()
 				a.ball_collided.emit(b)
 				b.ball_collided.emit(a)
 		if wall_events.is_empty() and pair_events.is_empty():

@@ -1,13 +1,14 @@
 extends Control
 const FIXED_DT := 1.0 / 120.0
-const ArenaScene := preload("res://scenes/arena.tscn")
-const BallScene := preload("res://scenes/ball.tscn")
-var arena: Arena
+const BASE_TIME_SCALE := 2.0
+var arena: BattleArena
 var rate := 0
+var selected_rate := 1
 var accumulator := 0.0
 var suspended := false
 var status: Label
 var buttons: Array[Button] = []
+var cards: Array[Label] = []
 
 func _ready() -> void:
 	var bg := ColorRect.new()
@@ -16,58 +17,78 @@ func _ready() -> void:
 	bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(bg)
 	var title := Label.new()
-	title.text = "SMOOTH ARENA"
-	title.position = Vector2(40, 32)
-	title.add_theme_font_size_override("font_size", 32)
+	title.text = "BALLS · AUTO BATTLE"
+	title.position = Vector2(24, 18)
+	title.add_theme_font_size_override("font_size", 25)
 	add_child(title)
-	var subtitle := Label.new()
-	subtitle.text = "Frictionless motion · Elastic collisions"
-	subtitle.position = Vector2(40, 78)
-	subtitle.modulate = Color("9daec6")
-	add_child(subtitle)
-	arena = ArenaScene.instantiate()
-	arena.position = Vector2(40, 145)
+	arena = BattleArena.new()
+	arena.arena_size = Vector2(700, 600)
+	arena.position = Vector2(370, 70)
 	add_child(arena)
+	arena.setup(randi())
 	for i in 2:
-		var ball: Ball = BallScene.instantiate()
-		ball.color = Color("50e0bd") if i == 0 else Color("ffb45f")
-		arena.register_ball(ball)
-	arena.initialize(randi())
+		var card := Label.new()
+		card.position = Vector2(24, 95 + i * 280)
+		card.add_theme_font_size_override("font_size", 21)
+		card.modulate = Color("8cebd2") if i == 0 else Color("ffe0a0")
+		add_child(card)
+		cards.append(card)
 	status = Label.new()
-	status.position = Vector2(40, 845)
-	status.add_theme_font_size_override("font_size", 22)
+	status.position = Vector2(370, 685)
+	status.add_theme_font_size_override("font_size", 18)
 	add_child(status)
-	var captions := ["1×", "2×", "Pause"]
-	var rates := [1, 2, 0]
-	for i in 3:
+	var captions := ["1×", "2×", "3×", "Pause"]
+	for i in 4:
 		var button := Button.new()
 		button.text = captions[i]
-		button.position = Vector2(40 + i * 220, 900)
-		button.size = Vector2(200, 64)
-		button.add_theme_font_size_override("font_size", 26)
-		button.pressed.connect(set_rate.bind(rates[i]))
+		button.position = Vector2(370 + i * 177, 718)
+		button.size = Vector2(166, 50)
+		button.add_theme_font_size_override("font_size", 24)
+		button.pressed.connect(set_rate.bind(i + 1 if i < 3 else 0))
 		add_child(button)
 		buttons.append(button)
 	set_rate(0)
+	refresh_hud()
 
 func set_rate(value: int) -> void:
 	rate = value
+	if value > 0:
+		selected_rate = value
 	accumulator = 0.0
-	status.text = "Paused" if rate == 0 else "Running · %d×" % rate
 	for i in buttons.size():
-		buttons[i].modulate = Color("50e0bd") if [1, 2, 0][i] == rate else Color.WHITE
+		buttons[i].modulate = Color("50e0bd") if (i + 1 == selected_rate and i < 3) or (i == 3 and rate == 0) else Color.WHITE
+	refresh_hud()
+
+func cooldown_text(value: float) -> String:
+	return "READY" if value <= 0 else "%.1fs" % value
+
+func refresh_hud() -> void:
+	if not is_instance_valid(arena) or cards.size() < 2:
+		return
+	for i in 2:
+		var fighter: Fighter = arena.balls[i]
+		var names := fighter.skill_names()
+		var extra := "Gas: %d / 100" % int(fighter.gas) if fighter is Puffer else "Eggs on field: %d" % arena.eggs.size()
+		cards[i].text = "%s\nHP: %d / %d\n%s\n\n%s  %s\n%s  %s\n\nState: %s" % [fighter.title, ceili(fighter.health), int(fighter.max_health), extra, names[0], cooldown_text(fighter.cd_one), names[1], cooldown_text(fighter.cd_two), fighter.state_name()]
+	if arena.finished:
+		status.text = arena.result
+	else:
+		status.text = ("PAUSED · select speed to start" if rate == 0 else "%d× = original %d×" % [rate, rate * 2]) + "   |   %.1fs" % arena.simulation_time
 
 func advance_real_time(delta: float) -> void:
-	if rate == 0 or suspended:
+	if rate == 0 or suspended or arena.finished:
 		return
-	# Drop long background stalls; never catch up minutes of elapsed wall time.
-	accumulator += minf(delta, 0.1) * rate
+	accumulator += minf(delta, 0.1) * rate * BASE_TIME_SCALE
 	while accumulator + 1e-12 >= FIXED_DT:
 		arena.step(FIXED_DT)
 		accumulator -= FIXED_DT
+		if arena.finished:
+			accumulator = 0.0
+			break
 
 func _process(delta: float) -> void:
 	advance_real_time(delta)
+	refresh_hud()
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_APPLICATION_FOCUS_OUT or what == NOTIFICATION_APPLICATION_PAUSED:
