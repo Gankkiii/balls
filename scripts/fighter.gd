@@ -12,15 +12,18 @@ var world: Arena
 var title := "Fighter"
 var rng := RandomNumberGenerator.new()
 var hud: FighterHUD
+var show_hud := true
 
 func _ready() -> void:
+	if not show_hud:
+		return
 	hud = FighterHUD.new()
 	hud.fighter = self
 	add_child(hud)
 
 
 func stationary() -> bool:
-	return action == "inflate" or action == "lay"
+	return action == "inflate" or action == "lay" or action == "forge"
 
 func inverse_mass() -> float:
 	return 0.0 if stationary() else 1.0 / mass

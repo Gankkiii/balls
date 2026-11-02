@@ -31,7 +31,7 @@ func advance(dt: float, fighters: Array[Ball]) -> void:
 	var just_armed := false
 	if not armed:
 		for fighter in fighters:
-			if fighter != owner_fighter and fighter is Fighter and fighter.health > 0 and position.distance_to(fighter.position) <= radius + fighter.radius:
+			if fighter != owner_fighter and fighter is Fighter and fighter.health > 0 and fighter.physics_enabled and position.distance_to(fighter.position) <= radius + fighter.radius:
 				armed = true
 				fuse = 0.8
 				just_armed = true
@@ -48,7 +48,7 @@ func explode(fighters: Array[Ball]) -> void:
 	exploded = true
 	blast_left = 0.3
 	for fighter in fighters:
-		if fighter is Fighter and fighter.health > 0 and position.distance_to(fighter.position) <= blast_radius + fighter.radius:
+		if fighter is Fighter and fighter.health > 0 and fighter.physics_enabled and position.distance_to(fighter.position) <= blast_radius + fighter.radius:
 			fighter.hit(damage, fighter == owner_fighter)
 
 func _draw() -> void:

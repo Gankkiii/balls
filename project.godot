@@ -3,7 +3,7 @@ config_version=5
 
 [application]
 
-config/version="0.3.0"
+config/version="0.4.0"
 config/name="Balls Auto Battle"
 config/icon="res://icon.svg"
 run/main_scene="res://scenes/main.tscn"

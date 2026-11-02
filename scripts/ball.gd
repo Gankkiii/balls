@@ -8,6 +8,7 @@ signal ball_collided(other: Ball)
 @export var mass: float = 1.0
 @export var color: Color = Color("55d6be")
 var velocity := Vector2.ZERO
+var physics_enabled := true
 
 func configure(at: Vector2, motion: Vector2) -> void:
 	position = at

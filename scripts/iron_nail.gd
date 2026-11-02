@@ -36,11 +36,14 @@ func advance(dt: float, world: Arena) -> void:
 		if outward_left == 0:
 			mode = "rest"
 	if old != position and hit_left <= 0:
-		var enemy: Fighter = world.enemy_of(owner_fighter)
-		var closest := Geometry2D.get_closest_point_to_segment(enemy.position,old,position)
-		if closest.distance_to(enemy.position) <= enemy.radius + 5:
-			enemy.hit(16)
+		var target: Fighter = world.first_target(owner_fighter,old,position,5)
+		if target != null:
+			target.hit(16)
 			hit_left = 0.3
+			if target is Scarecrow:
+				position = target.position - old.direction_to(position) * (target.radius + 5.1)
+				mode = "rest"
+				gone = false
 	queue_redraw()
 func _draw() -> void:
 	draw_line(Vector2(-6,-5),Vector2(6,5),Color("a3c5de") if mode == "rest" else Color("ffba70"),4)

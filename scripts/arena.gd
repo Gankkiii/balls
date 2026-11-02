@@ -11,6 +11,20 @@ const MAX_EVENTS := 128
 var balls: Array[Ball] = []
 var simulation_time := 0.0
 var event_limit_hits := 0
+var contact_pairs := {}
+
+func active_balls() -> Array[Ball]:
+	var result: Array[Ball] = []
+	for ball in balls:
+		if ball.physics_enabled:
+			result.append(ball)
+	return result
+
+func release_contacts() -> void:
+	for key in contact_pairs.keys():
+		var pair: Array = contact_pairs[key]
+		if not is_instance_valid(pair[0]) or not is_instance_valid(pair[1]) or not pair[0].physics_enabled or not pair[1].physics_enabled or pair[0].position.distance_to(pair[1].position) > pair[0].radius + pair[1].radius + 0.01:
+			contact_pairs.erase(key)
 
 func register_ball(ball: Ball) -> void:
 	if not balls.has(ball):
@@ -50,6 +64,8 @@ func momentum() -> Vector2:
 	return total
 
 func _pair_time(a: Ball, b: Ball, horizon: float) -> float:
+	if not a.physics_enabled or not b.physics_enabled:
+		return INF
 	var p := b.position - a.position
 	var v := b.velocity - a.velocity
 	var distance := a.radius + b.radius
@@ -68,13 +84,14 @@ func _pair_time(a: Ball, b: Ball, horizon: float) -> float:
 	return hit if hit >= -TIME_EPS and hit <= horizon + TIME_EPS else INF
 
 func _correct_positions() -> void:
-	for ball in balls:
+	var bodies := active_balls()
+	for ball in bodies:
 		ball.position.x = clampf(ball.position.x, ball.radius, arena_size.x - ball.radius)
 		ball.position.y = clampf(ball.position.y, ball.radius, arena_size.y - ball.radius)
-	for i in balls.size():
-		for j in range(i + 1, balls.size()):
-			var a := balls[i]
-			var b := balls[j]
+	for i in bodies.size():
+		for j in range(i + 1, bodies.size()):
+			var a := bodies[i]
+			var b := bodies[j]
 			var delta := b.position - a.position
 			var depth := a.radius + b.radius - delta.length()
 			if depth > 0.0:
@@ -88,14 +105,18 @@ func _correct_positions() -> void:
 func step(dt: float) -> void:
 	if dt <= 0.0:
 		return
+	var bodies := active_balls()
 	_correct_positions()
+	release_contacts()
 	var remaining := dt
 	var events := 0
 	while remaining > TIME_EPS:
 		var earliest := remaining
 		var wall_events: Array = []
 		var pair_events: Array = []
-		for ball in balls:
+		for ball in bodies:
+			if not ball.physics_enabled:
+				continue
 			for axis in 2:
 				var speed: float = ball.velocity[axis]
 				if absf(speed) < VEL_EPS:
@@ -110,21 +131,25 @@ func step(dt: float) -> void:
 					pair_events.clear()
 				if absf(t - earliest) <= TIME_EPS:
 					wall_events.append([ball, axis])
-		for i in balls.size():
-			for j in range(i + 1, balls.size()):
-				var t := _pair_time(balls[i], balls[j], remaining)
+		for i in bodies.size():
+			for j in range(i + 1, bodies.size()):
+				var t := _pair_time(bodies[i], bodies[j], remaining)
 				if t < earliest - TIME_EPS:
 					earliest = t
 					wall_events.clear()
 					pair_events.clear()
 				if is_finite(t) and absf(t - earliest) <= TIME_EPS:
-					pair_events.append([balls[i], balls[j]])
-		for ball in balls:
-			ball.position += ball.velocity * earliest
+					pair_events.append([bodies[i], bodies[j]])
+		for ball in bodies:
+			if ball.physics_enabled:
+				ball.position += ball.velocity * earliest
 		remaining -= earliest
+		release_contacts()
 		for event in wall_events:
 			var ball: Ball = event[0]
 			var axis: int = event[1]
+			if not ball.physics_enabled:
+				continue
 			ball.velocity[axis] = -ball.velocity[axis]
 			var normal := Vector2.ZERO
 			normal[axis] = signf(ball.velocity[axis])
@@ -132,6 +157,8 @@ func step(dt: float) -> void:
 		for event in pair_events:
 			var a: Ball = event[0]
 			var b: Ball = event[1]
+			if not a.physics_enabled or not b.physics_enabled:
+				continue
 			var normal := (b.position - a.position).normalized()
 			var relative := (b.velocity - a.velocity).dot(normal)
 			if relative < -VEL_EPS:
@@ -141,8 +168,11 @@ func step(dt: float) -> void:
 				var impulse := -2.0 * relative / inverse_total
 				a.velocity -= normal * impulse * a.inverse_mass()
 				b.velocity += normal * impulse * b.inverse_mass()
-				a.ball_collided.emit(b)
-				b.ball_collided.emit(a)
+				var key := "%d:%d" % [a.get_instance_id(), b.get_instance_id()]
+				if not contact_pairs.has(key):
+					contact_pairs[key] = [a,b]
+					a.ball_collided.emit(b)
+					b.ball_collided.emit(a)
 		if wall_events.is_empty() and pair_events.is_empty():
 			break
 		events += 1

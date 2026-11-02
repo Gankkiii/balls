@@ -85,7 +85,7 @@ func refresh_hud() -> void:
 	if not is_instance_valid(arena) or cards.size() < 2:
 		return
 	for i in 2:
-		var fighter: Fighter = arena.balls[i]
+		var fighter: Fighter = arena.heroes[i]
 		var names := fighter.skill_names()
 		var extra := ""
 		if fighter is Puffer:
@@ -98,6 +98,16 @@ func refresh_hud() -> void:
 			extra = "Charge: %.1f / 100" % fighter.charge
 		elif fighter is MagnetCrab:
 			extra = "Nails: %d | Repel: %s" % [arena.nails.size(), "ON" if fighter.repel_ready else "OFF"]
+		elif fighter is UnluckyDuck:
+			extra = "Thunder: %.1fs | Rods: %d" % [fighter.storm_left,fighter.rods.size()]
+		elif fighter is ForgeRabbit:
+			extra = "Blade: %.1f | Buff: %.1fs" % [fighter.stored_damage,fighter.temper_left]
+		elif fighter is Cactus:
+			extra = "Thorns: %d" % fighter.thorns.size()
+		elif fighter is ShellTurtle:
+			extra = "Shell spin: %.1fs" % fighter.shell.spin_left
+		elif fighter is Crow:
+			extra = "Dummies: %d | Feather: %d" % [fighter.dummies.size(),int(fighter.feather)]
 		cards[i].text = "%s\nHP: %d / %d\n%s\n\n%s  %s\n%s  %s\n\nState: %s" % [fighter.title, ceili(fighter.health), int(fighter.max_health), extra, names[0], cooldown_text(fighter.cd_one), names[1], cooldown_text(fighter.cd_two), fighter.state_name()]
 	if arena.finished:
 		status.text = arena.result + " | Seed: %d" % match_seed

@@ -40,7 +40,12 @@ func discharge(dt: float) -> void:
 	if zapping:
 		var spent := minf(charge, DRAIN * dt)
 		charge -= spent
-		enemy.hit(DPS * spent / DRAIN)
+		var origin := position
+		if position.distance_to(enemy.position) > RANGE + enemy.radius and wool_active:
+			origin = wool_position
+		var target: Fighter = world.first_target(self,origin,enemy.position)
+		if target != null:
+			target.hit(DPS * spent / DRAIN)
 	queue_redraw()
 func skill_names() -> Array[String]:
 	return ["WALL TURN", "DROP WOOL"]

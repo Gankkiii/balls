@@ -61,7 +61,7 @@ func hit(damage: float, self_blast: bool = false) -> void:
 	queue_redraw()
 
 func _on_contact(other: Ball) -> void:
-	if action == "burst" and impact_cooldown <= 0 and other is Fighter:
+	if action == "burst" and impact_cooldown <= 0 and other is Fighter and (not world is BattleArena or world.is_enemy_body(self,other)):
 		other.hit(HIT_DAMAGE)
 		impact_cooldown = 0.35
 
