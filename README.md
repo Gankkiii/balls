@@ -1,4 +1,4 @@
-# Balls Auto Battle — v0.2
+# Balls Auto Battle — v0.3
 
 Godot **4.6.3 stable + GDScript**。光滑竞技场，五个角色随机选两个不同角色对战、自动技能、左侧冷却显示。Android ARM64 横屏。
 
@@ -77,7 +77,7 @@ godot --headless --script tests/test_characters.gd
 安装匹配的Godot导出模板及Android SDK/JDK，配置调试签名后：
 
 ```bash
-godot --headless --export-debug Android build/balls-v0.2.apk
+godot --headless --export-debug Android build/balls-v0.3.apk
 ```
 
 最低Android7.0，arm64-v8a。使用非Gradle预构建模板，配置见export_presets.cfg。项目不包含签名私钥。
