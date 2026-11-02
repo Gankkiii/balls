@@ -66,3 +66,9 @@ godot --headless --path . --export-debug Android build/smooth-arena.apk
 APK 使用开发调试签名，仅用于测试；正式发行需要自行管理正式签名。不要将 keystore、密码或 `export_credentials.cfg` 提交到仓库。同包名不同签名不能直接覆盖安装，先卸载旧版会删除其本地数据。
 
 通过系统文件管理器打开自己构建的 APK 安装，按照 Android 的安装来源提示操作。构建成功不等于通过真机测试，实际状态见测试报告。
+
+## 当前构建结果
+
+已生成调试 APK（约 27 MiB），并通过 v2/v3 签名校验。最低 Android 7.0，CPU 为 arm64-v8a。APK 通过聊天附件交付；仓库只包含源码，不存放签名私钥。真机安装和画面尚未实测。
+
+构建使用 Godot 4.6.3 的预构建 Android 模板（target SDK 36），OpenJDK 21 和 Build Tools 35.0.0；导出器显示 Build Tools 版本回退警告，但成功导出并验签。自行配置时建议遵循对应版本官方推荐工具链。
