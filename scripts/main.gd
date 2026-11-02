@@ -1,6 +1,6 @@
 extends Control
 const FIXED_DT := 1.0 / 120.0
-const BASE_TIME_SCALE := 2.0
+const BASE_TIME_SCALE := 1.0
 var arena: BattleArena
 var rate := 0
 var selected_rate := 1
@@ -37,18 +37,33 @@ func _ready() -> void:
 	status.position = Vector2(370, 685)
 	status.add_theme_font_size_override("font_size", 18)
 	add_child(status)
-	var captions := ["1×", "2×", "3×", "Pause"]
-	for i in 4:
+	var captions := ["1×", "2×", "3×", "Pause", "Restart"]
+	for i in 5:
 		var button := Button.new()
 		button.text = captions[i]
-		button.position = Vector2(370 + i * 177, 718)
-		button.size = Vector2(166, 50)
+		button.position = Vector2(370 + i * 142, 718)
+		button.size = Vector2(132, 50)
 		button.add_theme_font_size_override("font_size", 24)
-		button.pressed.connect(set_rate.bind(i + 1 if i < 3 else 0))
+		if i == 4:
+			button.pressed.connect(restart_battle)
+		else:
+			button.pressed.connect(set_rate.bind(i + 1 if i < 3 else 0))
 		add_child(button)
 		buttons.append(button)
 	set_rate(0)
 	refresh_hud()
+
+func restart_battle() -> void:
+	# A new arena discards all fighter, egg, cooldown and result state.
+	var old_arena := arena
+	arena = BattleArena.new()
+	arena.arena_size = Vector2(700, 600)
+	arena.position = Vector2(370, 70)
+	add_child(arena)
+	arena.setup(randi())
+	remove_child(old_arena)
+	old_arena.queue_free()
+	set_rate(selected_rate)
 
 func set_rate(value: int) -> void:
 	rate = value
@@ -73,7 +88,7 @@ func refresh_hud() -> void:
 	if arena.finished:
 		status.text = arena.result
 	else:
-		status.text = ("PAUSED · select speed to start" if rate == 0 else "%d× = original %d×" % [rate, rate * 2]) + "   |   %.1fs" % arena.simulation_time
+		status.text = ("PAUSED · select speed to start" if rate == 0 else "%d×" % rate) + "   |   %.1fs" % arena.simulation_time
 
 func advance_real_time(delta: float) -> void:
 	if rate == 0 or suspended or arena.finished:

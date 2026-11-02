@@ -67,6 +67,18 @@ func run() -> void:
 		p.advance(1.0 / 120)
 	p.hit(10)
 	check(p.health == hp - 10, "C10 immunity expires")
+	p.gas = 0
+	check(is_equal_approx(p.visual_radius(), p.radius), "C34 empty original size")
+	p.gas = 100
+	check(is_equal_approx(p.visual_radius(), p.radius * 2), "C35 full double diameter")
+	p.action = "burst"
+	p.cd_one = 99
+	p.cd_two = 99
+	var full_size := p.visual_radius()
+	p.advance(1)
+	check(p.visual_radius() < full_size and p.visual_radius() > p.radius, "C36 gradual deflation shrink")
+	p.advance(3)
+	check(is_equal_approx(p.visual_radius(), p.radius), "C37 deflated original size")
 	p.free()
 	c.free()
 
@@ -145,11 +157,11 @@ func run() -> void:
 		main.arena.free()
 		main.arena = battle(81)
 		main.add_child(main.arena)
-		check(main.rate == 0 and main.selected_rate == 1 and main.buttons.size() == 4, "C26 paused default1x and four controls")
+		check(main.rate == 0 and main.selected_rate == 1 and main.buttons.size() == 5, "C26 paused default1x and five controls")
 		main.set_rate(shown_rate)
 		for i in (360 / shown_rate):
 			main.advance_real_time(1.0 / 60)
-		check(absf(main.arena.simulation_time - 12) < 0.00001, "C27 base time doubled")
+		check(absf(main.arena.simulation_time - 6) < 0.00001, "C27 original base speed restored")
 		var current := snapshot(main.arena)
 		if reference.is_empty():
 			reference = current
@@ -160,6 +172,19 @@ func run() -> void:
 		check(snapshot(main.arena) == current, "C29 pause freezes skills and eggs")
 		main.refresh_hud()
 		check(main.cards[0].text.contains("INFLATE") and main.cards[1].text.contains("BIG EGG"), "C30 HUD names and cooldown content")
+		main.arena.finished = true
+		main.arena.result = "TEST WIN"
+		main.arena.balls[0].health = 1
+		main.accumulator = 0.004
+		main.buttons[4].pressed.emit()
+		check(not main.arena.finished and main.arena.result == "" and main.arena.simulation_time == 0, "C38 restart clears outcome/time")
+		check(main.arena.eggs.is_empty() and main.arena.balls.size() == 2 and main.arena.balls[0].health == 120, "C39 restart fresh fighters/eggs")
+		check(main.rate == shown_rate and main.accumulator == 0, "C40 restart runs selected speed")
+		for j in 5:
+			main.buttons[4].pressed.emit()
+		check(main.arena.balls.size() == 2 and main.arena.get_parent() == main, "C41 repeated restart remains valid")
+		main.advance_real_time(0.1)
+		check(main.arena.simulation_time > 0, "C42 restarted match advances")
 		main.free()
 	var wins := {}
 	for seed_value in 20:

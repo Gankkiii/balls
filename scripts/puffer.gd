@@ -68,8 +68,12 @@ func _on_contact(other: Ball) -> void:
 func skill_names() -> Array[String]:
 	return ["INFLATE", "ABSORB"]
 
+func visual_radius() -> float:
+	# Keep the established physical collider independent of the artwork.
+	return radius * (1.0 + clampf(gas / GAS_MAX, 0.0, 1.0))
+
 func _draw() -> void:
-	var r := radius * (1.0 + gas / GAS_MAX * 0.2)
+	var r := visual_radius()
 	if immune_left > 0:
 		draw_arc(Vector2.ZERO, r + 7, 0, TAU, 48, Color("78b9ff"), 3, true)
 	if action == "burst":
