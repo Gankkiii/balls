@@ -48,7 +48,7 @@ func run(runner) -> void:
 		ck(snapshot(a) == snapshot(b), "seed repeats gameplay RNG")
 		a.free()
 		b.free()
-	ck(seen.size() == 5,"all five available")
+	ck(seen.size() == 10,"all ten available")
 
 	var a := arena([2,1])
 	var fish: BubbleFish = a.balls[0]
