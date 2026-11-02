@@ -12,7 +12,7 @@ func _initialize() -> void:
 
 func battle(seed_value: int = 42) -> BattleArena:
 	var a := BattleArena.new()
-	a.setup(seed_value)
+	a.setup(seed_value, [0,1])
 	return a
 
 func snapshot(a: BattleArena) -> Array:
@@ -159,9 +159,11 @@ func run() -> void:
 		root.add_child(main)
 		main.set_process(false)
 		main.arena.free()
-		main.arena = battle(81)
+		main.match_seed = legacy_seed()
+		main.arena = BattleArena.new()
+		main.arena.setup(main.match_seed)
 		main.add_child(main.arena)
-		check(main.rate == 0 and main.selected_rate == 1 and main.buttons.size() == 5, "C26 paused default1x and five controls")
+		check(main.rate == 0 and main.selected_rate == 1 and main.buttons.size() == 6, "C26 paused default1x and six controls")
 		main.set_rate(shown_rate)
 		for i in (360 / shown_rate):
 			main.advance_real_time(1.0 / 60)
@@ -180,17 +182,18 @@ func run() -> void:
 		main.arena.result = "TEST WIN"
 		main.arena.balls[0].health = 1
 		main.accumulator = 0.004
-		main.buttons[4].pressed.emit()
+		main.buttons[5].pressed.emit()
 		check(not main.arena.finished and main.arena.result == "" and main.arena.simulation_time == 0, "C38 restart clears outcome/time")
 		check(main.arena.eggs.is_empty() and main.arena.balls.size() == 2 and main.arena.balls[0].health == 120, "C39 restart fresh fighters/eggs")
 		check(main.rate == shown_rate and main.accumulator == 0, "C40 restart runs selected speed")
 		for j in 5:
-			main.buttons[4].pressed.emit()
+			main.buttons[5].pressed.emit()
 		check(main.arena.balls.size() == 2 and main.arena.get_parent() == main, "C41 repeated restart remains valid")
 		main.advance_real_time(0.1)
 		check(main.arena.simulation_time > 0, "C42 restarted match advances")
 		main.free()
 	await extended_checks()
+	await load("res://tests/new_roster_cases.gd").new().run(self)
 	var wins := {}
 	for seed_value in 20:
 		a = battle(seed_value)
@@ -212,7 +215,9 @@ func new_main():
 	root.add_child(main)
 	main.set_process(false)
 	main.arena.free()
-	main.arena = battle(42)
+	main.match_seed = legacy_seed()
+	main.arena = BattleArena.new()
+	main.arena.setup(main.match_seed)
 	main.add_child(main.arena)
 	return main
 
@@ -274,7 +279,7 @@ func extended_checks() -> void:
 			main.arena.result = "TEST"
 		main.arena.spawn_egg(p.position, c, true)
 		var old_ids: Array[int] = [main.arena.get_instance_id(), p.get_instance_id(), c.get_instance_id(), main.arena.eggs[0].get_instance_id()]
-		main.buttons[4].pressed.emit()
+		main.buttons[5].pressed.emit()
 		var fresh := battle(1)
 		for i in 2:
 			var actual: Fighter = main.arena.balls[i]
@@ -292,7 +297,7 @@ func extended_checks() -> void:
 			check(not is_instance_id_valid(id), "C53 old nodes truly freed " + mode)
 		for i in 20:
 			old_ids.append(main.arena.get_instance_id())
-			main.buttons[4].pressed.emit()
+			main.buttons[5].pressed.emit()
 		await process_frame
 		await process_frame
 		for id in old_ids:
@@ -335,3 +340,14 @@ func extended_checks() -> void:
 			main.advance_real_time(1000)
 			check(absf(main.arena.simulation_time - before - speed * 0.1) < 1e-9, "C63 long frame capped at every rate")
 			main.free()
+
+func legacy_seed() -> int:
+	for seed_value in 1000:
+		var a := BattleArena.new()
+		a.setup(seed_value)
+		var correct := a.roster == [0,1]
+		a.free()
+		if correct:
+			return seed_value
+	assert(false, "No legacy pair seed found")
+	return 0

@@ -81,7 +81,7 @@ func run() -> void:
 	var main = make_main()
 	check(main.arena is Arena, "one Arena")
 	check(main.arena.balls.size() == 2 and main.arena.get_child_count() == 2, "two Ball children")
-	check(main.buttons.size() == 5, "five current controls")
+	check(main.buttons.size() == 6, "six current controls")
 	check(main.arena.balls[0] is Ball and main.arena.balls[1] is Ball, "Ball instances")
 	main.free()
 	end_case()

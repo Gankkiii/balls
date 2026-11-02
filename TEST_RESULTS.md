@@ -1,23 +1,20 @@
-# v0.2 Verification — 2026-11-02
+# v0.2.0 五角色修订验收 — 2026-11-02
 
-Godot 4.6.3.stable.official.7d41c59c4, Linux x86_64.
+版本号仍0.2.0，code2。Godot4.6.3，Linux x86_64。
 
-Version remains **0.2.0 (code 2)** as requested; this is an in-version revision.
+- 完整基础/当前控制器回归 T01–T22：22/22通过，74,247断言，零失败。
+- 角色套件 C01–C63及new_roster_cases：2,009断言，零失败。
+- 新增验证包括100种子选人/随机复现、10组不同角色完整对局、全组合倍率/暂停/重开资源清理、三个新角色的具体机制及真实Replay按钮。
+- 原充气球/母鸡20种子样本仍17/2/1胜负/超时；新角色只做功能检查，不宣称平衡。
+- Headless导入及脚本执行完成，日志未见ERROR/FAIL。
 
-## Actual automated execution
+## 尚未验证
 
-- Original physics regression: **T01–T22 22/22 passed**, 74,247 assertions, zero failures. T01 and T15–T19 now load the current main scene and five-control UI; obsolete baseline-controller assertions were replaced, not skipped. Isolated production Arena/Ball physics coverage and tolerances are unchanged.
-- New character/controller regression: **1,256 assertions, zero failures**, behavior labels C01–C63. Includes actual main-scene 1×/2×/3× equivalence across positions, HP, cooldowns and egg states; paused start and skill queuing. Includes six restart states, actual queued-node destruction, repeated restarts, every quarter gas size, per-step growth/shrink, full-state 1/2/3 speed × 10/30/60/144 fps equivalence, actual button signals, background/focus notifications and frame clamp.
-- 20 seeded battles: 17 puffer wins, 2 chicken wins, 1 time-limit draw. This is a functional smoke sample, **not evidence of balanced gameplay**.
-- Godot headless import and gameplay initialization checked.
-- Previous gameplay revision Android v0.2 debug APK exported and v2/v3 signature verification passed; this revision changes tests/documentation only, no new APK export performed. No signing private key included in repository.
+- T23画面/触屏：NOT RUN。
+- T24Android真机安装/生命周期：NOT RUN。
+- 本轮环境没有Android SDK/导出模板，未在本地生成新版APK。提交后需手动运行GitHub Actions，等待对应提交构建；不能把旧版APK视为本次构建。
+- 同种子复现限相同代码/引擎/平台，不保证跨设备浮点逐位一致。
+- 碰撞体仍与美术独立，充气外观靠墙可能穿插，待人工验收。
+- 泡泡等级无玩法封顶，使用64位整数；显示/命中半径单独限制，不等于等级封顶。
 
-## Not verified / limits
-
-- T23 actual screen rendering and input: NOT RUN. An internal Web export was produced, but browser access to the preview server returned connection refused; this is not a passing visual test.
-- T24 real Android installation/touch/background lifecycle: NOT RUN, no device attached.
-- Sprite art is procedural placeholder art; collision bodies remain circles, including chicken.
-- Physics remains floating point; no cross-device bit-exact determinism claim.
-- APK verification is packaging/signature validation, not on-device execution.
-
-Latest logs: tests/latest-run.txt and tests/character-latest-run.txt.
+日志：tests/latest-run.txt、tests/character-latest-run.txt。
