@@ -6,11 +6,11 @@ Version remains **0.2.0 (code 2)** as requested; this is an in-version revision.
 
 ## Actual automated execution
 
-- Original physics regression: **T01–T22 22/22 passed**, 74,237 assertions, zero failures. Baseline controller remains as a fixture for the explicitly superseded old time scale and three-button layout. Shared production Arena/Ball are tested unchanged by fixtures.
-- New character/controller regression: **138 assertions, zero failures**, behavior labels C01–C42. Includes actual main-scene 1×/2×/3× equivalence across positions, HP, cooldowns and egg states; paused start and skill queuing. Normal 1/2/3 speed restored; restart/reset and gas-driven visual size regression added.
+- Original physics regression: **T01–T22 22/22 passed**, 74,247 assertions, zero failures. T01 and T15–T19 now load the current main scene and five-control UI; obsolete baseline-controller assertions were replaced, not skipped. Isolated production Arena/Ball physics coverage and tolerances are unchanged.
+- New character/controller regression: **1,256 assertions, zero failures**, behavior labels C01–C63. Includes actual main-scene 1×/2×/3× equivalence across positions, HP, cooldowns and egg states; paused start and skill queuing. Includes six restart states, actual queued-node destruction, repeated restarts, every quarter gas size, per-step growth/shrink, full-state 1/2/3 speed × 10/30/60/144 fps equivalence, actual button signals, background/focus notifications and frame clamp.
 - 20 seeded battles: 17 puffer wins, 2 chicken wins, 1 time-limit draw. This is a functional smoke sample, **not evidence of balanced gameplay**.
 - Godot headless import and gameplay initialization checked.
-- Android v0.2 debug APK exported and v2/v3 signature verification passed. No signing private key included in repository.
+- Previous gameplay revision Android v0.2 debug APK exported and v2/v3 signature verification passed; this revision changes tests/documentation only, no new APK export performed. No signing private key included in repository.
 
 ## Not verified / limits
 

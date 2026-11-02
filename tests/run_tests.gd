@@ -48,11 +48,17 @@ func make_arena() -> Arena:
 	return a
 
 func make_main():
-	var main = load("res://scenes/baseline.tscn").instantiate()
+	var main = load("res://scenes/main.tscn").instantiate()
 	root.add_child(main)
 	main.set_process(false)
-	main.arena.initialize(42)
+	reset_main(main)
 	return main
+
+func reset_main(main) -> void:
+	main.arena.free()
+	main.arena = BattleArena.new()
+	main.add_child(main.arena)
+	main.arena.setup(42)
 
 func state(a: Arena) -> Array:
 	var result: Array = [a.simulation_time]
@@ -75,7 +81,7 @@ func run() -> void:
 	var main = make_main()
 	check(main.arena is Arena, "one Arena")
 	check(main.arena.balls.size() == 2 and main.arena.get_child_count() == 2, "two Ball children")
-	check(main.buttons.size() == 3, "three original controls")
+	check(main.buttons.size() == 5, "five current controls")
 	check(main.arena.balls[0] is Ball and main.arena.balls[1] is Ball, "Ball instances")
 	main.free()
 	end_case()
@@ -203,10 +209,10 @@ func run() -> void:
 	check(absf(main.arena.simulation_time - float(before[0]) - 1.0 / 120) < 1e-9, "one resumed step only")
 	end_case()
 
-	begin_case("T17", "1x/2x and render frame rate equivalence")
+	begin_case("T17", "1x/2x/3x and 10/30/60/144fps equivalence")
 	var reference: Array = []
-	for config in [[1, 60, 600], [2, 60, 300], [1, 30, 300], [1, 144, 1440]]:
-		main.arena.initialize(42)
+	for config in [[1, 60, 360], [2, 60, 180], [3, 60, 120], [1, 30, 180], [1, 144, 864], [1, 10, 60]]:
+		reset_main(main)
 		main.set_rate(config[0])
 		for i in config[2]:
 			main.advance_real_time(1.0 / config[1])
@@ -220,10 +226,10 @@ func run() -> void:
 	end_case()
 
 	begin_case("T18", "Repeated real button signals")
-	main.arena.initialize(42)
+	reset_main(main)
 	before = state(main.arena)
 	for i in 99:
-		main.buttons[i % 3].pressed.emit()
+		main.buttons[i % 4].pressed.emit()
 	check(state(main.arena) == before, "button clicks do not move state")
 	check(main.arena.balls.size() == 2 and main.arena.get_child_count() == 2, "no duplicate instances")
 	main.buttons[0].pressed.emit()
