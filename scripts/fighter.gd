@@ -11,6 +11,13 @@ var stored_velocity := Vector2.ZERO
 var world: Arena
 var title := "Fighter"
 var rng := RandomNumberGenerator.new()
+var hud: FighterHUD
+
+func _ready() -> void:
+	hud = FighterHUD.new()
+	hud.fighter = self
+	add_child(hud)
+
 
 func stationary() -> bool:
 	return action == "inflate" or action == "lay"
