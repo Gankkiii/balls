@@ -1,0 +1,21 @@
+{
+  "scope": "independent static alpha-box checks on all34 character frames x2 facings x8 legal wall/corner positions, not real-device/gameplay test",
+  "checked_utc": "2026-11-03T13:38:53.389585+00:00",
+  "tests": 544,
+  "overlaps": [],
+  "union_bounds": [
+    178,
+    64,
+    922,
+    690
+  ],
+  "panel_arena_no_overlap": true,
+  "control_target_minimum_reference_size": [
+    44,
+    44
+  ],
+  "control_count": 9,
+  "control_target_nonoverlap": true,
+  "result": "PASS",
+  "note": "Ninth UI info/details control is a requested presentation proposal explicitly documented as requiring future implementation;48x48 reference target and no overlap independently rechecked after final text-light revision."
+}

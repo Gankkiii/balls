@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" shape-rendering="crispEdges">
+<polyline points="54,54 74,54 84,59 84,69 74,74 54,74 44,69 44,59 54,54" fill="none" stroke="#8BC9C3" stroke-width="4" stroke-linecap="square"/>
+<polyline points="57,59 71,59 78,62 78,66 71,69 57,69 50,66 50,62 57,59" fill="none" stroke="#FFF9E7" stroke-width="2" stroke-linecap="square"/>
+<polygon points="89,64 93,68 89,72 85,68" fill="#EFC65B"/>
+<polygon points="59,85 63,89 59,93 55,89" fill="#EFC65B"/>
+<polygon points="38,55 42,59 38,63 34,59" fill="#EFC65B"/>
+<polygon points="68,34 72,38 68,42 64,38" fill="#EFC65B"/>
+<polygon points="60,44 69,44 65,57 74,57 57,80 61,64 54,64" fill="#243746"/>
+</svg>

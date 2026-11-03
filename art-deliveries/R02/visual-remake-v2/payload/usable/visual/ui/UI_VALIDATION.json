@@ -1,0 +1,444 @@
+{
+  "asset_count": 36,
+  "png_and_svg_checks": "passed",
+  "all_sources_are_geometry_no_images_or_text": true,
+  "tests": [
+    {
+      "id": "status_panel",
+      "dimensions": [
+        64,
+        64
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "control_strip",
+      "dimensions": [
+        64,
+        40
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "inset_panel",
+      "dimensions": [
+        48,
+        32
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "hp_track",
+      "dimensions": [
+        128,
+        16
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "hp_frame",
+      "dimensions": [
+        128,
+        16
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "hp_fill_gold",
+      "dimensions": [
+        120,
+        8
+      ],
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "hp_fill_purple",
+      "dimensions": [
+        120,
+        8
+      ],
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "skill_slot_normal",
+      "dimensions": [
+        64,
+        64
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "skill_slot_ready",
+      "dimensions": [
+        64,
+        64
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "skill_slot_disabled",
+      "dimensions": [
+        64,
+        64
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "cooldown_overlay",
+      "dimensions": [
+        56,
+        56
+      ],
+      "alpha_extrema": [
+        174,
+        174
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "cooldown_ring_track",
+      "dimensions": [
+        40,
+        40
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "cooldown_ring_fill",
+      "dimensions": [
+        40,
+        40
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "badge_ready",
+      "dimensions": [
+        16,
+        16
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "badge_busy",
+      "dimensions": [
+        16,
+        16
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "button_normal",
+      "dimensions": [
+        48,
+        48
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "button_hover",
+      "dimensions": [
+        48,
+        48
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "button_pressed",
+      "dimensions": [
+        48,
+        48
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "button_disabled",
+      "dimensions": [
+        48,
+        48
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "icon_pause",
+      "dimensions": [
+        24,
+        24
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "icon_play",
+      "dimensions": [
+        24,
+        24
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "icon_replay",
+      "dimensions": [
+        24,
+        24
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "icon_new_seed",
+      "dimensions": [
+        24,
+        24
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "icon_speed",
+      "dimensions": [
+        24,
+        24
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "icon_sound_on",
+      "dimensions": [
+        24,
+        24
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "icon_sound_off",
+      "dimensions": [
+        24,
+        24
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "icon_roster",
+      "dimensions": [
+        24,
+        24
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "icon_info",
+      "dimensions": [
+        24,
+        24
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "icon_clock",
+      "dimensions": [
+        24,
+        24
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "icon_heart",
+      "dimensions": [
+        24,
+        24
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "icon_skill_timer",
+      "dimensions": [
+        32,
+        32
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "icon_skill_rod",
+      "dimensions": [
+        32,
+        32
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "icon_skill_forge",
+      "dimensions": [
+        32,
+        32
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "icon_skill_temper",
+      "dimensions": [
+        32,
+        32
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "icon_status_cloud",
+      "dimensions": [
+        32,
+        32
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source_export_validated": true
+    },
+    {
+      "id": "icon_status_stored_damage",
+      "dimensions": [
+        32,
+        32
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "source_export_validated": true
+    }
+  ],
+  "not_run": [
+    "Godot integration",
+    "device touch and safe area",
+    "actual game event binding"
+  ]
+}

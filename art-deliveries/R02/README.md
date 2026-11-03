@@ -1,3 +1,23 @@
+# R02 当前交付：视觉重制 v2
+
+用户已确认少字版交付：A像素风、横屏左右状态区、浅色场地，鸭/宽刀兔及道具全新制作，碰撞当帧命中后回收。示例常驻文字由160降至22个非空白字符，不含画布外审阅说明；实际字数随动态数值变化。
+
+- **当前压缩包：** [R02-visual-remake-v2.zip](R02-visual-remake-v2.zip)（同名.sha256校验）
+- **解压原件与制作源：** [visual-remake-v2/](visual-remake-v2/README.md)
+- **点点接入清单：** [visual-remake-v2/INTEGRATION_CHECKLIST.md](visual-remake-v2/INTEGRATION_CHECKLIST.md)
+- **当前逐项清单：** [visual-remake-v2/ASSET_MANIFEST.json](visual-remake-v2/ASSET_MANIFEST.json)
+- **验收报告：** [visual-remake-v2/QA_REPORT.md](visual-remake-v2/QA_REPORT.md)
+
+新版有144个独立正式PNG（角色/道具/精灵条/UI/场景/VFX）、120个可编辑SVG源及制作脚本，保留原7条已选WAV。审核预览独立归reference，不能把预览当作组件。旧R02视觉源未找回，新版明确是获批准后重制，不冒称恢复原件。
+
+本轮未修改游戏脚本、场景、玩法、物理或团队配置；资源/源复现、文件完整性和既有自动回归单独验证。游戏内接入、动态云/特效边缘适配、实际手机触控/听感仍须点点后续测试。
+
+原版58文件已逐字保存在 [archive/v1/](archive/v1/README.md)，旧R02-materials.zip及原路径保留、不删除历史。根目录旧ASSET_MANIFEST/QA_REPORT对应v1，请以本页指向的v2清单为当前依据。根SHA256SUMS覆盖当前目录树；各版本包根有各自校验。
+
+---
+
+## 以下为 v1 历史交付说明（仅供追溯）
+
 # R02 素材交接包：现存成果重建
 
 交付对象：点点。包版本：`R02-existing-materials-1`。本轮只整理、核对与交付，未重新设计、未生成替代图、未修改游戏代码。

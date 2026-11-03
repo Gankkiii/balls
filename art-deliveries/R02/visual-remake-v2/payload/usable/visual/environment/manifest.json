@@ -1,0 +1,82 @@
+{
+  "version": "R02-remake-env-1",
+  "original_new_remake": true,
+  "no_external_art_inputs": true,
+  "usage_class": "independent_production_exports",
+  "source": "build_environment_vfx.py supplied in delivery source directory; run --output in a new empty directory",
+  "review_only": "preview/environment_composition.png is a separately composited reference, not a production texture",
+  "assets": [
+    {
+      "id": "arena_floor",
+      "png": "arena_floor.png",
+      "svg": "arena_floor.svg",
+      "size": [
+        700,
+        600
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "opaque": true,
+      "ui_position": [
+        200,
+        90
+      ],
+      "purpose": "flat noncolliding playfield background; 1:1 visual mapping of existing 700x600 simulation"
+    },
+    {
+      "id": "arena_wood_frame",
+      "png": "arena_wood_frame.png",
+      "svg": "arena_wood_frame.svg",
+      "size": [
+        720,
+        620
+      ],
+      "anchor": [
+        10,
+        10
+      ],
+      "transparent_interior": [
+        10,
+        10,
+        700,
+        600
+      ],
+      "ui_position": [
+        190,
+        80
+      ],
+      "purpose": "outside-only decorative rails; never added as collision geometry"
+    },
+    {
+      "id": "corner_inlay",
+      "png": "corner_inlay.png",
+      "svg": "corner_inlay.svg",
+      "size": [
+        64,
+        64
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "purpose": "optional flat decorative inlay outside the playable interior; rotate by 90deg for other corners"
+    },
+    {
+      "id": "screen_surround",
+      "png": "screen_surround.png",
+      "svg": "screen_surround.svg",
+      "size": [
+        1100,
+        780
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "opaque": true,
+      "purpose": "outer composition backdrop only; UI and arena are separate layers"
+    }
+  ]
+}

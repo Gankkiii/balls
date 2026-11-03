@@ -1,0 +1,14 @@
+{
+  "reproduction_files": 110,
+  "png_files": 62,
+  "svg_files": 46,
+  "logical_vfx_frames": 42,
+  "distinct_vfx_frames": 41,
+  "vfx_edges_clear": true,
+  "strip_frames_exact": true,
+  "manifest_files_identical": true,
+  "issues": [],
+  "frame_interior_transparent": true,
+  "source_sha256": "5c2de890f22393f820f26362b8545572b2a81e858e070630496b7f9833ad0ae2",
+  "status": "PASS"
+}

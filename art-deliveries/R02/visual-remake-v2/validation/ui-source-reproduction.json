@@ -1,0 +1,12 @@
+{
+  "scope": "FINAL packaged approval-status UI source:77 generated files36SVG36PNGmanifest3previewsmetrics; full visual copied from actual staged package, no initial ui/preview directory; not gameplay",
+  "checked_utc": "2026-11-03T13:50:00.323273+00:00",
+  "package_path": "/workspace/shared/R02-v2-package",
+  "script_sha256": {
+    "build_ui.py": "d5b0c397f8dddbe6bd0e29ac4a89e4edb1ceae96e222f575958c91606e9d8c9c",
+    "build_preview.py": "a8f0ef162c3bb1b52c274681079e6041c2b6353ea7324c0909ff104225b0cad8"
+  },
+  "isolated_output": "/tmp/r02-packaged-final-ui-repro-3m6i83ol",
+  "files_byte_identical": 77,
+  "result": "PASS"
+}

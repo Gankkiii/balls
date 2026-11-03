@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96" shape-rendering="crispEdges">
+<polyline points="78,48 86,48" fill="none" stroke="#8BC9C3" stroke-width="2" stroke-linecap="square" opacity="0.137255"/>
+<polyline points="69,69 74,74" fill="none" stroke="#EFC65B" stroke-width="2" stroke-linecap="square" opacity="0.137255"/>
+<polygon points="74,72 76,74 74,76 72,74" fill="#FFF9E7" opacity="0.137255"/>
+<polyline points="48,78 48,86" fill="none" stroke="#8BC9C3" stroke-width="2" stroke-linecap="square" opacity="0.137255"/>
+<polyline points="26,69 21,74" fill="none" stroke="#EFC65B" stroke-width="2" stroke-linecap="square" opacity="0.137255"/>
+<polygon points="21,72 23,74 21,76 19,74" fill="#FFF9E7" opacity="0.137255"/>
+<polyline points="18,48 10,48" fill="none" stroke="#8BC9C3" stroke-width="2" stroke-linecap="square" opacity="0.137255"/>
+<polyline points="26,26 21,21" fill="none" stroke="#EFC65B" stroke-width="2" stroke-linecap="square" opacity="0.137255"/>
+<polygon points="21,19 23,21 21,23 19,21" fill="#FFF9E7" opacity="0.137255"/>
+<polyline points="47,18 47,10" fill="none" stroke="#8BC9C3" stroke-width="2" stroke-linecap="square" opacity="0.137255"/>
+<polyline points="69,26 74,21" fill="none" stroke="#EFC65B" stroke-width="2" stroke-linecap="square" opacity="0.137255"/>
+<polygon points="74,19 76,21 74,23 72,21" fill="#FFF9E7" opacity="0.137255"/>
+</svg>

@@ -1,0 +1,8 @@
+{
+  "scope": "all character generator outputs, excludes README and producer script, not gameplay",
+  "checked_utc": "2026-11-03T13:39:35.605648+00:00",
+  "script_sha256": "149471e3c40f0ee22f74aad5e72825198e23457d77b7bdf8ad9b1f9a076a2130",
+  "output_root": "/tmp/r02-char-final-repro-xopd48hf",
+  "files_byte_identical": 90,
+  "result": "PASS"
+}

@@ -1,0 +1,103 @@
+{
+  "checked_utc": "2026-11-03T13:51:59.045847+00:00",
+  "scope": "R02 newly remade visual delivery file/source QA; not real game integration or device validation",
+  "result": "PASS",
+  "master_manifest": {
+    "files": 299,
+    "exact_membership_match": true,
+    "bytes_and_sha256_all_match": true
+  },
+  "formal_assets": {
+    "png": 144,
+    "svg": 120,
+    "wav": 7,
+    "reference_previews": 8
+  },
+  "character": {
+    "individual_frames": 34,
+    "distinct_pixel_frames": 33,
+    "strips": 8,
+    "default_entries": 2,
+    "props": 4,
+    "canvas": [
+      96,
+      96
+    ],
+    "source_svg_pixel_equivalence": 38,
+    "alpha_hard_edges": true,
+    "single_frame_no_canvas_edge_touch": true,
+    "hit_recover_contact_frame": 0,
+    "damage_delay": false
+  },
+  "vfx": {
+    "groups": 7,
+    "logical_frames": 42,
+    "distinct_pixel_frames": 41,
+    "all_strip_cells_match_individual_png": true,
+    "single_frame_no_canvas_edge_touch": true
+  },
+  "layout": {
+    "game_canvas": [
+      1100,
+      780
+    ],
+    "review_preview": [
+      1100,
+      828
+    ],
+    "caption_outside_game_height": 48,
+    "panels": [
+      160,
+      160
+    ],
+    "character_static_edge_tests": 544,
+    "overlaps_with_panels_title_event_controls": 0,
+    "controls_reference_size": [
+      48,
+      48
+    ],
+    "controls_total": 9,
+    "existing_game_functions": 8,
+    "new_ui_details_proposal": 1,
+    "is_dynamic_vfx_or_device_test": false
+  },
+  "text_count": {
+    "definition": "non-whitespace Unicode characters in recorded default sample HUD source strings, excluding outside caption; not OCR",
+    "previous": 160,
+    "current": 22,
+    "reduction": 138,
+    "is_live_maximum": false
+  },
+  "godot_resource_load": {
+    "version": "4.6.3.stable.official",
+    "textures": 264,
+    "audio": 7,
+    "failures": 0,
+    "real_game_bindings_validated": false
+  },
+  "game_regressions": {
+    "automated_cases_passed": 22,
+    "automated_cases_failed": 0,
+    "manual_not_run": 2,
+    "physics_assertions": 74247,
+    "role_assertions": 11232,
+    "assertions_total": 85479,
+    "assertions_failed": 0,
+    "role_independent_case_count": "runner does not report it"
+  },
+  "source_reproductions": {
+    "characters_generated_files": 90,
+    "ui_final_approval_generated_files": 77,
+    "environment_vfx_generated_files": 110,
+    "each_result": "byte-identical in fresh external output directories"
+  },
+  "unverified": [
+    "real game rendering and presentation event hookup",
+    "VFX worst-case dynamic edge behavior",
+    "long-number and CJK text clipping in game",
+    "human listening and loudspeaker mixing",
+    "touch/safe area on Android or iPhone",
+    "physical-device installation/lifecycle"
+  ],
+  "archive_validation": "must be executed independently after final ZIP creation; this summary does not pre-approve an uncreated archive"
+}

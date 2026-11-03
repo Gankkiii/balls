@@ -1,0 +1,127 @@
+{
+  "scope": "Actual default HUD strings drawn by this preview source, excluding48px outside review caption and component labels; non-whitespace Unicode characters, not OCR. Example state only; live numeric lengths may differ.",
+  "game_canvas": [
+    1100,
+    780
+  ],
+  "preview_image": [
+    1100,
+    828
+  ],
+  "outside_caption_rect": [
+    0,
+    0,
+    1100,
+    48
+  ],
+  "game_canvas_rect_in_preview": [
+    0,
+    48,
+    1100,
+    780
+  ],
+  "previous_preview_default_strings": [
+    "R02 / LEFT-RIGHT MINIMAL HUD",
+    "DUCK",
+    "88 / 120",
+    "2.4 s",
+    "Rod  1 / 2",
+    "READY",
+    "3.2 s",
+    "TIMER",
+    "ROD",
+    "AUTO SKILLS",
+    "RABBIT",
+    "104 / 120",
+    "48",
+    "Temper  1.5x",
+    "READY",
+    "3.2 s",
+    "FORGE",
+    "TEMPER",
+    "AUTO SKILLS",
+    "1x",
+    "2x",
+    "3x",
+    "Event text / real state",
+    "Seed / time"
+  ],
+  "previous_non_whitespace_characters": 160,
+  "current_drawn_strings": [
+    {
+      "text": "88",
+      "at": [
+        62,
+        190
+      ],
+      "font_size": 22
+    },
+    {
+      "text": "2.4",
+      "at": [
+        62,
+        275
+      ],
+      "font_size": 22
+    },
+    {
+      "text": "3.2",
+      "at": [
+        107,
+        490
+      ],
+      "font_size": 16
+    },
+    {
+      "text": "104",
+      "at": [
+        982,
+        190
+      ],
+      "font_size": 22
+    },
+    {
+      "text": "48",
+      "at": [
+        982,
+        275
+      ],
+      "font_size": 22
+    },
+    {
+      "text": "3.2",
+      "at": [
+        1027,
+        490
+      ],
+      "font_size": 16
+    },
+    {
+      "text": "1×",
+      "at": [
+        558,
+        739
+      ],
+      "font_size": 12
+    },
+    {
+      "text": "2×",
+      "at": [
+        614,
+        739
+      ],
+      "font_size": 12
+    },
+    {
+      "text": "3×",
+      "at": [
+        670,
+        739
+      ],
+      "font_size": 12
+    }
+  ],
+  "current_non_whitespace_characters": 22,
+  "reduction": 138,
+  "status": "confirmed_delivery: user confirmed text-light handoff revision with22 sample default characters; not proof of live gameplay/device validation"
+}

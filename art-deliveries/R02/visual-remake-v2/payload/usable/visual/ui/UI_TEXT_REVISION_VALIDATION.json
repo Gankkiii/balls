@@ -1,0 +1,22 @@
+{
+  "clean_reproduction_without_preview_directory": "passed",
+  "preview_auto_mkdir": "passed",
+  "same_images_after_clean_copy": true,
+  "required_sibling_inputs": [
+    "characters",
+    "environment"
+  ],
+  "production_png_hashes_unchanged": 36,
+  "edge_geometry_rerun_passed": 544,
+  "new_default_characters": 22,
+  "old_default_characters": 160,
+  "new_review_image_size": [
+    1100,
+    828
+  ],
+  "unchanged_game_canvas": [
+    1100,
+    780
+  ],
+  "review_status": "confirmed_delivery: user confirmed22-character sample handoff; game/device validation still NOT RUN"
+}

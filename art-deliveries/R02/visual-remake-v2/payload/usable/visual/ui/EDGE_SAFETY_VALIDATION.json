@@ -1,0 +1,91 @@
+{
+  "reference_canvas": [
+    1100,
+    780
+  ],
+  "physics_field_unchanged": [
+    700,
+    600
+  ],
+  "body_origin": [
+    48,
+    56
+  ],
+  "test_positions_world": [
+    [
+      24,
+      24
+    ],
+    [
+      676,
+      24
+    ],
+    [
+      24,
+      576
+    ],
+    [
+      676,
+      576
+    ],
+    [
+      24,
+      300
+    ],
+    [
+      676,
+      300
+    ],
+    [
+      350,
+      24
+    ],
+    [
+      350,
+      576
+    ]
+  ],
+  "both_facings": true,
+  "static_bbox_test_count": 544,
+  "ui_regions": {
+    "left_status_panel": [
+      10,
+      90,
+      160,
+      600
+    ],
+    "right_status_panel": [
+      930,
+      90,
+      160,
+      600
+    ],
+    "title_safe_region": [
+      200,
+      12,
+      700,
+      44
+    ],
+    "control_strip": [
+      480,
+      706,
+      600,
+      58
+    ],
+    "event_label_region": [
+      210,
+      716,
+      260,
+      32
+    ]
+  },
+  "global_alpha_bounds_union": [
+    178,
+    64,
+    922,
+    690
+  ],
+  "overlaps": [],
+  "status": "passed",
+  "scope": "Rerun after text-only UI revision; unchanged geometry and actual actor frame alpha bounds. Review image has48px outside caption; coordinates remain1100x780 game-local."
+}

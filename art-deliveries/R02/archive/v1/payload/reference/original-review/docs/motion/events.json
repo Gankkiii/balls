@@ -1,0 +1,168 @@
+{
+  "cycle": "R02",
+  "setting_version": "R02-A-characters-0.1",
+  "fps": 50,
+  "sample_rate": 48000,
+  "time_origin": "video first frame/audio sample 0",
+  "note": "2.79s conceptual boundary quantized to first 50fps frame 2.80s; audio aligned to displayed frame. No gameplay timing changes.",
+  "clips": {
+    "rabbit_demo": [
+      {
+        "time_s": 0.28,
+        "event": "forge_contact",
+        "audio": "anvil_forge.wav",
+        "gain": 0.5,
+        "audio_start_sample": 13440,
+        "video_frame": 14,
+        "video_frame_time_s": 0.28,
+        "sync_offset_s": 0.0
+      },
+      {
+        "time_s": 1.0,
+        "event": "forge_contact",
+        "audio": "anvil_forge.wav",
+        "gain": 0.5,
+        "audio_start_sample": 48000,
+        "video_frame": 50,
+        "video_frame_time_s": 1.0,
+        "sync_offset_s": 0.0
+      },
+      {
+        "time_s": 2.72,
+        "event": "sword_swing",
+        "audio": "sword_short_swing.wav",
+        "gain": 0.5,
+        "audio_start_sample": 130560,
+        "video_frame": 136,
+        "video_frame_time_s": 2.72,
+        "sync_offset_s": 0.0
+      },
+      {
+        "time_s": 2.8,
+        "concept_boundary_s": 2.79,
+        "event": "sword_contact",
+        "audio": "sword_short_hit.wav",
+        "gain": 0.5,
+        "audio_start_sample": 134400,
+        "video_frame": 140,
+        "video_frame_time_s": 2.8,
+        "sync_offset_s": 0.0
+      }
+    ],
+    "rabbit_broad_demo": [
+      {
+        "time_s": 0.28,
+        "event": "forge_contact",
+        "audio": "anvil_forge.wav",
+        "gain": 0.5,
+        "audio_start_sample": 13440,
+        "video_frame": 14,
+        "video_frame_time_s": 0.28,
+        "sync_offset_s": 0.0
+      },
+      {
+        "time_s": 1.0,
+        "event": "forge_contact",
+        "audio": "anvil_forge.wav",
+        "gain": 0.5,
+        "audio_start_sample": 48000,
+        "video_frame": 50,
+        "video_frame_time_s": 1.0,
+        "sync_offset_s": 0.0
+      },
+      {
+        "time_s": 2.72,
+        "event": "sword_swing",
+        "audio": "sword_wide_swing.wav",
+        "gain": 0.5,
+        "audio_start_sample": 130560,
+        "video_frame": 136,
+        "video_frame_time_s": 2.72,
+        "sync_offset_s": 0.0
+      },
+      {
+        "time_s": 2.8,
+        "concept_boundary_s": 2.79,
+        "event": "sword_contact",
+        "audio": "sword_wide_hit.wav",
+        "gain": 0.5,
+        "audio_start_sample": 134400,
+        "video_frame": 140,
+        "video_frame_time_s": 2.8,
+        "sync_offset_s": 0.0
+      }
+    ],
+    "duck_demo": [
+      {
+        "time_s": 1.0,
+        "event": "countdown_tick",
+        "audio": "duck_countdown_tick.wav",
+        "gain": 0.5,
+        "audio_start_sample": 48000,
+        "video_frame": 50,
+        "video_frame_time_s": 1.0,
+        "sync_offset_s": 0.0
+      },
+      {
+        "time_s": 2.0,
+        "event": "countdown_tick",
+        "audio": "duck_countdown_tick.wav",
+        "gain": 0.5,
+        "audio_start_sample": 96000,
+        "video_frame": 100,
+        "video_frame_time_s": 2.0,
+        "sync_offset_s": 0.0
+      },
+      {
+        "time_s": 3.0,
+        "event": "countdown_tick",
+        "audio": "duck_countdown_tick.wav",
+        "gain": 0.5,
+        "audio_start_sample": 144000,
+        "video_frame": 150,
+        "video_frame_time_s": 3.0,
+        "sync_offset_s": 0.0
+      },
+      {
+        "time_s": 4.0,
+        "event": "countdown_tick",
+        "audio": "duck_countdown_tick.wav",
+        "gain": 0.5,
+        "audio_start_sample": 192000,
+        "video_frame": 200,
+        "video_frame_time_s": 4.0,
+        "sync_offset_s": 0.0
+      },
+      {
+        "time_s": 5.0,
+        "event": "countdown_tick",
+        "audio": "duck_countdown_tick.wav",
+        "gain": 0.5,
+        "audio_start_sample": 240000,
+        "video_frame": 250,
+        "video_frame_time_s": 5.0,
+        "sync_offset_s": 0.0
+      },
+      {
+        "time_s": 6.0,
+        "event": "countdown_final",
+        "audio": "duck_countdown_final.wav",
+        "gain": 0.5,
+        "audio_start_sample": 288000,
+        "video_frame": 300,
+        "video_frame_time_s": 6.0,
+        "sync_offset_s": 0.0
+      },
+      {
+        "time_s": 7.0,
+        "event": "lightning_strike",
+        "audio": "duck_lightning.wav",
+        "gain": 0.5,
+        "audio_start_sample": 336000,
+        "video_frame": 350,
+        "video_frame_time_s": 7.0,
+        "sync_offset_s": 0.0
+      }
+    ]
+  }
+}
