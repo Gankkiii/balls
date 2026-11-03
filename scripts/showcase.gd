@@ -1,8 +1,8 @@
 extends Control
 ## Presentation-only sample. BattleArena remains the authoritative simulation.
 const STEP := 1.0/120.0
-const ORIGIN := Vector2(270,140)
-const ZOOM := 0.8
+const ORIGIN := Vector2(200,90)
+const ZOOM := 1.0
 const INK := Color("f4eddf")
 const MUTED := Color("a7babb")
 const GOLD := Color("ffcb6c")
@@ -17,7 +17,7 @@ var paused := false
 var suspended := false
 var accumulator := 0.0
 var effects: Array[Dictionary] = []
-var banner := "看准时机，把霉运交出去。"
+var banner := ""
 var banner_left := 4.0
 var health_display := Vector2(120,120)
 var controls: Array[Button] = []
@@ -28,8 +28,18 @@ var previous_flash := 0.0
 var trail: Array[Vector2] = []
 var audio_player: AudioStreamPlayer
 var sound_enabled := true
+var texture_cache: Dictionary = {}
+var rabbit_hit_left := 0.0
+var duck_impact_left := 0.0
+var info_open := false
+var forge_phase := -1
+var pending_strike := false
+var strike_safe := false
+var strike_at := Vector2.ZERO
+const ROOT := "res://assets/r02/"
+
 var cue_forge: AudioStream = preload("res://assets/audio/anvil_forge.wav")
-var cue_sword_hit: AudioStream = preload("res://assets/audio/sword_short_hit.wav")
+var cue_sword_hit: AudioStream = preload("res://assets/audio/sword_wide_hit.wav")
 var cue_thunder: AudioStream = preload("res://assets/audio/duck_lightning.wav")
 var cue_transfer: AudioStream = preload("res://assets/audio/duck_cloud_transfer.wav")
 
@@ -37,37 +47,40 @@ func _ready() -> void:
 	font = load("res://assets/arena-ui.otf")
 	audio_player=AudioStreamPlayer.new()
 	add_child(audio_player)
-	make_button("声音开关",Vector2(830,728),Vector2(92,34),toggle_sound)
-	make_button("暂停",Vector2(337,728),Vector2(80,34),toggle_pause)
+	make_button("♪",Vector2(480,711),Vector2(48,48),toggle_sound)
+	make_button("Ⅱ",Vector2(532,711),Vector2(48,48),toggle_pause)
 	pause_button=controls.back()
 	for value in [1,2,3]:
-		make_button("%d×"%value,Vector2(425+(value-1)*53,728),Vector2(47,34),set_speed.bind(value))
-	make_button("同局重看",Vector2(594,728),Vector2(108,34),restart.bind(true))
-	make_button("换个种子",Vector2(710,728),Vector2(108,34),restart.bind(false))
-	make_button("全部角色",Vector2(930,30),Vector2(126,36),open_original)
+		make_button("%d×"%value,Vector2(584+(value-1)*52,711),Vector2(48,48),set_speed.bind(value))
+	make_button("↻",Vector2(740,711),Vector2(48,48),restart.bind(true))
+	make_button("⚄",Vector2(792,711),Vector2(48,48),restart.bind(false))
+	make_button("▣",Vector2(844,711),Vector2(48,48),open_original)
+	make_button("i",Vector2(896,711),Vector2(48,48),toggle_info)
 	restart(true)
 
 func make_button(caption: String, at: Vector2, size_value: Vector2, callback: Callable) -> void:
 	var b:=Button.new()
 	b.text=caption
+	var icons := {"♪":"icon_sound_on", "Ⅱ":"icon_pause", "↻":"icon_replay", "⚄":"icon_new_seed", "▣":"icon_roster", "i":"icon_info"}
+	if icons.has(caption):
+		b.text=""
+		b.icon=load(ROOT+"ui/png/"+icons[caption]+".png")
+		b.expand_icon=true
+		b.icon_alignment=HORIZONTAL_ALIGNMENT_CENTER
 	b.position=at
 	b.size=size_value
 	b.add_theme_font_override("font",font)
 	b.add_theme_font_size_override("font_size",15)
 	b.add_theme_color_override("font_color",INK)
-	var style:=StyleBoxFlat.new()
-	style.bg_color=Color("243744")
-	style.set_border_width_all(2)
-	style.border_color=Color("536c70")
-	style.corner_radius_top_left=0
-	style.corner_radius_top_right=0
-	style.corner_radius_bottom_left=0
-	style.corner_radius_bottom_right=0
-	b.add_theme_stylebox_override("normal",style)
-	var hover=style.duplicate()
-	hover.bg_color=Color("3b5660")
-	b.add_theme_stylebox_override("hover",hover)
-	b.add_theme_stylebox_override("pressed",hover)
+	for state in ["normal","hover","pressed","disabled"]:
+		var style := StyleBoxTexture.new()
+		style.texture=load(ROOT+"ui/png/button_"+state+".png")
+		style.texture_margin_left=12
+		style.texture_margin_top=12
+		style.texture_margin_right=12
+		style.texture_margin_bottom=12
+		b.add_theme_stylebox_override(state,style)
+	b.add_theme_color_override("font_color",Color("243746"))
 	b.pressed.connect(callback)
 	add_child(b)
 	controls.append(b)
@@ -90,6 +103,12 @@ func restart(same_seed: bool) -> void:
 	duck=arena.heroes[0]
 	rabbit=arena.heroes[1]
 	previous_holder=duck
+	rabbit.presentation_hit.connect(on_rabbit_hit)
+	duck.presentation_strike.connect(on_strike)
+	pending_strike=false
+	forge_phase=-1
+	rabbit_hit_left=0
+	duck_impact_left=0
 	previous_hp=Vector2(120,120)
 	health_display=previous_hp
 	previous_flash=0
@@ -98,14 +117,14 @@ func restart(same_seed: bool) -> void:
 	accumulator=0
 	paused=false
 	audio_player.stream_paused=false
-	pause_button.text="暂停"
-	banner="看准时机，把霉运交出去。"
-	banner_left=4
+	pause_button.icon=load(ROOT+"ui/png/icon_pause.png")
+	banner=""
+	banner_left=0
 	queue_redraw()
 
 func toggle_sound() -> void:
 	sound_enabled=not sound_enabled
-	controls[0].text="声音开启" if sound_enabled else "声音关闭"
+	controls[0].icon=load(ROOT+("ui/png/icon_sound_on.png" if sound_enabled else "ui/png/icon_sound_off.png"))
 	if not sound_enabled:
 		for child in get_children():
 			if child is AudioStreamPlayer:
@@ -143,10 +162,25 @@ func play_cue(base_frequency: float, duration: float, gain: float) -> void:
 func toggle_pause() -> void:
 	paused=not paused
 	accumulator=0
-	pause_button.text="继续" if paused else "暂停"
+	pause_button.icon=load(ROOT+("ui/png/icon_play.png" if paused else "ui/png/icon_pause.png"))
 	for child in get_children():
 		if child is AudioStreamPlayer:
 			child.stream_paused=paused
+func toggle_info() -> void:
+	info_open = not info_open
+
+func on_rabbit_hit(other: Fighter, damage: float) -> void:
+	if other == duck:
+		rabbit_hit_left = 0.42
+		duck_impact_left = 0.37
+		play_sample(cue_sword_hit)
+		effects.append({"kind":"blade","at":other.position,"time":0.28,"total":0.28,"text":""})
+
+func on_strike(at: Vector2, protected: bool) -> void:
+	pending_strike=true
+	strike_safe=protected
+	strike_at=at
+
 func set_speed(value: int) -> void:
 	speed=value
 	accumulator=0
@@ -168,6 +202,8 @@ func _process(delta: float) -> void:
 		health_display=health_display.lerp(Vector2(duck.health,rabbit.health),minf(1,delta*9))
 	queue_redraw()
 func advance(dt: float) -> void:
+	rabbit_hit_left=maxf(0.0,rabbit_hit_left-dt)
+	duck_impact_left=maxf(0.0,duck_impact_left-dt)
 	for i in range(effects.size()-1,-1,-1):
 		effects[i].time-=dt
 		if effects[i].time<=0:
@@ -178,32 +214,40 @@ func advance(dt: float) -> void:
 	var rods_before:=duck.rods.size()
 	var blade_before:=rabbit.stored_damage
 	var was_forging:=rabbit.action=="forge"
+	var before_storm:=duck.storm_left
 	arena.step(dt)
-	if not was_forging and rabbit.action=="forge":
-		play_sample(cue_forge)
+	if rabbit.action=="forge":
+		var phase := int(fmod(arena.simulation_time,0.70)/0.70*6.0)
+		if phase==2 and forge_phase!=2:
+			play_sample(cue_forge)
+			effects.append({"kind":"forge","at":rabbit.position,"time":0.3,"total":0.3,"text":""})
+		forge_phase=phase
+	else:
+		forge_phase=-1
+	if duck.storm_left < before_storm and ceili(duck.storm_left)<ceili(before_storm) and before_storm-duck.storm_left<0.1:
+		play_sample(preload("res://assets/audio/duck_countdown_final.wav") if ceili(duck.storm_left)==1 else preload("res://assets/audio/duck_countdown_tick.wav"))
 	if duck.cloud_holder!=previous_holder:
-		play_sample(cue_transfer)
-		effects.append({"kind":"transfer","at":previous_holder.position,"to":duck.cloud_holder.position,"time":0.35,"total":0.35,"text":""})
-		banner="霉运转交！" if duck.lightning_flash<=previous_flash else "下一轮乌云回到鸭子。"
-		banner_left=1.4
+		if not pending_strike:
+			play_sample(cue_transfer)
+			effects.append({"kind":"transfer","at":previous_holder.position,"to":duck.cloud_holder.position,"time":0.35,"total":0.35,"text":""})
+			banner="霉运转交！"
+			banner_left=1.4
 		previous_holder=duck.cloud_holder
-	var strike_event := duck.lightning_flash>previous_flash
+	var strike_event := pending_strike
 	if strike_event:
-		var safe:=duck.rods.size()<rods_before
-		if safe:
-			play_cue(880,0.15,0.08)
-		else:
-			play_sample(cue_thunder)
+		var safe:=strike_safe
+		play_sample(cue_thunder)
 		banner="避雷成功 · 消耗一根避雷针" if safe else "落雷！"
 		banner_left=1.8
-		effects.append({"kind":"safe" if safe else "thunder","at":duck.strike_position,"time":0.5,"total":0.5,"text":"避雷" if safe else ""})
+		effects.append({"kind":"safe" if safe else "thunder","at":strike_at,"time":0.5,"total":0.5,"text":"避雷" if safe else ""})
+	pending_strike=false
 	previous_flash=duck.lightning_flash
 	for i in 2:
 		var hero: Fighter=arena.heroes[i]
 		var lost: float=previous_hp[i]-hero.health
 		if lost>0.01:
 			if i==0 and rabbit.stored_damage<blade_before:
-				play_sample(cue_sword_hit)
+				pass
 			elif not strike_event:
 				play_cue(320,0.1,0.08)
 			effects.append({"kind":"hit","at":hero.position,"time":0.7,"total":0.7,"text":"−%d"%roundi(lost),"strong":lost>=24})
@@ -233,151 +277,132 @@ func meter(rect: Rect2,value: float,tint: Color) -> void:
 	if value>0:
 		panel(Rect2(rect.position,Vector2(rect.size.x*clampf(value,0,1),rect.size.y)),tint,0)
 
+func texture(path: String) -> Texture2D:
+	if not texture_cache.has(path):
+		texture_cache[path] = load(ROOT + path)
+	return texture_cache[path]
+
+func nine_patch(path: String, rect: Rect2, border: int = 12) -> void:
+	var t := texture(path)
+	if not t:
+		return
+	var source_size := t.get_size()
+	var sw: Array = [float(border),source_size.x-border*2,float(border)]
+	var sh: Array = [float(border),source_size.y-border*2,float(border)]
+	var dw: Array = [float(border),rect.size.x-border*2,float(border)]
+	var dh: Array = [float(border),rect.size.y-border*2,float(border)]
+	var sy := 0.0
+	var dy := rect.position.y
+	for y in 3:
+		var sx := 0.0
+		var dx := rect.position.x
+		for x in 3:
+			draw_texture_rect_region(t,Rect2(dx,dy,dw[x],dh[y]),Rect2(sx,sy,sw[x],sh[y]))
+			sx += sw[x]
+			dx += dw[x]
+		sy += sh[y]
+		dy += dh[y]
+
+func image_at(path: String, rect: Rect2) -> void:
+	var t := texture(path)
+	if t:
+		draw_texture_rect(t,rect,false)
+
+func strip_at(path: String, at: Vector2, frame_size: Vector2, durations: Array, elapsed: float, looped: bool = true, flip: bool = false, origin: Vector2 = Vector2.ZERO) -> void:
+	var total := 0.0
+	for duration in durations:
+		total += float(duration)
+	var time := fposmod(elapsed,total) if looped else minf(elapsed,total-0.0001)
+	var frame := 0
+	while frame < durations.size()-1 and time >= float(durations[frame]):
+		time -= float(durations[frame])
+		frame += 1
+	var source := Rect2(Vector2(frame*frame_size.x,0),frame_size)
+	var t := texture(path)
+	if t:
+		draw_set_transform(at,0,Vector2(-1,1) if flip else Vector2.ONE)
+		draw_texture_rect_region(t,Rect2(-origin,frame_size),source)
+		draw_set_transform(Vector2.ZERO)
+
 func _draw() -> void:
 	if not is_instance_valid(arena) or font==null:
 		return
-	draw_rect(Rect2(0,0,1100,780),Color("182837"))
-	label("鸭兔对决",Vector2(42,53),28)
-	label("自动战斗",Vector2(43,78),15,MUTED)
-	panel(Rect2(270,82,250,44),Color("243744"),0,Color("536c70"))
-	label("鸭",Vector2(285,108),18,GOLD)
-	label("%d"%ceili(duck.health),Vector2(335,108),19,GOLD)
-	meter(Rect2(382,99,120,8),health_display.x/120,GOLD)
-	panel(Rect2(580,82,250,44),Color("243744"),0,Color("536c70"))
-	label("兔",Vector2(595,108),18,PURPLE)
-	label("%d"%ceili(rabbit.health),Vector2(645,108),19,PURPLE)
-	meter(Rect2(692,99,120,8),health_display.y/120,PURPLE)
-	label("VS",Vector2(536,111),17,MUTED)
-	panel(Rect2(260,130,580,500),Color("b18a63"),0)
-	panel(Rect2(270,140,560,480),Color("415657"),0)
-	draw_set_transform(ORIGIN,0,Vector2.ONE*ZOOM)
-	for x in range(35,700,35):
-		for y in range(35,600,35):
-			draw_circle(Vector2(x,y),0.8,Color("526966"))
+	image_at("environment/screen_surround.png",Rect2(0,0,1100,780))
+	image_at("environment/arena_wood_frame.png",Rect2(190,80,720,620))
+	image_at("environment/arena_floor.png",Rect2(200,90,700,600))
 	for rod in duck.rods:
-		draw_circle(rod,100,Color(0.3,0.65,0.62,0.07))
-		draw_arc(rod,100,0,TAU,64,Color(0.3,0.65,0.62,0.3),1.4,true)
-		draw_circle(rod+Vector2(0,6),10,Color("cbdacf"))
-		draw_line(rod+Vector2(0,3),rod-Vector2(0,24),Color("4c9292"),5)
-		draw_line(rod-Vector2(7,18),rod+Vector2(7,-28),Color("4c9292"),3)
+		image_at("characters/props/lightning_rod.png",Rect2(ORIGIN+rod-Vector2(48,82),Vector2(96,96)))
+	var t := arena.simulation_time
+	var duck_strip := "characters/duck/impact_strip.png" if duck_impact_left > 0 else "characters/duck/idle_strip.png"
+	strip_at(duck_strip,ORIGIN+duck.position,Vector2(96,96),[0.07,0.08,0.10,0.12] if duck_impact_left>0 else [0.16,0.16,0.16,0.16],0.37-duck_impact_left if duck_impact_left>0 else t,duck_impact_left<=0,duck.velocity.x<0,Vector2(48,56))
+	var rs := "idle"
+	var durations: Array = [0.16,0.16,0.16,0.16]
+	var rt := t
+	var looped := true
+	if rabbit_hit_left>0:
+		rs="hit_recover"
+		durations=[0.07,0.08,0.11,0.16]
+		rt=0.42-rabbit_hit_left
+		looped=false
+	elif rabbit.action=="forge":
+		rs="forge"
+		durations=[0.16,0.10,0.08,0.09,0.11,0.16]
+	elif rabbit.temper_left>0:
+		rs="temper"
+		durations=[0.14,0.14,0.14,0.14]
+	strip_at("characters/rabbit/"+rs+"_strip.png",ORIGIN+rabbit.position,Vector2(96,96),durations,rt,looped,rabbit.velocity.x<0,Vector2(48,56))
+	var cloud: Vector2=ORIGIN+duck.cloud_holder.position+Vector2(0,-45)
+	cloud.x=clampf(cloud.x,238,862)
+	cloud.y=maxf(110,cloud.y)
+	strip_at("vfx/cloud_idle_strip.png",cloud,Vector2(128,80),[0.16,0.16,0.16,0.16,0.16,0.16],t,true,false,Vector2(64,68))
+	label("%.1f"%duck.storm_left,cloud+Vector2(-15,-20),18,Color("243746"))
+	if rabbit.temper_left>0:
+		strip_at("vfx/temper_aura_strip.png",ORIGIN+rabbit.position,Vector2(96,96),[0.1,0.1,0.1,0.1,0.1,0.1],t,true,false,Vector2(48,56))
 	for effect in effects:
-		if effect.kind=="transfer":
-			var t: float=1-effect.time/effect.total
-			var at: Vector2=effect.at.lerp(effect.to,t)
-			draw_arc(at,28,0,TAU,32,Color(0.7,0.5,0.2,effect.time/effect.total),3,true)
-	for i in 2:
-		var h: Fighter=arena.heroes[i]
-		draw_set_transform(ORIGIN+h.position*ZOOM,0,Vector2.ONE*ZOOM)
-		draw_circle(Vector2(0,17),24,Color(0.18,0.27,0.22,0.12))
-		if i==0:
-			draw_duck()
-		else:
-			draw_rabbit()
-	draw_set_transform(ORIGIN,0,Vector2.ONE*ZOOM)
-	var cloud: Vector2=duck.cloud_holder.position+Vector2(0,-60)
-	cloud.x=clampf(cloud.x,35,665)
-	cloud.y=maxf(36,cloud.y)
-	var danger:=duck.storm_left<=2
-	var cloud_color:=Color("bd655a") if danger else Color("687680")
-	for p in [Vector2(-15,0),Vector2(0,-7),Vector2(16,0)]:
-		draw_circle(cloud+p,16,cloud_color)
-	panel(Rect2(cloud+Vector2(-24,6),Vector2(48,25)),cloud_color,8)
-	label("%.1f"%duck.storm_left,cloud+Vector2(-14,24),18,Color.WHITE)
-	for effect in effects:
-		var fade: float=effect.time/effect.total
-		if effect.kind=="thunder":
-			draw_polyline(PackedVector2Array([effect.at+Vector2(-7,-90),effect.at+Vector2(9,-51),effect.at+Vector2(-8,-48),effect.at]),Color(0.94,0.65,0.19,fade),6,true)
+		var elapsed: float=effect.total-effect.time
+		if effect.kind=="blade":
+			strip_at("vfx/broad_sword_hit_strip.png",ORIGIN+effect.at,Vector2(96,96),[0.03,0.04,0.045,0.05,0.055,0.065],elapsed,false,false,Vector2(48,48))
+		elif effect.kind=="forge":
+			strip_at("vfx/forge_sparks_strip.png",ORIGIN+effect.at,Vector2(96,96),[0.035,0.045,0.05,0.055,0.06,0.07],elapsed,false,false,Vector2(48,68))
+		elif effect.kind=="transfer":
+			strip_at("vfx/cloud_transfer_strip.png",ORIGIN+effect.at,Vector2(128,128),[0.04,0.05,0.06,0.06,0.07,0.08],elapsed,false,false,Vector2(64,64))
+		elif effect.kind=="thunder":
+			strip_at("vfx/lightning_strike_strip.png",ORIGIN+effect.at,Vector2(128,192),[0.03,0.04,0.045,0.045,0.05,0.06],elapsed,false,false,Vector2(64,172))
 		elif effect.kind=="safe":
-			draw_arc(effect.at,26+(1-fade)*45,0,TAU,48,Color(0.2,0.6,0.54,fade),4,true)
-			label("避雷",effect.at+Vector2(-20,-34),20,Color(0.2,0.5,0.45,fade))
+			strip_at("vfx/rod_protected_strip.png",ORIGIN+effect.at,Vector2(128,128),[0.035,0.045,0.05,0.055,0.06,0.07],elapsed,false,false,Vector2(64,64))
 		elif effect.kind=="hit":
-			draw_arc(effect.at,20+(1-fade)*35,0,TAU,32,Color(0.8,0.32,0.26,fade),3,true)
-			label(effect.text,effect.at+Vector2(-20,-30-(1-fade)*35),28 if effect.strong else 20,Color(0.7,0.25,0.2,fade))
-	draw_set_transform(Vector2.ZERO)
-	# Compact state cards: symbols accompany values, while the full mode remains available.
-	panel(Rect2(38,165,188,78),Color("243744"),0,Color("536c70"))
-	draw_colored_polygon(PackedVector2Array([Vector2(66,177),Vector2(55,194),Vector2(63,194),Vector2(58,207),Vector2(76,188),Vector2(68,188)]),GOLD)
-	label("%.1f s"%duck.storm_left,Vector2(91,203),28,GOLD)
-	label("鸭" if duck.cloud_holder==duck else "兔",Vector2(52,228),15,MUTED)
-	label("避雷 %d/2"%duck.rods.size(),Vector2(91,228),14,MUTED)
-	var blade: float=rabbit.stored_damage*(1.5 if rabbit.temper_left>0 else 1)
-	panel(Rect2(870,165,188,78),Color("243744"),0,Color("536c70"))
-	label("剑",Vector2(884,199),20,PURPLE)
-	label("%d"%roundi(blade),Vector2(927,203),28,PURPLE)
-	meter(Rect2(887,220,145,6),minf(blade/60,1),PURPLE)
-	if rabbit.temper_left>0:
-		label("×1.5  %.1f s"%rabbit.temper_left,Vector2(880,276),18,GOLD)
-	var event_text:=banner if banner_left>0 else "轻碰不扣血 · 关键一击才值得强调"
-	if arena.finished:
-		event_text="平局" if arena.result.contains("DRAW") else ("倒霉鸭获胜" if duck.health>rabbit.health else "锻造兔获胜")
-	label(event_text,Vector2(290,652),16,INK)
-	label("%.1f 秒  /  %d×"%[arena.simulation_time,speed],Vector2(695,652),13,MUTED)
-	var captions: Array[String]=["改雷表","放避雷针","现场打铁","淬火"]
-	var values: Array[float]=[duck.cd_one,duck.cd_two,rabbit.cd_one,rabbit.cd_two]
-	for i in 4:
-		var x:=270+i*142
-		panel(Rect2(x,668,134,46),Color("243744") if values[i]>0 else Color("315253"),0,Color("536c70"))
-		var icon:=Vector2(x+21,691)
-		var tint:=GOLD if i<2 else PURPLE
-		draw_arc(icon,13,-PI/2,-PI/2+TAU*(1-clampf(values[i]/[6.0,6.0,7.0,8.0][i],0,1)),32,tint,2,true)
+			label(effect.text,ORIGIN+effect.at+Vector2(-18,-45-elapsed*20),22,Color("a24037"))
+	nine_patch("ui/png/control_strip.png",Rect2(470,706,490,58))
+	for i in 2:
+		var x := 10 if i==0 else 930
+		var hero: Fighter = duck if i==0 else rabbit
+		nine_patch("ui/png/status_panel.png",Rect2(x,90,160,600))
+		image_at("characters/"+("duck" if i==0 else "rabbit")+"/default.png",Rect2(x+56,110,48,48))
+		label("%d"%ceili(hero.health),Vector2(x+65,205),22,Color("243746"))
+		image_at("ui/png/hp_track.png",Rect2(x+16,226,128,16))
+		draw_rect(Rect2(x+20,230,120*clampf(hero.health/hero.max_health,0,1),8),Color("efc65b") if i==0 else Color("b89acf"))
+		image_at("ui/png/hp_frame.png",Rect2(x+16,226,128,16))
+		var values: Array = [hero.cd_one,hero.cd_two]
+		var icons: Array = ["icon_skill_timer","icon_skill_rod"] if i==0 else ["icon_skill_forge","icon_skill_temper"]
+		for j in 2:
+			var pos := Vector2(x+12+j*72,414)
+			image_at("ui/png/skill_slot_ready.png" if values[j]<=0 else "ui/png/skill_slot_normal.png",Rect2(pos,Vector2(64,64)))
+			image_at("ui/png/"+icons[j]+".png",Rect2(pos+Vector2(16,16),Vector2(32,32)))
+			if values[j]>0:
+				label("%.1f"%values[j],pos+Vector2(17,87),16,Color("243746"))
 		if i==0:
-			draw_line(icon,icon+Vector2(0,-7),tint,2)
-			draw_line(icon,icon+Vector2(6,3),tint,2)
-		elif i==1:
-			draw_line(icon+Vector2(0,8),icon-Vector2(0,8),tint,3)
-			draw_line(icon-Vector2(5,3),icon+Vector2(5,-8),tint,2)
-		elif i==2:
-			draw_line(icon+Vector2(-4,7),icon+Vector2(3,-4),tint,3)
-			draw_rect(Rect2(icon+Vector2(-2,-8),Vector2(11,6)),tint)
+			image_at("ui/png/icon_status_cloud.png",Rect2(x+18,280,32,32))
+			label("%d"%duck.rods.size(),Vector2(x+70,305),20,Color("243746"))
 		else:
-			draw_line(icon+Vector2(-5,7),icon+Vector2(6,-8),tint,4)
-		label(["雷","针","锻","火"][i],Vector2(x+42,687),14,tint)
-		label("%.1f s"%values[i] if values[i]>0 else "就绪",Vector2(x+72,696),14,MUTED)
-	label("种子 %d"%seed_value,Vector2(42,752),12,MUTED)
-	
-
-# Rectangular pixels remain presentation-only; the simulation keeps its original circular bodies.
-func pixel(rect: Rect2, color: String) -> void:
-	draw_rect(rect,Color(color))
-
-func draw_duck() -> void:
-	# Pixel silhouette, deliberately larger than the physical collision body only visually.
-	pixel(Rect2(-24,-5,45,25),"263647")
-	pixel(Rect2(-18,-11,39,27),"ffcf63")
-	pixel(Rect2(-23,0,12,13),"ffcf63")
-	pixel(Rect2(-12,-5,26,12),"ffe782")
-	pixel(Rect2(-8,7,23,8),"d99d49")
-	pixel(Rect2(4,-27,24,25),"263647")
-	pixel(Rect2(7,-24,18,19),"ffdb70")
-	pixel(Rect2(5,-31,15,6),"ef7956")
-	pixel(Rect2(18,-20,5,5),"263647")
-	pixel(Rect2(24,-15,15,6),"ed8156")
-	pixel(Rect2(-14,18,12,5),"ec815d")
-	pixel(Rect2(6,18,12,5),"ec815d")
-
-func draw_rabbit() -> void:
-	# The sword is drawn independently of collision shape and has no gameplay reach.
-	for x in [-14,8]:
-		pixel(Rect2(x-2,-42,11,31),"263647")
-		pixel(Rect2(x,-39,6,26),"d7b4e9")
-		pixel(Rect2(x+2,-34,3,14),"f2dff5")
-	pixel(Rect2(-22,-12,44,34),"263647")
-	pixel(Rect2(-18,-16,36,34),"d9b8ec")
-	pixel(Rect2(-14,-16,28,6),"f4e7f8")
-	pixel(Rect2(-12,-5,5,5),"263647")
-	pixel(Rect2(7,-5,5,5),"263647")
-	pixel(Rect2(-3,2,6,4),"ee947d")
-	pixel(Rect2(-13,10,26,8),"e39b46")
-	pixel(Rect2(-12,18,8,6),"f3e8f6")
-	pixel(Rect2(5,18,8,6),"f3e8f6")
-	var sword_color := "f7b86e" if rabbit.temper_left>0 else "bfdcdb"
-	pixel(Rect2(25,-26,8,36),"263647")
-	pixel(Rect2(27,-30,4,33),sword_color)
-	pixel(Rect2(21,5,20,5),"f08a5f")
-	pixel(Rect2(28,10,5,9),"ad7147")
-	if rabbit.action=="forge":
-		var lift:=sin(arena.simulation_time*16)*4
-		pixel(Rect2(-28,-6+lift,5,18),"a97953")
-		pixel(Rect2(-32,-12+lift,13,7),"93aaa9")
-	if rabbit.temper_left>0:
-		draw_arc(Vector2.ZERO,31,0,TAU,40,Color(0.9,0.65,0.25,0.45),2,true)
+			image_at("ui/png/icon_status_stored_damage.png",Rect2(x+18,280,32,32))
+			label("%d"%roundi(rabbit.stored_damage),Vector2(x+58,305),20,Color("243746"))
+	if arena.finished:
+		label("平局" if arena.result.contains("DRAW") else ("倒霉鸭获胜" if duck.health>rabbit.health else "锻造兔获胜"),Vector2(220,742),22,Color("243746"))
+	elif banner_left>0:
+		label(banner,Vector2(210,742),16,Color("243746"))
+	if info_open:
+		panel(Rect2(280,225,540,280),Color("f7ebcd"),0,Color("243746"))
+		label("种子 %d    时间 %.1f 秒"%[seed_value,arena.simulation_time],Vector2(310,270),20,Color("243746"))
+		label("乌云倒计时 %.1f 秒   避雷针 %d/2"%[duck.storm_left,duck.rods.size()],Vector2(310,315),18,Color("243746"))
+		label("蓄伤 %.1f   淬火 %s"%[rabbit.stored_damage,"生效" if rabbit.temper_left>0 else "无"],Vector2(310,355),18,Color("243746"))
+		label("技能自动释放，数字表示冷却时间。",Vector2(310,400),18,Color("243746"))

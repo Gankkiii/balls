@@ -1,5 +1,6 @@
 class_name UnluckyDuck
 extends Fighter
+signal presentation_strike(at: Vector2, protected: bool)
 const STORM_DURATION := 7.0
 const LIGHTNING_DAMAGE := 32.0
 var cloud_holder: Fighter
@@ -46,6 +47,7 @@ func strike() -> void:
 			break
 	if not protected:
 		cloud_holder.hit(LIGHTNING_DAMAGE)
+	presentation_strike.emit(strike_position, protected)
 	cloud_holder = self
 	storm_left = STORM_DURATION
 func skill_names() -> Array[String]:

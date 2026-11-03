@@ -1,5 +1,6 @@
 class_name ForgeRabbit
 extends Fighter
+signal presentation_hit(target: Fighter, damage: float)
 const GROWTH := 8.0
 var stored_damage := 0.0
 var temper_left := 0.0
@@ -11,7 +12,9 @@ func _init() -> void:
 	ball_collided.connect(contact)
 func contact(other: Ball) -> void:
 	if other is Fighter and world != null and world.is_enemy_body(self,other):
-		other.hit(stored_damage * (1.5 if temper_left > 0 else 1.0))
+		var damage := stored_damage * (1.5 if temper_left > 0 else 1.0)
+		other.hit(damage)
+		presentation_hit.emit(other, damage)
 		stored_damage = 0
 		temper_left = 0
 func advance(dt: float) -> void:
