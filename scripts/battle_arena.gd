@@ -1,5 +1,9 @@
 class_name BattleArena
 extends Arena
+signal presentation_event(cue_name: String)
+
+func present(cue_name: String) -> void:
+	presentation_event.emit(cue_name)
 var heroes: Array[Fighter] = []
 var eggs: Array[BombEgg] = []
 var bubbles: Array[Bubble] = []
@@ -128,6 +132,7 @@ func spawn_bubble(owner_value: Fighter, at: Vector2, speed: Vector2, launch: flo
 	add_child(bubble)
 	move_child(bubble,0)
 	bubbles.append(bubble)
+	present("bubble_fish_vacuum" if absorb > 0 else "bubble_fish_spit")
 	return bubble
 
 func spawn_nail(owner_value: Fighter, at: Vector2) -> IronNail:
@@ -137,6 +142,7 @@ func spawn_nail(owner_value: Fighter, at: Vector2) -> IronNail:
 	add_child(nail)
 	move_child(nail,0)
 	nails.append(nail)
+	present("magnet_crab_drop")
 	return nail
 
 func spawn_egg(at: Vector2, owner_value: Fighter, large: bool) -> void:
@@ -148,6 +154,9 @@ func spawn_egg(at: Vector2, owner_value: Fighter, large: bool) -> void:
 	add_child(egg)
 	move_child(egg, 0)
 	eggs.append(egg)
+	present("chicken_egg_drop")
+	if large:
+		present("chicken_fuse")
 
 func step_bubbles(dt: float) -> void:
 	var previous := {}
@@ -174,6 +183,7 @@ func step_bubbles(dt: float) -> void:
 				var keep := b if b.absorb_left > a.absorb_left else a
 				var drop := a if keep == b else b
 				keep.level += drop.level
+				present("bubble_fish_merge")
 				drop.gone = true
 				if a.gone:
 					break
@@ -184,6 +194,7 @@ func step_bubbles(dt: float) -> void:
 		if enemy != null:
 			if bubble.level >= 2:
 				enemy.hit(float(bubble.level)*8)
+				present("bubble_fish_hit")
 			bubble.gone = true
 	for i in range(bubbles.size()-1,-1,-1):
 		if bubbles[i].gone:

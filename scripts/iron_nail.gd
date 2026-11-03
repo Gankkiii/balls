@@ -21,6 +21,7 @@ func advance(dt: float, world: Arena) -> void:
 			else:
 				if owner_fighter.repel_ready:
 					owner_fighter.repel_ready = false
+					if world is BattleArena: world.present("magnet_crab_repel")
 					var enemy: Fighter = world.enemy_of(owner_fighter)
 					velocity = position.direction_to(enemy.position) * SPEED
 					if velocity == Vector2.ZERO:
@@ -39,6 +40,7 @@ func advance(dt: float, world: Arena) -> void:
 		var target: Fighter = world.first_target(owner_fighter,old,position,5)
 		if target != null:
 			target.hit(16)
+			if world is BattleArena: world.present("magnet_crab_moving_hit")
 			hit_left = 0.3
 			if target is Scarecrow:
 				position = target.position - old.direction_to(position) * (target.radius + 5.1)

@@ -16,6 +16,7 @@ func hit(damage: float, _self_blast: bool = false) -> void:
 	health -= actual
 	# Reflection bypasses dummy routing: no recursive chains.
 	world.enemy_of(owner_crow).hit(actual)
+	if actual > 0 and world is BattleArena: world.present("crow_reflect")
 	queue_redraw()
 func skill_names() -> Array[String]:
 	return ["", ""]

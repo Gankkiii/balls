@@ -14,6 +14,7 @@ func hit(damage: float, self_blast: bool = false) -> void:
 	if action != "hidden":
 		super.hit(damage,self_blast)
 func enter_shell() -> void:
+	if world is BattleArena: world.present("shell_turtle_enter")
 	action = "hidden"
 	action_left = 2.5
 	physics_enabled = false
@@ -29,6 +30,7 @@ func advance(dt: float) -> void:
 			var at: Vector2 = world.free_position(radius,self,shell.position)
 			if at.x >= 0:
 				position = at
+				if world is BattleArena: world.present("shell_turtle_exit")
 				physics_enabled = true
 				visible = true
 				velocity = Vector2.from_angle(rng.randf_range(0,TAU))*170

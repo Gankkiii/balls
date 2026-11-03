@@ -12,6 +12,7 @@ func _init() -> void:
 func contact(other: Ball) -> void:
 	if other is Scarecrow and other.owner_crow == self and feather and other.health > 0 and other.health < other.max_health:
 		other.health = minf(other.max_health,other.health+25)
+		if world is BattleArena: world.present("crow_repair")
 		feather = false
 		other.queue_redraw()
 func advance(dt: float) -> void:
@@ -37,6 +38,7 @@ func advance(dt: float) -> void:
 		if world.position_clear(dummy.position,radius,self,dummy) and world.position_clear(position,dummy.radius,self,dummy):
 			var old := position
 			position = dummy.position
+			if world is BattleArena: world.present("crow_swap")
 			dummy.position = old
 			world.release_contacts()
 			cd_one = 7

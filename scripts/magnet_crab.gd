@@ -24,6 +24,7 @@ func advance(dt: float) -> void:
 		cd_one = 7
 	queue_redraw()
 func magnetize(wall: int) -> void:
+	if world is BattleArena: world.present("magnet_crab_magnet")
 	magnetic_wall = wall
 	wall_flash = 1
 	for nail in world.nails:

@@ -16,6 +16,7 @@ func advance(dt: float) -> void:
 	super.advance(dt)
 	velocity = Vector2.ZERO
 	if cd_one <= 0:
+		if world is BattleArena: world.present("cactus_scatter")
 		for i in 5:
 			var at := position + Vector2.from_angle(rng.randf_range(0,TAU))*rng.randf_range(40,85)
 			thorns.append(at.clamp(Vector2(8,8),world.arena_size-Vector2(8,8)))
@@ -24,6 +25,7 @@ func advance(dt: float) -> void:
 		var at: Vector2 = world.free_position(radius,self)
 		if at.x >= 0:
 			position = at
+			if world is BattleArena: world.present("cactus_regrow")
 			world.release_contacts()
 			cd_two = 9
 	queue_redraw()

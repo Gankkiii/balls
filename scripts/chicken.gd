@@ -42,6 +42,7 @@ func advance(dt: float) -> void:
 			cd_two = 10.0
 		elif cd_one <= 0:
 			action = "run"
+			if world is BattleArena: world.present("chicken_panic_cluck")
 			action_left = 1.0
 			turn_timer = 0.0
 			run_base_speed = clampf(velocity.length(), 140, 230)

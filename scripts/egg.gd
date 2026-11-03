@@ -33,6 +33,7 @@ func advance(dt: float, fighters: Array[Ball]) -> void:
 		for fighter in fighters:
 			if fighter != owner_fighter and fighter is Fighter and fighter.health > 0 and fighter.physics_enabled and position.distance_to(fighter.position) <= radius + fighter.radius:
 				armed = true
+				if owner_fighter.world is BattleArena: owner_fighter.world.present("chicken_fuse")
 				fuse = 0.8
 				just_armed = true
 				break
@@ -46,6 +47,7 @@ func explode(fighters: Array[Ball]) -> void:
 	if exploded:
 		return
 	exploded = true
+	if owner_fighter.world is BattleArena: owner_fighter.world.present("chicken_explosion")
 	blast_left = 0.3
 	for fighter in fighters:
 		if fighter is Fighter and fighter.health > 0 and fighter.physics_enabled and position.distance_to(fighter.position) <= blast_radius + fighter.radius:

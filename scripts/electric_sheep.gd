@@ -16,6 +16,7 @@ func _init() -> void:
 	wall_collided.connect(_wall_charge)
 func _wall_charge(_normal: Vector2) -> void:
 	charge = minf(MAX_CHARGE, charge + 30)
+	if world is BattleArena: world.present("electric_sheep_charge")
 func advance(dt: float) -> void:
 	super.advance(dt)
 	if cd_one <= 0:
@@ -28,6 +29,7 @@ func advance(dt: float) -> void:
 		cd_one = 5
 	if cd_two <= 0:
 		wool_active = true
+		if world is BattleArena: world.present("electric_sheep_wool")
 		wool_position = position
 		cd_two = 7
 	queue_redraw()
@@ -36,7 +38,9 @@ func discharge(dt: float) -> void:
 	var in_range := position.distance_to(enemy.position) <= RANGE + enemy.radius
 	if wool_active:
 		in_range = in_range or wool_position.distance_to(enemy.position) <= RANGE + enemy.radius
+	var was_zapping := zapping
 	zapping = charge > 0 and enemy.health > 0 and in_range
+	if zapping and not was_zapping and world is BattleArena: world.present("electric_sheep_discharge")
 	if zapping:
 		var spent := minf(charge, DRAIN * dt)
 		charge -= spent

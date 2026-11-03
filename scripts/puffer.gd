@@ -39,10 +39,12 @@ func advance(dt: float) -> void:
 			cd_two = 9.0
 		elif cd_one <= 0:
 			begin_stationary("inflate")
+			if world is BattleArena: world.present("puffer_inflate")
 			cd_one = 6.0
 	queue_redraw()
 
 func start_burst() -> void:
+	if world is BattleArena: world.present("puffer_release")
 	if action == "inflate":
 		resume_motion()
 	burst_base_speed = clampf(velocity.length(), 140, 230)
@@ -53,6 +55,7 @@ func start_burst() -> void:
 
 func hit(damage: float, self_blast: bool = false) -> void:
 	if immune_left > 0:
+		if damage > 0 and world is BattleArena: world.present("puffer_absorb")
 		gas = minf(GAS_MAX, gas + damage * 1.8)
 		if gas >= GAS_MAX and action != "burst":
 			start_burst()
@@ -63,6 +66,7 @@ func hit(damage: float, self_blast: bool = false) -> void:
 func _on_contact(other: Ball) -> void:
 	if action == "burst" and impact_cooldown <= 0 and other is Fighter and (not world is BattleArena or world.is_enemy_body(self,other)):
 		other.hit(HIT_DAMAGE)
+		if world is BattleArena: world.present("puffer_contact")
 		impact_cooldown = 0.35
 
 func skill_names() -> Array[String]:

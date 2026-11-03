@@ -18,12 +18,14 @@ func contact(other: Ball) -> void:
 		return
 	if other is Fighter and world.is_enemy_body(turtle,other):
 		other.hit(18 * (1.5 if spin_left > 0 else 1.0))
+		if world is BattleArena: world.present("shell_turtle_contact")
 		if spin_left > 0 and other.inverse_mass() > 0:
 			var n := position.direction_to(other.position)
 			var impulse := 100.0
 			other.velocity += n * impulse * other.inverse_mass()
 			velocity -= n * impulse * inverse_mass()
 func start_spin() -> void:
+	if world is BattleArena: world.present("shell_turtle_spin")
 	spin_restore = velocity
 	velocity = Vector2.ZERO
 	spin_left = 2.5
