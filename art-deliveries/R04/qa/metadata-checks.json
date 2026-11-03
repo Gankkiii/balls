@@ -1,0 +1,89 @@
+{
+  "result": "PASS",
+  "character_file_records": 131,
+  "ui_records": 65,
+  "audio_event_records": 32,
+  "animations": [
+    {
+      "character": "puffer",
+      "id": "hurt",
+      "frames": 4,
+      "unique": 2,
+      "strip_exact": true
+    },
+    {
+      "character": "chicken",
+      "id": "hurt",
+      "frames": 4,
+      "unique": 2,
+      "strip_exact": true
+    },
+    {
+      "character": "chicken",
+      "id": "panic_run",
+      "frames": 4,
+      "unique": 4,
+      "strip_exact": true
+    },
+    {
+      "character": "chicken",
+      "id": "panic_run_blink",
+      "frames": 4,
+      "unique": 4,
+      "strip_exact": true
+    },
+    {
+      "character": "bubble_fish",
+      "id": "hurt",
+      "frames": 4,
+      "unique": 2,
+      "strip_exact": true
+    },
+    {
+      "character": "electric_sheep",
+      "id": "hurt",
+      "frames": 4,
+      "unique": 2,
+      "strip_exact": true
+    },
+    {
+      "character": "magnet_crab",
+      "id": "hurt",
+      "frames": 8,
+      "unique": 2,
+      "strip_exact": true
+    },
+    {
+      "character": "cactus",
+      "id": "hurt",
+      "frames": 8,
+      "unique": 2,
+      "strip_exact": true
+    },
+    {
+      "character": "shell_turtle",
+      "id": "hurt",
+      "frames": 8,
+      "unique": 2,
+      "strip_exact": true
+    },
+    {
+      "character": "shell_turtle",
+      "id": "shell_markings_spin",
+      "frames": 12,
+      "unique": 2,
+      "strip_exact": true
+    },
+    {
+      "character": "crow",
+      "id": "hurt",
+      "frames": 8,
+      "unique": 2,
+      "strip_exact": true
+    }
+  ],
+  "alpha_and_bbox_exact": true,
+  "declared_anchors_in_canvas": true,
+  "anchors_runtime_verified": false,
+  "scope": "Metadata mechanical consistency, not approved runtime alignment"
+}

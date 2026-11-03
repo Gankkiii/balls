@@ -1,0 +1,18 @@
+{
+  "version": "R04-handoff-1",
+  "game_repository": "https://github.com/Gankkiii/balls",
+  "game_commit": "d202089fe7dd71ee7aaf31fe8563867111c73498",
+  "review_repository": "https://github.com/Gankkiii/ball_art_review",
+  "review_commit": "33d13fc55256fb6ef4b7f7cf31ea75bd328b28e2",
+  "review_url": "https://gankkiii.github.io/ball_art_review/",
+  "scope": "Resource handoff only; game code, rules, scenes and team configs unchanged",
+  "user_acceptance": "本聊天：ok挺好，先这样吧，你来给点点做一个资源包让他写代码",
+  "timer_started_utc": "2026-11-03T16:18:02Z",
+  "work_limit_minutes": 60,
+  "not_validated": [
+    "in_game_art_binding",
+    "human_audio_listening",
+    "physical_device_display_and_audio",
+    "game_performance"
+  ]
+}

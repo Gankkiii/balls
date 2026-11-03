@@ -1,0 +1,483 @@
+{
+  "version": "R04-handoff-1",
+  "approval": "用户认可R04评审并明确要求交付点点资源包；不等于人工听审/游戏验收",
+  "format": "48kHz / 16bit / mono PCM WAV",
+  "provenance": {
+    "type": "original_procedural_cartoon_synthesis",
+    "external_samples": false,
+    "external_recordings": false,
+    "source": "source/audio/build_character_audio.py",
+    "seed": 2026110304,
+    "human_listening": "NOT_RUN",
+    "not_a_real_animal_recording": true
+  },
+  "characters": {
+    "puffer": {
+      "name": "充气球",
+      "events": [
+        {
+          "id": "inflate",
+          "title": "充气",
+          "event": "INFLATE starts / visual material cue",
+          "duration_s": 0.55,
+          "model": "乳胶摩擦＋气流，不是笛声",
+          "status": "user_accepted_handoff_revision_not_in_game_validated",
+          "peak_linear": 0.7400128177739799,
+          "clipped_samples": 0,
+          "sha256": "86788833d83f7d64549d26dab106f0ca812ac2c32134293316af622f6d2e0f02",
+          "path": "assets/audio/puffer_inflate.wav",
+          "source_sha256": "86788833d83f7d64549d26dab106f0ca812ac2c32134293316af622f6d2e0f02"
+        },
+        {
+          "id": "absorb",
+          "title": "吸收",
+          "event": "immune_left>0 actual absorption, not HP loss",
+          "duration_s": 0.31,
+          "model": "橡胶挤压回弹",
+          "status": "user_accepted_handoff_revision_not_in_game_validated",
+          "peak_linear": 0.7400128177739799,
+          "clipped_samples": 0,
+          "sha256": "f74f7f79f1893984150821b1c3615ddab5bd44b6e4e1aca6b1c8e42522e18e72",
+          "path": "assets/audio/puffer_absorb.wav",
+          "source_sha256": "f74f7f79f1893984150821b1c3615ddab5bd44b6e4e1aca6b1c8e42522e18e72"
+        },
+        {
+          "id": "release",
+          "title": "放气",
+          "event": "actual burst release; one short audition segment",
+          "duration_s": 0.9,
+          "model": "宽带排气与阀口扑动",
+          "status": "user_accepted_handoff_revision_not_in_game_validated",
+          "peak_linear": 0.7400128177739799,
+          "clipped_samples": 0,
+          "sha256": "c2975e5465e5033ef975226ee8eb514985f61f324ec3bba05261df8734913bba",
+          "path": "assets/audio/puffer_release.wav",
+          "source_sha256": "c2975e5465e5033ef975226ee8eb514985f61f324ec3bba05261df8734913bba"
+        },
+        {
+          "id": "contact",
+          "title": "碰撞",
+          "event": "actual effective burst collision only",
+          "duration_s": 0.31,
+          "model": "低短弹性碰撞，无爆炸",
+          "status": "user_accepted_handoff_revision_not_in_game_validated",
+          "peak_linear": 0.7400128177739799,
+          "clipped_samples": 0,
+          "sha256": "6db11aabdf175f56f0d01201e44be7508a4e0f422c389d8216b00665be7054fa",
+          "path": "assets/audio/puffer_contact.wav",
+          "source_sha256": "6db11aabdf175f56f0d01201e44be7508a4e0f422c389d8216b00665be7054fa"
+        }
+      ]
+    },
+    "chicken": {
+      "name": "炸弹母鸡",
+      "events": [
+        {
+          "id": "panic_cluck",
+          "title": "咯咯咯",
+          "event": "PANIC RUN starts; rapid hen clucks, not rooster crow",
+          "duration_s": 0.82,
+          "model": "短促五连咯声，声门＋胸腔共振",
+          "status": "user_accepted_handoff_revision_not_in_game_validated",
+          "peak_linear": 0.7400128177739799,
+          "clipped_samples": 0,
+          "sha256": "26674bdd5b6a92cfad3557b8ec3dd1697ac84b3da2b9c9e32e53d3105f024b2a",
+          "path": "assets/audio/chicken_panic_cluck.wav",
+          "source_sha256": "26674bdd5b6a92cfad3557b8ec3dd1697ac84b3da2b9c9e32e53d3105f024b2a"
+        },
+        {
+          "id": "egg_drop",
+          "title": "落蛋",
+          "event": "actual egg spawn/ground contact",
+          "duration_s": 0.21,
+          "model": "薄蛋壳小落地",
+          "status": "user_accepted_handoff_revision_not_in_game_validated",
+          "peak_linear": 0.7400128177739799,
+          "clipped_samples": 0,
+          "sha256": "a0085d8f61fab5f8294eecb99d62a3bd961182d4009a112eaf2066260091c045",
+          "path": "assets/audio/chicken_egg_drop.wav",
+          "source_sha256": "a0085d8f61fab5f8294eecb99d62a3bd961182d4009a112eaf2066260091c045"
+        },
+        {
+          "id": "fuse",
+          "title": "引信",
+          "event": "actual armed fuse only; montage rhythm does not define fuse",
+          "duration_s": 0.58,
+          "model": "短干裂壳提示",
+          "status": "user_accepted_handoff_revision_not_in_game_validated",
+          "peak_linear": 0.7400128177739799,
+          "clipped_samples": 0,
+          "sha256": "c47c4e6080cae367ff882e3867b3fe05f4e380a07f3bb2d86451feb263ad2ac8",
+          "path": "assets/audio/chicken_fuse.wav",
+          "source_sha256": "c47c4e6080cae367ff882e3867b3fe05f4e380a07f3bb2d86451feb263ad2ac8"
+        },
+        {
+          "id": "explosion",
+          "title": "炸蛋",
+          "event": "actual BombEgg.explode result, not impact shortcut",
+          "duration_s": 0.63,
+          "model": "干壳破裂＋短低频气爆",
+          "status": "user_accepted_handoff_revision_not_in_game_validated",
+          "peak_linear": 0.7400128177739799,
+          "clipped_samples": 0,
+          "sha256": "9f61e44333bc564aca9e2730aa3d718e3f36b4da0a4b00cf36f47581181a63f1",
+          "path": "assets/audio/chicken_explosion.wav",
+          "source_sha256": "9f61e44333bc564aca9e2730aa3d718e3f36b4da0a4b00cf36f47581181a63f1"
+        }
+      ]
+    },
+    "bubble_fish": {
+      "name": "泡泡鱼",
+      "events": [
+        {
+          "id": "spit",
+          "title": "噗啵",
+          "event": "actual level1 bubble spawn; harmless level1 remains harmless",
+          "duration_s": 0.29,
+          "model": "嘴部噗气流＋短湿腔啵",
+          "status": "user_accepted_handoff_revision_not_in_game_validated",
+          "peak_linear": 0.7400128177739799,
+          "clipped_samples": 0,
+          "sha256": "2523fb0807cf6635bb3463ae7e278c21202045b4fc4dff80334f383477149d19",
+          "path": "assets/audio/bubble_fish_spit.wav",
+          "source_sha256": "2523fb0807cf6635bb3463ae7e278c21202045b4fc4dff80334f383477149d19"
+        },
+        {
+          "id": "merge",
+          "title": "融合",
+          "event": "same-owner bubble levels merge",
+          "duration_s": 0.48,
+          "model": "两小泡并成一个低腔泡",
+          "status": "user_accepted_handoff_revision_not_in_game_validated",
+          "peak_linear": 0.7400128177739799,
+          "clipped_samples": 0,
+          "sha256": "19867855ad28e2bec6d195a3e30a11e372778a182089f6ced7170103295b4c54",
+          "path": "assets/audio/bubble_fish_merge.wav",
+          "source_sha256": "19867855ad28e2bec6d195a3e30a11e372778a182089f6ced7170103295b4c54"
+        },
+        {
+          "id": "vacuum",
+          "title": "吸泡",
+          "event": "own-bubble vacuum visual event only",
+          "duration_s": 0.68,
+          "model": "湿咕噜吸气、逐泡脉冲",
+          "status": "user_accepted_handoff_revision_not_in_game_validated",
+          "peak_linear": 0.7400128177739799,
+          "clipped_samples": 0,
+          "sha256": "686dcf482bc8c7a68cb95b792fb178e76916b008ebc770a202af9607185c21fb",
+          "path": "assets/audio/bubble_fish_vacuum.wav",
+          "source_sha256": "686dcf482bc8c7a68cb95b792fb178e76916b008ebc770a202af9607185c21fb"
+        },
+        {
+          "id": "hit",
+          "title": "泡命中",
+          "event": "actual merged bubble level>=2 effective hit",
+          "duration_s": 0.24,
+          "model": "大泡湿啪，不是玻璃铃",
+          "status": "user_accepted_handoff_revision_not_in_game_validated",
+          "peak_linear": 0.7400128177739799,
+          "clipped_samples": 0,
+          "sha256": "4f81524800afc02771596594c2b445e9f906eac93ab4bcfe7b313d1441022e57",
+          "path": "assets/audio/bubble_fish_hit.wav",
+          "source_sha256": "4f81524800afc02771596594c2b445e9f906eac93ab4bcfe7b313d1441022e57"
+        }
+      ]
+    },
+    "electric_sheep": {
+      "name": "触电羊",
+      "events": [
+        {
+          "id": "bleat",
+          "title": "咩",
+          "event": "character voice audition; optional skill expression, no new skill",
+          "duration_s": 0.94,
+          "model": "鼻腔声门抖动的咩，非纯音",
+          "status": "user_accepted_handoff_revision_not_in_game_validated",
+          "peak_linear": 0.7400128177739799,
+          "clipped_samples": 0,
+          "sha256": "1d1d4bf20ea1414296b56c5c9e57c17ab71885d9ccf41b78ce6ec9c9faa8a81f",
+          "path": "assets/audio/electric_sheep_bleat.wav",
+          "source_sha256": "1d1d4bf20ea1414296b56c5c9e57c17ab71885d9ccf41b78ce6ec9c9faa8a81f"
+        },
+        {
+          "id": "charge",
+          "title": "充电",
+          "event": "actual wall collision charges the shared pool",
+          "duration_s": 0.44,
+          "model": "离散短静电噼啪",
+          "status": "user_accepted_handoff_revision_not_in_game_validated",
+          "peak_linear": 0.7400128177739799,
+          "clipped_samples": 0,
+          "sha256": "b5528fc6b30e85d3a1082028a6aeabba5efee7488d5e1bb01834901cf46ad841",
+          "path": "assets/audio/electric_sheep_charge.wav",
+          "source_sha256": "b5528fc6b30e85d3a1082028a6aeabba5efee7488d5e1bb01834901cf46ad841"
+        },
+        {
+          "id": "wool",
+          "title": "落羊毛",
+          "event": "actual DROP WOOL placement",
+          "duration_s": 0.24,
+          "model": "低闷软绒落地",
+          "status": "user_accepted_handoff_revision_not_in_game_validated",
+          "peak_linear": 0.7400128177739799,
+          "clipped_samples": 0,
+          "sha256": "9fa4914cd5509b2bc424c56923fc367f45c59fd888f37612c12ce30113f982bf",
+          "path": "assets/audio/electric_sheep_wool.wav",
+          "source_sha256": "9fa4914cd5509b2bc424c56923fc367f45c59fd888f37612c12ce30113f982bf"
+        },
+        {
+          "id": "discharge",
+          "title": "放电",
+          "event": "continuous actual discharge excerpt; no added attack interval",
+          "duration_s": 0.63,
+          "model": "绒毛摩擦电流，持续段而非蜂鸣旋律",
+          "status": "user_accepted_handoff_revision_not_in_game_validated",
+          "peak_linear": 0.7400128177739799,
+          "clipped_samples": 0,
+          "sha256": "47915e294f3e9bd058bb5cacfadf8d5a08ad4af45776a4a8b9e4c46612106cd4",
+          "path": "assets/audio/electric_sheep_discharge.wav",
+          "source_sha256": "47915e294f3e9bd058bb5cacfadf8d5a08ad4af45776a4a8b9e4c46612106cd4"
+        }
+      ]
+    },
+    "magnet_crab": {
+      "name": "磁铁蟹",
+      "events": [
+        {
+          "id": "drop",
+          "title": "落钉",
+          "event": "actual iron nail spawn, not resting-nail damage",
+          "duration_s": 0.29,
+          "model": "小钢钉高次模态短叩",
+          "status": "user_accepted_handoff_revision_not_in_game_validated",
+          "peak_linear": 0.7400128177739799,
+          "clipped_samples": 0,
+          "sha256": "3f73aacc89289cd7c515351e89ff7ed81b5683958f00175810a2512b85213656",
+          "path": "assets/audio/magnet_crab_drop.wav",
+          "source_sha256": "3f73aacc89289cd7c515351e89ff7ed81b5683958f00175810a2512b85213656"
+        },
+        {
+          "id": "magnet",
+          "title": "磁吸",
+          "event": "actual wall magnetization and moving nail onset",
+          "duration_s": 0.7,
+          "model": "低线圈吸附＋最后金属搭扣",
+          "status": "user_accepted_handoff_revision_not_in_game_validated",
+          "peak_linear": 0.7400128177739799,
+          "clipped_samples": 0,
+          "sha256": "9d786d3f33febd9dc67dc71915220a2b5926c0dcaeb250dd7018dc45a7e31272",
+          "path": "assets/audio/magnet_crab_magnet.wav",
+          "source_sha256": "9d786d3f33febd9dc67dc71915220a2b5926c0dcaeb250dd7018dc45a7e31272"
+        },
+        {
+          "id": "moving_hit",
+          "title": "钉命中",
+          "event": "actually moving nail effective collision",
+          "duration_s": 0.34,
+          "model": "短钢钉硬接触",
+          "status": "user_accepted_handoff_revision_not_in_game_validated",
+          "peak_linear": 0.7400128177739799,
+          "clipped_samples": 0,
+          "sha256": "9d63db33d20f1adaba3f386a8ac162cb6f928c2d866974412ac001f382b8980d",
+          "path": "assets/audio/magnet_crab_moving_hit.wav",
+          "source_sha256": "9d63db33d20f1adaba3f386a8ac162cb6f928c2d866974412ac001f382b8980d"
+        },
+        {
+          "id": "repel",
+          "title": "弹钉",
+          "event": "prepared returning nail actually repelled",
+          "duration_s": 0.4,
+          "model": "金属弹扣＋短掠风",
+          "status": "user_accepted_handoff_revision_not_in_game_validated",
+          "peak_linear": 0.7400128177739799,
+          "clipped_samples": 0,
+          "sha256": "4136e04dbda8d5fc4544837ea4f938da0a60267c5cd828bf6d8aca226d29aea1",
+          "path": "assets/audio/magnet_crab_repel.wav",
+          "source_sha256": "4136e04dbda8d5fc4544837ea4f938da0a60267c5cd828bf6d8aca226d29aea1"
+        }
+      ]
+    },
+    "cactus": {
+      "name": "仙人掌",
+      "events": [
+        {
+          "id": "scatter",
+          "title": "散刺",
+          "event": "five thorns scatter; not a ranged machine-gun skill",
+          "duration_s": 0.3,
+          "model": "干刺逐根拨脱，噪声颗粒",
+          "status": "user_accepted_handoff_revision_not_in_game_validated",
+          "peak_linear": 0.7400128177739799,
+          "clipped_samples": 0,
+          "sha256": "052bedb478551015059447c0017543899c24fce1a45206f59e4e4b1369544e30",
+          "path": "assets/audio/cactus_scatter.wav",
+          "source_sha256": "052bedb478551015059447c0017543899c24fce1a45206f59e4e4b1369544e30"
+        },
+        {
+          "id": "land",
+          "title": "刺落地",
+          "event": "visual thorn placement/landing only",
+          "duration_s": 0.14,
+          "model": "干小刺轻点",
+          "status": "user_accepted_handoff_revision_not_in_game_validated",
+          "peak_linear": 0.7400128177739799,
+          "clipped_samples": 0,
+          "sha256": "043eab2ca87e8726e89441ec022cd2f2c3ae805e800a5fe40ea1db3341be6eb3",
+          "path": "assets/audio/cactus_land.wav",
+          "source_sha256": "043eab2ca87e8726e89441ec022cd2f2c3ae805e800a5fe40ea1db3341be6eb3"
+        },
+        {
+          "id": "regrow",
+          "title": "换位",
+          "event": "actual REGROW reposition; no healing",
+          "duration_s": 0.52,
+          "model": "干土根纤维收放",
+          "status": "user_accepted_handoff_revision_not_in_game_validated",
+          "peak_linear": 0.7400128177739799,
+          "clipped_samples": 0,
+          "sha256": "9b8c73f19cccb87b8836fc9c42504c6d44a979ba8e84ceb209b714d48bc16012",
+          "path": "assets/audio/cactus_regrow.wav",
+          "source_sha256": "9b8c73f19cccb87b8836fc9c42504c6d44a979ba8e84ceb209b714d48bc16012"
+        },
+        {
+          "id": "flower",
+          "title": "花短亮",
+          "event": "flower blink on actual reposition only; optional visual cue",
+          "duration_s": 0.13,
+          "model": "很短花瓣擦响，不是回血铃",
+          "status": "user_accepted_handoff_revision_not_in_game_validated",
+          "peak_linear": 0.7400128177739799,
+          "clipped_samples": 0,
+          "sha256": "91195fe9681701a3c9a60ce98b2c1c7d9cda90c47a5dd110333fa1e709bd6670",
+          "path": "assets/audio/cactus_flower.wav",
+          "source_sha256": "91195fe9681701a3c9a60ce98b2c1c7d9cda90c47a5dd110333fa1e709bd6670"
+        }
+      ]
+    },
+    "shell_turtle": {
+      "name": "脱壳乌龟",
+      "events": [
+        {
+          "id": "enter",
+          "title": "入壳",
+          "event": "actual enter_shell result",
+          "duration_s": 0.47,
+          "model": "空心壳腔与软身贴入",
+          "status": "user_accepted_handoff_revision_not_in_game_validated",
+          "peak_linear": 0.7400128177739799,
+          "clipped_samples": 0,
+          "sha256": "7f32013b437d4256902f992d876c89762fa006a313f1512af45cfaebcc37b681",
+          "path": "assets/audio/shell_turtle_enter.wav",
+          "source_sha256": "7f32013b437d4256902f992d876c89762fa006a313f1512af45cfaebcc37b681"
+        },
+        {
+          "id": "spin",
+          "title": "旋壳",
+          "event": "shell markings spin excerpt; no auto dash",
+          "duration_s": 0.82,
+          "model": "壳腔颗粒滚动，不是飞驰风声",
+          "status": "user_accepted_handoff_revision_not_in_game_validated",
+          "peak_linear": 0.7400128177739799,
+          "clipped_samples": 0,
+          "sha256": "cdb80a168fcc64cf5f72af3108d5e4ee3ba3e7f9b84248a0f995f280205daa79",
+          "path": "assets/audio/shell_turtle_spin.wav",
+          "source_sha256": "cdb80a168fcc64cf5f72af3108d5e4ee3ba3e7f9b84248a0f995f280205daa79"
+        },
+        {
+          "id": "contact",
+          "title": "壳碰撞",
+          "event": "actual shell enemy contact",
+          "duration_s": 0.4,
+          "model": "圆壳低空腔叩击，区别钢钉",
+          "status": "user_accepted_handoff_revision_not_in_game_validated",
+          "peak_linear": 0.7400128177739799,
+          "clipped_samples": 0,
+          "sha256": "13cf0baa7b1f8b2a3d1e9d8a6bfbdc1e90b4483e16dc32de7f9640b0a2cd725d",
+          "path": "assets/audio/shell_turtle_contact.wav",
+          "source_sha256": "13cf0baa7b1f8b2a3d1e9d8a6bfbdc1e90b4483e16dc32de7f9640b0a2cd725d"
+        },
+        {
+          "id": "exit",
+          "title": "出壳",
+          "event": "only successful legal exit, not guaranteed deadline",
+          "duration_s": 0.36,
+          "model": "短壳音＋软身离开",
+          "status": "user_accepted_handoff_revision_not_in_game_validated",
+          "peak_linear": 0.7400128177739799,
+          "clipped_samples": 0,
+          "sha256": "6d051dac26c0cde01c58717cc446cf2d1d5f8c63be4b5dc107d60942045944c2",
+          "path": "assets/audio/shell_turtle_exit.wav",
+          "source_sha256": "6d051dac26c0cde01c58717cc446cf2d1d5f8c63be4b5dc107d60942045944c2"
+        }
+      ]
+    },
+    "crow": {
+      "name": "乌鸦",
+      "events": [
+        {
+          "id": "caw",
+          "title": "嘎嘎",
+          "event": "character voice audition, optional event emphasis, not projectile",
+          "duration_s": 1.02,
+          "model": "粗糙双嘎，亚谐波声门与宽共振峰",
+          "status": "user_accepted_handoff_revision_not_in_game_validated",
+          "peak_linear": 0.7400128177739799,
+          "clipped_samples": 0,
+          "sha256": "5c1cecb750efdf762e0f7bec2584bf65df06be6a85e42d04fc484d9c83fdac25",
+          "path": "assets/audio/crow_caw.wav",
+          "source_sha256": "5c1cecb750efdf762e0f7bec2584bf65df06be6a85e42d04fc484d9c83fdac25"
+        },
+        {
+          "id": "swap",
+          "title": "换位",
+          "event": "actual legal swap; two endpoints feather glints, no projectile",
+          "duration_s": 0.46,
+          "model": "两段短羽翼掠动",
+          "status": "user_accepted_handoff_revision_not_in_game_validated",
+          "peak_linear": 0.7400128177739799,
+          "clipped_samples": 0,
+          "sha256": "e84d29c90c3ceae0e4b939613299ca42f39dd8d5ca845eb757758526bfaa77e1",
+          "path": "assets/audio/crow_swap.wav",
+          "source_sha256": "e84d29c90c3ceae0e4b939613299ca42f39dd8d5ca845eb757758526bfaa77e1"
+        },
+        {
+          "id": "repair",
+          "title": "修草人",
+          "event": "actual own injured dummy repaired by contact consumes stored feather",
+          "duration_s": 0.55,
+          "model": "干草束梳理摩擦，不是射羽",
+          "status": "user_accepted_handoff_revision_not_in_game_validated",
+          "peak_linear": 0.7400128177739799,
+          "clipped_samples": 0,
+          "sha256": "0dae7e460b52ffe2ba62576add8e386ea123dab46166d4605d92c9af54c5a5aa",
+          "path": "assets/audio/crow_repair.wav",
+          "source_sha256": "0dae7e460b52ffe2ba62576add8e386ea123dab46166d4605d92c9af54c5a5aa"
+        },
+        {
+          "id": "reflect",
+          "title": "草人承伤",
+          "event": "actual scarecrow damage/reflection result",
+          "duration_s": 0.27,
+          "model": "布草闷拍＋纤维，不是主动攻击",
+          "status": "user_accepted_handoff_revision_not_in_game_validated",
+          "peak_linear": 0.7400128177739799,
+          "clipped_samples": 0,
+          "sha256": "3b73be1f4449670568c8344393d770681517caa0ce6970b0d0b96b4ae41ef93e",
+          "path": "assets/audio/crow_reflect.wav",
+          "source_sha256": "3b73be1f4449670568c8344393d770681517caa0ce6970b0d0b96b4ae41ef93e"
+        }
+      ]
+    }
+  },
+  "godot_import": {
+    "engine_tested": "4.6.3",
+    "compress/mode": 0,
+    "force/8_bit": false,
+    "force/mono": false,
+    "force/max_rate": false,
+    "edit/trim": false,
+    "edit/normalize": false,
+    "edit/loop_mode": 0,
+    "note": "Godot4.6.3 fresh-project default compress/mode=2 imports QOA format3 despite source PCM16. Disable compression to keep original PCM16. Raw WAV bytes are unchanged."
+  }
+}

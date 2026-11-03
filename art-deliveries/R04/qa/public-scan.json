@@ -1,0 +1,7 @@
+{
+  "scope": "finite byte-pattern scan of all files, no assurance of detecting every secret; values never printed",
+  "file_count": 432,
+  "matches": [],
+  "symlinks": [],
+  "unexpected_private_or_cache_paths": []
+}

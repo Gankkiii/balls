@@ -1,0 +1,697 @@
+{
+  "version": "R04-handoff-ui-layout-1",
+  "accepted_direction": "A像素风、左右状态栏、浅色场地、极简；用户接受R04并授权交接",
+  "game_verified": false,
+  "canvas": [
+    1100,
+    780
+  ],
+  "world_rect": [
+    200,
+    90,
+    700,
+    600
+  ],
+  "world_scale": 1,
+  "world_physics_size_unchanged": [
+    700,
+    600
+  ],
+  "environment": [
+    {
+      "file": "assets/ui/environment/screen_surround.png",
+      "rect": [
+        0,
+        0,
+        1100,
+        780
+      ]
+    },
+    {
+      "file": "assets/ui/environment/arena_floor.png",
+      "rect": [
+        200,
+        90,
+        700,
+        600
+      ]
+    },
+    {
+      "file": "assets/ui/environment/arena_wood_frame.png",
+      "rect": [
+        190,
+        80,
+        720,
+        620
+      ]
+    }
+  ],
+  "side_panels": [
+    {
+      "side": "left",
+      "rect": [
+        10,
+        90,
+        160,
+        600
+      ]
+    },
+    {
+      "side": "right",
+      "rect": [
+        930,
+        90,
+        160,
+        600
+      ]
+    }
+  ],
+  "status_panel_asset": "assets/ui/status_panel.png",
+  "all_UI_asset_anchors_are_top_left": [
+    0,
+    0
+  ],
+  "frame_nine_slice_ltrb": [
+    8,
+    8,
+    8,
+    8
+  ],
+  "panel_local": {
+    "avatar_rect": [
+      56,
+      20,
+      48,
+      48
+    ],
+    "avatar_policy": "用各角色原始透明PNG fit48，不能从评审截图裁头像；完整图缩放不扩碰撞",
+    "health_heart_rect": [
+      14,
+      105,
+      20,
+      20
+    ],
+    "health_value_baseline": [
+      42,
+      122
+    ],
+    "health_value_font_size": 20,
+    "hp_track_rect": [
+      14,
+      132,
+      132,
+      9
+    ],
+    "hp_fill_rect": [
+      16,
+      134,
+      128,
+      5
+    ],
+    "state_icon_rect": [
+      14,
+      189,
+      28,
+      28
+    ],
+    "state_value_baseline": [
+      54,
+      213
+    ],
+    "state_value_font_size": 22,
+    "sheep_charge_track_rect": [
+      14,
+      232,
+      132,
+      5
+    ],
+    "secondary_crow_feather_rect": [
+      18,
+      240,
+      24,
+      24
+    ],
+    "skill_slot_rects": [
+      [
+        12,
+        330,
+        56,
+        56
+      ],
+      [
+        88,
+        330,
+        56,
+        56
+      ]
+    ],
+    "skill_icon_local_rect": [
+      14,
+      9,
+      28,
+      28
+    ],
+    "skill_CD_overlay_local_rect": [
+      4,
+      4,
+      48,
+      48
+    ],
+    "skill_CD_baselines": [
+      [
+        40,
+        405
+      ],
+      [
+        116,
+        405
+      ]
+    ],
+    "skill_CD_font_size": 16
+  },
+  "bar_assets": {
+    "hp_track": "assets/ui/hp_track.png",
+    "hp_fill_blue": "assets/ui/hp_fill_blue.png",
+    "hp_fill_gold": "assets/ui/hp_fill_gold.png",
+    "hp_fill_mint": "assets/ui/hp_fill_mint.png",
+    "hp_fill_purple": "assets/ui/hp_fill_purple.png",
+    "hp_inner_padding": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "charge_track": "assets/ui/charge_track.png",
+    "charge_fill": "assets/ui/charge_fill.png",
+    "object_hp_track": "assets/ui/object_hp_track.png",
+    "object_hp_fill": "assets/ui/object_hp_fill.png",
+    "object_hp_inner_padding": [
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  "cd_assets": {
+    "normal": "assets/ui/auto_skill_slot.png",
+    "ready": "assets/ui/auto_skill_slot_ready.png",
+    "remaining_overlay": "assets/ui/cd_overlay.png",
+    "ratio": "clamp(remaining/actual_skill_CD,0,1)",
+    "overlay_direction": "从顶向下覆盖剩余高度；原图透明度0.24",
+    "show_number_only_if_CD_positive": true,
+    "positive_number_format": "ceil(max(0,CD)*10-1e-7)/10，显示1位小数",
+    "auto_skills_not_click_to_cast": true,
+    "ready_semantics": "CD归零，不代表可打断当前动作；busy标记可复用既有retained/r02/badge_busy.png",
+    "disabled": "R04没有另画56px禁用态；保留既有64px R02 disabled作为legacy，不等同56槽无差别替换，不新增禁用规则"
+  },
+  "controls_strip_rect": [
+    480,
+    706,
+    600,
+    58
+  ],
+  "controls": [
+    {
+      "id": "pause",
+      "rect": [
+        488,
+        711,
+        48,
+        48
+      ],
+      "icon": "assets/ui/icon_pause.png",
+      "icon_rect": [
+        500,
+        723,
+        24,
+        24
+      ],
+      "label": null,
+      "label_baseline": null,
+      "main_callback": "set_rate(0) /保留暂停恢复语义",
+      "showcase_callback": "toggle_pause()"
+    },
+    {
+      "id": "speed1",
+      "rect": [
+        544,
+        711,
+        48,
+        48
+      ],
+      "icon": "assets/ui/icon_speed_display20.png",
+      "icon_rect": [
+        558,
+        715,
+        20,
+        20
+      ],
+      "label": "1×",
+      "label_baseline": [
+        568,
+        748
+      ],
+      "main_callback": "set_rate(1)",
+      "showcase_callback": "set_speed(1)"
+    },
+    {
+      "id": "speed2",
+      "rect": [
+        600,
+        711,
+        48,
+        48
+      ],
+      "icon": "assets/ui/icon_speed_display20.png",
+      "icon_rect": [
+        614,
+        715,
+        20,
+        20
+      ],
+      "label": "2×",
+      "label_baseline": [
+        624,
+        748
+      ],
+      "main_callback": "set_rate(2)",
+      "showcase_callback": "set_speed(2)"
+    },
+    {
+      "id": "speed3",
+      "rect": [
+        656,
+        711,
+        48,
+        48
+      ],
+      "icon": "assets/ui/icon_speed_display20.png",
+      "icon_rect": [
+        670,
+        715,
+        20,
+        20
+      ],
+      "label": "3×",
+      "label_baseline": [
+        680,
+        748
+      ],
+      "main_callback": "set_rate(3)",
+      "showcase_callback": "set_speed(3)"
+    },
+    {
+      "id": "replay",
+      "rect": [
+        724,
+        711,
+        48,
+        48
+      ],
+      "icon": "assets/ui/icon_replay.png",
+      "icon_rect": [
+        736,
+        723,
+        24,
+        24
+      ],
+      "label": null,
+      "label_baseline": null,
+      "main_callback": "restart_battle(true)",
+      "showcase_callback": "restart(true)"
+    },
+    {
+      "id": "new_random",
+      "rect": [
+        780,
+        711,
+        48,
+        48
+      ],
+      "icon": "assets/ui/icon_new_seed.png",
+      "icon_rect": [
+        792,
+        723,
+        24,
+        24
+      ],
+      "label": null,
+      "label_baseline": null,
+      "main_callback": "restart_battle(false)：10池不重复抽2",
+      "showcase_callback": "restart(false)：当前只换固定鸭兔种子，不是10池随机"
+    },
+    {
+      "id": "sound",
+      "rect": [
+        848,
+        711,
+        48,
+        48
+      ],
+      "icon": "assets/ui/icon_sound_on.png",
+      "icon_rect": [
+        860,
+        723,
+        24,
+        24
+      ],
+      "label": null,
+      "label_baseline": null,
+      "main_callback": "当前main无toggle_sound，新增泛化声音UI需点点接音频层",
+      "showcase_callback": "toggle_sound()"
+    },
+    {
+      "id": "roster",
+      "rect": [
+        904,
+        711,
+        48,
+        48
+      ],
+      "icon": "assets/ui/icon_roster.png",
+      "icon_rect": [
+        916,
+        723,
+        24,
+        24
+      ],
+      "label": null,
+      "label_baseline": null,
+      "main_callback": "保留main随机战斗入口/现有返回导航；不得新增玩法",
+      "showcase_callback": "open_original()"
+    },
+    {
+      "id": "info",
+      "rect": [
+        968,
+        711,
+        48,
+        48
+      ],
+      "icon": "assets/ui/icon_info.png",
+      "icon_rect": [
+        980,
+        723,
+        24,
+        24
+      ],
+      "label": null,
+      "label_baseline": null,
+      "main_callback": "main没有同名接口，按当前showcase详情读状态复用UI逻辑",
+      "showcase_callback": "toggle_info()已存在"
+    }
+  ],
+  "text_policy": {
+    "default": "只当前HP、关键资源/状态数值、正CD数字、1×2×3×；泡泡各level数字全部保留",
+    "hidden_default": [
+      "角色名字",
+      "技能名字",
+      "READY",
+      "长说明",
+      "种子/时间常驻术语"
+    ],
+    "details": "info按需展开种子/时间、单位与技能自动说明；showcase已实现toggle_info，main需点点泛化",
+    "no_unbounded_percentage_meter": [
+      "bubble level",
+      "ForgeRabbit.stored_damage",
+      "Cactus.thorns count",
+      "MagnetCrab nail count"
+    ]
+  },
+  "letterbox": {
+    "scale": "s=min(safe_width/1100,safe_height/780)",
+    "offset": "safe_origin+(safe_size-(1100,780)*s)/2",
+    "world_to_screen": "offset+((200,90)+world_position)*s",
+    "preserve": "全部角色/道具/特效/UI同一等比view变换；不得因宽屏多余边改Arena.arena_size、半径、速度、碰撞或随机",
+    "screen_excess": "多余屏幕只作边缘留白/装饰，先扣safe area；不是增加物理场地",
+    "touch": "48参考像素按钮需实际设备>=44UI点；若letterbox缩小需只重排/提高控制层触控，不扩大物理场地。真机未验"
+  },
+  "z_order": [
+    "screen surround",
+    "arena floor",
+    "outside-only decorative frame",
+    "props/characters including visual overshoot",
+    "state feedback",
+    "sidebars and controls"
+  ],
+  "font": "沿用项目res://assets/arena-ui.otf或项目已授权Font资源，不新增/复制字体二进制",
+  "role_adapters": {
+    "puffer": {
+      "roster_id": 0,
+      "skills": [
+        "INFLATE",
+        "ABSORB"
+      ],
+      "icons": [
+        null,
+        null
+      ],
+      "cd_duration": [
+        6,
+        9
+      ],
+      "state": "gas0..100、immune_left>0、action",
+      "state_icon": null,
+      "bounded_meter": "仅gas可100上限；视觉2倍膨胀不得扩大物理radius24"
+    },
+    "chicken": {
+      "roster_id": 1,
+      "skills": [
+        "PANIC RUN",
+        "BIG EGG"
+      ],
+      "icons": [
+        null,
+        null
+      ],
+      "cd_duration": [
+        5,
+        10
+      ],
+      "state": "egg_timer、action/action_left、实际egg.large/armed/fuse",
+      "state_icon": null,
+      "bounded_meter": "不能把小蛋接触0.8秒引信与大蛋落地1.5秒混为一条固定槽"
+    },
+    "bubble_fish": {
+      "roster_id": 2,
+      "skills": [
+        "VACUUM BUBBLE",
+        "EIGHT BUBBLES"
+      ],
+      "icons": [
+        "assets/ui/icon_vacuum_28.png",
+        "assets/ui/icon_eight_28.png"
+      ],
+      "cd_duration": [
+        7,
+        9
+      ],
+      "state": "本主人存活泡泡数；各Bubble.level按真实数字",
+      "state_icon": "assets/ui/icon_bubble_28.png",
+      "bounded_meter": null
+    },
+    "electric_sheep": {
+      "roster_id": 3,
+      "skills": [
+        "WALL TURN",
+        "DROP WOOL"
+      ],
+      "icons": [
+        "assets/ui/icon_wall_28.png",
+        "assets/ui/icon_wool_28.png"
+      ],
+      "cd_duration": [
+        5,
+        7
+      ],
+      "state": "charge、wool_active、zapping",
+      "state_icon": "assets/ui/icon_bolt_28.png",
+      "bounded_meter": "charge/MAX_CHARGE=charge/100；本体和羊毛共用一条，不能双电库"
+    },
+    "magnet_crab": {
+      "roster_id": 4,
+      "skills": [
+        "MAGNET WALL",
+        "RETURN REPEL"
+      ],
+      "icons": [
+        null,
+        null
+      ],
+      "cd_duration": [
+        7,
+        6
+      ],
+      "state": "nails实际mode/移动、repel_ready、magnetic_wall",
+      "state_icon": null,
+      "bounded_meter": null
+    },
+    "unlucky_duck": {
+      "roster_id": 5,
+      "skills": [
+        "CHANGE TIMER",
+        "LIGHTNING ROD"
+      ],
+      "icons": [
+        "assets/ui/retained/r02/icon_skill_timer.png",
+        "assets/ui/retained/r02/icon_skill_rod.png"
+      ],
+      "icon_size_override": [
+        32,
+        32
+      ],
+      "icon_slot_offset_override": [
+        12,
+        8
+      ],
+      "cd_duration": [
+        6,
+        6
+      ],
+      "state": "cloud_holder、storm_left、rods.size",
+      "state_icon": "assets/ui/retained/r02/icon_status_cloud.png",
+      "bounded_meter": "雷表能正负跳时，不解释为固定7秒百分比"
+    },
+    "forge_rabbit": {
+      "roster_id": 6,
+      "skills": [
+        "HAMMER FORGE",
+        "TEMPER"
+      ],
+      "icons": [
+        "assets/ui/retained/r02/icon_skill_forge.png",
+        "assets/ui/retained/r02/icon_skill_temper.png"
+      ],
+      "icon_size_override": [
+        32,
+        32
+      ],
+      "icon_slot_offset_override": [
+        12,
+        8
+      ],
+      "cd_duration": [
+        7,
+        8
+      ],
+      "state": "stored_damage、temper_left、action==forge",
+      "state_icon": "assets/ui/retained/r02/icon_status_stored_damage.png",
+      "bounded_meter": null
+    },
+    "cactus": {
+      "roster_id": 7,
+      "skills": [
+        "SCATTER THORNS",
+        "REGROW"
+      ],
+      "icons": [
+        null,
+        null
+      ],
+      "cd_duration": [
+        6,
+        9
+      ],
+      "state": "thorns.size、真实重定位；没有奔跑/回血状态",
+      "state_icon": null,
+      "bounded_meter": null
+    },
+    "shell_turtle": {
+      "roster_id": 8,
+      "skills": [
+        "HIDE IN SHELL",
+        "SPIN SHELL"
+      ],
+      "icons": [
+        "assets/ui/icon_shell_28.png",
+        "assets/ui/icon_spin_28.png"
+      ],
+      "cd_duration": [
+        9,
+        8
+      ],
+      "state": "action seek/hidden、action_left、shell.spin_left",
+      "state_icon": "assets/ui/icon_shell_28.png",
+      "bounded_meter": "隐藏时间结束还需合法出壳位置；壳不可伤，不画壳HP"
+    },
+    "crow": {
+      "roster_id": 9,
+      "skills": [
+        "SWAP DUMMY",
+        "STORE FEATHER"
+      ],
+      "icons": [
+        "assets/ui/icon_swap_28.png",
+        "assets/ui/icon_feather_28.png"
+      ],
+      "cd_duration": [
+        7,
+        6
+      ],
+      "state": "dummies.size最多2、各Scarecrow.health/max_health、feather布尔",
+      "state_icon": "assets/ui/icon_dummy_28.png",
+      "secondary_state_icon": "assets/ui/icon_feather.png",
+      "bounded_meter": "稻草人各60HP；羽毛是单根准备态不是远程弹药"
+    }
+  },
+  "missing_original_UI_icons": [
+    {
+      "character": "puffer",
+      "missing": [
+        "skill1 icon",
+        "skill2 icon",
+        "dedicated resource/status glyph"
+      ],
+      "reason": "已接受R04UI只画鱼/羊/龟/鸦的示例和旧鸭兔保留件；本轮机械导出不能编造未画图标",
+      "fallback_suggestion_not_new_art": "保留空自动CD槽与正CD数字；完整名称/语义在info读skill_names()；专属图标另行确认制作"
+    },
+    {
+      "character": "chicken",
+      "missing": [
+        "skill1 icon",
+        "skill2 icon",
+        "dedicated resource/status glyph"
+      ],
+      "reason": "已接受R04UI只画鱼/羊/龟/鸦的示例和旧鸭兔保留件；本轮机械导出不能编造未画图标",
+      "fallback_suggestion_not_new_art": "保留空自动CD槽与正CD数字；完整名称/语义在info读skill_names()；专属图标另行确认制作"
+    },
+    {
+      "character": "magnet_crab",
+      "missing": [
+        "skill1 icon",
+        "skill2 icon",
+        "dedicated resource/status glyph"
+      ],
+      "reason": "已接受R04UI只画鱼/羊/龟/鸦的示例和旧鸭兔保留件；本轮机械导出不能编造未画图标",
+      "fallback_suggestion_not_new_art": "保留空自动CD槽与正CD数字；完整名称/语义在info读skill_names()；专属图标另行确认制作"
+    },
+    {
+      "character": "cactus",
+      "missing": [
+        "skill1 icon",
+        "skill2 icon",
+        "dedicated resource/status glyph"
+      ],
+      "reason": "已接受R04UI只画鱼/羊/龟/鸦的示例和旧鸭兔保留件；本轮机械导出不能编造未画图标",
+      "fallback_suggestion_not_new_art": "保留空自动CD槽与正CD数字；完整名称/语义在info读skill_names()；专属图标另行确认制作"
+    }
+  ],
+  "current_code": {
+    "main": "scripts/main.gd有10角色随机及6个原操作；仍为文本HUD，R04未接入",
+    "showcase": "scripts/showcase.gd当前固定鸭兔[5,6]，已有R02纹理、宽刀声、toggle_info与9控件",
+    "hud": "scripts/fighter_hud.gd仍有跟随HP/CD，泛化新侧栏需避免与其重复，不删游戏数据",
+    "approved_game_baseline": "3134f2b8dd0fe250b01e1e7d3c829da5c54aaa47"
+  },
+  "not_validated": [
+    "真正Godot泛化UI状态绑定",
+    "全部10角色动态重叠/长数值/阶段切换",
+    "Puffer实际最大视觉膨胀或大泡泡靠边时与侧栏的遮挡",
+    "真实设备safe area/触控/性能"
+  ],
+  "not_gameplay_changes": [
+    "不改变700×600世界边界",
+    "不修改碰撞/伤害/CD/随机/技能触发",
+    "不把自动技能改为手动点击",
+    "不把界面图标的轮廓当成碰撞或技能范围"
+  ]
+}

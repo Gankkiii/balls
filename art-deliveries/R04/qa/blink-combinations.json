@@ -1,0 +1,234 @@
+{
+  "result": "PASS",
+  "pairs": [
+    {
+      "character": "puffer",
+      "open": "assets/characters/puffer/idle.png",
+      "closed": "assets/characters/puffer/hurt.png",
+      "alpha_same": true,
+      "difference_bbox": [
+        38,
+        42,
+        62,
+        48
+      ]
+    },
+    {
+      "character": "puffer",
+      "open": "assets/characters/puffer/gas_samples/gas_000.png",
+      "closed": "assets/characters/puffer/gas_samples/gas_000_blink.png",
+      "alpha_same": true,
+      "difference_bbox": [
+        38,
+        42,
+        62,
+        48
+      ]
+    },
+    {
+      "character": "puffer",
+      "open": "assets/characters/puffer/gas_samples/gas_040.png",
+      "closed": "assets/characters/puffer/gas_samples/gas_040_blink.png",
+      "alpha_same": true,
+      "difference_bbox": [
+        38,
+        42,
+        62,
+        48
+      ]
+    },
+    {
+      "character": "puffer",
+      "open": "assets/characters/puffer/gas_samples/gas_050.png",
+      "closed": "assets/characters/puffer/gas_samples/gas_050_blink.png",
+      "alpha_same": true,
+      "difference_bbox": [
+        38,
+        42,
+        62,
+        48
+      ]
+    },
+    {
+      "character": "puffer",
+      "open": "assets/characters/puffer/gas_samples/gas_100.png",
+      "closed": "assets/characters/puffer/gas_samples/gas_100_blink.png",
+      "alpha_same": true,
+      "difference_bbox": [
+        38,
+        42,
+        62,
+        48
+      ]
+    },
+    {
+      "character": "chicken",
+      "open": "assets/characters/chicken/idle.png",
+      "closed": "assets/characters/chicken/hurt.png",
+      "alpha_same": true,
+      "difference_bbox": [
+        62,
+        24,
+        68,
+        30
+      ]
+    },
+    {
+      "character": "bubble_fish",
+      "open": "assets/characters/bubble_fish/idle.png",
+      "closed": "assets/characters/bubble_fish/hurt.png",
+      "alpha_same": true,
+      "difference_bbox": [
+        62,
+        44,
+        68,
+        50
+      ]
+    },
+    {
+      "character": "electric_sheep",
+      "open": "assets/characters/electric_sheep/idle.png",
+      "closed": "assets/characters/electric_sheep/hurt.png",
+      "alpha_same": true,
+      "difference_bbox": [
+        64,
+        48,
+        70,
+        54
+      ]
+    },
+    {
+      "character": "magnet_crab",
+      "open": "assets/characters/magnet_crab/idle.png",
+      "closed": "assets/characters/magnet_crab/hurt.png",
+      "alpha_same": true,
+      "difference_bbox": [
+        30,
+        30,
+        66,
+        40
+      ]
+    },
+    {
+      "character": "cactus",
+      "open": "assets/characters/cactus/idle.png",
+      "closed": "assets/characters/cactus/hurt.png",
+      "alpha_same": true,
+      "difference_bbox": [
+        42,
+        42,
+        56,
+        48
+      ]
+    },
+    {
+      "character": "shell_turtle",
+      "open": "assets/characters/shell_turtle/idle.png",
+      "closed": "assets/characters/shell_turtle/hurt.png",
+      "alpha_same": true,
+      "difference_bbox": [
+        80,
+        32,
+        86,
+        40
+      ]
+    },
+    {
+      "character": "crow",
+      "open": "assets/characters/crow/idle.png",
+      "closed": "assets/characters/crow/hurt.png",
+      "alpha_same": true,
+      "difference_bbox": [
+        56,
+        32,
+        62,
+        40
+      ]
+    },
+    {
+      "character": "chicken",
+      "open": "assets/characters/chicken/poses/lay.png",
+      "closed": "assets/characters/chicken/poses/lay_hurt.png",
+      "alpha_same": true,
+      "difference_bbox": [
+        62,
+        30,
+        68,
+        36
+      ]
+    },
+    {
+      "character": "cactus",
+      "open": "assets/characters/cactus/poses/flower_lit.png",
+      "closed": "assets/characters/cactus/poses/flower_lit_hurt.png",
+      "alpha_same": true,
+      "difference_bbox": [
+        42,
+        42,
+        56,
+        48
+      ]
+    },
+    {
+      "character": "crow",
+      "open": "assets/characters/crow/poses/feather_stored.png",
+      "closed": "assets/characters/crow/poses/feather_stored_hurt.png",
+      "alpha_same": true,
+      "difference_bbox": [
+        56,
+        32,
+        62,
+        40
+      ]
+    },
+    {
+      "character": "chicken",
+      "open": "assets/characters/chicken/animations/panic_run/frame_00.png",
+      "closed": "assets/characters/chicken/animations/panic_run_blink/frame_00.png",
+      "alpha_same": true,
+      "difference_bbox": [
+        62,
+        24,
+        68,
+        30
+      ]
+    },
+    {
+      "character": "chicken",
+      "open": "assets/characters/chicken/animations/panic_run/frame_01.png",
+      "closed": "assets/characters/chicken/animations/panic_run_blink/frame_01.png",
+      "alpha_same": true,
+      "difference_bbox": [
+        62,
+        24,
+        68,
+        30
+      ]
+    },
+    {
+      "character": "chicken",
+      "open": "assets/characters/chicken/animations/panic_run/frame_02.png",
+      "closed": "assets/characters/chicken/animations/panic_run_blink/frame_02.png",
+      "alpha_same": true,
+      "difference_bbox": [
+        62,
+        24,
+        68,
+        30
+      ]
+    },
+    {
+      "character": "chicken",
+      "open": "assets/characters/chicken/animations/panic_run/frame_03.png",
+      "closed": "assets/characters/chicken/animations/panic_run_blink/frame_03.png",
+      "alpha_same": true,
+      "difference_bbox": [
+        62,
+        24,
+        68,
+        30
+      ]
+    }
+  ],
+  "scope": "8 ordinary idle blinks plus11 state/phase-preserving combinations; visible differences constrained to eye regions"
+}
