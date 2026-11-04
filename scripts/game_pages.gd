@@ -182,7 +182,8 @@ func build_breeding() -> void:
 	for x in [m, f]:
 		x.add_theme_font_override("font", font); x.add_theme_font_size_override("font_size", 18)
 	p.add_child(m); p.add_child(f)
-	m.add_item("选择母亲 ♀", -1); f.add_item("选择父亲 ♂", -1)
+	m.add_item("选择母亲 ♀"); f.add_item("选择父亲 ♂")
+	m.set_item_id(0, -1); f.set_item_id(0, -1)
 	for i in samples.size():
 		if samples[i].sex == 0: m.add_item(creature_title(samples[i]), i)
 		else: f.add_item(creature_title(samples[i]), i)

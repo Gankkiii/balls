@@ -192,6 +192,7 @@ func run() -> void:
 		main.advance_real_time(0.1)
 		check(main.arena.simulation_time > 0, "C42 restarted match advances")
 		main.free()
+	load("res://tests/page_cases.gd").new().run(self)
 	await extended_checks()
 	await load("res://tests/new_roster_cases.gd").new().run(self)
 	load("res://tests/hud_physics_cases.gd").new().run(self)
