@@ -44,7 +44,7 @@ func run(runner) -> void:
 	ck(main.arena.simulation_time == time_before, "P09 combat remains frozen on another page")
 	pages.tabs[2].pressed.emit()
 	ck(pages.page == 2 and pages.list.item_count == pages.samples.size(), "P10 storage lists every sample individual")
-	ck(has_text(pages.body, "演示数据"), "P11 storage labels sample data")
+	ck(has_text(pages.body, "示例与已孵精灵"), "P11 storage labels sample data")
 	ck(pages.samples.size() == 20, "P12 sample roster count")
 	for i in pages.samples.size():
 		var c: Dictionary = pages.samples[i]
@@ -56,7 +56,7 @@ func run(runner) -> void:
 	for field in ["特性", "技能 1", "技能 2", "种族基础", "先天", "后天", "最终", "生命", "攻击", "防御", "速度", "重量", "大小", "待定"]:
 		ck(has_text(pages.detail, field), "P17 storage detail field " + field)
 	pages.tabs[3].pressed.emit()
-	ck(pages.page == 3 and has_text(pages.body, "不产生正式精灵"), "P18 breeding prototype label")
+	ck(pages.page == 3 and has_text(pages.body, "后代保存到本机"), "P18 breeding prototype label")
 	ck(has_text(pages.detail, "请选择一只母精灵和一只公精灵"), "P19 missing parents guidance")
 	var selects: Array = []
 	options_in(pages.body, selects)
@@ -78,7 +78,7 @@ func run(runner) -> void:
 			var lo := mini(mom.innate[i], dad.innate[i]); var hi := maxi(mom.innate[i], dad.innate[i])
 			ck(has_text(pages.detail, "%s  %d～%d" % [pages.STATS[i], lo, hi]), "P28 parental interval %d" % i)
 		ck(has_text(pages.detail, "不与技能 1 相同") and has_text(pages.detail, "+1～+9"), "P29 second skill rules")
-		ck(has_text(pages.detail, "不会生成或保存精灵"), "P30 preview does not claim actual hatching")
+		ck(has_text(pages.detail, "孵蛋后保存到本机"), "P30 hatching save notice shown")
 		m.select(0); m.item_selected.emit(0)
 		ck(pages.mother == -1 and has_text(pages.detail, "请选择"), "P30a clearing mother clears preview")
 		m.select(1); m.item_selected.emit(1)

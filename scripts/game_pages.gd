@@ -1,8 +1,10 @@
 extends CanvasLayer
-## Navigation and prototype collection/breeding pages. Sample creatures only.
+## Navigation, sample collection, and locally saved hatchlings.
 const NAMES := ["充气球", "炸弹母鸡", "泡泡鱼", "触电羊", "磁铁蟹", "倒霉鸭", "锻造兔", "仙人掌", "脱壳乌龟", "乌鸦"]
 const IDS := ["puffer", "chicken", "bubble_fish", "electric_sheep", "magnet_crab", "duck", "rabbit", "cactus", "shell_turtle", "crow"]
 const SKILLS := [["充气", "吸收"], ["乱跑", "大炸弹"], ["吸附泡泡", "八方泡泡"], ["转向墙壁", "放置羊毛"], ["磁力墙", "铁钉弹射"], ["调整雷表", "避雷针"], ["现场锻造", "淬火"], ["撒刺", "换地方生长"], ["躲进壳中", "旋转龟壳"], ["交换位置", "储存羽毛"]]
+const TRAITS := ["特性一（待设计）", "特性二（待设计）", "特性三（待设计）"]
+const SAVE_PATH := "user://balls_hatchlings_v1.jsonl"
 const STATS := ["生命", "攻击", "防御", "速度", "重量", "大小"]
 var game: Control
 var page := 0
@@ -11,6 +13,8 @@ var selected := 0
 var mother := -1
 var father := -1
 var tie_choice := 0
+var rng := RandomNumberGenerator.new()
+var hatch_notice := ""
 var root: Control
 var body: Control
 var detail: Control
@@ -21,7 +25,9 @@ var font: Font
 func _ready() -> void:
 	layer = 10
 	font = load("res://assets/arena-ui.otf")
+	rng.randomize()
 	make_samples()
+	load_hatchlings()
 	root = Control.new()
 	root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	root.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -49,7 +55,7 @@ func make_samples() -> void:
 			var values: Array = []
 			for k in 6:
 				values.append(8 + ((i * 13 + sex * 19 + k * 7) % 43))
-			samples.append({"species": i, "sex": sex, "level": 0, "trait": "待设定", "innate": values, "training": [0,0,0,0,0,0], "ranks": [1 + (i + sex) % 5, 1 + (i * 2 + sex) % 5]})
+			samples.append({"species": i, "sex": sex, "level": 0, "trait": TRAITS[0], "skills": [0,1], "innate": values, "training": [0,0,0,0,0,0], "ranks": [1 + (i + sex) % 5, 1 + (i * 2 + sex) % 5]})
 
 func style_button(b: Button) -> void:
 	b.add_theme_font_override("font", font)
@@ -130,7 +136,7 @@ func portrait(parent: Control, species: int, at: Vector2, size_value: Vector2) -
 	parent.add_child(image)
 
 func creature_title(c: Dictionary) -> String:
-	return "%s  %s  Lv.%d" % [NAMES[c.species], "♀" if c.sex == 0 else "♂", c.level]
+	return "%s  %s  Lv.%d%s" % [NAMES[c.species], "♀" if c.sex == 0 else "♂", c.level, ("  #%d" % c.number) if c.has("number") else ""]
 
 func build_story() -> void:
 	background()
@@ -142,7 +148,7 @@ func build_storage() -> void:
 	background()
 	var left := panel(Vector2(28, 18), Vector2(390, 670))
 	text_label(left, "精灵仓库", Vector2(22, 13), Vector2(250, 35), 26)
-	text_label(left, "演示数据 · 暂非正式持有", Vector2(22, 53), Vector2(340, 30), 15)
+	text_label(left, "示例与已孵精灵 · 本机保存", Vector2(22, 53), Vector2(340, 30), 15)
 	list = ItemList.new()
 	list.position = Vector2(18, 90); list.size = Vector2(354, 555)
 	list.add_theme_font_override("font", font); list.add_theme_font_size_override("font_size", 19)
@@ -158,24 +164,36 @@ func storage_selected(index: int) -> void:
 	selected = index
 	show_detail()
 
+func skill_name(species: int, slot: int) -> String:
+	if slot < 2: return SKILLS[species][slot]
+	return "技能%d（待设计）" % (slot + 1)
+
 func show_detail() -> void:
 	clear_node(detail)
 	var c: Dictionary = samples[selected]
-	portrait(detail, c.species, Vector2(24, 28), Vector2(130, 130))
-	text_label(detail, creature_title(c), Vector2(180, 30), Vector2(420, 40), 25)
-	text_label(detail, "特性：" + c.trait, Vector2(180, 82), Vector2(400, 32), 19)
-	text_label(detail, "技能 1：%s  +%d" % [SKILLS[c.species][0], c.ranks[0]], Vector2(28, 185), Vector2(500, 33), 20)
-	text_label(detail, "技能 2：%s  +%d" % [SKILLS[c.species][1], c.ranks[1]], Vector2(28, 225), Vector2(500, 33), 20)
-	text_label(detail, "属性          种族基础     先天     后天     最终", Vector2(28, 285), Vector2(570, 30), 18)
+	portrait(detail, c.species, Vector2(24, 16), Vector2(115, 115))
+	text_label(detail, creature_title(c), Vector2(155, 16), Vector2(450, 40), 23)
+	text_label(detail, "特性：" + c.trait, Vector2(155, 56), Vector2(460, 30), 17)
+	var other_traits: Array[String] = []
+	for trait_name in TRAITS:
+		if trait_name != c.trait: other_traits.append(trait_name)
+	text_label(detail, "其他特性：" + " / ".join(other_traits), Vector2(155, 94), Vector2(465, 28), 14)
+	text_label(detail, "技能 1：%s  +%d" % [skill_name(c.species, c.skills[0]), c.ranks[0]], Vector2(24, 146), Vector2(570, 30), 18)
+	text_label(detail, "技能 2：%s  +%d" % [skill_name(c.species, c.skills[1]), c.ranks[1]], Vector2(24, 179), Vector2(570, 30), 18)
+	var other_skills: Array[String] = []
+	for slot in 5:
+		if slot not in c.skills: other_skills.append(skill_name(c.species, slot))
+	text_label(detail, "其他技能：" + " / ".join(other_skills), Vector2(24, 217), Vector2(590, 30), 15)
+	text_label(detail, "属性          种族基础     先天     后天     最终", Vector2(24, 267), Vector2(570, 30), 18)
 	for i in 6:
-		text_label(detail, "%s                待定           %d          %d         待定" % [STATS[i], c.innate[i], c.training[i]], Vector2(30, 325 + i * 43), Vector2(570, 35), 18)
-	text_label(detail, "基础值、最终计算与特性尚未确定", Vector2(28, 607), Vector2(550, 30), 16)
+		text_label(detail, "%s                待定           %d          %d         待定" % [STATS[i], c.innate[i], c.training[i]], Vector2(26, 306 + i * 43), Vector2(570, 35), 18)
+	text_label(detail, "未设计的特性、技能及基础数值仅为占位", Vector2(24, 608), Vector2(580, 30), 15)
 
 func build_breeding() -> void:
 	background()
 	var p := panel(Vector2(35, 18), Vector2(1030, 670))
-	text_label(p, "孵蛋 · 亲本预览", Vector2(25, 14), Vector2(500, 40), 26)
-	text_label(p, "演示数据 · 暂不产生正式精灵", Vector2(650, 23), Vector2(340, 28), 15)
+	text_label(p, "孵蛋 · 亲本选择", Vector2(25, 14), Vector2(500, 40), 26)
+	text_label(p, "后代保存到本机 · 数值暂定", Vector2(650, 23), Vector2(340, 28), 15)
 	var m := OptionButton.new(); var f := OptionButton.new()
 	m.position = Vector2(25, 90); m.size = Vector2(445, 48)
 	f.position = Vector2(555, 90); f.size = Vector2(445, 48)
@@ -202,27 +220,114 @@ func refresh_breeding_preview() -> void:
 	if mother < 0 or father < 0:
 		text_label(detail, "请选择一只母精灵和一只公精灵。", Vector2(0, 15), Vector2(900, 40), 20)
 		text_label(detail, "后代种类和特性跟随母亲，先天值在父母之间随机。", Vector2(0, 65), Vector2(950, 40), 19)
-		text_label(detail, "孵化时间、消耗、突破概率等尚待设计。", Vector2(0, 115), Vector2(900, 40), 19)
+		text_label(detail, "请选择亲本后开始孵蛋。", Vector2(0, 115), Vector2(900, 40), 19)
 		return
 	var mom: Dictionary = samples[mother]; var dad: Dictionary = samples[father]
 	var ranks: Array = mom.ranks
 	var highest := maxi(ranks[0], ranks[1])
-	var skill: String = SKILLS[mom.species][0] if ranks[0] > ranks[1] else SKILLS[mom.species][1]
-	if ranks[0] == ranks[1]: skill = SKILLS[mom.species][tie_choice]
-	text_label(detail, "后代：%s    特性：跟随母亲（待设定）    初始等级：0" % NAMES[mom.species], Vector2(0, 0), Vector2(960, 38), 20)
+	var skill: String = skill_name(mom.species, mom.skills[0]) if ranks[0] > ranks[1] else skill_name(mom.species, mom.skills[1])
+	if ranks[0] == ranks[1]: skill = skill_name(mom.species, mom.skills[tie_choice])
+	text_label(detail, "后代：%s    特性：跟随母亲    初始等级：0" % NAMES[mom.species], Vector2(0, 0), Vector2(960, 38), 20)
 	text_label(detail, "技能 1：%s  （母亲最高 +%d）" % [skill, highest], Vector2(0, 47), Vector2(960, 35), 19)
 	if ranks[0] == ranks[1]:
 		var choice := OptionButton.new()
 		choice.position = Vector2(610, 43); choice.size = Vector2(310, 38)
 		choice.add_theme_font_override("font", font); choice.add_theme_font_size_override("font_size", 16)
-		choice.add_item(SKILLS[mom.species][0]); choice.add_item(SKILLS[mom.species][1]); choice.select(tie_choice)
+		choice.add_item(skill_name(mom.species, mom.skills[0])); choice.add_item(skill_name(mom.species, mom.skills[1])); choice.select(tie_choice)
 		choice.item_selected.connect(func(i: int): tie_choice = i; refresh_breeding_preview())
 		detail.add_child(choice)
-	text_label(detail, "等级：父母各自最高技能等级之间随机，有机会向上突破（概率待定）", Vector2(0, 83), Vector2(970, 35), 17)
+	text_label(detail, "等级：父母最高等级之间随机；1% 概率超过父母较高值一级（临时）", Vector2(0, 83), Vector2(970, 35), 17)
 	text_label(detail, "技能 2：从母亲种族其余技能随机，不与技能 1 相同；+1～+9 递减概率", Vector2(0, 119), Vector2(970, 35), 17)
 	text_label(detail, "先天值范围（含两端）：", Vector2(0, 170), Vector2(500, 30), 19)
 	for i in 6:
 		var lo := mini(mom.innate[i], dad.innate[i]); var hi := maxi(mom.innate[i], dad.innate[i])
 		text_label(detail, "%s  %d～%d" % [STATS[i], lo, hi], Vector2((i % 3) * 280, 212 + int(i / 3) * 40), Vector2(260, 30), 18)
-	text_label(detail, "出生后天值为 0；孵化时间、消耗和突破概率尚未确定。", Vector2(0, 315), Vector2(970, 35), 18)
-	text_label(detail, "当前仅预览规则，不会生成或保存精灵。", Vector2(0, 360), Vector2(950, 35), 18)
+	text_label(detail, "后天值为 0；立即孵化。技能等级概率为临时方案。", Vector2(0, 315), Vector2(970, 35), 18)
+	var hatch := button(detail, "孵蛋", Vector2(0, 360), Vector2(160, 50))
+	hatch.pressed.connect(hatch_creature)
+	text_label(detail, hatch_notice if not hatch_notice.is_empty() else "孵蛋后保存到本机", Vector2(180, 365), Vector2(770, 40), 17)
+
+
+func random_skill_rank() -> int:
+	# Temporary, strictly decreasing weights 9:8:...:1 for +1 ... +9.
+	var ticket := rng.randi_range(1, 45)
+	for rank in range(1, 10):
+		ticket -= 10 - rank
+		if ticket <= 0: return rank
+	return 9
+
+func hatch_creature() -> void:
+	if mother < 0 or father < 0: return
+	var mom: Dictionary = samples[mother]; var dad: Dictionary = samples[father]
+	if mom.sex != 0 or dad.sex != 1: return
+	var own_slot: int = 0 if mom.ranks[0] > mom.ranks[1] else 1
+	if mom.ranks[0] == mom.ranks[1]: own_slot = tie_choice
+	var first: int = mom.skills[own_slot]
+	var candidates: Array[int] = []
+	for index in 5:
+		if index != first: candidates.append(index)
+	var second: int = candidates[rng.randi_range(0, candidates.size() - 1)]
+	var mom_best := maxi(mom.ranks[0], mom.ranks[1])
+	var dad_best := maxi(dad.ranks[0], dad.ranks[1])
+	var rank_one := rng.randi_range(mini(mom_best, dad_best), maxi(mom_best, dad_best))
+	if maxi(mom_best, dad_best) < 10 and rng.randf() < 0.01: rank_one = maxi(mom_best, dad_best) + 1
+	var inherited: Array = []
+	for i in 6:
+		inherited.append(rng.randi_range(mini(mom.innate[i], dad.innate[i]), maxi(mom.innate[i], dad.innate[i])))
+	var child := {"species": mom.species, "sex": rng.randi_range(0, 1), "level": 0, "trait": mom.trait, "skills": [first, second], "ranks": [rank_one, random_skill_rank()], "innate": inherited, "training": [0,0,0,0,0,0], "number": samples.size() + 1}
+	if not append_hatchling(child):
+		hatch_notice = "保存失败，请检查设备存储空间。"
+		refresh_breeding_preview()
+		return
+	samples.append(child)
+	selected = samples.size() - 1
+	hatch_notice = "已孵出：%s；可到仓库查看" % creature_title(child)
+	refresh_breeding_preview()
+
+func append_hatchling(child: Dictionary) -> bool:
+	var mode := FileAccess.READ_WRITE if FileAccess.file_exists(SAVE_PATH) else FileAccess.WRITE
+	var file := FileAccess.open(SAVE_PATH, mode)
+	if file == null: return false
+	file.seek_end()
+	file.store_line(JSON.stringify(child))
+	file.flush()
+	var ok := file.get_error() == OK
+	file.close()
+	return ok
+
+func load_hatchlings() -> void:
+	if not FileAccess.file_exists(SAVE_PATH): return
+	var file := FileAccess.open(SAVE_PATH, FileAccess.READ)
+	if file == null: return
+	while not file.eof_reached():
+		var line := file.get_line()
+		if line.is_empty(): continue
+		var value: Variant = JSON.parse_string(line)
+		if valid_hatchling(value):
+			for key in ["species", "sex", "level"]: value[key] = int(value[key])
+			if value.has("number"): value.number = int(value.number)
+			for key in ["skills", "ranks", "innate", "training"]:
+				for i in value[key].size(): value[key][i] = int(value[key][i])
+			samples.append(value)
+	file.close()
+
+func valid_hatchling(value: Variant) -> bool:
+	if not value is Dictionary: return false
+	for key in ["species", "sex", "level", "trait", "skills", "ranks", "innate", "training"]:
+		if not value.has(key): return false
+	if not (value.species is int or value.species is float) or not (value.sex is int or value.sex is float): return false
+	if int(value.species) < 0 or int(value.species) >= NAMES.size() or int(value.sex) not in [0, 1]: return false
+	if not value.trait is String: return false
+	for key in ["skills", "ranks", "innate", "training"]:
+		if not value[key] is Array: return false
+	if value.skills.size() != 2 or value.ranks.size() != 2 or value.innate.size() != 6 or value.training.size() != 6: return false
+	for slot in value.skills:
+		if not (slot is int or slot is float) or int(slot) < 0 or int(slot) >= 5: return false
+	if value.skills[0] == value.skills[1]: return false
+	for rank in value.ranks:
+		if not (rank is int or rank is float) or int(rank) < 1 or int(rank) > 10: return false
+	for stat in value.innate:
+		if not (stat is int or stat is float) or int(stat) < 1 or int(stat) > 50: return false
+	for stat in value.training:
+		if not (stat is int or stat is float) or int(stat) < 0 or int(stat) > 100: return false
+	return true
