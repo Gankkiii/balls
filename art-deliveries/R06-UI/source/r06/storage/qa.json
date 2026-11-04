@@ -1,0 +1,22 @@
+{
+  "automated_ui_checks_passed": 14,
+  "failed": 0,
+  "checks": [
+    "default mother fish, 20 shared fixture individuals",
+    "all 6 rows / 4 source columns visible",
+    "no collapsed default / toggle",
+    "next individual becomes male fish",
+    "previous returns selected mother",
+    "shared father sample ranks3/3",
+    "last fixed example boundary disabled",
+    "attribute explanation opens",
+    "explanation closes without collapsing matrix",
+    "same-origin nav postMessage delivered",
+    "parent child-message selects one in-memory child21",
+    "repeated demo replaces sole child rather than adding",
+    "no browser persistence APIs",
+    "full matrix above footer"
+  ],
+  "scope": "browser prototype only; Godot/game/device NOT RUN",
+  "source_sha256": "163856c36ceb10541ef1edb5854b5b0063e7325cc87ce06af3ae6847bd16a10d"
+}

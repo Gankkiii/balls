@@ -1,0 +1,38 @@
+{
+  "id": "storage",
+  "title": "仓库",
+  "image": "main.png",
+  "prototype": "source.html",
+  "source": "source.html",
+  "status": "按已选D整理；完整资料默认展开，非游戏接入",
+  "canvas": [
+    1600,
+    900
+  ],
+  "detail_images": [
+    {
+      "image": "info.png",
+      "title": "属性说明"
+    },
+    {
+      "image": "individual.png",
+      "title": "切换个体"
+    },
+    {
+      "image": "demo_child.png",
+      "title": "演示后代 · 仅内存"
+    }
+  ],
+  "confirmed": [
+    "横向逐个体画廊",
+    "完整6×4属性默认常驻",
+    "不保留折叠主状态",
+    "20固定示例与本机孵出个体分清"
+  ],
+  "notes": [
+    "母鱼+3/+3人工UI样例，统一fixtures鱼♀与羊♂使用人工3/3，其余按game_pages公式",
+    "基础/最终待定，不增加培养或出战",
+    "后代仅网页内存示例，无真实孵化/存档写入",
+    "固定1600×900，本轮不做手机适配"
+  ]
+}

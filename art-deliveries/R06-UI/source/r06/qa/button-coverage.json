@@ -1,0 +1,1041 @@
+{
+  "result": "PASS",
+  "utc": "2026-11-04T06:07:01.000036+00:00",
+  "screens": [
+    "workbench",
+    "pick-mother",
+    "pick-father",
+    "detail-mother",
+    "detail-father",
+    "rules",
+    "preview",
+    "confirm",
+    "success",
+    "failure",
+    "missing"
+  ],
+  "enabled_visible_buttons_clicked": 113,
+  "records": [
+    {
+      "screen": "workbench",
+      "act": "nav-arena",
+      "id": null,
+      "text": "竞技场",
+      "disabled": false,
+      "expected": "parent:arena",
+      "observed": "parent:arena"
+    },
+    {
+      "screen": "workbench",
+      "act": "nav-story",
+      "id": null,
+      "text": "主线",
+      "disabled": false,
+      "expected": "parent:story",
+      "observed": "parent:story"
+    },
+    {
+      "screen": "workbench",
+      "act": "nav-storage",
+      "id": null,
+      "text": "仓库",
+      "disabled": false,
+      "expected": "parent:storage",
+      "observed": "parent:storage"
+    },
+    {
+      "screen": "workbench",
+      "act": "nav-hatch",
+      "id": null,
+      "text": "孵蛋",
+      "disabled": false,
+      "expected": "parent:hatch",
+      "observed": "parent:hatch"
+    },
+    {
+      "screen": "workbench",
+      "act": "reset",
+      "id": null,
+      "text": "重置示例",
+      "disabled": false,
+      "expected": "workbench",
+      "observed": "workbench"
+    },
+    {
+      "screen": "workbench",
+      "act": "detail-mother",
+      "id": null,
+      "text": "查看详情",
+      "disabled": false,
+      "expected": "detail",
+      "observed": "detail"
+    },
+    {
+      "screen": "workbench",
+      "act": "pick-mother",
+      "id": null,
+      "text": "更换母亲",
+      "disabled": false,
+      "expected": "pick",
+      "observed": "pick"
+    },
+    {
+      "screen": "workbench",
+      "act": "rules",
+      "id": null,
+      "text": "规则说明",
+      "disabled": false,
+      "expected": "rules",
+      "observed": "rules"
+    },
+    {
+      "screen": "workbench",
+      "act": "tie-0",
+      "id": null,
+      "text": "● 吸附泡泡\n+3",
+      "disabled": false,
+      "expected": "workbench",
+      "observed": "workbench"
+    },
+    {
+      "screen": "workbench",
+      "act": "tie-1",
+      "id": null,
+      "text": "○ 八方泡泡\n+3",
+      "disabled": false,
+      "expected": "workbench",
+      "observed": "workbench"
+    },
+    {
+      "screen": "workbench",
+      "act": "preview",
+      "id": null,
+      "text": "查看后代预览",
+      "disabled": false,
+      "expected": "preview",
+      "observed": "preview"
+    },
+    {
+      "screen": "workbench",
+      "act": "confirm",
+      "id": null,
+      "text": "确认并演示",
+      "disabled": false,
+      "expected": "confirm",
+      "observed": "confirm"
+    },
+    {
+      "screen": "workbench",
+      "act": "detail-father",
+      "id": null,
+      "text": "查看详情",
+      "disabled": false,
+      "expected": "detail",
+      "observed": "detail"
+    },
+    {
+      "screen": "workbench",
+      "act": "pick-father",
+      "id": null,
+      "text": "更换父亲",
+      "disabled": false,
+      "expected": "pick",
+      "observed": "pick"
+    },
+    {
+      "screen": "pick-mother",
+      "act": "nav-arena",
+      "id": null,
+      "text": "竞技场",
+      "disabled": false,
+      "expected": "parent:arena",
+      "observed": "parent:arena"
+    },
+    {
+      "screen": "pick-mother",
+      "act": "nav-story",
+      "id": null,
+      "text": "主线",
+      "disabled": false,
+      "expected": "parent:story",
+      "observed": "parent:story"
+    },
+    {
+      "screen": "pick-mother",
+      "act": "nav-storage",
+      "id": null,
+      "text": "仓库",
+      "disabled": false,
+      "expected": "parent:storage",
+      "observed": "parent:storage"
+    },
+    {
+      "screen": "pick-mother",
+      "act": "nav-hatch",
+      "id": null,
+      "text": "孵蛋",
+      "disabled": false,
+      "expected": "parent:hatch",
+      "observed": "parent:hatch"
+    },
+    {
+      "screen": "pick-mother",
+      "act": "reset",
+      "id": null,
+      "text": "重置示例",
+      "disabled": false,
+      "expected": "workbench",
+      "observed": "workbench"
+    },
+    {
+      "screen": "pick-mother",
+      "act": "candidate",
+      "id": "puffer_f",
+      "text": "充气球 ♀\n精灵 Lv.0 · 技能 +1 / +1",
+      "disabled": false,
+      "expected": "pick",
+      "observed": "pick"
+    },
+    {
+      "screen": "pick-mother",
+      "act": "candidate",
+      "id": "chicken_f",
+      "text": "炸弹母鸡 ♀\n精灵 Lv.0 · 技能 +2 / +3",
+      "disabled": false,
+      "expected": "pick",
+      "observed": "pick"
+    },
+    {
+      "screen": "pick-mother",
+      "act": "candidate",
+      "id": "bubble_fish_f",
+      "text": "泡泡鱼 ♀\n精灵 Lv.0 · 技能 +3 / +3",
+      "disabled": false,
+      "expected": "pick",
+      "observed": "pick"
+    },
+    {
+      "screen": "pick-mother",
+      "act": "candidate",
+      "id": "electric_sheep_f",
+      "text": "触电羊 ♀\n精灵 Lv.0 · 技能 +4 / +2",
+      "disabled": false,
+      "expected": "pick",
+      "observed": "pick"
+    },
+    {
+      "screen": "pick-mother",
+      "act": "candidate",
+      "id": "magnet_crab_f",
+      "text": "磁铁蟹 ♀\n精灵 Lv.0 · 技能 +5 / +4",
+      "disabled": false,
+      "expected": "pick",
+      "observed": "pick"
+    },
+    {
+      "screen": "pick-mother",
+      "act": "candidate",
+      "id": "duck_f",
+      "text": "倒霉鸭 ♀\n精灵 Lv.0 · 技能 +1 / +1",
+      "disabled": false,
+      "expected": "pick",
+      "observed": "pick"
+    },
+    {
+      "screen": "pick-mother",
+      "act": "candidate",
+      "id": "rabbit_f",
+      "text": "锻造兔 ♀\n精灵 Lv.0 · 技能 +2 / +3",
+      "disabled": false,
+      "expected": "pick",
+      "observed": "pick"
+    },
+    {
+      "screen": "pick-mother",
+      "act": "candidate",
+      "id": "cactus_f",
+      "text": "仙人掌 ♀\n精灵 Lv.0 · 技能 +3 / +5",
+      "disabled": false,
+      "expected": "pick",
+      "observed": "pick"
+    },
+    {
+      "screen": "pick-mother",
+      "act": "candidate",
+      "id": "shell_turtle_f",
+      "text": "脱壳乌龟 ♀\n精灵 Lv.0 · 技能 +4 / +2",
+      "disabled": false,
+      "expected": "pick",
+      "observed": "pick"
+    },
+    {
+      "screen": "pick-mother",
+      "act": "candidate",
+      "id": "crow_f",
+      "text": "乌鸦 ♀\n精灵 Lv.0 · 技能 +5 / +4",
+      "disabled": false,
+      "expected": "pick",
+      "observed": "pick"
+    },
+    {
+      "screen": "pick-mother",
+      "act": "workbench",
+      "id": null,
+      "text": "取消 / 返回工作台",
+      "disabled": false,
+      "expected": "workbench",
+      "observed": "workbench"
+    },
+    {
+      "screen": "pick-mother",
+      "act": "use-parent",
+      "id": null,
+      "text": "使用此母亲",
+      "disabled": false,
+      "expected": "workbench",
+      "observed": "workbench"
+    },
+    {
+      "screen": "pick-father",
+      "act": "nav-arena",
+      "id": null,
+      "text": "竞技场",
+      "disabled": false,
+      "expected": "parent:arena",
+      "observed": "parent:arena"
+    },
+    {
+      "screen": "pick-father",
+      "act": "nav-story",
+      "id": null,
+      "text": "主线",
+      "disabled": false,
+      "expected": "parent:story",
+      "observed": "parent:story"
+    },
+    {
+      "screen": "pick-father",
+      "act": "nav-storage",
+      "id": null,
+      "text": "仓库",
+      "disabled": false,
+      "expected": "parent:storage",
+      "observed": "parent:storage"
+    },
+    {
+      "screen": "pick-father",
+      "act": "nav-hatch",
+      "id": null,
+      "text": "孵蛋",
+      "disabled": false,
+      "expected": "parent:hatch",
+      "observed": "parent:hatch"
+    },
+    {
+      "screen": "pick-father",
+      "act": "reset",
+      "id": null,
+      "text": "重置示例",
+      "disabled": false,
+      "expected": "workbench",
+      "observed": "workbench"
+    },
+    {
+      "screen": "pick-father",
+      "act": "candidate",
+      "id": "puffer_m",
+      "text": "充气球 ♂\n精灵 Lv.0 · 技能 +2 / +2",
+      "disabled": false,
+      "expected": "pick",
+      "observed": "pick"
+    },
+    {
+      "screen": "pick-father",
+      "act": "candidate",
+      "id": "chicken_m",
+      "text": "炸弹母鸡 ♂\n精灵 Lv.0 · 技能 +3 / +4",
+      "disabled": false,
+      "expected": "pick",
+      "observed": "pick"
+    },
+    {
+      "screen": "pick-father",
+      "act": "candidate",
+      "id": "bubble_fish_m",
+      "text": "泡泡鱼 ♂\n精灵 Lv.0 · 技能 +4 / +1",
+      "disabled": false,
+      "expected": "pick",
+      "observed": "pick"
+    },
+    {
+      "screen": "pick-father",
+      "act": "candidate",
+      "id": "electric_sheep_m",
+      "text": "触电羊 ♂\n精灵 Lv.0 · 技能 +3 / +3",
+      "disabled": false,
+      "expected": "pick",
+      "observed": "pick"
+    },
+    {
+      "screen": "pick-father",
+      "act": "candidate",
+      "id": "magnet_crab_m",
+      "text": "磁铁蟹 ♂\n精灵 Lv.0 · 技能 +1 / +5",
+      "disabled": false,
+      "expected": "pick",
+      "observed": "pick"
+    },
+    {
+      "screen": "pick-father",
+      "act": "candidate",
+      "id": "duck_m",
+      "text": "倒霉鸭 ♂\n精灵 Lv.0 · 技能 +2 / +2",
+      "disabled": false,
+      "expected": "pick",
+      "observed": "pick"
+    },
+    {
+      "screen": "pick-father",
+      "act": "candidate",
+      "id": "rabbit_m",
+      "text": "锻造兔 ♂\n精灵 Lv.0 · 技能 +3 / +4",
+      "disabled": false,
+      "expected": "pick",
+      "observed": "pick"
+    },
+    {
+      "screen": "pick-father",
+      "act": "candidate",
+      "id": "cactus_m",
+      "text": "仙人掌 ♂\n精灵 Lv.0 · 技能 +4 / +1",
+      "disabled": false,
+      "expected": "pick",
+      "observed": "pick"
+    },
+    {
+      "screen": "pick-father",
+      "act": "candidate",
+      "id": "shell_turtle_m",
+      "text": "脱壳乌龟 ♂\n精灵 Lv.0 · 技能 +5 / +3",
+      "disabled": false,
+      "expected": "pick",
+      "observed": "pick"
+    },
+    {
+      "screen": "pick-father",
+      "act": "candidate",
+      "id": "crow_m",
+      "text": "乌鸦 ♂\n精灵 Lv.0 · 技能 +1 / +5",
+      "disabled": false,
+      "expected": "pick",
+      "observed": "pick"
+    },
+    {
+      "screen": "pick-father",
+      "act": "workbench",
+      "id": null,
+      "text": "取消 / 返回工作台",
+      "disabled": false,
+      "expected": "workbench",
+      "observed": "workbench"
+    },
+    {
+      "screen": "pick-father",
+      "act": "use-parent",
+      "id": null,
+      "text": "使用此父亲",
+      "disabled": false,
+      "expected": "workbench",
+      "observed": "workbench"
+    },
+    {
+      "screen": "detail-mother",
+      "act": "nav-arena",
+      "id": null,
+      "text": "竞技场",
+      "disabled": false,
+      "expected": "parent:arena",
+      "observed": "parent:arena"
+    },
+    {
+      "screen": "detail-mother",
+      "act": "nav-story",
+      "id": null,
+      "text": "主线",
+      "disabled": false,
+      "expected": "parent:story",
+      "observed": "parent:story"
+    },
+    {
+      "screen": "detail-mother",
+      "act": "nav-storage",
+      "id": null,
+      "text": "仓库",
+      "disabled": false,
+      "expected": "parent:storage",
+      "observed": "parent:storage"
+    },
+    {
+      "screen": "detail-mother",
+      "act": "nav-hatch",
+      "id": null,
+      "text": "孵蛋",
+      "disabled": false,
+      "expected": "parent:hatch",
+      "observed": "parent:hatch"
+    },
+    {
+      "screen": "detail-mother",
+      "act": "reset",
+      "id": null,
+      "text": "重置示例",
+      "disabled": false,
+      "expected": "workbench",
+      "observed": "workbench"
+    },
+    {
+      "screen": "detail-mother",
+      "act": "pick-mother",
+      "id": null,
+      "text": "更换母亲",
+      "disabled": false,
+      "expected": "pick",
+      "observed": "pick"
+    },
+    {
+      "screen": "detail-mother",
+      "act": "workbench",
+      "id": null,
+      "text": "返回工作台",
+      "disabled": false,
+      "expected": "workbench",
+      "observed": "workbench"
+    },
+    {
+      "screen": "detail-father",
+      "act": "nav-arena",
+      "id": null,
+      "text": "竞技场",
+      "disabled": false,
+      "expected": "parent:arena",
+      "observed": "parent:arena"
+    },
+    {
+      "screen": "detail-father",
+      "act": "nav-story",
+      "id": null,
+      "text": "主线",
+      "disabled": false,
+      "expected": "parent:story",
+      "observed": "parent:story"
+    },
+    {
+      "screen": "detail-father",
+      "act": "nav-storage",
+      "id": null,
+      "text": "仓库",
+      "disabled": false,
+      "expected": "parent:storage",
+      "observed": "parent:storage"
+    },
+    {
+      "screen": "detail-father",
+      "act": "nav-hatch",
+      "id": null,
+      "text": "孵蛋",
+      "disabled": false,
+      "expected": "parent:hatch",
+      "observed": "parent:hatch"
+    },
+    {
+      "screen": "detail-father",
+      "act": "reset",
+      "id": null,
+      "text": "重置示例",
+      "disabled": false,
+      "expected": "workbench",
+      "observed": "workbench"
+    },
+    {
+      "screen": "detail-father",
+      "act": "pick-father",
+      "id": null,
+      "text": "更换父亲",
+      "disabled": false,
+      "expected": "pick",
+      "observed": "pick"
+    },
+    {
+      "screen": "detail-father",
+      "act": "workbench",
+      "id": null,
+      "text": "返回工作台",
+      "disabled": false,
+      "expected": "workbench",
+      "observed": "workbench"
+    },
+    {
+      "screen": "rules",
+      "act": "nav-arena",
+      "id": null,
+      "text": "竞技场",
+      "disabled": false,
+      "expected": "parent:arena",
+      "observed": "parent:arena"
+    },
+    {
+      "screen": "rules",
+      "act": "nav-story",
+      "id": null,
+      "text": "主线",
+      "disabled": false,
+      "expected": "parent:story",
+      "observed": "parent:story"
+    },
+    {
+      "screen": "rules",
+      "act": "nav-storage",
+      "id": null,
+      "text": "仓库",
+      "disabled": false,
+      "expected": "parent:storage",
+      "observed": "parent:storage"
+    },
+    {
+      "screen": "rules",
+      "act": "nav-hatch",
+      "id": null,
+      "text": "孵蛋",
+      "disabled": false,
+      "expected": "parent:hatch",
+      "observed": "parent:hatch"
+    },
+    {
+      "screen": "rules",
+      "act": "reset",
+      "id": null,
+      "text": "重置示例",
+      "disabled": false,
+      "expected": "workbench",
+      "observed": "workbench"
+    },
+    {
+      "screen": "rules",
+      "act": "workbench",
+      "id": null,
+      "text": "返回工作台",
+      "disabled": false,
+      "expected": "workbench",
+      "observed": "workbench"
+    },
+    {
+      "screen": "rules",
+      "act": "preview",
+      "id": null,
+      "text": "查看后代预览",
+      "disabled": false,
+      "expected": "preview",
+      "observed": "preview"
+    },
+    {
+      "screen": "preview",
+      "act": "nav-arena",
+      "id": null,
+      "text": "竞技场",
+      "disabled": false,
+      "expected": "parent:arena",
+      "observed": "parent:arena"
+    },
+    {
+      "screen": "preview",
+      "act": "nav-story",
+      "id": null,
+      "text": "主线",
+      "disabled": false,
+      "expected": "parent:story",
+      "observed": "parent:story"
+    },
+    {
+      "screen": "preview",
+      "act": "nav-storage",
+      "id": null,
+      "text": "仓库",
+      "disabled": false,
+      "expected": "parent:storage",
+      "observed": "parent:storage"
+    },
+    {
+      "screen": "preview",
+      "act": "nav-hatch",
+      "id": null,
+      "text": "孵蛋",
+      "disabled": false,
+      "expected": "parent:hatch",
+      "observed": "parent:hatch"
+    },
+    {
+      "screen": "preview",
+      "act": "reset",
+      "id": null,
+      "text": "重置示例",
+      "disabled": false,
+      "expected": "workbench",
+      "observed": "workbench"
+    },
+    {
+      "screen": "preview",
+      "act": "workbench",
+      "id": null,
+      "text": "返回修改",
+      "disabled": false,
+      "expected": "workbench",
+      "observed": "workbench"
+    },
+    {
+      "screen": "preview",
+      "act": "rules",
+      "id": null,
+      "text": "规则说明",
+      "disabled": false,
+      "expected": "rules",
+      "observed": "rules"
+    },
+    {
+      "screen": "preview",
+      "act": "confirm",
+      "id": null,
+      "text": "继续到执行确认",
+      "disabled": false,
+      "expected": "confirm",
+      "observed": "confirm"
+    },
+    {
+      "screen": "confirm",
+      "act": "nav-arena",
+      "id": null,
+      "text": "竞技场",
+      "disabled": false,
+      "expected": "parent:arena",
+      "observed": "parent:arena"
+    },
+    {
+      "screen": "confirm",
+      "act": "nav-story",
+      "id": null,
+      "text": "主线",
+      "disabled": false,
+      "expected": "parent:story",
+      "observed": "parent:story"
+    },
+    {
+      "screen": "confirm",
+      "act": "nav-storage",
+      "id": null,
+      "text": "仓库",
+      "disabled": false,
+      "expected": "parent:storage",
+      "observed": "parent:storage"
+    },
+    {
+      "screen": "confirm",
+      "act": "nav-hatch",
+      "id": null,
+      "text": "孵蛋",
+      "disabled": false,
+      "expected": "parent:hatch",
+      "observed": "parent:hatch"
+    },
+    {
+      "screen": "confirm",
+      "act": "reset",
+      "id": null,
+      "text": "重置示例",
+      "disabled": false,
+      "expected": "workbench",
+      "observed": "workbench"
+    },
+    {
+      "screen": "confirm",
+      "act": "workbench",
+      "id": null,
+      "text": "取消 / 返回修改",
+      "disabled": false,
+      "expected": "workbench",
+      "observed": "workbench"
+    },
+    {
+      "screen": "confirm",
+      "act": "failure",
+      "id": null,
+      "text": "演示保存失败",
+      "disabled": false,
+      "expected": "failure",
+      "observed": "failure"
+    },
+    {
+      "screen": "confirm",
+      "act": "success",
+      "id": null,
+      "text": "演示成功结果",
+      "disabled": false,
+      "expected": "success",
+      "observed": "success"
+    },
+    {
+      "screen": "success",
+      "act": "nav-arena",
+      "id": null,
+      "text": "竞技场",
+      "disabled": false,
+      "expected": "parent:arena",
+      "observed": "parent:arena"
+    },
+    {
+      "screen": "success",
+      "act": "nav-story",
+      "id": null,
+      "text": "主线",
+      "disabled": false,
+      "expected": "parent:story",
+      "observed": "parent:story"
+    },
+    {
+      "screen": "success",
+      "act": "nav-storage",
+      "id": null,
+      "text": "仓库",
+      "disabled": false,
+      "expected": "parent:storage",
+      "observed": "parent:storage"
+    },
+    {
+      "screen": "success",
+      "act": "nav-hatch",
+      "id": null,
+      "text": "孵蛋",
+      "disabled": false,
+      "expected": "parent:hatch",
+      "observed": "parent:hatch"
+    },
+    {
+      "screen": "success",
+      "act": "reset",
+      "id": null,
+      "text": "重置示例",
+      "disabled": false,
+      "expected": "workbench",
+      "observed": "workbench"
+    },
+    {
+      "screen": "success",
+      "act": "detail-mother",
+      "id": null,
+      "text": "查看详情",
+      "disabled": false,
+      "expected": "detail",
+      "observed": "detail"
+    },
+    {
+      "screen": "success",
+      "act": "pick-mother",
+      "id": null,
+      "text": "更换母亲",
+      "disabled": false,
+      "expected": "pick",
+      "observed": "pick"
+    },
+    {
+      "screen": "success",
+      "act": "workbench",
+      "id": null,
+      "text": "返回修改亲本",
+      "disabled": false,
+      "expected": "workbench",
+      "observed": "workbench"
+    },
+    {
+      "screen": "success",
+      "act": "detail-father",
+      "id": null,
+      "text": "查看详情",
+      "disabled": false,
+      "expected": "detail",
+      "observed": "detail"
+    },
+    {
+      "screen": "success",
+      "act": "pick-father",
+      "id": null,
+      "text": "更换父亲",
+      "disabled": false,
+      "expected": "pick",
+      "observed": "pick"
+    },
+    {
+      "screen": "success",
+      "act": "storage-child",
+      "id": null,
+      "text": "到仓库查看",
+      "disabled": false,
+      "expected": "parent:storage",
+      "observed": "parent:storage"
+    },
+    {
+      "screen": "success",
+      "act": "confirm",
+      "id": null,
+      "text": "再次演示 → 返回确认",
+      "disabled": false,
+      "expected": "confirm",
+      "observed": "confirm"
+    },
+    {
+      "screen": "failure",
+      "act": "nav-arena",
+      "id": null,
+      "text": "竞技场",
+      "disabled": false,
+      "expected": "parent:arena",
+      "observed": "parent:arena"
+    },
+    {
+      "screen": "failure",
+      "act": "nav-story",
+      "id": null,
+      "text": "主线",
+      "disabled": false,
+      "expected": "parent:story",
+      "observed": "parent:story"
+    },
+    {
+      "screen": "failure",
+      "act": "nav-storage",
+      "id": null,
+      "text": "仓库",
+      "disabled": false,
+      "expected": "parent:storage",
+      "observed": "parent:storage"
+    },
+    {
+      "screen": "failure",
+      "act": "nav-hatch",
+      "id": null,
+      "text": "孵蛋",
+      "disabled": false,
+      "expected": "parent:hatch",
+      "observed": "parent:hatch"
+    },
+    {
+      "screen": "failure",
+      "act": "reset",
+      "id": null,
+      "text": "重置示例",
+      "disabled": false,
+      "expected": "workbench",
+      "observed": "workbench"
+    },
+    {
+      "screen": "failure",
+      "act": "preview",
+      "id": null,
+      "text": "返回后代预览",
+      "disabled": false,
+      "expected": "preview",
+      "observed": "preview"
+    },
+    {
+      "screen": "failure",
+      "act": "workbench",
+      "id": null,
+      "text": "返回修改亲本",
+      "disabled": false,
+      "expected": "workbench",
+      "observed": "workbench"
+    },
+    {
+      "screen": "failure",
+      "act": "confirm",
+      "id": null,
+      "text": "再次执行确认",
+      "disabled": false,
+      "expected": "confirm",
+      "observed": "confirm"
+    },
+    {
+      "screen": "missing",
+      "act": "nav-arena",
+      "id": null,
+      "text": "竞技场",
+      "disabled": false,
+      "expected": "parent:arena",
+      "observed": "parent:arena"
+    },
+    {
+      "screen": "missing",
+      "act": "nav-story",
+      "id": null,
+      "text": "主线",
+      "disabled": false,
+      "expected": "parent:story",
+      "observed": "parent:story"
+    },
+    {
+      "screen": "missing",
+      "act": "nav-storage",
+      "id": null,
+      "text": "仓库",
+      "disabled": false,
+      "expected": "parent:storage",
+      "observed": "parent:storage"
+    },
+    {
+      "screen": "missing",
+      "act": "nav-hatch",
+      "id": null,
+      "text": "孵蛋",
+      "disabled": false,
+      "expected": "parent:hatch",
+      "observed": "parent:hatch"
+    },
+    {
+      "screen": "missing",
+      "act": "reset",
+      "id": null,
+      "text": "重置示例",
+      "disabled": false,
+      "expected": "workbench",
+      "observed": "workbench"
+    },
+    {
+      "screen": "missing",
+      "act": "pick-mother",
+      "id": null,
+      "text": "选择母亲",
+      "disabled": false,
+      "expected": "pick",
+      "observed": "pick"
+    },
+    {
+      "screen": "missing",
+      "act": "rules",
+      "id": null,
+      "text": "规则说明",
+      "disabled": false,
+      "expected": "rules",
+      "observed": "rules"
+    },
+    {
+      "screen": "missing",
+      "act": "pick-father",
+      "id": null,
+      "text": "选择父亲",
+      "disabled": false,
+      "expected": "pick",
+      "observed": "pick"
+    }
+  ],
+  "disabled_buttons_expected_not_clicked": [],
+  "method": "Set each UI state through visible state directory, then click every visible enabled button. Reset API used only to isolate preconditions between cases; no game or save access.",
+  "javascript_errors": [],
+  "game_binding": "NOT_RUN"
+}

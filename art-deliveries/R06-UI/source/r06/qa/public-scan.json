@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "scope": "All working-tree files in public review repository, existing history assets retained; .git metadata excluded. Finite byte patterns only, not a guarantee of finding every secret. No matched values emitted.",
+  "file_count": 1857,
+  "matches": [],
+  "symlinks": [],
+  "private_configuration_or_font_binary_paths": []
+}

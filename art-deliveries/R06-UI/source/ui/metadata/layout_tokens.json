@@ -1,0 +1,533 @@
+{
+  "version": "R07-final-navigation-confirmed-1",
+  "basis": "ball_art_review@54d8f8d sources/r06; balls@3dd29e8",
+  "canvas": [
+    1600,
+    900
+  ],
+  "mobile_policy": "CONFIRMED_PAUSED_LAYOUT_ADAPTATION; only resource importability in scope; real phone NOT RUN",
+  "global_navigation_policy": "CONFIRMED_UNIFIED_STORAGE_LIGHT_HEADER",
+  "dynamic_text": "Godot Labels/data binding; do not bake names, HP, CDs, traits, ranks or six-stat values",
+  "arena": {
+    "world_rect": [
+      450,
+      180,
+      700,
+      600
+    ],
+    "world_scale": 1,
+    "status_panel_rects": [
+      [
+        164,
+        180,
+        230,
+        600
+      ],
+      [
+        1200,
+        180,
+        230,
+        600
+      ]
+    ],
+    "portrait_rects": [
+      [
+        231,
+        208,
+        96,
+        96
+      ],
+      [
+        1267,
+        208,
+        96,
+        96
+      ]
+    ],
+    "hp_track_rects": [
+      [
+        191,
+        365,
+        176,
+        10
+      ],
+      [
+        1227,
+        365,
+        176,
+        10
+      ]
+    ],
+    "hp_fill_rects": [
+      [
+        193,
+        367,
+        172,
+        6
+      ],
+      [
+        1229,
+        367,
+        172,
+        6
+      ]
+    ],
+    "hp_fill_color": [
+      "#67AFC9",
+      "#EFC65B"
+    ],
+    "hp_ratio": "clamp(current_health/max_health,0,1); sample110/120 and120/120, never alter max_health",
+    "skill_slot_rects": [
+      [
+        203,
+        534,
+        64,
+        64
+      ],
+      [
+        291,
+        534,
+        64,
+        64
+      ],
+      [
+        1239,
+        534,
+        64,
+        64
+      ],
+      [
+        1327,
+        534,
+        64,
+        64
+      ]
+    ],
+    "skills_interaction": "read_only_automatic; remaining CD only, not manual cast",
+    "resource_origins": [
+      [
+        191,
+        418
+      ],
+      [
+        1227,
+        418
+      ]
+    ],
+    "control_start": [
+      550,
+      811
+    ],
+    "control_size": [
+      54,
+      54
+    ],
+    "control_step_x": 64,
+    "control_order": [
+      "pause_resume",
+      "rate1",
+      "rate2",
+      "rate3",
+      "replay_same_seed",
+      "new_random_match",
+      "sound",
+      "info"
+    ],
+    "source_nav_rects": [
+      [
+        48,
+        28,
+        124,
+        48
+      ],
+      [
+        185,
+        28,
+        124,
+        48
+      ],
+      [
+        322,
+        28,
+        124,
+        48
+      ],
+      [
+        459,
+        28,
+        124,
+        48
+      ]
+    ],
+    "source_palette": {
+      "ink": "#243746",
+      "wood": "#815A43",
+      "paper": "#F6EDD9",
+      "blue": "#67AFC9",
+      "gold": "#EFC65B",
+      "selected": "#A6CFC1"
+    },
+    "panel_geometry": {
+      "borders_nested_px": [
+        4,
+        4
+      ],
+      "shadow_offset": [
+        5,
+        6
+      ],
+      "top_highlight_px": 3
+    },
+    "unlimited_values": [
+      "bubble.level",
+      "rabbit.stored_damage",
+      "crab.nails_count",
+      "cactus.thorns_count"
+    ],
+    "bounded_resource": {
+      "sheep_charge": 100,
+      "puffer_gas": 100
+    },
+    "sample_state": "artificial UI fixture, not a reproducible game capture"
+  },
+  "storage": {
+    "default_state": "D_expanded_six_by_four_attributes",
+    "header_height": 92,
+    "footer_height": 46,
+    "content_padding": [
+      34,
+      22
+    ],
+    "gallery_height": 260,
+    "gallery_gap": 16,
+    "gallery_grid_columns": "1fr 1fr 1.7fr 1fr 1fr",
+    "normal_gallery_card_height": 190,
+    "selected_gallery_card_height": 255,
+    "lower_columns": "1.35fr 1fr",
+    "lower_gap": 24,
+    "lower_height": 360,
+    "stylebox_panel": {
+      "bg_color": "#fcfaf2",
+      "border_color": "#bac7b8",
+      "border_all": 2,
+      "corner_radius_all": 10,
+      "content_margin_all": 24,
+      "css_shadow": {
+        "offset": [
+          5,
+          5
+        ],
+        "blur": 0,
+        "color": "#d0d8cb"
+      }
+    },
+    "stylebox_action": {
+      "bg_color": "#547a68",
+      "border_color": "#355d4c",
+      "border_all": 2,
+      "corner_radius_all": 6,
+      "content_margin_ltrb": [
+        24,
+        12,
+        24,
+        12
+      ],
+      "min_height": 48
+    },
+    "stylebox_subaction": {
+      "bg_color": "#eef2e7",
+      "border_color": "#b0c2ac",
+      "border_all": 1,
+      "corner_radius_all": 5,
+      "content_margin_ltrb": [
+        18,
+        12,
+        18,
+        12
+      ],
+      "min_height": 48
+    },
+    "stylebox_gallery_normal": {
+      "border_color": "#d0d9c6",
+      "border_all": 1,
+      "opacity": 0.72,
+      "background": "radial-gradient(ellipse at center,#e4f0dc 0%,#f6f5e9 64%)"
+    },
+    "stylebox_gallery_selected": {
+      "bg_color": "#e7f0df",
+      "border_color": "#7b9b7f",
+      "border_all": 3,
+      "opacity": 1
+    },
+    "hover": "not drawn as separate storage button state; do not invent approval",
+    "focus": {
+      "outline_color": "#d49560",
+      "outline_width": 3,
+      "outline_offset": 3
+    },
+    "gradient_note": "CSS radial/linear gradient is source-backed; use shader/code or source-based mechanical export, not screenshot crop",
+    "six_attributes": [
+      "生命",
+      "攻击",
+      "防御",
+      "速度",
+      "重量",
+      "大小"
+    ],
+    "four_data_columns": [
+      "种族基础",
+      "先天",
+      "后天",
+      "最终"
+    ],
+    "undefined_values": "base and final pending; no invented formulas"
+  },
+  "hatch": {
+    "header_height": 88,
+    "heading_height": 90,
+    "canvas_margin_ltr": [
+      44,
+      18,
+      44
+    ],
+    "canvas_height": 637,
+    "workbench_columns": [
+      430,
+      600,
+      430
+    ],
+    "column_gap": 24,
+    "parent_card_height": 310,
+    "lower_card_height": 303,
+    "detail_columns": [
+      480,
+      1008
+    ],
+    "detail_gap": 24,
+    "stylebox_panel": {
+      "bg_color": "#fff9eb",
+      "border_color": "#243746",
+      "border_all": 3,
+      "corner_radius_all": 0,
+      "content_margin_all": 22
+    },
+    "stylebox_button_normal": {
+      "bg_color": "#fff9eb",
+      "border_color": "#243746",
+      "border_all": 3,
+      "corner_radius_all": 0,
+      "content_margin_ltrb": [
+        17,
+        9,
+        17,
+        9
+      ],
+      "min_height": 52
+    },
+    "stylebox_button_primary": {
+      "bg_color": "#a9d8c9",
+      "inherits": "button_normal"
+    },
+    "stylebox_button_hover": {
+      "bg_color": "#d3e9df",
+      "inherits": "button_normal"
+    },
+    "stylebox_button_disabled": {
+      "bg_color": "#ddd2bf",
+      "font_color": "#6a7472",
+      "inherits": "button_normal"
+    },
+    "stylebox_button_danger": {
+      "bg_color": "#e77d65",
+      "inherits": "button_normal"
+    },
+    "stylebox_focus": {
+      "outline_color": "#ca7054",
+      "outline_width": 5,
+      "outline_offset": 2
+    },
+    "states": "main,parent_picker,parent_details,rules,preview,confirm,success,failure,missing,non_tie; see original flow.json",
+    "semantics": "real game logic/save not implemented by review prototype; do not bind illustrative success as real hatch"
+  },
+  "story": {
+    "header_height": 100,
+    "source_footer_rect": [
+      0,
+      804,
+      1600,
+      96
+    ],
+    "archive_panel_rect": [
+      30,
+      123,
+      416,
+      668
+    ],
+    "stage_panel_rect": [
+      474,
+      123,
+      1095,
+      668
+    ],
+    "search_field_rect": [
+      58,
+      203,
+      360,
+      62
+    ],
+    "entry_rects": [
+      [
+        119,
+        291,
+        295,
+        84
+      ],
+      [
+        119,
+        402,
+        295,
+        84
+      ],
+      [
+        119,
+        513,
+        295,
+        84
+      ],
+      [
+        119,
+        624,
+        295,
+        84
+      ]
+    ],
+    "view_button_rect": [
+      1190,
+      601,
+      332,
+      84
+    ],
+    "detail_panel_rect": [
+      393,
+      232,
+      814,
+      420
+    ],
+    "source_palette": {
+      "ink": "#283e45",
+      "muted": "#6d7c78",
+      "paper": "#fff8e8",
+      "teal": "#398a79",
+      "gold": "#e4b86d"
+    },
+    "panel_stroke_px": 3,
+    "panel_shadow_offset": [
+      6,
+      7
+    ],
+    "panel_highlight_opacity": 0.5019607843,
+    "action_normal": {
+      "bg_color": "#398a79",
+      "border_color": "#283e45",
+      "border_all": 3,
+      "font_color": "#fff9e9",
+      "shadow_offset": [
+        2,
+        5
+      ],
+      "shadow_color": "#3c5853",
+      "shadow_opacity": 0.2509803922
+    },
+    "action_disabled": {
+      "bg_color": "#e2dfd3",
+      "border_color": "#a6aea4",
+      "font_color": "#89938a"
+    },
+    "source_nav_rects": [
+      [
+        445,
+        806,
+        208,
+        84
+      ],
+      [
+        673,
+        806,
+        208,
+        84
+      ],
+      [
+        901,
+        806,
+        208,
+        84
+      ],
+      [
+        1129,
+        806,
+        208,
+        84
+      ]
+    ],
+    "semantics": "archive/stage placeholder only; no chapter unlock,reward,cost,progress or battle"
+  },
+  "godot_notes": [
+    "StyleBoxFlat numbers are exact CSS/source tokens, not a verified 1:1 importer mapping",
+    "CSS outer outlines and shadows need separate draw layers or provided SVG/PNG; do not claim StyleBoxFlat shadow equivalence",
+    "Canvas text remains dynamic; source scene is reference only",
+    "Actual Godot/mobile integration and performance NOT RUN"
+  ],
+  "css_source_files": {
+    "arena": "source/input_css/arena.css",
+    "storage": "source/input_css/storage.css",
+    "hatch": "source/input_css/hatch.css",
+    "story": "source/input_css/story.css"
+  },
+  "confirmed_scope": [
+    "R06 arena B",
+    "R06 storage D expanded",
+    "R06 hatch B",
+    "R06 story D"
+  ],
+  "global_navigation_entries_confirmed": [
+    "竞技场",
+    "主线",
+    "仓库",
+    "孵蛋"
+  ],
+  "final_navigation_source": "../../final_navigation/source/navigation.css",
+  "final_navigation_spec": "../../final_navigation/navigation.json",
+  "global_navigation_rect": [
+    0,
+    0,
+    1600,
+    92
+  ],
+  "global_navigation_button_rects": [
+    [
+      813.71875,
+      18,
+      138,
+      54
+    ],
+    [
+      963.71875,
+      18,
+      138,
+      54
+    ],
+    [
+      1113.71875,
+      18,
+      138,
+      54
+    ],
+    [
+      1263.71875,
+      18,
+      138,
+      54
+    ]
+  ],
+  "source_geometry_note": "per-page source_nav_rects retained as historical source evidence only; final_navigation overrides all four pages, story footer nav removed"
+}

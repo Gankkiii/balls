@@ -1,0 +1,231 @@
+{
+  "images": [
+    {
+      "page": "arena",
+      "title": "完整主页面效果图",
+      "path": "reference/r06_original/arena/main.png",
+      "width": 1600,
+      "height": 900,
+      "purpose": "完整UI参考；浏览器人工示例，非可直接接入整页背景",
+      "source_commit": "54d8f8d48966e1e7af5e8261d44ad31ab9258e55"
+    },
+    {
+      "page": "arena",
+      "title": "信息展开与关闭",
+      "path": "reference/r06_original/arena/info.png",
+      "width": 1600,
+      "height": 900,
+      "purpose": "完整UI参考；浏览器人工示例，非可直接接入整页背景",
+      "source_commit": "54d8f8d48966e1e7af5e8261d44ad31ab9258e55"
+    },
+    {
+      "page": "storage",
+      "title": "完整主页面效果图",
+      "path": "reference/r06_original/storage/main.png",
+      "width": 1600,
+      "height": 900,
+      "purpose": "完整UI参考；浏览器人工示例，非可直接接入整页背景",
+      "source_commit": "54d8f8d48966e1e7af5e8261d44ad31ab9258e55"
+    },
+    {
+      "page": "storage",
+      "title": "属性说明",
+      "path": "reference/r06_original/storage/info.png",
+      "width": 1600,
+      "height": 900,
+      "purpose": "完整UI参考；浏览器人工示例，非可直接接入整页背景",
+      "source_commit": "54d8f8d48966e1e7af5e8261d44ad31ab9258e55"
+    },
+    {
+      "page": "storage",
+      "title": "切换个体",
+      "path": "reference/r06_original/storage/individual.png",
+      "width": 1600,
+      "height": 900,
+      "purpose": "完整UI参考；浏览器人工示例，非可直接接入整页背景",
+      "source_commit": "54d8f8d48966e1e7af5e8261d44ad31ab9258e55"
+    },
+    {
+      "page": "storage",
+      "title": "演示后代 · 仅内存",
+      "path": "reference/r06_original/storage/demo_child.png",
+      "width": 1600,
+      "height": 900,
+      "purpose": "完整UI参考；浏览器人工示例，非可直接接入整页背景",
+      "source_commit": "54d8f8d48966e1e7af5e8261d44ad31ab9258e55"
+    },
+    {
+      "page": "hatch",
+      "title": "完整主页面效果图",
+      "path": "reference/r06_original/hatch/main.png",
+      "width": 1600,
+      "height": 900,
+      "purpose": "完整UI参考；浏览器人工示例，非可直接接入整页背景",
+      "source_commit": "54d8f8d48966e1e7af5e8261d44ad31ab9258e55"
+    },
+    {
+      "page": "hatch",
+      "title": "选择母亲",
+      "path": "reference/r06_original/hatch/screens/pick-mother.png",
+      "width": 1600,
+      "height": 900,
+      "purpose": "完整UI参考；浏览器人工示例，非可直接接入整页背景",
+      "source_commit": "54d8f8d48966e1e7af5e8261d44ad31ab9258e55"
+    },
+    {
+      "page": "hatch",
+      "title": "选择父亲",
+      "path": "reference/r06_original/hatch/screens/pick-father.png",
+      "width": 1600,
+      "height": 900,
+      "purpose": "完整UI参考；浏览器人工示例，非可直接接入整页背景",
+      "source_commit": "54d8f8d48966e1e7af5e8261d44ad31ab9258e55"
+    },
+    {
+      "page": "hatch",
+      "title": "母亲完整详情",
+      "path": "reference/r06_original/hatch/screens/detail-mother.png",
+      "width": 1600,
+      "height": 900,
+      "purpose": "完整UI参考；浏览器人工示例，非可直接接入整页背景",
+      "source_commit": "54d8f8d48966e1e7af5e8261d44ad31ab9258e55"
+    },
+    {
+      "page": "hatch",
+      "title": "父亲完整详情",
+      "path": "reference/r06_original/hatch/screens/detail-father.png",
+      "width": 1600,
+      "height": 900,
+      "purpose": "完整UI参考；浏览器人工示例，非可直接接入整页背景",
+      "source_commit": "54d8f8d48966e1e7af5e8261d44ad31ab9258e55"
+    },
+    {
+      "page": "hatch",
+      "title": "临时规则说明",
+      "path": "reference/r06_original/hatch/screens/rules.png",
+      "width": 1600,
+      "height": 900,
+      "purpose": "完整UI参考；浏览器人工示例，非可直接接入整页背景",
+      "source_commit": "54d8f8d48966e1e7af5e8261d44ad31ab9258e55"
+    },
+    {
+      "page": "hatch",
+      "title": "后代预览",
+      "path": "reference/r06_original/hatch/screens/preview.png",
+      "width": 1600,
+      "height": 900,
+      "purpose": "完整UI参考；浏览器人工示例，非可直接接入整页背景",
+      "source_commit": "54d8f8d48966e1e7af5e8261d44ad31ab9258e55"
+    },
+    {
+      "page": "hatch",
+      "title": "执行确认",
+      "path": "reference/r06_original/hatch/screens/confirm.png",
+      "width": 1600,
+      "height": 900,
+      "purpose": "完整UI参考；浏览器人工示例，非可直接接入整页背景",
+      "source_commit": "54d8f8d48966e1e7af5e8261d44ad31ab9258e55"
+    },
+    {
+      "page": "hatch",
+      "title": "人工成功结果",
+      "path": "reference/r06_original/hatch/screens/success.png",
+      "width": 1600,
+      "height": 900,
+      "purpose": "完整UI参考；浏览器人工示例，非可直接接入整页背景",
+      "source_commit": "54d8f8d48966e1e7af5e8261d44ad31ab9258e55"
+    },
+    {
+      "page": "hatch",
+      "title": "失败状态",
+      "path": "reference/r06_original/hatch/screens/failure.png",
+      "width": 1600,
+      "height": 900,
+      "purpose": "完整UI参考；浏览器人工示例，非可直接接入整页背景",
+      "source_commit": "54d8f8d48966e1e7af5e8261d44ad31ab9258e55"
+    },
+    {
+      "page": "hatch",
+      "title": "缺少亲本",
+      "path": "reference/r06_original/hatch/screens/missing.png",
+      "width": 1600,
+      "height": 900,
+      "purpose": "完整UI参考；浏览器人工示例，非可直接接入整页背景",
+      "source_commit": "54d8f8d48966e1e7af5e8261d44ad31ab9258e55"
+    },
+    {
+      "page": "hatch",
+      "title": "非并列技能自动只读",
+      "path": "reference/r06_original/hatch/screens/non-tie.png",
+      "width": 1600,
+      "height": 900,
+      "purpose": "完整UI参考；浏览器人工示例，非可直接接入整页背景",
+      "source_commit": "54d8f8d48966e1e7af5e8261d44ad31ab9258e55"
+    },
+    {
+      "page": "story",
+      "title": "完整主页面效果图",
+      "path": "reference/r06_original/story/main.png",
+      "width": 1600,
+      "height": 900,
+      "purpose": "完整UI参考；浏览器人工示例，非可直接接入整页背景",
+      "source_commit": "54d8f8d48966e1e7af5e8261d44ad31ab9258e55"
+    },
+    {
+      "page": "story",
+      "title": "档案详情与返回",
+      "path": "reference/r06_original/story/detail.png",
+      "width": 1600,
+      "height": 900,
+      "purpose": "完整UI参考；浏览器人工示例，非可直接接入整页背景",
+      "source_commit": "54d8f8d48966e1e7af5e8261d44ad31ab9258e55"
+    }
+  ],
+  "final_images": [
+    {
+      "page": "arena",
+      "path": "reference/final/arena.png",
+      "canvas": [
+        1600,
+        900
+      ],
+      "use": "本轮已确认四页组合目标参考：仓库浅色顶部栏统一；不是可运行的整页贴图",
+      "source": "source/navigation/",
+      "status": "CONFIRMED_REFERENCE"
+    },
+    {
+      "page": "storage",
+      "path": "reference/final/storage.png",
+      "canvas": [
+        1600,
+        900
+      ],
+      "use": "本轮已确认四页组合目标参考：仓库浅色顶部栏统一；不是可运行的整页贴图",
+      "source": "source/navigation/",
+      "status": "CONFIRMED_REFERENCE"
+    },
+    {
+      "page": "hatch",
+      "path": "reference/final/hatch.png",
+      "canvas": [
+        1600,
+        900
+      ],
+      "use": "本轮已确认四页组合目标参考：仓库浅色顶部栏统一；不是可运行的整页贴图",
+      "source": "source/navigation/",
+      "status": "CONFIRMED_REFERENCE"
+    },
+    {
+      "page": "story",
+      "path": "reference/final/story.png",
+      "canvas": [
+        1600,
+        900
+      ],
+      "use": "本轮已确认四页组合目标参考：仓库浅色顶部栏统一；不是可运行的整页贴图",
+      "source": "source/navigation/",
+      "status": "CONFIRMED_REFERENCE"
+    }
+  ],
+  "original_images_policy": "images保持原R06子状态和源码，不覆盖最终统一导航；排除原评审debug。"
+}

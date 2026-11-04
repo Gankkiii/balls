@@ -1,0 +1,79 @@
+{
+  "errors": [],
+  "bounds": [
+    {
+      "name": "workbench",
+      "images": true,
+      "scrollable_list_expected": null,
+      "outside": []
+    },
+    {
+      "name": "pick-mother",
+      "images": true,
+      "scrollable_list_expected": {
+        "entries": 10,
+        "client_height": 466,
+        "scroll_height": 910
+      },
+      "outside": []
+    },
+    {
+      "name": "pick-father",
+      "images": true,
+      "scrollable_list_expected": {
+        "entries": 10,
+        "client_height": 466,
+        "scroll_height": 910
+      },
+      "outside": []
+    },
+    {
+      "name": "detail-mother",
+      "images": true,
+      "scrollable_list_expected": null,
+      "outside": []
+    },
+    {
+      "name": "detail-father",
+      "images": true,
+      "scrollable_list_expected": null,
+      "outside": []
+    },
+    {
+      "name": "rules",
+      "images": true,
+      "scrollable_list_expected": null,
+      "outside": []
+    },
+    {
+      "name": "preview",
+      "images": true,
+      "scrollable_list_expected": null,
+      "outside": []
+    },
+    {
+      "name": "confirm",
+      "images": true,
+      "scrollable_list_expected": null,
+      "outside": []
+    },
+    {
+      "name": "success",
+      "images": true,
+      "scrollable_list_expected": null,
+      "outside": []
+    },
+    {
+      "name": "failure",
+      "images": true,
+      "scrollable_list_expected": null,
+      "outside": []
+    },
+    {
+      "name": "missing",
+      "images": true,
+      "scrollable_list_expected": null,
+      "outside": []
+    }
+  ]
+}

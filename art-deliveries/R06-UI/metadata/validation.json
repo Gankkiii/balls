@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "mechanical_export_count": 13,
+  "source_only_reproduction_exact_files": 27,
+  "source_only_reproduction_dir": "/tmp/r07-ui-source-only-fbo_no4j/ui",
+  "source_method": "original SVG node selection or original fallback glyph-outline path; no screenshot crops",
+  "game_modification": false,
+  "godot_import": "NOT RUN",
+  "real_device": "NOT RUN",
+  "theme_runtime": "NOT RUN"
+}

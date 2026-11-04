@@ -1,0 +1,42 @@
+{
+  "storage_trait_spark": {
+    "character": "✦",
+    "upstream": "sources/r06/storage/source.html #trait",
+    "source_font": "DejaVu Sans Regular",
+    "system_file": "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+    "font_sha256": "57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e",
+    "browser_evidence": "Chromium CDP CSS.getPlatformFontsForNode #trait:7 NotoSansCJKSC glyphs and1 DejaVuSans glyph",
+    "font_size_px": 20,
+    "baseline_y": 20,
+    "canvas": [
+      20,
+      24
+    ],
+    "method": "original fallback font glyph outline converted to vector path; not screenshot",
+    "license": "licenses/DejaVu-font-copyright.txt"
+  },
+  "absent_in_actual_sources": [
+    "⌕",
+    "⏸",
+    "↺",
+    "✕"
+  ],
+  "existing_raster_controls": "R04 icon_pause,replay,info and R02 retained icon_play,sound_off exist as PNG; no fallback font needed",
+  "storage_skill_asterisk": {
+    "character": "✣",
+    "unicode": "U+2723",
+    "upstream": "sources/r06/storage/source.html .skills i (second skill)",
+    "source_font": "DejaVu Sans Regular",
+    "source_font_size_px": 25,
+    "source_css_fill": "#698f86",
+    "baseline_y": 25,
+    "canvas": [
+      26,
+      30
+    ],
+    "font_sha256": "57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e",
+    "method": "original fallback font glyph-outline path, not screenshot",
+    "license": "licenses/DejaVu-font-copyright.txt",
+    "browser_evidence": "Chromium CDP CSS.getPlatformFontsForNode #skills>div:nth-child(2) i: DejaVuSans glyphCount1"
+  }
+}

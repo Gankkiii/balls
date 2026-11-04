@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "source_reproduction_exact": true,
+  "compared_files_total_both_pages": 28,
+  "reproduction_dir": "/tmp/r06-arena-story-8vn88uc_",
+  "browser": "system Chromium headless via Playwright",
+  "javascript_errors": 0,
+  "interaction_checks": "select_c,view_detail,return,search_empty,clear_search,help_open_close",
+  "not_run": [
+    "Godot integration",
+    "real device",
+    "actual combat",
+    "audio playback"
+  ],
+  "round_scope": "specified directions only, no phone or candidate selection",
+  "browser_report": "../arena_story_browser_validation.json",
+  "combined_browser_flow_checks": 20,
+  "parent_navigation_messages": "4 per page, received"
+}

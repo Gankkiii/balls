@@ -1,0 +1,1137 @@
+{
+  "result": "PRELIMINARY_PHYSICAL_AUDIT_PASS_NOT_FINAL_PACKAGE",
+  "scope_status": "User has confirmed all four R06 pages, common light top navigation based on storage, and continued mobile pause/resource-import-only. Final nav compositions and package freeze checks are not yet complete; no final delivery claim.",
+  "portraits": [
+    {
+      "kind": "portrait",
+      "file": "assets/portraits/puffer.png",
+      "source": "assets/r04/characters/puffer/idle.png",
+      "sha256": "1b3d621f0ff6230a53556eb13eb311b9b50fbe2d254ebb2df7e6aa2cbe26f23d",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "alpha_bbox": [
+        24,
+        24,
+        74,
+        74
+      ],
+      "byte_equal_git": true
+    },
+    {
+      "kind": "portrait",
+      "file": "assets/portraits/chicken.png",
+      "source": "assets/r04/characters/chicken/idle.png",
+      "sha256": "88b5566cb8a47442ffb2b04412b7797f185e96ee123f36b36ae756d17d457a53",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "alpha_bbox": [
+        14,
+        2,
+        82,
+        86
+      ],
+      "byte_equal_git": true
+    },
+    {
+      "kind": "portrait",
+      "file": "assets/portraits/bubble_fish.png",
+      "source": "assets/r04/characters/bubble_fish/idle.png",
+      "sha256": "cce6d3a057426be51c262a15c40a306930fb3d9e6df46777865984f5bbcdd870",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "alpha_bbox": [
+        6,
+        22,
+        82,
+        72
+      ],
+      "byte_equal_git": true
+    },
+    {
+      "kind": "portrait",
+      "file": "assets/portraits/electric_sheep.png",
+      "source": "assets/r04/characters/electric_sheep/idle.png",
+      "sha256": "c8586c95074497a46e3ff85fcf125b12a390844c1aecc6b6a08a3de8b7a23676",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "alpha_bbox": [
+        4,
+        8,
+        84,
+        88
+      ],
+      "byte_equal_git": true
+    },
+    {
+      "kind": "portrait",
+      "file": "assets/portraits/magnet_crab.png",
+      "source": "assets/r04/characters/magnet_crab/idle.png",
+      "sha256": "3db728b98a4425548a867ec89941cad5614fffe3412beee1b66e504653ea99a5",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "alpha_bbox": [
+        2,
+        22,
+        94,
+        82
+      ],
+      "byte_equal_git": true
+    },
+    {
+      "kind": "portrait",
+      "file": "assets/portraits/duck.png",
+      "source": "assets/r02/characters/duck/default.png",
+      "sha256": "e68a13d364c4f901f3fcf726a9ec0ecc8f6f3510a030b2f7701bbf07dede07f4",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "alpha_bbox": [
+        20,
+        22,
+        84,
+        80
+      ],
+      "byte_equal_git": true
+    },
+    {
+      "kind": "portrait",
+      "file": "assets/portraits/rabbit.png",
+      "source": "assets/r02/characters/rabbit/default.png",
+      "sha256": "49b33c511483a6d4637cf81d7138159a7d04822027565b57db2434c6d2e25fc0",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "alpha_bbox": [
+        26,
+        8,
+        78,
+        80
+      ],
+      "byte_equal_git": true
+    },
+    {
+      "kind": "portrait",
+      "file": "assets/portraits/cactus.png",
+      "source": "assets/r04/characters/cactus/idle.png",
+      "sha256": "33088f2705e8fe1e3e7b11606a8161fbcd2ff186f8f0ed47aa71ceb8ed795e34",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "alpha_bbox": [
+        12,
+        12,
+        84,
+        82
+      ],
+      "byte_equal_git": true
+    },
+    {
+      "kind": "portrait",
+      "file": "assets/portraits/shell_turtle.png",
+      "source": "assets/r04/characters/shell_turtle/idle.png",
+      "sha256": "cd1304b21975c8d5f795d1d94a983f7a81797b58f02c9874720e8ebc6d520186",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "alpha_bbox": [
+        6,
+        24,
+        90,
+        80
+      ],
+      "byte_equal_git": true
+    },
+    {
+      "kind": "portrait",
+      "file": "assets/portraits/crow.png",
+      "source": "assets/r04/characters/crow/idle.png",
+      "sha256": "21a2ef82ab7e38dc01d19c4328482e07cc9d9d2356969e6d9e0fff1c0173fa16",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "alpha_bbox": [
+        10,
+        20,
+        86,
+        82
+      ],
+      "byte_equal_git": true
+    }
+  ],
+  "references": [
+    {
+      "kind": "reference_only",
+      "file": "reference/arena/main.png",
+      "source": "docs/r06/arena/main.png",
+      "sha256": "ec1d8bb3a91293da263379c2b98a5736f1ba3eb04bf671e95abf1ea4d7e73487",
+      "size": [
+        1600,
+        900
+      ],
+      "byte_equal_git": true
+    },
+    {
+      "kind": "reference_only",
+      "file": "reference/arena/info.png",
+      "source": "docs/r06/arena/info.png",
+      "sha256": "e414ab75c966828de4edab3719658aa10e0cf8ec9a9db2cf9e61c24bc4274e5c",
+      "size": [
+        1600,
+        900
+      ],
+      "byte_equal_git": true
+    },
+    {
+      "kind": "reference_only",
+      "file": "reference/storage/main.png",
+      "source": "docs/r06/storage/main.png",
+      "sha256": "f9c24cc9057d37e8781711be26d64af2f43a0ba98f20e649ffd1c1751ef14f05",
+      "size": [
+        1600,
+        900
+      ],
+      "byte_equal_git": true
+    },
+    {
+      "kind": "reference_only",
+      "file": "reference/storage/info.png",
+      "source": "docs/r06/storage/info.png",
+      "sha256": "e9035aeac18a73ce028538fcfadd11d7485f219b016167c7b12a2e4268bc873b",
+      "size": [
+        1600,
+        900
+      ],
+      "byte_equal_git": true
+    },
+    {
+      "kind": "reference_only",
+      "file": "reference/storage/individual.png",
+      "source": "docs/r06/storage/individual.png",
+      "sha256": "c30443df1ec4df074dd2243ce73fa2daf19d38abe598797fa74aa18ba92eb357",
+      "size": [
+        1600,
+        900
+      ],
+      "byte_equal_git": true
+    },
+    {
+      "kind": "reference_only",
+      "file": "reference/storage/demo_child.png",
+      "source": "docs/r06/storage/demo_child.png",
+      "sha256": "65730f2aa5745e6a54cc36943db702cc03c4c7126a9edbe33e1f2f35fd6fa466",
+      "size": [
+        1600,
+        900
+      ],
+      "byte_equal_git": true
+    },
+    {
+      "kind": "reference_only",
+      "file": "reference/hatch/main.png",
+      "source": "docs/r06/hatch/main.png",
+      "sha256": "e052711f249653af8372efd8da3f9071ea173fc4cc35768afa56090f717dac8e",
+      "size": [
+        1600,
+        900
+      ],
+      "byte_equal_git": true
+    },
+    {
+      "kind": "reference_only",
+      "file": "reference/hatch/screens/pick-mother.png",
+      "source": "docs/r06/hatch/screens/pick-mother.png",
+      "sha256": "edcd7863857b23b210b52f40aa3c9570da9b66dbd1e1e5de7eb9059510a57a6b",
+      "size": [
+        1600,
+        900
+      ],
+      "byte_equal_git": true
+    },
+    {
+      "kind": "reference_only",
+      "file": "reference/hatch/screens/pick-father.png",
+      "source": "docs/r06/hatch/screens/pick-father.png",
+      "sha256": "7649925114a696935e198337c5d749f16e44a189b2084a7dd16511dabdb5a40e",
+      "size": [
+        1600,
+        900
+      ],
+      "byte_equal_git": true
+    },
+    {
+      "kind": "reference_only",
+      "file": "reference/hatch/screens/detail-mother.png",
+      "source": "docs/r06/hatch/screens/detail-mother.png",
+      "sha256": "3a252d68d9d3982b90a887578e39901285de09e810ab8c89f73e995719ca4fc3",
+      "size": [
+        1600,
+        900
+      ],
+      "byte_equal_git": true
+    },
+    {
+      "kind": "reference_only",
+      "file": "reference/hatch/screens/detail-father.png",
+      "source": "docs/r06/hatch/screens/detail-father.png",
+      "sha256": "91997de1aeecc518e45003df692f0f487c9ba250a2dd547037f8aeaef3f6fd2e",
+      "size": [
+        1600,
+        900
+      ],
+      "byte_equal_git": true
+    },
+    {
+      "kind": "reference_only",
+      "file": "reference/hatch/screens/rules.png",
+      "source": "docs/r06/hatch/screens/rules.png",
+      "sha256": "52e615d1ba5c22ea4c28b901969e43e34c1fa5ce9861c9baf37eaf4843fd29d0",
+      "size": [
+        1600,
+        900
+      ],
+      "byte_equal_git": true
+    },
+    {
+      "kind": "reference_only",
+      "file": "reference/hatch/screens/preview.png",
+      "source": "docs/r06/hatch/screens/preview.png",
+      "sha256": "e81378e9297bdeab7cc419d2397adf7e81b86c9d101a103975d1e0111dc824aa",
+      "size": [
+        1600,
+        900
+      ],
+      "byte_equal_git": true
+    },
+    {
+      "kind": "reference_only",
+      "file": "reference/hatch/screens/confirm.png",
+      "source": "docs/r06/hatch/screens/confirm.png",
+      "sha256": "60a62170493ef3c6a4a745bd48d2fa0eb31cd6ff5c66dabe010d94d86acc05d7",
+      "size": [
+        1600,
+        900
+      ],
+      "byte_equal_git": true
+    },
+    {
+      "kind": "reference_only",
+      "file": "reference/hatch/screens/success.png",
+      "source": "docs/r06/hatch/screens/success.png",
+      "sha256": "ed9a144585091394f06be1e78decf0e529d433132806e9aa7626d5a1ca35a68a",
+      "size": [
+        1600,
+        900
+      ],
+      "byte_equal_git": true
+    },
+    {
+      "kind": "reference_only",
+      "file": "reference/hatch/screens/failure.png",
+      "source": "docs/r06/hatch/screens/failure.png",
+      "sha256": "015c5f60fb2dc2e3d320f5641657db7c22ba309910a467dda4794f2679dd125b",
+      "size": [
+        1600,
+        900
+      ],
+      "byte_equal_git": true
+    },
+    {
+      "kind": "reference_only",
+      "file": "reference/hatch/screens/missing.png",
+      "source": "docs/r06/hatch/screens/missing.png",
+      "sha256": "12f74704e68ff25c441d4797d9c1840c274291f1e328d629e8e052c34ce07cf6",
+      "size": [
+        1600,
+        900
+      ],
+      "byte_equal_git": true
+    },
+    {
+      "kind": "reference_only",
+      "file": "reference/hatch/screens/non-tie.png",
+      "source": "docs/r06/hatch/screens/non-tie.png",
+      "sha256": "8db1a87753fb59313ab90fcaff5458fa81561db8bbebb0c9074596371e518bf2",
+      "size": [
+        1600,
+        900
+      ],
+      "byte_equal_git": true
+    },
+    {
+      "kind": "reference_only",
+      "file": "reference/story/main.png",
+      "source": "docs/r06/story/main.png",
+      "sha256": "494864fd4c0cb1a64e15d1ab1261a10300df9145948009af6015ad1cca182346",
+      "size": [
+        1600,
+        900
+      ],
+      "byte_equal_git": true
+    },
+    {
+      "kind": "reference_only",
+      "file": "reference/story/detail.png",
+      "source": "docs/r06/story/detail.png",
+      "sha256": "ec0c4888ab70f667c7a372169f3361b2087d53edcdc402e4dd12eb18b817d8fc",
+      "size": [
+        1600,
+        900
+      ],
+      "byte_equal_git": true
+    }
+  ],
+  "source_snapshot_files": [
+    {
+      "path": "source/r06/DECISIONS.md",
+      "source": "sources/r06/DECISIONS.md",
+      "sha256": "203d81705c63fc68944b1b9071b419f4da28390acb072bd1686be6a4ce89c046",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/FACTS.md",
+      "source": "sources/r06/FACTS.md",
+      "sha256": "ec8fd9f87a8a956e59d98c5d9b10750d286238194689bf592cbfea054d148dfc",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/arena/README.md",
+      "source": "sources/r06/arena/README.md",
+      "sha256": "4a330d08cbbaa21cb3150c7209c70d8c8c79df2cb23ee98b1a147040a371b9fe",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/arena/info.png",
+      "source": "sources/r06/arena/info.png",
+      "sha256": "e414ab75c966828de4edab3719658aa10e0cf8ec9a9db2cf9e61c24bc4274e5c",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/arena/info.svg",
+      "source": "sources/r06/arena/info.svg",
+      "sha256": "c91b240d5f137c92242e5827c8a468886280e916fcaa084b7e8d6ef8aed19bee",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/arena/main.png",
+      "source": "sources/r06/arena/main.png",
+      "sha256": "ec1d8bb3a91293da263379c2b98a5736f1ba3eb04bf671e95abf1ea4d7e73487",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/arena/main.svg",
+      "source": "sources/r06/arena/main.svg",
+      "sha256": "98abf96d63d4dd8503fa76a4aed8585474d0397f2dc9c656f9062d85cbcdccc3",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/arena/prototype.html",
+      "source": "sources/r06/arena/prototype.html",
+      "sha256": "6135d0b077f46f6cb7e6face5d1333f449a767c3a8c24efc7707c879696da8e8",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/arena/qa/prototype_check.png",
+      "source": "sources/r06/arena/qa/prototype_check.png",
+      "sha256": "d71edcef4c1f921ce9bcd2481d2b59c8f29525b40ab5cd9118ab289c9495006f",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/arena/review.json",
+      "source": "sources/r06/arena/review.json",
+      "sha256": "f23bbeffaf0f08e9fbc35f050698aa189b71028b1a5eb32e68902604f5e62e6e",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/arena/source/info.svg",
+      "source": "sources/r06/arena/source/info.svg",
+      "sha256": "6f5de2b68f440fb40a167e50844972f5737bdac30d162b5e7ad2b12240e55913",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/arena/source/main.svg",
+      "source": "sources/r06/arena/source/main.svg",
+      "sha256": "9327ff536adbae9865fa5ebba47f32336c1c6c74b3abc4ad3644b25d6dde3c57",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/arena/validation.json",
+      "source": "sources/r06/arena/validation.json",
+      "sha256": "d8be7f7cf5c45909f811d71a2b522629e10ddb16128c787b7618738d05e4027e",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/arena_story_browser_validation.json",
+      "source": "sources/r06/arena_story_browser_validation.json",
+      "sha256": "03f4004ca061b7a6a6f7f7b38b0e4d64636026af87d53c3f995ff3beaf3cbbdf",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/build_arena_story.py",
+      "source": "sources/r06/build_arena_story.py",
+      "sha256": "67b035e8bae7ae2ea9a11be0dbda42ecad2e0bc66391accb275c3876dd086890",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/fixtures.json",
+      "source": "sources/r06/fixtures.json",
+      "sha256": "bdd2291447f86540a2604e7c1d118263f710b7bdb191e71cddfee841b7feed67",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/README.md",
+      "source": "sources/r06/hatch/README.md",
+      "sha256": "ff926cdbdce0c92a59d53f0bbc21cda285667bab9f4bc779954833a06fa74fdf",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/app.js",
+      "source": "sources/r06/hatch/app.js",
+      "sha256": "07fa23346956e3fe1fab0d91954389f50da57370aae7df35bead165ca54eb2be",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/assets/bubble_fish.png",
+      "source": "sources/r06/hatch/assets/bubble_fish.png",
+      "sha256": "cce6d3a057426be51c262a15c40a306930fb3d9e6df46777865984f5bbcdd870",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/assets/cactus.png",
+      "source": "sources/r06/hatch/assets/cactus.png",
+      "sha256": "33088f2705e8fe1e3e7b11606a8161fbcd2ff186f8f0ed47aa71ceb8ed795e34",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/assets/chicken.png",
+      "source": "sources/r06/hatch/assets/chicken.png",
+      "sha256": "88b5566cb8a47442ffb2b04412b7797f185e96ee123f36b36ae756d17d457a53",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/assets/crow.png",
+      "source": "sources/r06/hatch/assets/crow.png",
+      "sha256": "21a2ef82ab7e38dc01d19c4328482e07cc9d9d2356969e6d9e0fff1c0173fa16",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/assets/duck.png",
+      "source": "sources/r06/hatch/assets/duck.png",
+      "sha256": "e68a13d364c4f901f3fcf726a9ec0ecc8f6f3510a030b2f7701bbf07dede07f4",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/assets/electric_sheep.png",
+      "source": "sources/r06/hatch/assets/electric_sheep.png",
+      "sha256": "c8586c95074497a46e3ff85fcf125b12a390844c1aecc6b6a08a3de8b7a23676",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/assets/magnet_crab.png",
+      "source": "sources/r06/hatch/assets/magnet_crab.png",
+      "sha256": "3db728b98a4425548a867ec89941cad5614fffe3412beee1b66e504653ea99a5",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/assets/puffer.png",
+      "source": "sources/r06/hatch/assets/puffer.png",
+      "sha256": "1b3d621f0ff6230a53556eb13eb311b9b50fbe2d254ebb2df7e6aa2cbe26f23d",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/assets/rabbit.png",
+      "source": "sources/r06/hatch/assets/rabbit.png",
+      "sha256": "49b33c511483a6d4637cf81d7138159a7d04822027565b57db2434c6d2e25fc0",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/assets/shell_turtle.png",
+      "source": "sources/r06/hatch/assets/shell_turtle.png",
+      "sha256": "cd1304b21975c8d5f795d1d94a983f7a81797b58f02c9874720e8ebc6d520186",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/fixtures.js",
+      "source": "sources/r06/hatch/fixtures.js",
+      "sha256": "f74db78e14f8979d600b15edc66913459e259487f307bc695d3e32e6396bce6d",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/fixtures.json",
+      "source": "sources/r06/hatch/fixtures.json",
+      "sha256": "bdd2291447f86540a2604e7c1d118263f710b7bdb191e71cddfee841b7feed67",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/flow.json",
+      "source": "sources/r06/hatch/flow.json",
+      "sha256": "faf9e5f7ca8db7f2b3ac4bc62d7132b04ff46eb8e1cb2247fc7c16aea0e97bb4",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/main.png",
+      "source": "sources/r06/hatch/main.png",
+      "sha256": "e052711f249653af8372efd8da3f9071ea173fc4cc35768afa56090f717dac8e",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/prototype.html",
+      "source": "sources/r06/hatch/prototype.html",
+      "sha256": "daa76cf11ed8f4c35c4c81cc7f7570ae90a70a20d1160e51ff88f0297278c243",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/qa/assets.json",
+      "source": "sources/r06/hatch/qa/assets.json",
+      "sha256": "0daa3bd7c2a8e4d2916cade6f127304414a22c453e09a7258d8baf378d8258ef",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/qa/capture.json",
+      "source": "sources/r06/hatch/qa/capture.json",
+      "sha256": "d097f7d20b09d8ef8fd98c0f4c7d0c0474433d78ec6fa3c5cd29812d0b2e59eb",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/qa/check_files.py",
+      "source": "sources/r06/hatch/qa/check_files.py",
+      "sha256": "061a7355dc038611f51ea5e029be15965148d1427383701d84c642d64819ca26",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/qa/flow-test.json",
+      "source": "sources/r06/hatch/qa/flow-test.json",
+      "sha256": "ce94afff4cbdd331a53f23c684bd34e549bbb79aafc46bbf167d0c5d8aca47be",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/qa/validation.json",
+      "source": "sources/r06/hatch/qa/validation.json",
+      "sha256": "5c8e7535b14dfc08a003e92a8a168ce0c3f331cc1d93dab2a68ce3ab71f7c4d9",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/review.json",
+      "source": "sources/r06/hatch/review.json",
+      "sha256": "534e3c7a49ea315a0f76846c57b6f58f44ea50b1ca88d8d3a2e929e6133c92f4",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/screens/confirm.png",
+      "source": "sources/r06/hatch/screens/confirm.png",
+      "sha256": "60a62170493ef3c6a4a745bd48d2fa0eb31cd6ff5c66dabe010d94d86acc05d7",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/screens/detail-father.png",
+      "source": "sources/r06/hatch/screens/detail-father.png",
+      "sha256": "91997de1aeecc518e45003df692f0f487c9ba250a2dd547037f8aeaef3f6fd2e",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/screens/detail-mother.png",
+      "source": "sources/r06/hatch/screens/detail-mother.png",
+      "sha256": "3a252d68d9d3982b90a887578e39901285de09e810ab8c89f73e995719ca4fc3",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/screens/failure.png",
+      "source": "sources/r06/hatch/screens/failure.png",
+      "sha256": "015c5f60fb2dc2e3d320f5641657db7c22ba309910a467dda4794f2679dd125b",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/screens/missing.png",
+      "source": "sources/r06/hatch/screens/missing.png",
+      "sha256": "12f74704e68ff25c441d4797d9c1840c274291f1e328d629e8e052c34ce07cf6",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/screens/non-tie.png",
+      "source": "sources/r06/hatch/screens/non-tie.png",
+      "sha256": "8db1a87753fb59313ab90fcaff5458fa81561db8bbebb0c9074596371e518bf2",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/screens/pick-father.png",
+      "source": "sources/r06/hatch/screens/pick-father.png",
+      "sha256": "7649925114a696935e198337c5d749f16e44a189b2084a7dd16511dabdb5a40e",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/screens/pick-mother.png",
+      "source": "sources/r06/hatch/screens/pick-mother.png",
+      "sha256": "edcd7863857b23b210b52f40aa3c9570da9b66dbd1e1e5de7eb9059510a57a6b",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/screens/preview.png",
+      "source": "sources/r06/hatch/screens/preview.png",
+      "sha256": "e81378e9297bdeab7cc419d2397adf7e81b86c9d101a103975d1e0111dc824aa",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/screens/rules.png",
+      "source": "sources/r06/hatch/screens/rules.png",
+      "sha256": "52e615d1ba5c22ea4c28b901969e43e34c1fa5ce9861c9baf37eaf4843fd29d0",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/screens/success.png",
+      "source": "sources/r06/hatch/screens/success.png",
+      "sha256": "ed9a144585091394f06be1e78decf0e529d433132806e9aa7626d5a1ca35a68a",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/screens/workbench.png",
+      "source": "sources/r06/hatch/screens/workbench.png",
+      "sha256": "e052711f249653af8372efd8da3f9071ea173fc4cc35768afa56090f717dac8e",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/hatch/style.css",
+      "source": "sources/r06/hatch/style.css",
+      "sha256": "8e913ff79d48fb1da37df70c43009afdbb8489bf1cb74d6bbe2eaa07447c4f5b",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/qa/QA_METHOD.md",
+      "source": "sources/r06/qa/QA_METHOD.md",
+      "sha256": "d29bac2431652cd1070ff4ff4df5fce0e5101a7d63f69d2da2e5539dde4d6fd8",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/qa/REPORT.md",
+      "source": "sources/r06/qa/REPORT.md",
+      "sha256": "db1779765c312747e890a11d9e504fa891243634de47dc5dd0b87315b3a0a48c",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/qa/browser-flows.json",
+      "source": "sources/r06/qa/browser-flows.json",
+      "sha256": "aac0ef88bb300c1f7f08ada83e77d602c051f78ff23a347b750d0e4326774bc0",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/qa/browser-shell-media.json",
+      "source": "sources/r06/qa/browser-shell-media.json",
+      "sha256": "ef7b6d3fc13ed279cc83407062e7c8d3b5b9e8823d1f38e473ea0aecc95bdc03",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/qa/browser_flows.py",
+      "source": "sources/r06/qa/browser_flows.py",
+      "sha256": "eda18ffe0cc0bc7c0ec638295647858ef888c75be947f92b3108ea5541648923",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/qa/browser_shell_media.py",
+      "source": "sources/r06/qa/browser_shell_media.py",
+      "sha256": "80e50c7bfbcc9344f9d9c13ae5b21727478793ca12433e110a023430b1fd8785",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/qa/button-coverage.json",
+      "source": "sources/r06/qa/button-coverage.json",
+      "sha256": "88972e032c8b187ad5fd36885028123104471c16336a53bce551d7e84c2c7a78",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/qa/button_coverage.py",
+      "source": "sources/r06/qa/button_coverage.py",
+      "sha256": "c569e13459691e655eda8833e60b7cec688818a8ba671a3b9142144df05d06fb",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/qa/check_final_missing.py",
+      "source": "sources/r06/qa/check_final_missing.py",
+      "sha256": "3d411993b633039160177fb197b267354954ccfcf3808207c76ba81547f4a8dc",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/qa/game-characters.txt",
+      "source": "sources/r06/qa/game-characters.txt",
+      "sha256": "aec92039787822fe5430621e1cfe5b423ade2a2798698a0e8399f08f5d3c3c4e",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/qa/game-import.txt",
+      "source": "sources/r06/qa/game-import.txt",
+      "sha256": "104746b6d7aaa183cb8294e804d63a0f7cdd63af332fedc0d429aec94af2b2e2",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/qa/game-physics.txt",
+      "source": "sources/r06/qa/game-physics.txt",
+      "sha256": "504df593ce5599f530d3f0c5e9b4e09a0ca55cffdfdf7f31e47cbdfb8ccd3a9b",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/qa/hatch-success-browser.png",
+      "source": "sources/r06/qa/hatch-success-browser.png",
+      "sha256": "c9c73a07c423d0529994d491cb5e9fd6c0e79bb93e3c12820e15334b74534926",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/qa/missing-final-check.json",
+      "source": "sources/r06/qa/missing-final-check.json",
+      "sha256": "a93215e55147e432d24c3f4df9fc16a9a612d234cf7ded4b377cb2a9d2b579c8",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/qa/public-scan.json",
+      "source": "sources/r06/qa/public-scan.json",
+      "sha256": "e50947f9633be4e64efb905e5f7bbae53355f8e7e3bc18d61bb377159f6f3d35",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/qa/shell-fit-browser.png",
+      "source": "sources/r06/qa/shell-fit-browser.png",
+      "sha256": "dfcb50ed4a71ce4ca78b0314ff1dee4d1bff5fc51c4eaf11332086c4f97c4d7e",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/qa/source-reproduction.json",
+      "source": "sources/r06/qa/source-reproduction.json",
+      "sha256": "4bd1a811e5d1eb3bff9e1730fd46614643c4bde6b0e90628848ff6469a19a41f",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/storage/README.md",
+      "source": "sources/r06/storage/README.md",
+      "sha256": "091b3c5b4100a56fde70fe80f6f6a15b70ba9b3b0c000b21629c5ab5149b8e32",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/storage/demo_child.png",
+      "source": "sources/r06/storage/demo_child.png",
+      "sha256": "65730f2aa5745e6a54cc36943db702cc03c4c7126a9edbe33e1f2f35fd6fa466",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/storage/individual.png",
+      "source": "sources/r06/storage/individual.png",
+      "sha256": "c30443df1ec4df074dd2243ce73fa2daf19d38abe598797fa74aa18ba92eb357",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/storage/info.png",
+      "source": "sources/r06/storage/info.png",
+      "sha256": "e9035aeac18a73ce028538fcfadd11d7485f219b016167c7b12a2e4268bc873b",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/storage/main.png",
+      "source": "sources/r06/storage/main.png",
+      "sha256": "f9c24cc9057d37e8781711be26d64af2f43a0ba98f20e649ffd1c1751ef14f05",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/storage/qa.json",
+      "source": "sources/r06/storage/qa.json",
+      "sha256": "5efc64d57819ed784446405cc50fa3c37b3a2c66f9899d4b51331d14361fd572",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/storage/review.json",
+      "source": "sources/r06/storage/review.json",
+      "sha256": "6a408ccff6efb3ba531ae8710159e4eb9ee4be8edce3df4faf4e075d94b9fcb0",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/storage/source/base.css",
+      "source": "sources/r06/storage/source/base.css",
+      "sha256": "7004f355ad8c5c08748878139f31e988ba9f2726fd0768f99077ed27e1d5bc14",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/storage/source/build_storage.py",
+      "source": "sources/r06/storage/source/build_storage.py",
+      "sha256": "85c1a203371736adb0285583287654dd30d8a69549df467b20a25e50ffb95268",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/storage/source/demo_child.json",
+      "source": "sources/r06/storage/source/demo_child.json",
+      "sha256": "33a6306e26d200f56bd046373ec07a84ed361d9b5baf9702b2c4b88addd3954b",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/storage/source/fixtures.json",
+      "source": "sources/r06/storage/source/fixtures.json",
+      "sha256": "bdd2291447f86540a2604e7c1d118263f710b7bdb191e71cddfee841b7feed67",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/storage/source/verify_storage.py",
+      "source": "sources/r06/storage/source/verify_storage.py",
+      "sha256": "9e73b03b3c94403388f8abcf0d9032616da70364654cd05570bbf7c873845da3",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/storage/source.html",
+      "source": "sources/r06/storage/source.html",
+      "sha256": "163856c36ceb10541ef1edb5854b5b0063e7325cc87ce06af3ae6847bd16a10d",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/story/README.md",
+      "source": "sources/r06/story/README.md",
+      "sha256": "6161c4510e77bcc13c1bbe405c3cd875e521c967ef93a3d3a8ed9d8d5e120f8b",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/story/detail.png",
+      "source": "sources/r06/story/detail.png",
+      "sha256": "ec0c4888ab70f667c7a372169f3361b2087d53edcdc402e4dd12eb18b817d8fc",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/story/detail.svg",
+      "source": "sources/r06/story/detail.svg",
+      "sha256": "b8b5613ca243cec9a78aeae41c87224ebec9f73d23400c650c36fa2f406ae176",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/story/main.png",
+      "source": "sources/r06/story/main.png",
+      "sha256": "494864fd4c0cb1a64e15d1ab1261a10300df9145948009af6015ad1cca182346",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/story/main.svg",
+      "source": "sources/r06/story/main.svg",
+      "sha256": "82b704bb19d63e7fd36983e97c322507b7c093bbbda623353244025e6ac1ece0",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/story/prototype.html",
+      "source": "sources/r06/story/prototype.html",
+      "sha256": "b98395f7c6cbe098f16725afdd2a57162b7eba338f6f15466833890b44dc49e1",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/story/qa/prototype_check.png",
+      "source": "sources/r06/story/qa/prototype_check.png",
+      "sha256": "c87f5cc28a83c062bd1901345f66d0995f8695db4c18057a0d199db3cdbecf22",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/story/review.json",
+      "source": "sources/r06/story/review.json",
+      "sha256": "56c832f2f3c84052697665e5472b343f0b8fa6a65e75f8f9b5f6457dba0bccc2",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/story/source/detail.svg",
+      "source": "sources/r06/story/source/detail.svg",
+      "sha256": "b8b5613ca243cec9a78aeae41c87224ebec9f73d23400c650c36fa2f406ae176",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/story/source/main.svg",
+      "source": "sources/r06/story/source/main.svg",
+      "sha256": "82b704bb19d63e7fd36983e97c322507b7c093bbbda623353244025e6ac1ece0",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/story/states/a_detail.png",
+      "source": "sources/r06/story/states/a_detail.png",
+      "sha256": "ec0c4888ab70f667c7a372169f3361b2087d53edcdc402e4dd12eb18b817d8fc",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/story/states/a_detail.svg",
+      "source": "sources/r06/story/states/a_detail.svg",
+      "sha256": "b8b5613ca243cec9a78aeae41c87224ebec9f73d23400c650c36fa2f406ae176",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/story/states/a_main.png",
+      "source": "sources/r06/story/states/a_main.png",
+      "sha256": "494864fd4c0cb1a64e15d1ab1261a10300df9145948009af6015ad1cca182346",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/story/states/a_main.svg",
+      "source": "sources/r06/story/states/a_main.svg",
+      "sha256": "82b704bb19d63e7fd36983e97c322507b7c093bbbda623353244025e6ac1ece0",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/story/states/b_detail.png",
+      "source": "sources/r06/story/states/b_detail.png",
+      "sha256": "d7a2c61cae5e86532956c2ce121bef8de449349aedc41e69659b98e7b8b9fb16",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/story/states/b_detail.svg",
+      "source": "sources/r06/story/states/b_detail.svg",
+      "sha256": "eec2b39358275a1ffcdbe14a2435e1efae8a4fa33d0d062844cbf06780dfe08e",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/story/states/b_main.png",
+      "source": "sources/r06/story/states/b_main.png",
+      "sha256": "d049badd7aa58a9a4d86bc5f3cc7cd08d85f734bf26545272b6ea595016e8663",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/story/states/b_main.svg",
+      "source": "sources/r06/story/states/b_main.svg",
+      "sha256": "b1b63587b0dc64e3565ca52237684a7140f759064b80208c5b0706e9ca24c33c",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/story/states/c_detail.png",
+      "source": "sources/r06/story/states/c_detail.png",
+      "sha256": "64a57a330ef78e67e3ad6f229c482b765385d4eb8a161195ec9d617361296007",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/story/states/c_detail.svg",
+      "source": "sources/r06/story/states/c_detail.svg",
+      "sha256": "326d39d500c902f7e3be6995437bc72e6e85dfceea0c461ea540281e6393f8c5",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/story/states/c_main.png",
+      "source": "sources/r06/story/states/c_main.png",
+      "sha256": "c40587a430f2d591a991c45c6846f26374a599e481330707a9270443f904b0a3",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/story/states/c_main.svg",
+      "source": "sources/r06/story/states/c_main.svg",
+      "sha256": "33fbf7a592a4bf2cf1a638ac47990d4206494a98ad1e461a75162241c54b6613",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/story/states/d_detail.png",
+      "source": "sources/r06/story/states/d_detail.png",
+      "sha256": "e1696f61f70f234ab4ba2ff2a2f6d6f9f3eaa09c21a0dec87aff41512c66147c",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/story/states/d_detail.svg",
+      "source": "sources/r06/story/states/d_detail.svg",
+      "sha256": "f3974b48a2ea7d7d7540fe46e72c293fd055a5cb16a8f42fbd45ebac0c316184",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/story/states/d_main.png",
+      "source": "sources/r06/story/states/d_main.png",
+      "sha256": "720f52a47ad52d281c38101725c9a90b94aaa74dec4eb0533dc91ce50b6c1d46",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/story/states/d_main.svg",
+      "source": "sources/r06/story/states/d_main.svg",
+      "sha256": "dbc42c8475f72ec15e8970b7310ca43345316697eb159e0bcf7f9304477d68a3",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/story/validation.json",
+      "source": "sources/r06/story/validation.json",
+      "sha256": "c06fdf05a978c7bd44041ed220d195a78ae677fa1139c3fbbe7f7b2a85f543dc",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/web/R06-web-build.py",
+      "source": "sources/r06/web/R06-web-build.py",
+      "sha256": "d69229565e10c3327b66a4eccc1f3f22785e68b13e6e23308203edad0be2a9fa",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/web/README.md",
+      "source": "sources/r06/web/README.md",
+      "sha256": "69dc5af27310ff0fe737e0cd3e4bdc2d4c859d9d8fd2ccb1cfe8592606809cc4",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/web/site/index.html",
+      "source": "sources/r06/web/site/index.html",
+      "sha256": "5ba4d27054707e3e2611cbab6587666b9a4f4df013e560525df3eac73806dbb7",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/web/site/r06/app.js",
+      "source": "sources/r06/web/site/r06/app.js",
+      "sha256": "5d6156df21406b2209ebd10dd714216af853013af4701d60f439c11571926710",
+      "byte_equal_git": true
+    },
+    {
+      "path": "source/r06/web/site/r06/style.css",
+      "source": "sources/r06/web/site/r06/style.css",
+      "sha256": "d25b3da1060faa18d27029ef200a09d15c11ad03f1915a72423cd792eff13c11",
+      "byte_equal_git": true
+    }
+  ],
+  "source_differences": [],
+  "font": {
+    "file": "assets/fonts/NotoSansCJKsc-Regular.otf",
+    "bytes": 16437340,
+    "sha256": "28c7e3ad7c124ccac3e739bae3763a68b58b01047a9a6c3603487e8db5e86a1c",
+    "cmap_entries": 44810,
+    "checked_CJK_scope": "unique CJK in committed R06 source text suffixhtml/css/js/json/svg/md; source/comments included, not OCR-visible-only",
+    "CJK_count": 692,
+    "missing_CJK": [],
+    "source_ttc_face": 2,
+    "source_cmap_glyphorder_and_CFF_identical": true,
+    "embedded_names_and_license": {
+      "0": [
+        "© 2014-2021 Adobe (http://www.adobe.com/)."
+      ],
+      "1": [
+        "Noto Sans CJK SC"
+      ],
+      "5": [
+        "Version 2.004;hotconv 1.0.118;makeotfexe 2.5.65603"
+      ],
+      "6": [
+        "NotoSansCJKsc-Regular"
+      ],
+      "13": [
+        "This Font Software is licensed under the SIL Open Font License, Version 1.1. This Font Software is distributed on an \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the SIL Open Font License for the specific language, permissions and limitations governing your use of this Font Software."
+      ],
+      "14": [
+        "http://scripts.sil.org/OFL"
+      ]
+    },
+    "debian_license_record_identical": true,
+    "old_game_subset_cmap": 227,
+    "known_uncovered_symbols": [
+      "⌕",
+      "⏸",
+      "↺",
+      "✦",
+      "✕"
+    ],
+    "root_isolated_godot_logs_checked": true,
+    "godot_reexecuted_by_QA": false
+  }
+}

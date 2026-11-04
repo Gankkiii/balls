@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "utc": "2026-11-04T07:26:52.450577+00:00",
+  "package": "art-deliveries/R06-UI/",
+  "archive": "art-deliveries/R06-UI.zip",
+  "archive_bytes": 39390874,
+  "archive_sha256": "bf70c1e3fe29acbc4d7baf27966f56a421fe0c45d857a297d7472c03450b9134",
+  "archive_entries": 364,
+  "manifest_payload_entries": 363,
+  "manifest_sha256": "def205517b82ed0d9b558253142dd1e8df96db17b7e8e17d2689682b3384379f",
+  "crc": "PASS",
+  "safe_paths_no_symlinks": "PASS",
+  "fresh_extraction_manifest_exact_set_bytes_sha256": "PASS",
+  "public_finite_scan": "PASS no findings",
+  "runtime_assets": {
+    "png": 53,
+    "component_svg": 14,
+    "otf": 2
+  },
+  "final_reference_images": 4,
+  "original_reference_images": 20,
+  "formal_game_code_changed": false,
+  "protected_configs_changed": false,
+  "phone_layout": "PAUSED_BY_USER",
+  "actual_device": "NOT_RUN",
+  "new_UI_game_binding": "NOT_RUN",
+  "upstream_license_whitespace_exception": "One original trailing space preserved; see qa/FINAL_CHECK_SCOPE.md"
+}

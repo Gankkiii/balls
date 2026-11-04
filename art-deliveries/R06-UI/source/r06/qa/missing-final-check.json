@@ -1,0 +1,31 @@
+{
+  "result": "PASS",
+  "utc": "2026-11-04T06:16:40.351222+00:00",
+  "scope": "Only late missing-parent CSS correction; original full business and113-button suites retained, unchanged JS/storage/shell not rerun.",
+  "old_full_business_css_sha256": "f232eb4317b76af577d181249639cddc1b4ec72e5710e987ad8918d7b8d44e2a",
+  "final_css_sha256": "8e913ff79d48fb1da37df70c43009afdbb8489bf1cb74d6bbe2eaa07447c4f5b",
+  "final_missing_png_sha256": "12f74704e68ff25c441d4797d9c1840c274291f1e328d629e8e052c34ce07cf6",
+  "empty_parent_buttons": [
+    {
+      "text": "选择母亲",
+      "width": 124,
+      "height": 54,
+      "top": 317,
+      "bottom": 371
+    },
+    {
+      "text": "选择父亲",
+      "width": 124,
+      "height": 54,
+      "top": 317,
+      "bottom": 371
+    }
+  ],
+  "non_scrolling_elements_outside_canvas": [],
+  "missing_both_picker_cancel_paths": true,
+  "rules_disabled_preview": true,
+  "only_one_parent_hides_execute": true,
+  "ready_shows_confirm_and_cancel_returns": true,
+  "final_missing_matches_independent_source_render": true,
+  "javascript_errors": []
+}

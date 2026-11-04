@@ -1,0 +1,345 @@
+{
+  "basis": "ball_art_review@54d8f8d sources/r06; original element extraction",
+  "no_dynamic_text_baked": true,
+  "assets": [
+    {
+      "id": "arena_status_panel",
+      "file": "png/arena_status_panel.png",
+      "source": "svg/arena_status_panel.svg",
+      "delivery_file": "assets/ui/arena_status_panel.png",
+      "delivery_source": "source/ui/components/arena_status_panel.svg",
+      "upstream_scene": "source/input_scenes/arena_main.svg",
+      "method": "original SVG element extraction; no screenshot or bitmap crop",
+      "size": [
+        235,
+        606
+      ],
+      "use": "R06 B side status panel; visible panel230x600 plus right5/bottom6 shadow",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "nine_slice_ltrb": [
+        8,
+        8,
+        13,
+        14
+      ],
+      "state": "existing R06 normal state only",
+      "sha256": "4a35f663afc17a9353dd0730ed56ed14f14ad17db24a1af612d4dd10f1f83390"
+    },
+    {
+      "id": "arena_control_button",
+      "file": "png/arena_control_button.png",
+      "source": "svg/arena_control_button.svg",
+      "delivery_file": "assets/ui/arena_control_button.png",
+      "delivery_source": "source/ui/components/arena_control_button.svg",
+      "upstream_scene": "source/input_scenes/arena_main.svg",
+      "method": "original SVG element extraction; no screenshot or bitmap crop",
+      "size": [
+        59,
+        60
+      ],
+      "use": "R06 common control button; no glyph/text",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "nine_slice_ltrb": [
+        8,
+        8,
+        13,
+        14
+      ],
+      "state": "existing R06 normal state only",
+      "sha256": "484bb39d5e72c0a196d161fa54e6f465078be68317b738f1fb2035ac2a1e7ef8"
+    },
+    {
+      "id": "arena_auto_skill_slot",
+      "file": "png/arena_auto_skill_slot.png",
+      "source": "svg/arena_auto_skill_slot.svg",
+      "delivery_file": "assets/ui/arena_auto_skill_slot.png",
+      "delivery_source": "source/ui/components/arena_auto_skill_slot.svg",
+      "upstream_scene": "source/input_scenes/arena_main.svg",
+      "method": "original SVG element extraction; no screenshot or bitmap crop",
+      "size": [
+        69,
+        70
+      ],
+      "use": "R06 B read-only automatic skill slot; no glyph/CD",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "nine_slice_ltrb": [
+        8,
+        8,
+        13,
+        14
+      ],
+      "state": "existing R06 normal state only",
+      "sha256": "99eb02b4e8f6ffe20ce796ed7e32b4044ce911d4ac2c8d71ad050662f6b9cd16"
+    },
+    {
+      "id": "arena_hp_track",
+      "file": "png/arena_hp_track.png",
+      "source": "svg/arena_hp_track.svg",
+      "delivery_file": "assets/ui/arena_hp_track.png",
+      "delivery_source": "source/ui/components/arena_hp_track.svg",
+      "upstream_scene": "source/input_scenes/arena_main.svg",
+      "method": "original SVG element extraction; no screenshot or bitmap crop",
+      "size": [
+        176,
+        10
+      ],
+      "use": "HP track, dynamic fill is not baked",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "nine_slice_ltrb": null,
+      "state": "existing R06 normal state only",
+      "sha256": "0cc1d7383fd7cb7cd7d1631fcdf5dacf8795e46091c4d0a951c57c2245afb42b"
+    },
+    {
+      "id": "arena_cd_overlay",
+      "file": "png/arena_cd_overlay.png",
+      "source": "svg/arena_cd_overlay.svg",
+      "delivery_file": "assets/ui/arena_cd_overlay.png",
+      "delivery_source": "source/ui/components/arena_cd_overlay.svg",
+      "upstream_scene": "source/input_scenes/arena_main.svg",
+      "method": "original SVG element extraction; no screenshot or bitmap crop",
+      "size": [
+        48,
+        34
+      ],
+      "use": "cooldown tint; runtime clip by true remaining/CD, not a fixed cooldown animation",
+      "alpha_extrema": [
+        35,
+        35
+      ],
+      "nine_slice_ltrb": null,
+      "state": "existing R06 normal state only",
+      "sha256": "f99d566b1ae7cf2ffe1f659158c6a7d9bcead4216cd0d1cc053ed42e83e142ed"
+    },
+    {
+      "id": "arena_info_panel",
+      "file": "png/arena_info_panel.png",
+      "source": "svg/arena_info_panel.svg",
+      "delivery_file": "assets/ui/arena_info_panel.png",
+      "delivery_source": "source/ui/components/arena_info_panel.svg",
+      "upstream_scene": "source/input_scenes/arena_info.svg",
+      "method": "original SVG element extraction; no screenshot or bitmap crop",
+      "size": [
+        525,
+        366
+      ],
+      "use": "information popup skin without values/text",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "nine_slice_ltrb": [
+        8,
+        8,
+        13,
+        14
+      ],
+      "state": "existing R06 normal state only",
+      "sha256": "f065bbdcbdb69c57c7fce244b593876bc872c3e3f2dcc8ce7a475e22f3f488f3"
+    },
+    {
+      "id": "story_archive_panel",
+      "file": "png/story_archive_panel.png",
+      "source": "svg/story_archive_panel.svg",
+      "delivery_file": "assets/ui/story_archive_panel.png",
+      "delivery_source": "source/ui/components/story_archive_panel.svg",
+      "upstream_scene": "source/input_scenes/story_main.svg",
+      "method": "original SVG element extraction; no screenshot or bitmap crop",
+      "size": [
+        424,
+        677
+      ],
+      "use": "archive listing panel, no text; includes centered3px outline and shadow",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "nine_slice_ltrb": [
+        10,
+        10,
+        16,
+        17
+      ],
+      "state": "existing R06 normal state only",
+      "sha256": "398ea5fdc599f17b64beb14885621ba33642ce5627488871d3870883ab868f2b"
+    },
+    {
+      "id": "story_action_button",
+      "file": "png/story_action_button.png",
+      "source": "svg/story_action_button.svg",
+      "delivery_file": "assets/ui/story_action_button.png",
+      "delivery_source": "source/ui/components/story_action_button.svg",
+      "upstream_scene": "source/input_scenes/story_main.svg",
+      "method": "original SVG element extraction; no screenshot or bitmap crop",
+      "size": [
+        336,
+        91
+      ],
+      "use": "normal story action button without text",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "nine_slice_ltrb": [
+        4,
+        4,
+        6,
+        9
+      ],
+      "state": "existing R06 normal state only",
+      "sha256": "381faf7eea148a7963a7617f6645d7f1a2b6bd7f3d2c4250c3665d31b9cb9533"
+    },
+    {
+      "id": "story_entry_selected",
+      "file": "png/story_entry_selected.png",
+      "source": "svg/story_entry_selected.svg",
+      "delivery_file": "assets/ui/story_entry_selected.png",
+      "delivery_source": "source/ui/components/story_entry_selected.svg",
+      "upstream_scene": "source/input_scenes/story_main.svg",
+      "method": "original SVG element extraction; no screenshot or bitmap crop",
+      "size": [
+        295,
+        84
+      ],
+      "use": "selected archive row flat backing",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "nine_slice_ltrb": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "state": "existing selected state",
+      "sha256": "56216ee90e42c7574e6a940ff228a4c5fec625d374edffb9a58ac30ab5acad21"
+    },
+    {
+      "id": "story_entry_normal",
+      "file": "png/story_entry_normal.png",
+      "source": "svg/story_entry_normal.svg",
+      "delivery_file": "assets/ui/story_entry_normal.png",
+      "delivery_source": "source/ui/components/story_entry_normal.svg",
+      "upstream_scene": "source/input_scenes/story_main.svg",
+      "method": "original SVG element extraction; no screenshot or bitmap crop",
+      "size": [
+        295,
+        84
+      ],
+      "use": "normal archive row flat backing",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "nine_slice_ltrb": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "state": "existing R06 normal state only",
+      "sha256": "f4437e59e51c1b0aab4bf93f01f7546035a79328ae8af6f8f8a248a6a9cf85f5"
+    },
+    {
+      "id": "story_search_field",
+      "file": "png/story_search_field.png",
+      "source": "svg/story_search_field.svg",
+      "delivery_file": "assets/ui/story_search_field.png",
+      "delivery_source": "source/ui/components/story_search_field.svg",
+      "upstream_scene": "source/input_scenes/story_main.svg",
+      "method": "original SVG element extraction; no screenshot or bitmap crop",
+      "size": [
+        362,
+        64
+      ],
+      "use": "search field backing without glyph/placeholder",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "nine_slice_ltrb": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "state": "existing R06 normal state only",
+      "sha256": "12b454d7d87564c292e743b7e54bab6d10c2df569dc41ab9c7325067850b5b53"
+    },
+    {
+      "id": "story_search_icon",
+      "file": "png/story_search_icon.png",
+      "source": "svg/story_search_icon.svg",
+      "delivery_file": "assets/ui/story_search_icon.png",
+      "delivery_source": "source/ui/components/story_search_icon.svg",
+      "upstream_scene": "source/input_scenes/story_main.svg",
+      "method": "original SVG element extraction; no screenshot or bitmap crop",
+      "size": [
+        35,
+        36
+      ],
+      "use": "original search circle/handle geometry; independent from font",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "nine_slice_ltrb": null,
+      "state": "existing R06 normal state only",
+      "sha256": "38aa84682a5195003b3f55bd8bd6ffa464f27eb8e8f23317d06991eeed6e897f"
+    },
+    {
+      "id": "storage_trait_spark",
+      "file": "png/storage_trait_spark.png",
+      "source": "svg/storage_trait_spark.svg",
+      "delivery_file": "assets/ui/storage_trait_spark.png",
+      "delivery_source": "source/ui/components/storage_trait_spark.svg",
+      "upstream_scene": "source/input_scenes/storage_trait_spark.svg",
+      "method": "original SVG element extraction; no screenshot or bitmap crop",
+      "size": [
+        20,
+        24
+      ],
+      "use": "original storage trait star glyph rendered at20px; baseline20; DejaVu license included",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "nine_slice_ltrb": null,
+      "state": "original actual fallback glyph from R06 source",
+      "sha256": "1945b90126cf499ed9fc4890cc378dc5cf0a40ebcae46da3fefe41508d94d788"
+    },
+    {
+      "id": "storage_skill_asterisk",
+      "file": "png/storage_skill_asterisk.png",
+      "source": "svg/storage_skill_asterisk.svg",
+      "delivery_file": "assets/ui/storage_skill_asterisk.png",
+      "delivery_source": "source/ui/components/storage_skill_asterisk.svg",
+      "upstream_scene": "source/input_scenes/storage_skill_asterisk.svg",
+      "method": "original SVG element extraction; no screenshot or bitmap crop",
+      "size": [
+        26,
+        30
+      ],
+      "use": "original storage second-skill ornament glyph at25px; baseline25; DejaVu license included",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "nine_slice_ltrb": null,
+      "state": "original actual fallback glyph from R06 source",
+      "sha256": "c56eeb018584347a2a6a4549a9a386bc27bb493993d9355e4234ea5e34fc85ec"
+    }
+  ]
+}

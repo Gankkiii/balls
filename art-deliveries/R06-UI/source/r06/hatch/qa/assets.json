@@ -1,0 +1,92 @@
+[
+  {
+    "file": "assets/puffer.png",
+    "source": "balls/assets/r04/characters/puffer/idle.png",
+    "sha256": "1b3d621f0ff6230a53556eb13eb311b9b50fbe2d254ebb2df7e6aa2cbe26f23d",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "file": "assets/chicken.png",
+    "source": "balls/assets/r04/characters/chicken/idle.png",
+    "sha256": "88b5566cb8a47442ffb2b04412b7797f185e96ee123f36b36ae756d17d457a53",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "file": "assets/bubble_fish.png",
+    "source": "balls/assets/r04/characters/bubble_fish/idle.png",
+    "sha256": "cce6d3a057426be51c262a15c40a306930fb3d9e6df46777865984f5bbcdd870",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "file": "assets/electric_sheep.png",
+    "source": "balls/assets/r04/characters/electric_sheep/idle.png",
+    "sha256": "c8586c95074497a46e3ff85fcf125b12a390844c1aecc6b6a08a3de8b7a23676",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "file": "assets/magnet_crab.png",
+    "source": "balls/assets/r04/characters/magnet_crab/idle.png",
+    "sha256": "3db728b98a4425548a867ec89941cad5614fffe3412beee1b66e504653ea99a5",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "file": "assets/duck.png",
+    "source": "balls/assets/r02/characters/duck/default.png",
+    "sha256": "e68a13d364c4f901f3fcf726a9ec0ecc8f6f3510a030b2f7701bbf07dede07f4",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "file": "assets/rabbit.png",
+    "source": "balls/assets/r02/characters/rabbit/default.png",
+    "sha256": "49b33c511483a6d4637cf81d7138159a7d04822027565b57db2434c6d2e25fc0",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "file": "assets/cactus.png",
+    "source": "balls/assets/r04/characters/cactus/idle.png",
+    "sha256": "33088f2705e8fe1e3e7b11606a8161fbcd2ff186f8f0ed47aa71ceb8ed795e34",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "file": "assets/shell_turtle.png",
+    "source": "balls/assets/r04/characters/shell_turtle/idle.png",
+    "sha256": "cd1304b21975c8d5f795d1d94a983f7a81797b58f02c9874720e8ebc6d520186",
+    "size": [
+      96,
+      96
+    ]
+  },
+  {
+    "file": "assets/crow.png",
+    "source": "balls/assets/r04/characters/crow/idle.png",
+    "sha256": "21a2ef82ab7e38dc01d19c4328482e07cc9d9d2356969e6d9e0fff1c0173fa16",
+    "size": [
+      96,
+      96
+    ]
+  }
+]

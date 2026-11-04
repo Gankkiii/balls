@@ -1,0 +1,22 @@
+{
+  "version": "R06-ui-handoff-1",
+  "game_commit": "3dd29e881d43b0be53170696633a6c118cd7d077",
+  "review_commit": "54d8f8d48966e1e7af5e8261d44ad31ab9258e55",
+  "user_confirmed": {
+    "arena": "R05 B/R06 refinement",
+    "storage": "R05 D expanded secondary becomes sole default; full6x4",
+    "hatch": "R05 B/R06 detailed workbench flow",
+    "story": "R05 D; placeholder only",
+    "navigation": "all4 use storage light top bar",
+    "mobile_layout": "paused; resource importability only",
+    "exclude_review_debug": true
+  },
+  "not_user_final_gameplay_approval": [
+    "temporary breeding probabilities",
+    "unknown skills/traits/base/final stats",
+    "story rules",
+    "unresolved old Puffer contact cooldown description"
+  ],
+  "formal_game_modified": false,
+  "team_configuration_modified": false
+}

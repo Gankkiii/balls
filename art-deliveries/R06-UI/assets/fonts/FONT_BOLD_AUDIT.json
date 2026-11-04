@@ -1,0 +1,15 @@
+{
+  "file": "NotoSansCJKsc-Bold.otf",
+  "family": "Noto Sans CJK SC",
+  "style": "Bold",
+  "version": "Version 2.004;hotconv 1.0.118;makeotfexe 2.5.65603",
+  "bytes": 17002224,
+  "sha256": "2d891314797c38751640385bd3fd68f9d7ddcdac0c4b37d79c674d35e3a1080c",
+  "source": "Debian fonts-noto-cjk NotoSansCJK-Bold.ttc face2",
+  "source_sha256": "faa5f3656a78b2e2d450d27fe8382c778bc2b6bb5ea29c986664a6a435056ceb",
+  "cmap_entries": 44810,
+  "license": "SIL OFL1.1, same accompanying OFL/UPSTREAM_COPYRIGHT",
+  "export": "Unmodified face extraction, no subsetting or outline changes",
+  "use": "R06原CSS粗体层级；600/700/800最终字重映射需Godot排版验证，不靠旧227字字库或系统fallback",
+  "actual_godot_import": "PASS: isolated Godot4.6.3 imported and loaded; sample glyph coverage passed; layout/device NOT_RUN"
+}

@@ -1,0 +1,29 @@
+{
+  "page": "arena",
+  "selected_direction": "B",
+  "status": "direction_refinement_not_game",
+  "title": "竞技场 · 双侧状态卡",
+  "image": "main.png",
+  "source": "main.svg",
+  "prototype": "prototype.html",
+  "canvas": [
+    1600,
+    900
+  ],
+  "detail_images": [
+    {
+      "image": "info.png",
+      "source": "info.svg",
+      "title": "信息展开与关闭"
+    }
+  ],
+  "limits": [
+    "纯UI交互示意，非真实战斗/真实游戏导航",
+    "不包含手机适配或A-D选择",
+    "游戏接入、设备交互与性能未验证"
+  ],
+  "navigation_message": {
+    "type": "r06-nav",
+    "page": "arena|story|storage|hatch"
+  }
+}

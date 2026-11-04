@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "source_only_empty_root": "/workspace/shared/r07-glyph-qa-rs_wxkre/ui",
+  "byte_equal_files": 29,
+  "PNG": 14,
+  "SVG": 14,
+  "metadata": 1
+}

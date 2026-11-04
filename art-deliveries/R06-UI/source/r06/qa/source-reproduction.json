@@ -1,0 +1,122 @@
+{
+  "result": "PASS",
+  "groups": [
+    {
+      "group": "arena-story",
+      "generated_files": 28,
+      "files": [
+        "story/detail.svg",
+        "story/detail.png",
+        "story/main.svg",
+        "story/review.json",
+        "story/prototype.html",
+        "story/main.png",
+        "arena/info.svg",
+        "arena/main.svg",
+        "arena/review.json",
+        "arena/prototype.html",
+        "arena/main.png",
+        "arena/info.png",
+        "story/states/b_detail.png",
+        "story/states/b_main.svg",
+        "story/states/a_detail.svg",
+        "story/states/d_main.svg",
+        "story/states/b_detail.svg",
+        "story/states/c_main.png",
+        "story/states/c_detail.svg",
+        "story/states/c_main.svg",
+        "story/states/d_detail.svg",
+        "story/states/a_main.png",
+        "story/states/d_main.png",
+        "story/states/a_main.svg",
+        "story/states/d_detail.png",
+        "story/states/c_detail.png",
+        "story/states/b_main.png",
+        "story/states/a_detail.png"
+      ],
+      "all_byte_equal": true
+    },
+    {
+      "group": "storage",
+      "generated_files": 6,
+      "files": [
+        "individual.png",
+        "review.json",
+        "main.png",
+        "source.html",
+        "demo_child.png",
+        "info.png"
+      ],
+      "all_byte_equal": true
+    },
+    {
+      "group": "hatch-html-screens",
+      "generated_files": 12,
+      "files": [
+        {
+          "name": "workbench",
+          "byte_equal": true,
+          "sha256": "e052711f249653af8372efd8da3f9071ea173fc4cc35768afa56090f717dac8e"
+        },
+        {
+          "name": "pick-mother",
+          "byte_equal": true,
+          "sha256": "edcd7863857b23b210b52f40aa3c9570da9b66dbd1e1e5de7eb9059510a57a6b"
+        },
+        {
+          "name": "pick-father",
+          "byte_equal": true,
+          "sha256": "7649925114a696935e198337c5d749f16e44a189b2084a7dd16511dabdb5a40e"
+        },
+        {
+          "name": "detail-mother",
+          "byte_equal": true,
+          "sha256": "3a252d68d9d3982b90a887578e39901285de09e810ab8c89f73e995719ca4fc3"
+        },
+        {
+          "name": "detail-father",
+          "byte_equal": true,
+          "sha256": "91997de1aeecc518e45003df692f0f487c9ba250a2dd547037f8aeaef3f6fd2e"
+        },
+        {
+          "name": "rules",
+          "byte_equal": true,
+          "sha256": "52e615d1ba5c22ea4c28b901969e43e34c1fa5ce9861c9baf37eaf4843fd29d0"
+        },
+        {
+          "name": "preview",
+          "byte_equal": true,
+          "sha256": "e81378e9297bdeab7cc419d2397adf7e81b86c9d101a103975d1e0111dc824aa"
+        },
+        {
+          "name": "confirm",
+          "byte_equal": true,
+          "sha256": "60a62170493ef3c6a4a745bd48d2fa0eb31cd6ff5c66dabe010d94d86acc05d7"
+        },
+        {
+          "name": "success",
+          "byte_equal": true,
+          "sha256": "ed9a144585091394f06be1e78decf0e529d433132806e9aa7626d5a1ca35a68a"
+        },
+        {
+          "name": "failure",
+          "byte_equal": true,
+          "sha256": "015c5f60fb2dc2e3d320f5641657db7c22ba309910a467dda4794f2679dd125b"
+        },
+        {
+          "name": "missing",
+          "byte_equal": true,
+          "sha256": "12f74704e68ff25c441d4797d9c1840c274291f1e328d629e8e052c34ce07cf6"
+        },
+        {
+          "name": "non-tie",
+          "byte_equal": true,
+          "sha256": "8db1a87753fb59313ab90fcaff5458fa81561db8bbebb0c9074596371e518bf2"
+        }
+      ],
+      "all_byte_equal": true,
+      "method": "Copied only editable HTML/JS/CSS/fixtures and declared PNG inputs to a new directory, served independently; rendered12 states through a separate Chromium context. Original fixed-path capture helper was not invoked."
+    }
+  ],
+  "scope": "Independent fresh-directory rendering/generation of arena/story28 outputs, storage6 outputs and hatch12 screenshots. No originals overwritten; storage original-game image inputs are declared read-only dependencies."
+}

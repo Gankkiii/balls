@@ -1,0 +1,23 @@
+extends SceneTree
+func _init():
+ var rows=JSON.parse_string(FileAccess.get_file_as_string("res://expected.json"))
+ var bad=[]
+ for row in rows:
+  var texture=load(row.path)
+  if texture==null or texture.get_width()!=row.width or texture.get_height()!=row.height: bad.append(row.path)
+ var font=load("res://assets/fonts/NotoSansCJKsc-Regular.otf")
+ for c in "竞技场主线仓库孵蛋生命攻击防御速度重量大小先天后天最终♀♂＋":
+  if not font.has_char(c.unicode_at(0)): bad.append(c)
+ var vectors=0
+ for path in DirAccess.get_files_at("res://assets/component_vectors"):
+  if not path.ends_with(".svg"): continue
+  vectors+=1
+  var vector=load("res://assets/component_vectors/"+path)
+  var bitmap=load("res://assets/ui/"+path.get_basename()+".png")
+  if vector==null or bitmap==null or vector.get_size()!=bitmap.get_size(): bad.append(path)
+ if vectors!=14: bad.append("Expected14SVGs; actual="+str(vectors))
+ var bold=load("res://assets/fonts/NotoSansCJKsc-Bold.otf")
+ for c in "竞技场主线仓库孵蛋生命攻击防御速度重量大小先天后天最终♀♂＋":
+  if not bold.has_char(c.unicode_at(0)): bad.append("bold:"+c)
+ print("R06_RESOURCE_CHECK pngs=",rows.size()," vectors=",vectors," font_regular_ok=",font!=null," font_bold_ok=",bold!=null," failures=",bad)
+ quit(0 if bad.is_empty() else 1)

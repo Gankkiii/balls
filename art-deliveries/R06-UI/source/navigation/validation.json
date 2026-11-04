@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "canvas": [
+    1600,
+    900
+  ],
+  "png_count": 4,
+  "browser": "Chromium native desktop viewport",
+  "javascript_errors": [],
+  "real_device": "NOT RUN",
+  "game_integration": "NOT RUN",
+  "classification": "full-page reference only; not HUD component",
+  "clean_source_reproduction_exact_files": 9,
+  "clean_source_reproduction_dir": "/tmp/r07-final-nav-repro-pzbn5jrn",
+  "hatch_debug_controls_removed": true,
+  "hatch_confirm_opens_original_confirmation": "PASS",
+  "other_three_png_unchanged": true
+}

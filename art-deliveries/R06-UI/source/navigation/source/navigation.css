@@ -1,0 +1,7 @@
+/* Exact storage R06 light-header skin; source button coordinates preserved after removing review-only notices. */
+.final-nav{position:absolute;left:0;top:0;width:1600px;height:92px;box-sizing:border-box;background:#faf8ef;border-bottom:2px solid #c2cbbd;color:#293d40;font-family:"Noto Sans CJK SC",sans-serif;z-index:20}
+.final-nav .brand{position:absolute;left:42px;top:0;height:90px;display:flex;align-items:center;font-size:27px;font-weight:900;letter-spacing:3px}
+.final-nav nav{position:absolute;left:813.71875px;top:18px;display:flex;gap:12px}
+.final-nav button{box-sizing:border-box;width:138px;height:54px;min-width:138px;padding:0;border:2px solid transparent;background:transparent;color:#293d40;font-family:inherit;font-size:22px;font-weight:400;line-height:normal}
+.final-nav button.selected{background:#d7e9dc;border-color:#648d7b;box-shadow:3px 3px 0 #9db5a3}
+.final-nav button:focus-visible{outline:3px solid #d49560;outline-offset:3px}

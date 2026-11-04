@@ -1,0 +1,103 @@
+{
+  "id": "hatch",
+  "direction": "R05 B 工作台，用户已指定；无方案投票",
+  "prototype": "prototype.html",
+  "viewport": [
+    1600,
+    900
+  ],
+  "responsive_phone": false,
+  "states": [
+    {
+      "id": "workbench",
+      "title": "工作台 / 继承选择",
+      "screenshot": "screens/workbench.png"
+    },
+    {
+      "id": "pick-mother",
+      "title": "选择母亲",
+      "screenshot": "screens/pick-mother.png"
+    },
+    {
+      "id": "pick-father",
+      "title": "选择父亲",
+      "screenshot": "screens/pick-father.png"
+    },
+    {
+      "id": "detail-mother",
+      "title": "母亲完整详情",
+      "screenshot": "screens/detail-mother.png"
+    },
+    {
+      "id": "detail-father",
+      "title": "父亲完整详情",
+      "screenshot": "screens/detail-father.png"
+    },
+    {
+      "id": "rules",
+      "title": "临时规则说明",
+      "screenshot": "screens/rules.png"
+    },
+    {
+      "id": "preview",
+      "title": "后代预览",
+      "screenshot": "screens/preview.png"
+    },
+    {
+      "id": "confirm",
+      "title": "执行确认",
+      "screenshot": "screens/confirm.png"
+    },
+    {
+      "id": "success",
+      "title": "人工成功结果",
+      "screenshot": "screens/success.png"
+    },
+    {
+      "id": "failure",
+      "title": "失败状态",
+      "screenshot": "screens/failure.png"
+    },
+    {
+      "id": "missing",
+      "title": "缺少亲本",
+      "screenshot": "screens/missing.png"
+    },
+    {
+      "id": "non-tie",
+      "title": "非并列技能自动只读",
+      "screenshot": "screens/non-tie.png"
+    }
+  ],
+  "actions": {
+    "pick-mother": "母亲性别过滤列表与候选完整详情",
+    "pick-father": "父亲性别过滤列表与候选完整详情",
+    "candidate": "浏览候选，不立即替换已选亲本",
+    "use-parent": "确认该候选；仅mother身份真正变化才重置并列选择",
+    "detail-mother": "已选母亲完整三特性/五技能/六属性四列",
+    "detail-father": "已选父亲完整详情",
+    "tie-0/tie-1": "仅母亲最高技能并列时出现，决定技能1身份",
+    "rules": "临时概率与继承规则",
+    "preview": "只显示身份和范围，不生成随机对象",
+    "confirm": "确认页面，取消保留选择",
+    "success": "根据当前亲本及技能选择生成一个确定的合法人工#21结果；不执行随机或保存",
+    "failure": "演示失败、不建立后代对象",
+    "storage-child": "向同源父页发送r06-nav storage携同一#21演示child",
+    "workbench": "回工作台，保留亲本和选择",
+    "reset": "恢复统一鱼/羊人工样例，清演示child",
+    "nav-arena/nav-story/nav-storage/nav-hatch": "向同源父窗口发送四页导航消息"
+  },
+  "fixture_source": "../fixtures.json，fixtures.json逐字副本；fixtures.js只将该JSON暴露到window",
+  "storage": "仅内存，无localStorage/sessionStorage/真实玩家文件",
+  "demo_result": "#21，物种/trait随当前mother，sex0/Lv0，技能1随最高或并列选择；技能2取母种另一个已命名技能，rank1取父母最高rank的较低值、rank2=2，先天每维取双亲较低值。只是合法人工示例，不承诺真实随机结果。",
+  "message_protocol": {
+    "target": "同源parent",
+    "payload": {
+      "type": "r06-nav",
+      "page": "arena|story|storage|hatch",
+      "child": "可选；只在结果页到仓库时提供人工对象"
+    },
+    "parent_guard": "由父页按origin和event.source双校验；storage接收r06-demo-child"
+  },
+  "automation": "qa/flow-test.json，50个浏览器场景检查通过；不是游戏回归或设备验收"
+}

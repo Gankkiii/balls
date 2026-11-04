@@ -1,0 +1,71 @@
+{
+  "id": "hatch",
+  "page": "hatch",
+  "title": "孵蛋 · 工作台",
+  "status": "指定方向细化 · 交互示意 · 不保存",
+  "prototype": "prototype.html",
+  "image": "main.png",
+  "flow": "flow.json",
+  "detail_images": [
+    {
+      "title": "选择母亲",
+      "image": "screens/pick-mother.png"
+    },
+    {
+      "title": "选择父亲",
+      "image": "screens/pick-father.png"
+    },
+    {
+      "title": "母亲完整详情",
+      "image": "screens/detail-mother.png"
+    },
+    {
+      "title": "父亲完整详情",
+      "image": "screens/detail-father.png"
+    },
+    {
+      "title": "临时规则说明",
+      "image": "screens/rules.png"
+    },
+    {
+      "title": "后代预览",
+      "image": "screens/preview.png"
+    },
+    {
+      "title": "执行确认",
+      "image": "screens/confirm.png"
+    },
+    {
+      "title": "人工成功结果",
+      "image": "screens/success.png"
+    },
+    {
+      "title": "失败状态",
+      "image": "screens/failure.png"
+    },
+    {
+      "title": "缺少亲本",
+      "image": "screens/missing.png"
+    },
+    {
+      "title": "非并列技能自动只读",
+      "image": "screens/non-tie.png"
+    }
+  ],
+  "dimensions": [
+    1600,
+    900
+  ],
+  "source": [
+    "prototype.html",
+    "app.js",
+    "style.css",
+    "fixtures.js",
+    "fixtures.json"
+  ],
+  "notes": [
+    "仅纯内存人工UI示例，不真实孵化/随机/写盘。",
+    "四导航由同源父网页接收r06-nav切页，到仓库携同一人工#21对象。",
+    "本轮不做手机适配，不再开放布局选择。"
+  ]
+}

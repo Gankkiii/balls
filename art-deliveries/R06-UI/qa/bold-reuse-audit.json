@@ -1,0 +1,93 @@
+{
+  "result": "PRELIMINARY_PHYSICAL_AUDIT_PASS_NOT_FINAL_PACKAGE",
+  "bold": {
+    "file": "assets/fonts/NotoSansCJKsc-Bold.otf",
+    "bytes": 17002224,
+    "sha256": "2d891314797c38751640385bd3fd68f9d7ddcdac0c4b37d79c674d35e3a1080c",
+    "source_ttc_face": 2,
+    "source_cmap_glyphorder_CFF_exact": true,
+    "cmap_entries": 44810,
+    "source_CJK_codepoints": 692,
+    "missing_CJK": [],
+    "embedded_OFL": true,
+    "glyph_layout_device_NOT_RUN": true
+  },
+  "reused": [
+    {
+      "file": "assets/ui/reused/icon_play.png",
+      "original": "assets/r04/ui/retained/r02/icon_play.png",
+      "sha256": "02f843ff7ef8a25e38f39a1d4360fc0277f264f8535d02a30f43a4e3daf3bf9b",
+      "byte_equal": true
+    },
+    {
+      "file": "assets/ui/reused/icon_sound_off.png",
+      "original": "assets/r04/ui/retained/r02/icon_sound_off.png",
+      "sha256": "9504cf4ef0345ed3ad8a99240364f19ecc4dd162a72fde1e943ca0c8e6de3970",
+      "byte_equal": true
+    },
+    {
+      "file": "assets/ui/reused/icon_skill_timer.png",
+      "original": "assets/r04/ui/retained/r02/icon_skill_timer.png",
+      "sha256": "569ba23373cf94e8b8ce4822d9940b340b209013e6dda4ff5fabe2a931c85e91",
+      "byte_equal": true
+    },
+    {
+      "file": "assets/ui/reused/icon_skill_rod.png",
+      "original": "assets/r04/ui/retained/r02/icon_skill_rod.png",
+      "sha256": "08ced9f700587f2daf823c23596748eb1e590d56a4efbbe4f09107283b98333c",
+      "byte_equal": true
+    },
+    {
+      "file": "assets/ui/reused/icon_skill_forge.png",
+      "original": "assets/r04/ui/retained/r02/icon_skill_forge.png",
+      "sha256": "4390c6f3711a50b670b632ee8e4a065e3371cd3b935d31a23c672c5a561a8faf",
+      "byte_equal": true
+    },
+    {
+      "file": "assets/ui/reused/icon_skill_temper.png",
+      "original": "assets/r04/ui/retained/r02/icon_skill_temper.png",
+      "sha256": "c4cf712d737f1f607262437213c8bc8e5c861200a8e5d86c2fb2cfa888c59a1e",
+      "byte_equal": true
+    },
+    {
+      "file": "assets/ui/reused/icon_shell_28.png",
+      "original": "assets/r04/ui/icon_shell_28.png",
+      "sha256": "66ceff10b1e8757e35cfa15d6105acf6dd0f4300ce34bd9a24d30c786b1c1c54",
+      "byte_equal": true
+    },
+    {
+      "file": "assets/ui/reused/icon_spin_28.png",
+      "original": "assets/r04/ui/icon_spin_28.png",
+      "sha256": "1077a21916008265406dee92c41022f190f60f2f70364b8fce17df5149634975",
+      "byte_equal": true
+    },
+    {
+      "file": "assets/ui/reused/icon_swap_28.png",
+      "original": "assets/r04/ui/icon_swap_28.png",
+      "sha256": "c581fbcf0cadb756f2e5d8fcfca8cc30eb99b7fbff067373b9703ab55349ba5e",
+      "byte_equal": true
+    },
+    {
+      "file": "assets/ui/reused/icon_feather_28.png",
+      "original": "assets/r04/ui/icon_feather_28.png",
+      "sha256": "0a8184c60ef6bb6c225f0d2fa21523db3bc79ff2cf93a143309300f48a5b3689",
+      "byte_equal": true
+    },
+    {
+      "file": "assets/ui/reused/icon_feather.png",
+      "original": "assets/r04/ui/icon_feather.png",
+      "sha256": "b1e385fec010a3eae7ef4fd9798202cae25018963655556243710afc6b25c5f4",
+      "byte_equal": true
+    },
+    {
+      "file": "assets/ui/reused/icon_dummy.png",
+      "original": "assets/r04/ui/icon_dummy.png",
+      "sha256": "8dd9825c44b14fbd298a95b1912d4f3e1ae0d19b1df5cb442f563b10a086449a",
+      "byte_equal": true
+    }
+  ],
+  "formal_PNG_count": 52,
+  "trait_glyph_exact_original_outline": true,
+  "trait_glyph_font_sha256": "57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e",
+  "scope": "Core R06 and storage-light top navigation confirmed, final nav compositions/package checks pending."
+}

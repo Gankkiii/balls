@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "character": "✣",
+  "codepoint": "U+2723",
+  "original_outline_exact": true,
+  "font": "DejaVu Sans",
+  "font_sha256": "57f73e11f51999432bf7ab22ce55b6f945d5eca1bf824404cfa9ec2e3718c84e",
+  "size": [
+    26,
+    30
+  ],
+  "alpha": [
+    0,
+    255
+  ],
+  "png_sha256": "c56eeb018584347a2a6a4549a9a386bc27bb493993d9355e4234ea5e34fc85ec",
+  "font_license_block_exact": true,
+  "delivery_png_exact": true,
+  "delivery_svg_exact": true,
+  "final_PNG_count": 53,
+  "final_Godot_log": "Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\n\nR06_RESOURCE_CHECK pngs=53 vectors=14 font_regular_ok=true font_bold_ok=true failures=[]",
+  "report_sha256": "23c576a67e0a4974bc481e01a2244a32a82b71d2de28f8d90d6a4a8896840897"
+}

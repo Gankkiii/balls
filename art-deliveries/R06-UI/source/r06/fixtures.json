@@ -1,0 +1,1305 @@
+{
+  "version": "R06-ui-fixtures-1",
+  "game_commit": "3dd29e881d43b0be53170696633a6c118cd7d077",
+  "status": "仅UI演示数据，不是玩家存档，不真实孵化或保存；鱼♀和羊♂的+3/+3为沿用R05人工示例，非代码默认",
+  "stats": [
+    "生命",
+    "攻击",
+    "防御",
+    "速度",
+    "重量",
+    "大小"
+  ],
+  "columns": [
+    "种族基础",
+    "先天",
+    "后天",
+    "最终"
+  ],
+  "people": [
+    {
+      "id": "puffer_f",
+      "species": 0,
+      "name": "充气球",
+      "sex": 0,
+      "level": 0,
+      "trait": "特性一（待设计）",
+      "other_traits": [
+        "特性二（待设计）",
+        "特性三（待设计）"
+      ],
+      "skills": [
+        0,
+        1
+      ],
+      "skill_names": [
+        "充气",
+        "吸收",
+        "技能3（待设计）",
+        "技能4（待设计）",
+        "技能5（待设计）"
+      ],
+      "ranks": [
+        1,
+        1
+      ],
+      "original_make_samples_ranks": [
+        1,
+        1
+      ],
+      "innate": [
+        8,
+        15,
+        22,
+        29,
+        36,
+        43
+      ],
+      "training": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "final": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "art_source": "assets/r04/characters/puffer/idle.png"
+    },
+    {
+      "id": "puffer_m",
+      "species": 0,
+      "name": "充气球",
+      "sex": 1,
+      "level": 0,
+      "trait": "特性一（待设计）",
+      "other_traits": [
+        "特性二（待设计）",
+        "特性三（待设计）"
+      ],
+      "skills": [
+        0,
+        1
+      ],
+      "skill_names": [
+        "充气",
+        "吸收",
+        "技能3（待设计）",
+        "技能4（待设计）",
+        "技能5（待设计）"
+      ],
+      "ranks": [
+        2,
+        2
+      ],
+      "original_make_samples_ranks": [
+        2,
+        2
+      ],
+      "innate": [
+        27,
+        34,
+        41,
+        48,
+        12,
+        19
+      ],
+      "training": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "final": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "art_source": "assets/r04/characters/puffer/idle.png"
+    },
+    {
+      "id": "chicken_f",
+      "species": 1,
+      "name": "炸弹母鸡",
+      "sex": 0,
+      "level": 0,
+      "trait": "特性一（待设计）",
+      "other_traits": [
+        "特性二（待设计）",
+        "特性三（待设计）"
+      ],
+      "skills": [
+        0,
+        1
+      ],
+      "skill_names": [
+        "乱跑",
+        "大炸弹",
+        "技能3（待设计）",
+        "技能4（待设计）",
+        "技能5（待设计）"
+      ],
+      "ranks": [
+        2,
+        3
+      ],
+      "original_make_samples_ranks": [
+        2,
+        3
+      ],
+      "innate": [
+        21,
+        28,
+        35,
+        42,
+        49,
+        13
+      ],
+      "training": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "final": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "art_source": "assets/r04/characters/chicken/idle.png"
+    },
+    {
+      "id": "chicken_m",
+      "species": 1,
+      "name": "炸弹母鸡",
+      "sex": 1,
+      "level": 0,
+      "trait": "特性一（待设计）",
+      "other_traits": [
+        "特性二（待设计）",
+        "特性三（待设计）"
+      ],
+      "skills": [
+        0,
+        1
+      ],
+      "skill_names": [
+        "乱跑",
+        "大炸弹",
+        "技能3（待设计）",
+        "技能4（待设计）",
+        "技能5（待设计）"
+      ],
+      "ranks": [
+        3,
+        4
+      ],
+      "original_make_samples_ranks": [
+        3,
+        4
+      ],
+      "innate": [
+        40,
+        47,
+        11,
+        18,
+        25,
+        32
+      ],
+      "training": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "final": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "art_source": "assets/r04/characters/chicken/idle.png"
+    },
+    {
+      "id": "bubble_fish_f",
+      "species": 2,
+      "name": "泡泡鱼",
+      "sex": 0,
+      "level": 0,
+      "trait": "特性一（待设计）",
+      "other_traits": [
+        "特性二（待设计）",
+        "特性三（待设计）"
+      ],
+      "skills": [
+        0,
+        1
+      ],
+      "skill_names": [
+        "吸附泡泡",
+        "八方泡泡",
+        "技能3（待设计）",
+        "技能4（待设计）",
+        "技能5（待设计）"
+      ],
+      "ranks": [
+        3,
+        3
+      ],
+      "original_make_samples_ranks": [
+        3,
+        5
+      ],
+      "innate": [
+        34,
+        41,
+        48,
+        12,
+        19,
+        26
+      ],
+      "training": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "final": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "art_source": "assets/r04/characters/bubble_fish/idle.png"
+    },
+    {
+      "id": "bubble_fish_m",
+      "species": 2,
+      "name": "泡泡鱼",
+      "sex": 1,
+      "level": 0,
+      "trait": "特性一（待设计）",
+      "other_traits": [
+        "特性二（待设计）",
+        "特性三（待设计）"
+      ],
+      "skills": [
+        0,
+        1
+      ],
+      "skill_names": [
+        "吸附泡泡",
+        "八方泡泡",
+        "技能3（待设计）",
+        "技能4（待设计）",
+        "技能5（待设计）"
+      ],
+      "ranks": [
+        4,
+        1
+      ],
+      "original_make_samples_ranks": [
+        4,
+        1
+      ],
+      "innate": [
+        10,
+        17,
+        24,
+        31,
+        38,
+        45
+      ],
+      "training": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "final": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "art_source": "assets/r04/characters/bubble_fish/idle.png"
+    },
+    {
+      "id": "electric_sheep_f",
+      "species": 3,
+      "name": "触电羊",
+      "sex": 0,
+      "level": 0,
+      "trait": "特性一（待设计）",
+      "other_traits": [
+        "特性二（待设计）",
+        "特性三（待设计）"
+      ],
+      "skills": [
+        0,
+        1
+      ],
+      "skill_names": [
+        "转向墙壁",
+        "放置羊毛",
+        "技能3（待设计）",
+        "技能4（待设计）",
+        "技能5（待设计）"
+      ],
+      "ranks": [
+        4,
+        2
+      ],
+      "original_make_samples_ranks": [
+        4,
+        2
+      ],
+      "innate": [
+        47,
+        11,
+        18,
+        25,
+        32,
+        39
+      ],
+      "training": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "final": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "art_source": "assets/r04/characters/electric_sheep/idle.png"
+    },
+    {
+      "id": "electric_sheep_m",
+      "species": 3,
+      "name": "触电羊",
+      "sex": 1,
+      "level": 0,
+      "trait": "特性一（待设计）",
+      "other_traits": [
+        "特性二（待设计）",
+        "特性三（待设计）"
+      ],
+      "skills": [
+        0,
+        1
+      ],
+      "skill_names": [
+        "转向墙壁",
+        "放置羊毛",
+        "技能3（待设计）",
+        "技能4（待设计）",
+        "技能5（待设计）"
+      ],
+      "ranks": [
+        3,
+        3
+      ],
+      "original_make_samples_ranks": [
+        5,
+        3
+      ],
+      "innate": [
+        23,
+        30,
+        37,
+        44,
+        8,
+        15
+      ],
+      "training": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "final": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "art_source": "assets/r04/characters/electric_sheep/idle.png"
+    },
+    {
+      "id": "magnet_crab_f",
+      "species": 4,
+      "name": "磁铁蟹",
+      "sex": 0,
+      "level": 0,
+      "trait": "特性一（待设计）",
+      "other_traits": [
+        "特性二（待设计）",
+        "特性三（待设计）"
+      ],
+      "skills": [
+        0,
+        1
+      ],
+      "skill_names": [
+        "磁力墙",
+        "铁钉弹射",
+        "技能3（待设计）",
+        "技能4（待设计）",
+        "技能5（待设计）"
+      ],
+      "ranks": [
+        5,
+        4
+      ],
+      "original_make_samples_ranks": [
+        5,
+        4
+      ],
+      "innate": [
+        17,
+        24,
+        31,
+        38,
+        45,
+        9
+      ],
+      "training": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "final": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "art_source": "assets/r04/characters/magnet_crab/idle.png"
+    },
+    {
+      "id": "magnet_crab_m",
+      "species": 4,
+      "name": "磁铁蟹",
+      "sex": 1,
+      "level": 0,
+      "trait": "特性一（待设计）",
+      "other_traits": [
+        "特性二（待设计）",
+        "特性三（待设计）"
+      ],
+      "skills": [
+        0,
+        1
+      ],
+      "skill_names": [
+        "磁力墙",
+        "铁钉弹射",
+        "技能3（待设计）",
+        "技能4（待设计）",
+        "技能5（待设计）"
+      ],
+      "ranks": [
+        1,
+        5
+      ],
+      "original_make_samples_ranks": [
+        1,
+        5
+      ],
+      "innate": [
+        36,
+        43,
+        50,
+        14,
+        21,
+        28
+      ],
+      "training": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "final": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "art_source": "assets/r04/characters/magnet_crab/idle.png"
+    },
+    {
+      "id": "duck_f",
+      "species": 5,
+      "name": "倒霉鸭",
+      "sex": 0,
+      "level": 0,
+      "trait": "特性一（待设计）",
+      "other_traits": [
+        "特性二（待设计）",
+        "特性三（待设计）"
+      ],
+      "skills": [
+        0,
+        1
+      ],
+      "skill_names": [
+        "调整雷表",
+        "避雷针",
+        "技能3（待设计）",
+        "技能4（待设计）",
+        "技能5（待设计）"
+      ],
+      "ranks": [
+        1,
+        1
+      ],
+      "original_make_samples_ranks": [
+        1,
+        1
+      ],
+      "innate": [
+        30,
+        37,
+        44,
+        8,
+        15,
+        22
+      ],
+      "training": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "final": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "art_source": "assets/r02/characters/duck/default.png"
+    },
+    {
+      "id": "duck_m",
+      "species": 5,
+      "name": "倒霉鸭",
+      "sex": 1,
+      "level": 0,
+      "trait": "特性一（待设计）",
+      "other_traits": [
+        "特性二（待设计）",
+        "特性三（待设计）"
+      ],
+      "skills": [
+        0,
+        1
+      ],
+      "skill_names": [
+        "调整雷表",
+        "避雷针",
+        "技能3（待设计）",
+        "技能4（待设计）",
+        "技能5（待设计）"
+      ],
+      "ranks": [
+        2,
+        2
+      ],
+      "original_make_samples_ranks": [
+        2,
+        2
+      ],
+      "innate": [
+        49,
+        13,
+        20,
+        27,
+        34,
+        41
+      ],
+      "training": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "final": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "art_source": "assets/r02/characters/duck/default.png"
+    },
+    {
+      "id": "rabbit_f",
+      "species": 6,
+      "name": "锻造兔",
+      "sex": 0,
+      "level": 0,
+      "trait": "特性一（待设计）",
+      "other_traits": [
+        "特性二（待设计）",
+        "特性三（待设计）"
+      ],
+      "skills": [
+        0,
+        1
+      ],
+      "skill_names": [
+        "现场锻造",
+        "淬火",
+        "技能3（待设计）",
+        "技能4（待设计）",
+        "技能5（待设计）"
+      ],
+      "ranks": [
+        2,
+        3
+      ],
+      "original_make_samples_ranks": [
+        2,
+        3
+      ],
+      "innate": [
+        43,
+        50,
+        14,
+        21,
+        28,
+        35
+      ],
+      "training": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "final": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "art_source": "assets/r02/characters/rabbit/default.png"
+    },
+    {
+      "id": "rabbit_m",
+      "species": 6,
+      "name": "锻造兔",
+      "sex": 1,
+      "level": 0,
+      "trait": "特性一（待设计）",
+      "other_traits": [
+        "特性二（待设计）",
+        "特性三（待设计）"
+      ],
+      "skills": [
+        0,
+        1
+      ],
+      "skill_names": [
+        "现场锻造",
+        "淬火",
+        "技能3（待设计）",
+        "技能4（待设计）",
+        "技能5（待设计）"
+      ],
+      "ranks": [
+        3,
+        4
+      ],
+      "original_make_samples_ranks": [
+        3,
+        4
+      ],
+      "innate": [
+        19,
+        26,
+        33,
+        40,
+        47,
+        11
+      ],
+      "training": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "final": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "art_source": "assets/r02/characters/rabbit/default.png"
+    },
+    {
+      "id": "cactus_f",
+      "species": 7,
+      "name": "仙人掌",
+      "sex": 0,
+      "level": 0,
+      "trait": "特性一（待设计）",
+      "other_traits": [
+        "特性二（待设计）",
+        "特性三（待设计）"
+      ],
+      "skills": [
+        0,
+        1
+      ],
+      "skill_names": [
+        "撒刺",
+        "换地方生长",
+        "技能3（待设计）",
+        "技能4（待设计）",
+        "技能5（待设计）"
+      ],
+      "ranks": [
+        3,
+        5
+      ],
+      "original_make_samples_ranks": [
+        3,
+        5
+      ],
+      "innate": [
+        13,
+        20,
+        27,
+        34,
+        41,
+        48
+      ],
+      "training": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "final": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "art_source": "assets/r04/characters/cactus/idle.png"
+    },
+    {
+      "id": "cactus_m",
+      "species": 7,
+      "name": "仙人掌",
+      "sex": 1,
+      "level": 0,
+      "trait": "特性一（待设计）",
+      "other_traits": [
+        "特性二（待设计）",
+        "特性三（待设计）"
+      ],
+      "skills": [
+        0,
+        1
+      ],
+      "skill_names": [
+        "撒刺",
+        "换地方生长",
+        "技能3（待设计）",
+        "技能4（待设计）",
+        "技能5（待设计）"
+      ],
+      "ranks": [
+        4,
+        1
+      ],
+      "original_make_samples_ranks": [
+        4,
+        1
+      ],
+      "innate": [
+        32,
+        39,
+        46,
+        10,
+        17,
+        24
+      ],
+      "training": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "final": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "art_source": "assets/r04/characters/cactus/idle.png"
+    },
+    {
+      "id": "shell_turtle_f",
+      "species": 8,
+      "name": "脱壳乌龟",
+      "sex": 0,
+      "level": 0,
+      "trait": "特性一（待设计）",
+      "other_traits": [
+        "特性二（待设计）",
+        "特性三（待设计）"
+      ],
+      "skills": [
+        0,
+        1
+      ],
+      "skill_names": [
+        "躲进壳中",
+        "旋转龟壳",
+        "技能3（待设计）",
+        "技能4（待设计）",
+        "技能5（待设计）"
+      ],
+      "ranks": [
+        4,
+        2
+      ],
+      "original_make_samples_ranks": [
+        4,
+        2
+      ],
+      "innate": [
+        26,
+        33,
+        40,
+        47,
+        11,
+        18
+      ],
+      "training": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "final": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "art_source": "assets/r04/characters/shell_turtle/idle.png"
+    },
+    {
+      "id": "shell_turtle_m",
+      "species": 8,
+      "name": "脱壳乌龟",
+      "sex": 1,
+      "level": 0,
+      "trait": "特性一（待设计）",
+      "other_traits": [
+        "特性二（待设计）",
+        "特性三（待设计）"
+      ],
+      "skills": [
+        0,
+        1
+      ],
+      "skill_names": [
+        "躲进壳中",
+        "旋转龟壳",
+        "技能3（待设计）",
+        "技能4（待设计）",
+        "技能5（待设计）"
+      ],
+      "ranks": [
+        5,
+        3
+      ],
+      "original_make_samples_ranks": [
+        5,
+        3
+      ],
+      "innate": [
+        45,
+        9,
+        16,
+        23,
+        30,
+        37
+      ],
+      "training": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "final": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "art_source": "assets/r04/characters/shell_turtle/idle.png"
+    },
+    {
+      "id": "crow_f",
+      "species": 9,
+      "name": "乌鸦",
+      "sex": 0,
+      "level": 0,
+      "trait": "特性一（待设计）",
+      "other_traits": [
+        "特性二（待设计）",
+        "特性三（待设计）"
+      ],
+      "skills": [
+        0,
+        1
+      ],
+      "skill_names": [
+        "交换位置",
+        "储存羽毛",
+        "技能3（待设计）",
+        "技能4（待设计）",
+        "技能5（待设计）"
+      ],
+      "ranks": [
+        5,
+        4
+      ],
+      "original_make_samples_ranks": [
+        5,
+        4
+      ],
+      "innate": [
+        39,
+        46,
+        10,
+        17,
+        24,
+        31
+      ],
+      "training": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "final": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "art_source": "assets/r04/characters/crow/idle.png"
+    },
+    {
+      "id": "crow_m",
+      "species": 9,
+      "name": "乌鸦",
+      "sex": 1,
+      "level": 0,
+      "trait": "特性一（待设计）",
+      "other_traits": [
+        "特性二（待设计）",
+        "特性三（待设计）"
+      ],
+      "skills": [
+        0,
+        1
+      ],
+      "skill_names": [
+        "交换位置",
+        "储存羽毛",
+        "技能3（待设计）",
+        "技能4（待设计）",
+        "技能5（待设计）"
+      ],
+      "ranks": [
+        1,
+        5
+      ],
+      "original_make_samples_ranks": [
+        1,
+        5
+      ],
+      "innate": [
+        15,
+        22,
+        29,
+        36,
+        43,
+        50
+      ],
+      "training": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "final": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "art_source": "assets/r04/characters/crow/idle.png"
+    }
+  ],
+  "default_mother": "bubble_fish_f",
+  "default_father": "electric_sheep_m",
+  "unknown_slots": "特性仍待设计，每种5技能池仅前2已命名；不补效果或基础/最终公式",
+  "puffer_cooldown_conflict": "沿用R05待核对项，不阻UI，本轮不作玩法选择或修改"
+}

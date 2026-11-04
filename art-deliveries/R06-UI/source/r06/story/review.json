@@ -1,0 +1,29 @@
+{
+  "page": "story",
+  "selected_direction": "D",
+  "status": "direction_refinement_not_game",
+  "title": "主线 · 档案与舞台",
+  "image": "main.png",
+  "source": "main.svg",
+  "prototype": "prototype.html",
+  "canvas": [
+    1600,
+    900
+  ],
+  "detail_images": [
+    {
+      "image": "detail.png",
+      "source": "detail.svg",
+      "title": "档案详情与返回"
+    }
+  ],
+  "limits": [
+    "纯UI交互示意，非真实战斗/真实游戏导航",
+    "不包含手机适配或A-D选择",
+    "游戏接入、设备交互与性能未验证"
+  ],
+  "navigation_message": {
+    "type": "r06-nav",
+    "page": "arena|story|storage|hatch"
+  }
+}

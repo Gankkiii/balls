@@ -1,0 +1,615 @@
+{
+  "result": "DRAFT_PHYSICAL_AUDIT_PASS",
+  "formal_png_count": 40,
+  "portraits": 10,
+  "components": [
+    {
+      "file": "assets/ui/arena_status_panel.png",
+      "source": "source/ui/components/arena_status_panel.svg",
+      "size": [
+        235,
+        606
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        0,
+        0,
+        235,
+        606
+      ],
+      "nine_slice": [
+        8,
+        8,
+        13,
+        14
+      ],
+      "sha256": "4a35f663afc17a9353dd0730ed56ed14f14ad17db24a1af612d4dd10f1f83390"
+    },
+    {
+      "file": "assets/ui/arena_control_button.png",
+      "source": "source/ui/components/arena_control_button.svg",
+      "size": [
+        59,
+        60
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        0,
+        0,
+        59,
+        60
+      ],
+      "nine_slice": [
+        8,
+        8,
+        13,
+        14
+      ],
+      "sha256": "484bb39d5e72c0a196d161fa54e6f465078be68317b738f1fb2035ac2a1e7ef8"
+    },
+    {
+      "file": "assets/ui/arena_auto_skill_slot.png",
+      "source": "source/ui/components/arena_auto_skill_slot.svg",
+      "size": [
+        69,
+        70
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        0,
+        0,
+        69,
+        70
+      ],
+      "nine_slice": [
+        8,
+        8,
+        13,
+        14
+      ],
+      "sha256": "99eb02b4e8f6ffe20ce796ed7e32b4044ce911d4ac2c8d71ad050662f6b9cd16"
+    },
+    {
+      "file": "assets/ui/arena_hp_track.png",
+      "source": "source/ui/components/arena_hp_track.svg",
+      "size": [
+        176,
+        10
+      ],
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "alpha_bbox": [
+        0,
+        0,
+        176,
+        10
+      ],
+      "nine_slice": null,
+      "sha256": "0cc1d7383fd7cb7cd7d1631fcdf5dacf8795e46091c4d0a951c57c2245afb42b"
+    },
+    {
+      "file": "assets/ui/arena_cd_overlay.png",
+      "source": "source/ui/components/arena_cd_overlay.svg",
+      "size": [
+        48,
+        34
+      ],
+      "alpha_extrema": [
+        35,
+        35
+      ],
+      "alpha_bbox": [
+        0,
+        0,
+        48,
+        34
+      ],
+      "nine_slice": null,
+      "sha256": "f99d566b1ae7cf2ffe1f659158c6a7d9bcead4216cd0d1cc053ed42e83e142ed"
+    },
+    {
+      "file": "assets/ui/arena_info_panel.png",
+      "source": "source/ui/components/arena_info_panel.svg",
+      "size": [
+        525,
+        366
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        0,
+        0,
+        525,
+        366
+      ],
+      "nine_slice": [
+        8,
+        8,
+        13,
+        14
+      ],
+      "sha256": "f065bbdcbdb69c57c7fce244b593876bc872c3e3f2dcc8ce7a475e22f3f488f3"
+    },
+    {
+      "file": "assets/ui/story_archive_panel.png",
+      "source": "source/ui/components/story_archive_panel.svg",
+      "size": [
+        424,
+        677
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        0,
+        0,
+        424,
+        677
+      ],
+      "nine_slice": [
+        10,
+        10,
+        16,
+        17
+      ],
+      "sha256": "398ea5fdc599f17b64beb14885621ba33642ce5627488871d3870883ab868f2b"
+    },
+    {
+      "file": "assets/ui/story_action_button.png",
+      "source": "source/ui/components/story_action_button.svg",
+      "size": [
+        336,
+        91
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        0,
+        0,
+        336,
+        91
+      ],
+      "nine_slice": [
+        4,
+        4,
+        6,
+        9
+      ],
+      "sha256": "381faf7eea148a7963a7617f6645d7f1a2b6bd7f3d2c4250c3665d31b9cb9533"
+    },
+    {
+      "file": "assets/ui/story_entry_selected.png",
+      "source": "source/ui/components/story_entry_selected.svg",
+      "size": [
+        295,
+        84
+      ],
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "alpha_bbox": [
+        0,
+        0,
+        295,
+        84
+      ],
+      "nine_slice": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "56216ee90e42c7574e6a940ff228a4c5fec625d374edffb9a58ac30ab5acad21"
+    },
+    {
+      "file": "assets/ui/story_entry_normal.png",
+      "source": "source/ui/components/story_entry_normal.svg",
+      "size": [
+        295,
+        84
+      ],
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "alpha_bbox": [
+        0,
+        0,
+        295,
+        84
+      ],
+      "nine_slice": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sha256": "f4437e59e51c1b0aab4bf93f01f7546035a79328ae8af6f8f8a248a6a9cf85f5"
+    },
+    {
+      "file": "assets/ui/story_search_field.png",
+      "source": "source/ui/components/story_search_field.svg",
+      "size": [
+        362,
+        64
+      ],
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "alpha_bbox": [
+        0,
+        0,
+        362,
+        64
+      ],
+      "nine_slice": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "sha256": "12b454d7d87564c292e743b7e54bab6d10c2df569dc41ab9c7325067850b5b53"
+    },
+    {
+      "file": "assets/ui/story_search_icon.png",
+      "source": "source/ui/components/story_search_icon.svg",
+      "size": [
+        35,
+        36
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        0,
+        0,
+        34,
+        35
+      ],
+      "nine_slice": null,
+      "sha256": "38aa84682a5195003b3f55bd8bd6ffa464f27eb8e8f23317d06991eeed6e897f"
+    },
+    {
+      "file": "assets/ui/storage_trait_spark.png",
+      "source": "source/ui/components/storage_trait_spark.svg",
+      "size": [
+        20,
+        24
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        0,
+        5,
+        16,
+        21
+      ],
+      "nine_slice": null,
+      "sha256": "1945b90126cf499ed9fc4890cc378dc5cf0a40ebcae46da3fefe41508d94d788"
+    }
+  ],
+  "embedded": [
+    {
+      "file": "assets/ui/embedded/arena_wood_frame.png",
+      "source": "source/r06/arena/main.svg",
+      "original_game_paths": [
+        "assets/r04/ui/environment/arena_wood_frame.png",
+        "assets/r02/environment/arena_wood_frame.png"
+      ],
+      "source_embedded_bytes_exact": true,
+      "size": [
+        720,
+        620
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "78c38e792d4f93bb8a698a55caf490982cfbb072be6045ad76b826d7dbb29023"
+    },
+    {
+      "file": "assets/ui/embedded/arena_floor.png",
+      "source": "source/r06/arena/main.svg",
+      "original_game_paths": [
+        "assets/r04/ui/environment/arena_floor.png",
+        "assets/r02/environment/arena_floor.png"
+      ],
+      "source_embedded_bytes_exact": true,
+      "size": [
+        700,
+        600
+      ],
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "sha256": "9d74c35390008ca72504ac70efaaab41f5bb4a7dea72116ae638b66c3ca05083"
+    },
+    {
+      "file": "assets/ui/embedded/idle.png",
+      "source": "source/r06/arena/main.svg",
+      "original_game_paths": [
+        "assets/r04/characters/bubble_fish/idle.png",
+        "assets/r04/characters/bubble_fish/animations/hurt/frame_03.png",
+        "assets/r04/characters/bubble_fish/animations/hurt/frame_00.png"
+      ],
+      "source_embedded_bytes_exact": true,
+      "size": [
+        96,
+        96
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "cce6d3a057426be51c262a15c40a306930fb3d9e6df46777865984f5bbcdd870"
+    },
+    {
+      "file": "assets/ui/embedded/idle_c8586c95.png",
+      "source": "source/r06/arena/main.svg",
+      "original_game_paths": [
+        "assets/r04/characters/electric_sheep/idle.png",
+        "assets/r04/characters/electric_sheep/animations/hurt/frame_03.png",
+        "assets/r04/characters/electric_sheep/animations/hurt/frame_00.png"
+      ],
+      "source_embedded_bytes_exact": true,
+      "size": [
+        96,
+        96
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "c8586c95074497a46e3ff85fcf125b12a390844c1aecc6b6a08a3de8b7a23676"
+    },
+    {
+      "file": "assets/ui/embedded/wool.png",
+      "source": "source/r06/arena/main.svg",
+      "original_game_paths": [
+        "assets/r04/characters/electric_sheep/objects/wool.png"
+      ],
+      "source_embedded_bytes_exact": true,
+      "size": [
+        96,
+        96
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "de80cb95123a00e708ba72e54ec50933609cd3bb0d40fa724432a4073c33b358"
+    },
+    {
+      "file": "assets/ui/embedded/icon_heart.png",
+      "source": "source/r06/arena/main.svg",
+      "original_game_paths": [
+        "assets/r04/ui/icon_heart.png"
+      ],
+      "source_embedded_bytes_exact": true,
+      "size": [
+        24,
+        24
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "78bf22369e00964047e2f4eaecbe51fc6286e4adf8c1d95bbb7ed74a2b922614"
+    },
+    {
+      "file": "assets/ui/embedded/icon_bubble_28.png",
+      "source": "source/r06/arena/main.svg",
+      "original_game_paths": [
+        "assets/r04/ui/icon_bubble_28.png"
+      ],
+      "source_embedded_bytes_exact": true,
+      "size": [
+        28,
+        28
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "63224ab902d211cd423c65f7a973f04d26a1540432f92fc38228902de286cd44"
+    },
+    {
+      "file": "assets/ui/embedded/icon_vacuum_28.png",
+      "source": "source/r06/arena/main.svg",
+      "original_game_paths": [
+        "assets/r04/ui/icon_vacuum_28.png"
+      ],
+      "source_embedded_bytes_exact": true,
+      "size": [
+        28,
+        28
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "e8ffa1fca0a73a0d9cefcd5dd5fc7d9ce2e45458736f221c345beb35ba304d84"
+    },
+    {
+      "file": "assets/ui/embedded/icon_eight_28.png",
+      "source": "source/r06/arena/main.svg",
+      "original_game_paths": [
+        "assets/r04/ui/icon_eight_28.png"
+      ],
+      "source_embedded_bytes_exact": true,
+      "size": [
+        28,
+        28
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "0a1bd042b63e55c145c9a741279a752f45547c4a19518e92ef7c07ed78dc180d"
+    },
+    {
+      "file": "assets/ui/embedded/icon_info.png",
+      "source": "source/r06/arena/main.svg",
+      "original_game_paths": [
+        "assets/r04/ui/icon_info.png",
+        "assets/r02/ui/png/icon_info.png"
+      ],
+      "source_embedded_bytes_exact": true,
+      "size": [
+        24,
+        24
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "a2645f92cec19aebae52ab855c6d073f83f49029bb5dda9b8e7abd4b18ef9608"
+    },
+    {
+      "file": "assets/ui/embedded/icon_bolt_28.png",
+      "source": "source/r06/arena/main.svg",
+      "original_game_paths": [
+        "assets/r04/ui/icon_bolt_28.png"
+      ],
+      "source_embedded_bytes_exact": true,
+      "size": [
+        28,
+        28
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "f8c79a6deee413c0ce5a352d526909bb3f719e062db2537b7d52436ba79808de"
+    },
+    {
+      "file": "assets/ui/embedded/icon_wall_28.png",
+      "source": "source/r06/arena/main.svg",
+      "original_game_paths": [
+        "assets/r04/ui/icon_wall_28.png"
+      ],
+      "source_embedded_bytes_exact": true,
+      "size": [
+        28,
+        28
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "53b364142160fce41d0f6a90bf3c7c13367e6904c0a08e6e4d4f4bfcfe84aac5"
+    },
+    {
+      "file": "assets/ui/embedded/icon_wool_28.png",
+      "source": "source/r06/arena/main.svg",
+      "original_game_paths": [
+        "assets/r04/ui/icon_wool_28.png"
+      ],
+      "source_embedded_bytes_exact": true,
+      "size": [
+        28,
+        28
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "f1c6f279bc717ad74b514faa621c713f60de591c1ed4c3ffdb35b1ebb777375e"
+    },
+    {
+      "file": "assets/ui/embedded/icon_pause.png",
+      "source": "source/r06/arena/main.svg",
+      "original_game_paths": [
+        "assets/r04/ui/icon_pause.png",
+        "assets/r02/ui/png/icon_pause.png"
+      ],
+      "source_embedded_bytes_exact": true,
+      "size": [
+        24,
+        24
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "dbacb0bbd98c9934fc0a90feea124230e74762e42ab74b83fd6b67efeae15fb3"
+    },
+    {
+      "file": "assets/ui/embedded/icon_replay.png",
+      "source": "source/r06/arena/main.svg",
+      "original_game_paths": [
+        "assets/r04/ui/icon_replay.png",
+        "assets/r02/ui/png/icon_replay.png"
+      ],
+      "source_embedded_bytes_exact": true,
+      "size": [
+        24,
+        24
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "f800720391c8609bac633833331ce9d18d33500e8ca9529d8d59e198aeb43bfd"
+    },
+    {
+      "file": "assets/ui/embedded/icon_new_seed.png",
+      "source": "source/r06/arena/main.svg",
+      "original_game_paths": [
+        "assets/r04/ui/icon_new_seed.png",
+        "assets/r02/ui/png/icon_new_seed.png"
+      ],
+      "source_embedded_bytes_exact": true,
+      "size": [
+        24,
+        24
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "8f4c17ca963e3fc170aa0230a9fa1eb04f8081f61035e6c51b08707d4d64ed5f"
+    },
+    {
+      "file": "assets/ui/embedded/icon_sound_on.png",
+      "source": "source/r06/arena/main.svg",
+      "original_game_paths": [
+        "assets/r04/ui/icon_sound_on.png",
+        "assets/r02/ui/png/icon_sound_on.png"
+      ],
+      "source_embedded_bytes_exact": true,
+      "size": [
+        24,
+        24
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "a08a0249856965de329500da8f4ebe476f3807b20849454542cb7f951c1688a2"
+    }
+  ],
+  "scope": "All core scope including storage-style common light top navigation confirmed. Current40PNG audited, final nav reference compositions pending. delivery_file/source are package-root paths; file/source fields are local editable-ui paths. Runtime Theme/nine-slice unverified."
+}

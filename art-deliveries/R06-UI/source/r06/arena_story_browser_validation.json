@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "browser": "system Chromium headless",
+  "checks": [
+    "arena:info",
+    "arena:left-info",
+    "arena:right-info",
+    "arena:1×",
+    "arena:2×",
+    "arena:3×",
+    "arena:pause",
+    "arena:pause",
+    "arena:sound_on",
+    "arena:sound_on",
+    "arena:replay",
+    "arena:new_seed",
+    "arena:4 parent nav messages",
+    "story:entry-a detail return",
+    "story:entry-b detail return",
+    "story:entry-c detail return",
+    "story:entry-d detail return",
+    "story:help-top",
+    "story:help-bottom",
+    "story:4 parent nav messages"
+  ],
+  "check_count": 20,
+  "javascript_errors": [],
+  "not_run": [
+    "Godot integration",
+    "real device",
+    "actual combat"
+  ]
+}

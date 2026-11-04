@@ -1,0 +1,1755 @@
+{
+  "status": "SOURCE_MEASURED_GEOMETRY_NOT_GODOT_TOUCH_QA",
+  "canvas": [
+    1600,
+    900
+  ],
+  "source": "Warehouse/Hatch final-derived browser frames; Arena/Story original R06 control geometry unchanged by header-only combination; Chromium1600x900",
+  "common_nav": "metadata/navigation.json",
+  "states": [
+    {
+      "page": "arena",
+      "state": "main_ready_sample",
+      "coordinate_space": "1600x900 content; common nav measured separately; clips exclude covered original header",
+      "controls": [
+        {
+          "id": "pause",
+          "action": null,
+          "tag": "BUTTON",
+          "text": "暂停/继续",
+          "rect": [
+            550,
+            811,
+            54,
+            54
+          ],
+          "clip_rect": [
+            550,
+            811,
+            54,
+            54
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": "1×",
+          "action": null,
+          "tag": "BUTTON",
+          "text": "1倍速",
+          "rect": [
+            614,
+            811,
+            54,
+            54
+          ],
+          "clip_rect": [
+            614,
+            811,
+            54,
+            54
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": "2×",
+          "action": null,
+          "tag": "BUTTON",
+          "text": "2倍速",
+          "rect": [
+            678,
+            811,
+            54,
+            54
+          ],
+          "clip_rect": [
+            678,
+            811,
+            54,
+            54
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": "3×",
+          "action": null,
+          "tag": "BUTTON",
+          "text": "3倍速",
+          "rect": [
+            742,
+            811,
+            54,
+            54
+          ],
+          "clip_rect": [
+            742,
+            811,
+            54,
+            54
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": "replay",
+          "action": null,
+          "tag": "BUTTON",
+          "text": "重看同局",
+          "rect": [
+            806,
+            811,
+            54,
+            54
+          ],
+          "clip_rect": [
+            806,
+            811,
+            54,
+            54
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": "new_seed",
+          "action": null,
+          "tag": "BUTTON",
+          "text": "新随机局",
+          "rect": [
+            870,
+            811,
+            54,
+            54
+          ],
+          "clip_rect": [
+            870,
+            811,
+            54,
+            54
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": "sound_on",
+          "action": null,
+          "tag": "BUTTON",
+          "text": "声音开关",
+          "rect": [
+            934,
+            811,
+            54,
+            54
+          ],
+          "clip_rect": [
+            934,
+            811,
+            54,
+            54
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": "info",
+          "action": null,
+          "tag": "BUTTON",
+          "text": "查看信息",
+          "rect": [
+            998,
+            811,
+            54,
+            54
+          ],
+          "clip_rect": [
+            998,
+            811,
+            54,
+            54
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": "left-info",
+          "action": null,
+          "tag": "BUTTON",
+          "text": "鱼信息",
+          "rect": [
+            259,
+            699,
+            40,
+            40
+          ],
+          "clip_rect": [
+            259,
+            699,
+            40,
+            40
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": "right-info",
+          "action": null,
+          "tag": "BUTTON",
+          "text": "羊信息",
+          "rect": [
+            1295,
+            699,
+            40,
+            40
+          ],
+          "clip_rect": [
+            1295,
+            699,
+            40,
+            40
+          ],
+          "displayed": true,
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "page": "story",
+      "state": "main_ready_sample",
+      "coordinate_space": "1600x900 content; common nav measured separately; clips exclude covered original header",
+      "controls": [
+        {
+          "id": "entry-a",
+          "action": null,
+          "tag": "BUTTON",
+          "text": "地点A结构条目",
+          "rect": [
+            119,
+            291,
+            295,
+            84
+          ],
+          "clip_rect": [
+            119,
+            291,
+            295,
+            84
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": "entry-b",
+          "action": null,
+          "tag": "BUTTON",
+          "text": "地点B结构条目",
+          "rect": [
+            119,
+            402,
+            295,
+            84
+          ],
+          "clip_rect": [
+            119,
+            402,
+            295,
+            84
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": "entry-c",
+          "action": null,
+          "tag": "BUTTON",
+          "text": "地点C结构条目",
+          "rect": [
+            119,
+            513,
+            295,
+            84
+          ],
+          "clip_rect": [
+            119,
+            513,
+            295,
+            84
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": "entry-d",
+          "action": null,
+          "tag": "BUTTON",
+          "text": "地点D结构条目",
+          "rect": [
+            119,
+            624,
+            295,
+            84
+          ],
+          "clip_rect": [
+            119,
+            624,
+            295,
+            84
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": "view",
+          "action": null,
+          "tag": "BUTTON",
+          "text": "查看档案",
+          "rect": [
+            1190,
+            601,
+            332,
+            84
+          ],
+          "clip_rect": [
+            1190,
+            601,
+            332,
+            84
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": "help-bottom",
+          "action": null,
+          "tag": "BUTTON",
+          "text": "说明",
+          "rect": [
+            1424,
+            817,
+            64,
+            64
+          ],
+          "clip_rect": [
+            1424,
+            817,
+            64,
+            64
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": "search",
+          "action": null,
+          "tag": "INPUT",
+          "text": "搜索档案占位条目",
+          "rect": [
+            109,
+            210,
+            302,
+            48
+          ],
+          "clip_rect": [
+            109,
+            210,
+            302,
+            48
+          ],
+          "displayed": true,
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "page": "storage",
+      "state": "main_ready_sample",
+      "coordinate_space": "1600x900 content; common nav measured separately; clips exclude covered original header",
+      "controls": [
+        {
+          "id": "prev",
+          "action": null,
+          "tag": "BUTTON",
+          "text": "上一个体",
+          "rect": [
+            1013.156,
+            114,
+            48,
+            48
+          ],
+          "clip_rect": [
+            1013.156,
+            114,
+            48,
+            48
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": "individual",
+          "action": null,
+          "tag": "SELECT",
+          "text": "选择仓库个体",
+          "rect": [
+            1071.156,
+            114,
+            360,
+            48
+          ],
+          "clip_rect": [
+            1071.156,
+            114,
+            360,
+            48
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": "next",
+          "action": null,
+          "tag": "BUTTON",
+          "text": "下一个体",
+          "rect": [
+            1441.156,
+            114,
+            48,
+            48
+          ],
+          "clip_rect": [
+            1441.156,
+            114,
+            48,
+            48
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": null,
+          "tag": "BUTTON",
+          "text": "选择炸弹母鸡 ♀ Lv.0 · 固定示例",
+          "rect": [
+            34,
+            213,
+            257.531,
+            190
+          ],
+          "clip_rect": [
+            34,
+            213,
+            257.531,
+            190
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": null,
+          "tag": "BUTTON",
+          "text": "选择炸弹母鸡 ♂ Lv.0 · 固定示例",
+          "rect": [
+            307.531,
+            213,
+            257.547,
+            190
+          ],
+          "clip_rect": [
+            307.531,
+            213,
+            257.547,
+            190
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": null,
+          "tag": "BUTTON",
+          "text": "选择泡泡鱼 ♀ Lv.0 · 固定示例",
+          "rect": [
+            581.078,
+            180.5,
+            437.828,
+            255
+          ],
+          "clip_rect": [
+            581.078,
+            180.5,
+            437.828,
+            255
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": null,
+          "tag": "BUTTON",
+          "text": "选择泡泡鱼 ♂ Lv.0 · 固定示例",
+          "rect": [
+            1034.906,
+            213,
+            257.547,
+            190
+          ],
+          "clip_rect": [
+            1034.906,
+            213,
+            257.547,
+            190
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": null,
+          "tag": "BUTTON",
+          "text": "选择触电羊 ♀ Lv.0 · 固定示例",
+          "rect": [
+            1308.453,
+            213,
+            257.531,
+            190
+          ],
+          "clip_rect": [
+            1308.453,
+            213,
+            257.531,
+            190
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": "explain",
+          "action": null,
+          "tag": "BUTTON",
+          "text": "属性说明　ⓘ",
+          "rect": [
+            758.281,
+            484,
+            116.016,
+            48
+          ],
+          "clip_rect": [
+            758.281,
+            484,
+            116.016,
+            48
+          ],
+          "displayed": true,
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "page": "hatch",
+      "state": "main_ready_sample",
+      "coordinate_space": "1600x900 content; common nav measured separately; clips exclude covered original header",
+      "controls": [
+        {
+          "id": null,
+          "action": "detail-mother",
+          "tag": "BUTTON",
+          "text": "查看详情",
+          "rect": [
+            65,
+            410,
+            189,
+            50
+          ],
+          "clip_rect": [
+            65,
+            410,
+            189,
+            50
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "pick-mother",
+          "tag": "BUTTON",
+          "text": "更换母亲",
+          "rect": [
+            264,
+            410,
+            189,
+            50
+          ],
+          "clip_rect": [
+            264,
+            410,
+            189,
+            50
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "rules",
+          "tag": "BUTTON",
+          "text": "规则说明",
+          "rect": [
+            69,
+            716.594,
+            380,
+            56
+          ],
+          "clip_rect": [
+            69,
+            716.594,
+            380,
+            56
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "tie-0",
+          "tag": "BUTTON",
+          "text": "● 吸附泡泡+3",
+          "rect": [
+            525,
+            420.625,
+            546,
+            66
+          ],
+          "clip_rect": [
+            525,
+            420.625,
+            546,
+            66
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "tie-1",
+          "tag": "BUTTON",
+          "text": "○ 八方泡泡+3",
+          "rect": [
+            525,
+            498.625,
+            546,
+            66
+          ],
+          "clip_rect": [
+            525,
+            498.625,
+            546,
+            66
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "preview",
+          "tag": "BUTTON",
+          "text": "查看后代预览",
+          "rect": [
+            525,
+            657.5,
+            267,
+            54
+          ],
+          "clip_rect": [
+            525,
+            657.5,
+            267,
+            54
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "confirm",
+          "tag": "BUTTON",
+          "text": "确认孵蛋",
+          "rect": [
+            804,
+            657.5,
+            267,
+            54
+          ],
+          "clip_rect": [
+            804,
+            657.5,
+            267,
+            54
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "detail-father",
+          "tag": "BUTTON",
+          "text": "查看详情",
+          "rect": [
+            1143,
+            410,
+            189,
+            50
+          ],
+          "clip_rect": [
+            1143,
+            410,
+            189,
+            50
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "pick-father",
+          "tag": "BUTTON",
+          "text": "更换父亲",
+          "rect": [
+            1342,
+            410,
+            189,
+            50
+          ],
+          "clip_rect": [
+            1342,
+            410,
+            189,
+            50
+          ],
+          "displayed": true,
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "page": "hatch",
+      "state": "pick-mother",
+      "coordinate_space": "1600x900 content; common nav measured separately; clips exclude covered original header",
+      "controls": [
+        {
+          "id": null,
+          "action": "candidate",
+          "tag": "BUTTON",
+          "text": "充气球 ♀精灵 Lv.0 · 技能 +1 / +1",
+          "rect": [
+            69,
+            273,
+            422,
+            82
+          ],
+          "clip_rect": [
+            69,
+            273,
+            422,
+            82
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "candidate",
+          "tag": "BUTTON",
+          "text": "炸弹母鸡 ♀精灵 Lv.0 · 技能 +2 / +3",
+          "rect": [
+            69,
+            365,
+            422,
+            82
+          ],
+          "clip_rect": [
+            69,
+            365,
+            422,
+            82
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "candidate",
+          "tag": "BUTTON",
+          "text": "泡泡鱼 ♀精灵 Lv.0 · 技能 +3 / +3",
+          "rect": [
+            69,
+            457,
+            422,
+            82
+          ],
+          "clip_rect": [
+            69,
+            457,
+            422,
+            82
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "candidate",
+          "tag": "BUTTON",
+          "text": "触电羊 ♀精灵 Lv.0 · 技能 +4 / +2",
+          "rect": [
+            69,
+            549,
+            422,
+            82
+          ],
+          "clip_rect": [
+            69,
+            549,
+            422,
+            82
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "candidate",
+          "tag": "BUTTON",
+          "text": "磁铁蟹 ♀精灵 Lv.0 · 技能 +5 / +4",
+          "rect": [
+            69,
+            641,
+            422,
+            82
+          ],
+          "clip_rect": [
+            69,
+            641,
+            422,
+            82
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "candidate",
+          "tag": "BUTTON",
+          "text": "倒霉鸭 ♀精灵 Lv.0 · 技能 +1 / +1",
+          "rect": [
+            69,
+            733,
+            422,
+            82
+          ],
+          "clip_rect": [
+            69,
+            733,
+            422,
+            6.172
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "candidate",
+          "tag": "BUTTON",
+          "text": "锻造兔 ♀精灵 Lv.0 · 技能 +2 / +3",
+          "rect": [
+            69,
+            825,
+            422,
+            82
+          ],
+          "clip_rect": [
+            69,
+            825,
+            422,
+            0
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "candidate",
+          "tag": "BUTTON",
+          "text": "仙人掌 ♀精灵 Lv.0 · 技能 +3 / +5",
+          "rect": [
+            69,
+            917,
+            422,
+            82
+          ],
+          "clip_rect": [
+            69,
+            917,
+            422,
+            0
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "candidate",
+          "tag": "BUTTON",
+          "text": "脱壳乌龟 ♀精灵 Lv.0 · 技能 +4 / +2",
+          "rect": [
+            69,
+            1009,
+            422,
+            82
+          ],
+          "clip_rect": [
+            69,
+            1009,
+            422,
+            0
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "candidate",
+          "tag": "BUTTON",
+          "text": "乌鸦 ♀精灵 Lv.0 · 技能 +5 / +4",
+          "rect": [
+            69,
+            1101,
+            422,
+            82
+          ],
+          "clip_rect": [
+            69,
+            1101,
+            422,
+            0
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "workbench",
+          "tag": "BUTTON",
+          "text": "取消 / 返回工作台",
+          "rect": [
+            69,
+            753.172,
+            430,
+            54.828
+          ],
+          "clip_rect": [
+            69,
+            753.172,
+            430,
+            54.828
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "use-parent",
+          "tag": "BUTTON",
+          "text": "使用此母亲",
+          "rect": [
+            1384,
+            667,
+            145,
+            54
+          ],
+          "clip_rect": [
+            1384,
+            667,
+            145,
+            54
+          ],
+          "displayed": true,
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "page": "hatch",
+      "state": "pick-father",
+      "coordinate_space": "1600x900 content; common nav measured separately; clips exclude covered original header",
+      "controls": [
+        {
+          "id": null,
+          "action": "candidate",
+          "tag": "BUTTON",
+          "text": "充气球 ♂精灵 Lv.0 · 技能 +2 / +2",
+          "rect": [
+            69,
+            273,
+            422,
+            82
+          ],
+          "clip_rect": [
+            69,
+            273,
+            422,
+            82
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "candidate",
+          "tag": "BUTTON",
+          "text": "炸弹母鸡 ♂精灵 Lv.0 · 技能 +3 / +4",
+          "rect": [
+            69,
+            365,
+            422,
+            82
+          ],
+          "clip_rect": [
+            69,
+            365,
+            422,
+            82
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "candidate",
+          "tag": "BUTTON",
+          "text": "泡泡鱼 ♂精灵 Lv.0 · 技能 +4 / +1",
+          "rect": [
+            69,
+            457,
+            422,
+            82
+          ],
+          "clip_rect": [
+            69,
+            457,
+            422,
+            82
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "candidate",
+          "tag": "BUTTON",
+          "text": "触电羊 ♂精灵 Lv.0 · 技能 +3 / +3",
+          "rect": [
+            69,
+            549,
+            422,
+            82
+          ],
+          "clip_rect": [
+            69,
+            549,
+            422,
+            82
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "candidate",
+          "tag": "BUTTON",
+          "text": "磁铁蟹 ♂精灵 Lv.0 · 技能 +1 / +5",
+          "rect": [
+            69,
+            641,
+            422,
+            82
+          ],
+          "clip_rect": [
+            69,
+            641,
+            422,
+            82
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "candidate",
+          "tag": "BUTTON",
+          "text": "倒霉鸭 ♂精灵 Lv.0 · 技能 +2 / +2",
+          "rect": [
+            69,
+            733,
+            422,
+            82
+          ],
+          "clip_rect": [
+            69,
+            733,
+            422,
+            6.172
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "candidate",
+          "tag": "BUTTON",
+          "text": "锻造兔 ♂精灵 Lv.0 · 技能 +3 / +4",
+          "rect": [
+            69,
+            825,
+            422,
+            82
+          ],
+          "clip_rect": [
+            69,
+            825,
+            422,
+            0
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "candidate",
+          "tag": "BUTTON",
+          "text": "仙人掌 ♂精灵 Lv.0 · 技能 +4 / +1",
+          "rect": [
+            69,
+            917,
+            422,
+            82
+          ],
+          "clip_rect": [
+            69,
+            917,
+            422,
+            0
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "candidate",
+          "tag": "BUTTON",
+          "text": "脱壳乌龟 ♂精灵 Lv.0 · 技能 +5 / +3",
+          "rect": [
+            69,
+            1009,
+            422,
+            82
+          ],
+          "clip_rect": [
+            69,
+            1009,
+            422,
+            0
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "candidate",
+          "tag": "BUTTON",
+          "text": "乌鸦 ♂精灵 Lv.0 · 技能 +1 / +5",
+          "rect": [
+            69,
+            1101,
+            422,
+            82
+          ],
+          "clip_rect": [
+            69,
+            1101,
+            422,
+            0
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "workbench",
+          "tag": "BUTTON",
+          "text": "取消 / 返回工作台",
+          "rect": [
+            69,
+            753.172,
+            430,
+            54.828
+          ],
+          "clip_rect": [
+            69,
+            753.172,
+            430,
+            54.828
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "use-parent",
+          "tag": "BUTTON",
+          "text": "使用此父亲",
+          "rect": [
+            1384,
+            667,
+            145,
+            54
+          ],
+          "clip_rect": [
+            1384,
+            667,
+            145,
+            54
+          ],
+          "displayed": true,
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "page": "hatch",
+      "state": "detail-mother",
+      "coordinate_space": "1600x900 content; common nav measured separately; clips exclude covered original header",
+      "controls": [
+        {
+          "id": null,
+          "action": "pick-mother",
+          "tag": "BUTTON",
+          "text": "更换母亲",
+          "rect": [
+            69,
+            611.125,
+            430,
+            56
+          ],
+          "clip_rect": [
+            69,
+            611.125,
+            430,
+            56
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "workbench",
+          "tag": "BUTTON",
+          "text": "返回工作台",
+          "rect": [
+            69,
+            689.125,
+            430,
+            56
+          ],
+          "clip_rect": [
+            69,
+            689.125,
+            430,
+            56
+          ],
+          "displayed": true,
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "page": "hatch",
+      "state": "detail-father",
+      "coordinate_space": "1600x900 content; common nav measured separately; clips exclude covered original header",
+      "controls": [
+        {
+          "id": null,
+          "action": "pick-father",
+          "tag": "BUTTON",
+          "text": "更换父亲",
+          "rect": [
+            69,
+            611.125,
+            430,
+            56
+          ],
+          "clip_rect": [
+            69,
+            611.125,
+            430,
+            56
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "workbench",
+          "tag": "BUTTON",
+          "text": "返回工作台",
+          "rect": [
+            69,
+            689.125,
+            430,
+            56
+          ],
+          "clip_rect": [
+            69,
+            689.125,
+            430,
+            56
+          ],
+          "displayed": true,
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "page": "hatch",
+      "state": "rules",
+      "coordinate_space": "1600x900 content; common nav measured separately; clips exclude covered original header",
+      "controls": [
+        {
+          "id": null,
+          "action": "workbench",
+          "tag": "BUTTON",
+          "text": "返回工作台",
+          "rect": [
+            69,
+            736.5,
+            723,
+            56
+          ],
+          "clip_rect": [
+            69,
+            736.5,
+            723,
+            56
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "preview",
+          "tag": "BUTTON",
+          "text": "查看后代预览",
+          "rect": [
+            808,
+            736.5,
+            723,
+            56
+          ],
+          "clip_rect": [
+            808,
+            736.5,
+            723,
+            56
+          ],
+          "displayed": true,
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "page": "hatch",
+      "state": "preview",
+      "coordinate_space": "1600x900 content; common nav measured separately; clips exclude covered original header",
+      "controls": [
+        {
+          "id": null,
+          "action": "workbench",
+          "tag": "BUTTON",
+          "text": "返回修改",
+          "rect": [
+            69,
+            725.938,
+            476.656,
+            56
+          ],
+          "clip_rect": [
+            69,
+            725.938,
+            476.656,
+            56
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "rules",
+          "tag": "BUTTON",
+          "text": "规则说明",
+          "rect": [
+            561.656,
+            725.938,
+            476.672,
+            56
+          ],
+          "clip_rect": [
+            561.656,
+            725.938,
+            476.672,
+            56
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "confirm",
+          "tag": "BUTTON",
+          "text": "继续到执行确认",
+          "rect": [
+            1054.328,
+            725.938,
+            476.672,
+            56
+          ],
+          "clip_rect": [
+            1054.328,
+            725.938,
+            476.672,
+            56
+          ],
+          "displayed": true,
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "page": "hatch",
+      "state": "confirm",
+      "coordinate_space": "1600x900 content; common nav measured separately; clips exclude covered original header",
+      "controls": [
+        {
+          "id": null,
+          "action": "workbench",
+          "tag": "BUTTON",
+          "text": "取消 / 返回修改",
+          "rect": [
+            69,
+            668.188,
+            1462,
+            56
+          ],
+          "clip_rect": [
+            69,
+            668.188,
+            1462,
+            56
+          ],
+          "displayed": true,
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "page": "hatch",
+      "state": "success_reference",
+      "coordinate_space": "1600x900 content; common nav measured separately; clips exclude covered original header",
+      "controls": [
+        {
+          "id": null,
+          "action": "detail-mother",
+          "tag": "BUTTON",
+          "text": "查看详情",
+          "rect": [
+            65,
+            410,
+            189,
+            50
+          ],
+          "clip_rect": [
+            65,
+            410,
+            189,
+            50
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "pick-mother",
+          "tag": "BUTTON",
+          "text": "更换母亲",
+          "rect": [
+            264,
+            410,
+            189,
+            50
+          ],
+          "clip_rect": [
+            264,
+            410,
+            189,
+            50
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "workbench",
+          "tag": "BUTTON",
+          "text": "返回修改亲本",
+          "rect": [
+            69,
+            682,
+            380,
+            56
+          ],
+          "clip_rect": [
+            69,
+            682,
+            380,
+            56
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "detail-father",
+          "tag": "BUTTON",
+          "text": "查看详情",
+          "rect": [
+            1143,
+            410,
+            189,
+            50
+          ],
+          "clip_rect": [
+            1143,
+            410,
+            189,
+            50
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "pick-father",
+          "tag": "BUTTON",
+          "text": "更换父亲",
+          "rect": [
+            1342,
+            410,
+            189,
+            50
+          ],
+          "clip_rect": [
+            1342,
+            410,
+            189,
+            50
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "storage-child",
+          "tag": "BUTTON",
+          "text": "到仓库查看",
+          "rect": [
+            1147,
+            654.594,
+            380,
+            56
+          ],
+          "clip_rect": [
+            1147,
+            654.594,
+            380,
+            56
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "confirm",
+          "tag": "BUTTON",
+          "text": "再次演示 → 返回确认",
+          "rect": [
+            1147,
+            722.594,
+            380,
+            56
+          ],
+          "clip_rect": [
+            1147,
+            722.594,
+            380,
+            56
+          ],
+          "displayed": true,
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "page": "hatch",
+      "state": "failure_reference",
+      "coordinate_space": "1600x900 content; common nav measured separately; clips exclude covered original header",
+      "controls": [
+        {
+          "id": null,
+          "action": "preview",
+          "tag": "BUTTON",
+          "text": "返回后代预览",
+          "rect": [
+            78,
+            557.563,
+            473.656,
+            56
+          ],
+          "clip_rect": [
+            78,
+            557.563,
+            473.656,
+            56
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "workbench",
+          "tag": "BUTTON",
+          "text": "返回修改亲本",
+          "rect": [
+            567.656,
+            557.563,
+            473.672,
+            56
+          ],
+          "clip_rect": [
+            567.656,
+            557.563,
+            473.672,
+            56
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "confirm",
+          "tag": "BUTTON",
+          "text": "再次执行确认",
+          "rect": [
+            1057.328,
+            557.563,
+            473.672,
+            56
+          ],
+          "clip_rect": [
+            1057.328,
+            557.563,
+            473.672,
+            56
+          ],
+          "displayed": true,
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "page": "hatch",
+      "state": "missing",
+      "coordinate_space": "1600x900 content; common nav measured separately; clips exclude covered original header",
+      "controls": [
+        {
+          "id": null,
+          "action": "pick-mother",
+          "tag": "BUTTON",
+          "text": "选择母亲",
+          "rect": [
+            197,
+            317,
+            124,
+            54
+          ],
+          "clip_rect": [
+            197,
+            317,
+            124,
+            54
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "rules",
+          "tag": "BUTTON",
+          "text": "规则说明",
+          "rect": [
+            69,
+            716.594,
+            380,
+            56
+          ],
+          "clip_rect": [
+            69,
+            716.594,
+            380,
+            56
+          ],
+          "displayed": true,
+          "disabled": false
+        },
+        {
+          "id": null,
+          "action": "pick-father",
+          "tag": "BUTTON",
+          "text": "选择父亲",
+          "rect": [
+            1275,
+            317,
+            124,
+            54
+          ],
+          "clip_rect": [
+            1275,
+            317,
+            124,
+            54
+          ],
+          "displayed": true,
+          "disabled": false
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "These are source-measured control boxes, not a completed Godot UI or mobile-dp specification.",
+    "Final reference hides review debug selectors and artificial result buttons. Actual confirmation execution button and real result binding must be implemented as specified in INTEGRATION.md.",
+    "Offscreen list rows have zero/partial clip_rect and require scrolling; full source rect is not the hit area outside a ScrollContainer.",
+    "Underlying child navigation excluded; always use the single confirmed top navigation owner."
+  ]
+}

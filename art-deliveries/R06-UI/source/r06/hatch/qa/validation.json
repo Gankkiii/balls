@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "viewport": [
+    1600,
+    900
+  ],
+  "state_screenshots": 12,
+  "image_files": 10,
+  "fixture_people": 20,
+  "shared_fixture_bytes_identical": true,
+  "review_paths_valid": true,
+  "non_scrollable_elements_within_viewport": true,
+  "browser_checks": 50,
+  "browser_errors": 0,
+  "core_source_sha256": {
+    "prototype.html": "daa76cf11ed8f4c35c4c81cc7f7570ae90a70a20d1160e51ff88f0297278c243",
+    "app.js": "07fa23346956e3fe1fab0d91954389f50da57370aae7df35bead165ca54eb2be",
+    "style.css": "8e913ff79d48fb1da37df70c43009afdbb8489bf1cb74d6bbe2eaa07447c4f5b",
+    "fixtures.js": "f74db78e14f8979d600b15edc66913459e259487f307bc695d3e32e6396bce6d"
+  },
+  "not_run": [
+    "Godot new UI integration",
+    "real hatch/save",
+    "device/touch QA"
+  ]
+}

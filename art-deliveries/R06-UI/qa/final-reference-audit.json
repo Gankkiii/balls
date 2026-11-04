@@ -1,0 +1,120 @@
+{
+  "status": "PASS",
+  "references": [
+    {
+      "path": "reference/r06_original/arena/main.png",
+      "sha256": "ec1d8bb3a91293da263379c2b98a5736f1ba3eb04bf671e95abf1ea4d7e73487"
+    },
+    {
+      "path": "reference/r06_original/arena/info.png",
+      "sha256": "e414ab75c966828de4edab3719658aa10e0cf8ec9a9db2cf9e61c24bc4274e5c"
+    },
+    {
+      "path": "reference/r06_original/storage/main.png",
+      "sha256": "f9c24cc9057d37e8781711be26d64af2f43a0ba98f20e649ffd1c1751ef14f05"
+    },
+    {
+      "path": "reference/r06_original/storage/info.png",
+      "sha256": "e9035aeac18a73ce028538fcfadd11d7485f219b016167c7b12a2e4268bc873b"
+    },
+    {
+      "path": "reference/r06_original/storage/individual.png",
+      "sha256": "c30443df1ec4df074dd2243ce73fa2daf19d38abe598797fa74aa18ba92eb357"
+    },
+    {
+      "path": "reference/r06_original/storage/demo_child.png",
+      "sha256": "65730f2aa5745e6a54cc36943db702cc03c4c7126a9edbe33e1f2f35fd6fa466"
+    },
+    {
+      "path": "reference/r06_original/hatch/main.png",
+      "sha256": "e052711f249653af8372efd8da3f9071ea173fc4cc35768afa56090f717dac8e"
+    },
+    {
+      "path": "reference/r06_original/hatch/screens/pick-mother.png",
+      "sha256": "edcd7863857b23b210b52f40aa3c9570da9b66dbd1e1e5de7eb9059510a57a6b"
+    },
+    {
+      "path": "reference/r06_original/hatch/screens/pick-father.png",
+      "sha256": "7649925114a696935e198337c5d749f16e44a189b2084a7dd16511dabdb5a40e"
+    },
+    {
+      "path": "reference/r06_original/hatch/screens/detail-mother.png",
+      "sha256": "3a252d68d9d3982b90a887578e39901285de09e810ab8c89f73e995719ca4fc3"
+    },
+    {
+      "path": "reference/r06_original/hatch/screens/detail-father.png",
+      "sha256": "91997de1aeecc518e45003df692f0f487c9ba250a2dd547037f8aeaef3f6fd2e"
+    },
+    {
+      "path": "reference/r06_original/hatch/screens/rules.png",
+      "sha256": "52e615d1ba5c22ea4c28b901969e43e34c1fa5ce9861c9baf37eaf4843fd29d0"
+    },
+    {
+      "path": "reference/r06_original/hatch/screens/preview.png",
+      "sha256": "e81378e9297bdeab7cc419d2397adf7e81b86c9d101a103975d1e0111dc824aa"
+    },
+    {
+      "path": "reference/r06_original/hatch/screens/confirm.png",
+      "sha256": "60a62170493ef3c6a4a745bd48d2fa0eb31cd6ff5c66dabe010d94d86acc05d7"
+    },
+    {
+      "path": "reference/r06_original/hatch/screens/success.png",
+      "sha256": "ed9a144585091394f06be1e78decf0e529d433132806e9aa7626d5a1ca35a68a"
+    },
+    {
+      "path": "reference/r06_original/hatch/screens/failure.png",
+      "sha256": "015c5f60fb2dc2e3d320f5641657db7c22ba309910a467dda4794f2679dd125b"
+    },
+    {
+      "path": "reference/r06_original/hatch/screens/missing.png",
+      "sha256": "12f74704e68ff25c441d4797d9c1840c274291f1e328d629e8e052c34ce07cf6"
+    },
+    {
+      "path": "reference/r06_original/hatch/screens/non-tie.png",
+      "sha256": "8db1a87753fb59313ab90fcaff5458fa81561db8bbebb0c9074596371e518bf2"
+    },
+    {
+      "path": "reference/r06_original/story/main.png",
+      "sha256": "494864fd4c0cb1a64e15d1ab1261a10300df9145948009af6015ad1cca182346"
+    },
+    {
+      "path": "reference/r06_original/story/detail.png",
+      "sha256": "ec0c4888ab70f667c7a372169f3361b2087d53edcdc402e4dd12eb18b817d8fc"
+    }
+  ],
+  "navigation": [
+    {
+      "path": "reference/final/arena.png",
+      "sha256": "197b182d8dabea23976273505722296cfea719a9219951c9671ee5e61f656649",
+      "size": [
+        1600,
+        900
+      ]
+    },
+    {
+      "path": "reference/final/storage.png",
+      "sha256": "f6882184911c90946a0eefc62f5b7f89c5975ad89714ca632645e5e6b1ab6c03",
+      "size": [
+        1600,
+        900
+      ]
+    },
+    {
+      "path": "reference/final/hatch.png",
+      "sha256": "1c18bfc86d992e03b2073a332ffa8b6e658f8706f9929cf7a5292f0255447edc",
+      "size": [
+        1600,
+        900
+      ]
+    },
+    {
+      "path": "reference/final/story.png",
+      "sha256": "f879579c3ed90b31f3129c9a60924c7153393c0873628727ed36ac803eac23bc",
+      "size": [
+        1600,
+        900
+      ]
+    }
+  ],
+  "resource_log": "Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\n\nR06_RESOURCE_CHECK pngs=52 vectors=13 font_regular_ok=true font_bold_ok=true failures=[]"
+}

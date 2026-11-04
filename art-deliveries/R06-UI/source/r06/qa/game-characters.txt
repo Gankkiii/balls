@@ -1,0 +1,7 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PAGE CASES checks=331
+HATCH CASES checks=186
+GAMEPLAY CASES checks=96
+V04 matrix assertions=5428
+ROLE RESULT checks=11845 failures=0 outcomes={ "PUFFER WINS": 17, "CHICKEN WINS": 2, "TIME LIMIT · DRAW": 1 }

@@ -1,0 +1,114 @@
+{
+  "result": "PASS",
+  "utc": "2026-11-04T06:10:23.230960+00:00",
+  "scope": "Arena/Story button destinations, shell query/hash, complete20 state media, same-origin frames, basic viewing; not game/mobile adaptation",
+  "arena_controls_and_three_info_entries": true,
+  "story_four_entries_detail_close_return": true,
+  "story_search_empty_clear_and_help": true,
+  "both_pages_all4_navigation": true,
+  "frames": [
+    {
+      "id": "arena",
+      "src": "http://127.0.0.1:8033/r06/arena/prototype.html"
+    },
+    {
+      "id": "story",
+      "src": "http://127.0.0.1:8033/r06/story/prototype.html"
+    },
+    {
+      "id": "storage",
+      "src": "http://127.0.0.1:8033/r06/storage/source.html"
+    },
+    {
+      "id": "hatch",
+      "src": "http://127.0.0.1:8033/r06/hatch/prototype.html"
+    }
+  ],
+  "state_media": [
+    "r06/arena/main.png",
+    "r06/arena/info.png",
+    "r06/storage/main.png",
+    "r06/storage/info.png",
+    "r06/storage/individual.png",
+    "r06/storage/demo_child.png",
+    "r06/hatch/main.png",
+    "r06/hatch/screens/pick-mother.png",
+    "r06/hatch/screens/pick-father.png",
+    "r06/hatch/screens/detail-mother.png",
+    "r06/hatch/screens/detail-father.png",
+    "r06/hatch/screens/rules.png",
+    "r06/hatch/screens/preview.png",
+    "r06/hatch/screens/confirm.png",
+    "r06/hatch/screens/success.png",
+    "r06/hatch/screens/failure.png",
+    "r06/hatch/screens/missing.png",
+    "r06/hatch/screens/non-tie.png",
+    "r06/story/main.png",
+    "r06/story/detail.png"
+  ],
+  "no_new_phone_media": true,
+  "original_image_1600": true,
+  "native_workspace": {
+    "width": 1254,
+    "scroll": 1600
+  },
+  "fit_workspace": {
+    "width": 1254,
+    "height": 705,
+    "scrollWidth": 1254,
+    "scrollHeight": 705
+  },
+  "query_hash_reload_priority": true,
+  "reload_resets_memory_child": true,
+  "static_targets": [
+    "http://127.0.0.1:8033/?page=story&size=native",
+    "http://127.0.0.1:8033/r06/DECISIONS.md",
+    "http://127.0.0.1:8033/r06/FACTS.md",
+    "http://127.0.0.1:8033/r06/PUBLIC_SCOPE.md",
+    "http://127.0.0.1:8033/r06/app.js",
+    "http://127.0.0.1:8033/r06/arena/info.png",
+    "http://127.0.0.1:8033/r06/arena/main.png",
+    "http://127.0.0.1:8033/r06/arena/prototype.html",
+    "http://127.0.0.1:8033/r06/arena/review.json",
+    "http://127.0.0.1:8033/r06/fixtures.json",
+    "http://127.0.0.1:8033/r06/hatch/main.png",
+    "http://127.0.0.1:8033/r06/hatch/prototype.html",
+    "http://127.0.0.1:8033/r06/hatch/review.json",
+    "http://127.0.0.1:8033/r06/hatch/screens/confirm.png",
+    "http://127.0.0.1:8033/r06/hatch/screens/detail-father.png",
+    "http://127.0.0.1:8033/r06/hatch/screens/detail-mother.png",
+    "http://127.0.0.1:8033/r06/hatch/screens/failure.png",
+    "http://127.0.0.1:8033/r06/hatch/screens/missing.png",
+    "http://127.0.0.1:8033/r06/hatch/screens/non-tie.png",
+    "http://127.0.0.1:8033/r06/hatch/screens/pick-father.png",
+    "http://127.0.0.1:8033/r06/hatch/screens/pick-mother.png",
+    "http://127.0.0.1:8033/r06/hatch/screens/preview.png",
+    "http://127.0.0.1:8033/r06/hatch/screens/rules.png",
+    "http://127.0.0.1:8033/r06/hatch/screens/success.png",
+    "http://127.0.0.1:8033/r06/qa/REPORT.md",
+    "http://127.0.0.1:8033/r06/storage/demo_child.png",
+    "http://127.0.0.1:8033/r06/storage/individual.png",
+    "http://127.0.0.1:8033/r06/storage/info.png",
+    "http://127.0.0.1:8033/r06/storage/main.png",
+    "http://127.0.0.1:8033/r06/storage/review.json",
+    "http://127.0.0.1:8033/r06/storage/source.html",
+    "http://127.0.0.1:8033/r06/story/detail.png",
+    "http://127.0.0.1:8033/r06/story/main.png",
+    "http://127.0.0.1:8033/r06/story/prototype.html",
+    "http://127.0.0.1:8033/r06/story/review.json",
+    "http://127.0.0.1:8033/r06/style.css"
+  ],
+  "javascript_errors": [],
+  "http_errors": [],
+  "mutating_network_requests": [],
+  "hashes": {
+    "index.html": "5ba4d27054707e3e2611cbab6587666b9a4f4df013e560525df3eac73806dbb7",
+    "r06/app.js": "5d6156df21406b2209ebd10dd714216af853013af4701d60f439c11571926710",
+    "r06/style.css": "d25b3da1060faa18d27029ef200a09d15c11ad03f1915a72423cd792eff13c11",
+    "r06/review-data.json": "e27ca2e8b2d683c239c0b3a162db43f6245f65da062e8d1fd734de61aab37da2",
+    "r06/arena/prototype.html": "6135d0b077f46f6cb7e6face5d1333f449a767c3a8c24efc7707c879696da8e8",
+    "r06/story/prototype.html": "b98395f7c6cbe098f16725afdd2a57162b7eba338f6f15466833890b44dc49e1"
+  },
+  "game_binding": "NOT_RUN",
+  "real_device": "NOT_RUN"
+}

@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "mechanical_export_count": 14,
+  "source_only_reproduction_exact_files": 29,
+  "source_only_reproduction_dir": "/tmp/r07-ui14-source-only-mrh5at3d/ui",
+  "source_method": "original SVG node selection or original fallback glyph-outline path; no screenshot crops",
+  "game_modification": false,
+  "godot_import": "NOT RUN",
+  "real_device": "NOT RUN",
+  "theme_runtime": "NOT RUN",
+  "original13_png_svg_sha_unchanged": true,
+  "additional_symbol": "U+2723 storage second skill glyph, original25px DejaVu fallback"
+}

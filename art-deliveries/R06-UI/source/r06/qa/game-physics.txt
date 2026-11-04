@@ -1,0 +1,49 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+BEGIN T01 Scene composition
+PASS T01 assertions=4
+BEGIN T02 Legal initialization across 100 seeds
+PASS T02 assertions=600
+BEGIN T03 Seed reproducibility and speed limits
+PASS T03 assertions=301
+BEGIN T04 Register and remove
+PASS T04 assertions=4
+BEGIN T05 Uniform motion
+PASS T05 assertions=2
+BEGIN T06 Wall reflection
+PASS T06 assertions=7
+BEGIN T07 Wall reflection
+PASS T07 assertions=7
+BEGIN T08 Wall reflection
+PASS T08 assertions=7
+BEGIN T09 Wall reflection
+PASS T09 assertions=7
+BEGIN T10 Corner
+PASS T10 assertions=7
+BEGIN T11 Head-on collision
+PASS T11 assertions=1
+BEGIN T12 Oblique contact, energy and momentum
+PASS T12 assertions=3
+BEGIN T13 Separating contact
+PASS T13 assertions=1
+BEGIN T14 Near miss
+PASS T14 assertions=2
+BEGIN T15 Initial pause
+PASS T15 assertions=2
+BEGIN T16 Pause and resume
+PASS T16 assertions=4
+BEGIN T17 1x/2x/3x and 10/30/60/144fps equivalence
+PASS T17 assertions=25
+BEGIN T18 Repeated real button signals
+PASS T18 assertions=3
+BEGIN T19 App notifications and stall clamp
+PASS T19 assertions=4
+BEGIN T20 High speed and multiple impacts per step
+PASS T20 assertions=1202
+BEGIN T21 Small initial overlap, approaching and separating
+PASS T21 assertions=14
+BEGIN T22 20 seeds, ten simulated minutes each
+PASS T22 assertions=72040
+MANUAL T23 NOT_RUN desktop/mobile visual layout and touch
+MANUAL T24 NOT_RUN Android device install and lifecycle
+RESULT automated_cases=22 passed=22 failed=0 manual_not_run=2 checks=74247 failures=0 worst_relative_energy_error=0.000000834
