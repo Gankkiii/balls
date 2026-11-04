@@ -95,6 +95,9 @@ func _ready() -> void:
 	add_child(info_button)
 	set_rate(0)
 	refresh_hud()
+	var pages = load("res://scripts/game_pages.gd").new()
+	pages.game = self
+	add_child(pages)
 
 func restart_battle(same_seed: bool = false) -> void:
 	# A new arena discards all fighter, egg, cooldown and result state.
