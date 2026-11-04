@@ -7,6 +7,8 @@ const TRAITS := ["特性一（待设计）", "特性二（待设计）", "特性
 const SAVE_PATH := "user://balls_hatchlings_v1.jsonl"
 const STATS := ["生命", "攻击", "防御", "速度", "重量", "大小"]
 var game: Control
+# Defaults to the real save; tests may supply an isolated path before the node enters the tree.
+var save_path: String = SAVE_PATH
 var page := 0
 var samples: Array[Dictionary] = []
 var selected := 0
@@ -285,10 +287,18 @@ func hatch_creature() -> void:
 	refresh_breeding_preview()
 
 func append_hatchling(child: Dictionary) -> bool:
-	var mode := FileAccess.READ_WRITE if FileAccess.file_exists(SAVE_PATH) else FileAccess.WRITE
-	var file := FileAccess.open(SAVE_PATH, mode)
+	var mode := FileAccess.READ_WRITE if FileAccess.file_exists(save_path) else FileAccess.WRITE
+	var file := FileAccess.open(save_path, mode)
 	if file == null: return false
-	file.seek_end()
+	# Keep a previous complete or interrupted last line separate from the new one.
+	# Preserve existing bytes; never truncate a player's save during recovery.
+	if file.get_length() > 0:
+		file.seek(file.get_length() - 1)
+		var last_byte := file.get_8()
+		file.seek_end()
+		if last_byte != 10: file.store_string("\n")
+	else:
+		file.seek_end()
 	file.store_line(JSON.stringify(child))
 	file.flush()
 	var ok := file.get_error() == OK
@@ -296,13 +306,15 @@ func append_hatchling(child: Dictionary) -> bool:
 	return ok
 
 func load_hatchlings() -> void:
-	if not FileAccess.file_exists(SAVE_PATH): return
-	var file := FileAccess.open(SAVE_PATH, FileAccess.READ)
+	if not FileAccess.file_exists(save_path): return
+	var file := FileAccess.open(save_path, FileAccess.READ)
 	if file == null: return
 	while not file.eof_reached():
 		var line := file.get_line()
 		if line.is_empty(): continue
-		var value: Variant = JSON.parse_string(line)
+		var parsed := JSON.new()
+		if parsed.parse(line) != OK: continue
+		var value: Variant = parsed.data
 		if valid_hatchling(value):
 			for key in ["species", "sex", "level"]: value[key] = int(value[key])
 			if value.has("number"): value.number = int(value.number)
@@ -311,23 +323,32 @@ func load_hatchlings() -> void:
 			samples.append(value)
 	file.close()
 
+func whole_number(value: Variant) -> bool:
+	if not (value is int or value is float): return false
+	var n := float(value)
+	return is_finite(n) and n == floor(n)
+
 func valid_hatchling(value: Variant) -> bool:
 	if not value is Dictionary: return false
 	for key in ["species", "sex", "level", "trait", "skills", "ranks", "innate", "training"]:
 		if not value.has(key): return false
-	if not (value.species is int or value.species is float) or not (value.sex is int or value.sex is float): return false
+	if not whole_number(value.species) or not whole_number(value.sex) or not whole_number(value.level): return false
 	if int(value.species) < 0 or int(value.species) >= NAMES.size() or int(value.sex) not in [0, 1]: return false
+	if int(value.level) < 0 or int(value.level) > 100: return false
+	if value.has("number") and (not whole_number(value.number) or int(value.number) < 1): return false
 	if not value.trait is String: return false
 	for key in ["skills", "ranks", "innate", "training"]:
 		if not value[key] is Array: return false
 	if value.skills.size() != 2 or value.ranks.size() != 2 or value.innate.size() != 6 or value.training.size() != 6: return false
 	for slot in value.skills:
-		if not (slot is int or slot is float) or int(slot) < 0 or int(slot) >= 5: return false
+		if not whole_number(slot) or int(slot) < 0 or int(slot) >= 5: return false
 	if value.skills[0] == value.skills[1]: return false
 	for rank in value.ranks:
-		if not (rank is int or rank is float) or int(rank) < 1 or int(rank) > 10: return false
+		if not whole_number(rank) or int(rank) < 1 or int(rank) > 10: return false
 	for stat in value.innate:
-		if not (stat is int or stat is float) or int(stat) < 1 or int(stat) > 50: return false
+		if not whole_number(stat) or int(stat) < 1 or int(stat) > 50: return false
+	var training_total := 0
 	for stat in value.training:
-		if not (stat is int or stat is float) or int(stat) < 0 or int(stat) > 100: return false
-	return true
+		if not whole_number(stat) or int(stat) < 0 or int(stat) > 100: return false
+		training_total += int(stat)
+	return training_total <= 200

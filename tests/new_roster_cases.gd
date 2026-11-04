@@ -15,6 +15,10 @@ func snapshot(a: BattleArena) -> Array:
 		result.append_array([f.title,f.position,f.velocity,f.health,f.cd_one,f.cd_two,f.action,f.action_left,f.rng.state,f.stored_velocity])
 		if f is Puffer:
 			result.append_array([f.gas,f.immune_left,f.impact_cooldown,f.burst_base_speed])
+			var independent_cooldowns: Array = []
+			for target in a.balls:
+				if f.impact_cooldowns.has(target): independent_cooldowns.append([a.balls.find(target), f.impact_cooldowns[target]])
+			result.append(independent_cooldowns)
 		elif f is Chicken:
 			result.append_array([f.egg_timer,f.turn_timer,f.run_base_speed])
 		elif f is BubbleFish:
@@ -203,6 +207,7 @@ func run(runner) -> void:
 			var reference: Array = []
 			for speed in [1,2,3]:
 				var controller = load("res://scenes/main.tscn").instantiate()
+				controller.page_save_path_override = "user://readonly_test_%d_%d.jsonl" % [OS.get_process_id(), Time.get_ticks_usec()]
 				host.root.add_child(controller)
 				controller.set_process(false)
 				controller.arena.free()
@@ -230,6 +235,7 @@ func run(runner) -> void:
 				controller.free()
 
 	var main = load("res://scenes/main.tscn").instantiate()
+	main.page_save_path_override = "user://readonly_test_%d_%d.jsonl" % [OS.get_process_id(), Time.get_ticks_usec()]
 	host.root.add_child(main)
 	main.set_process(false)
 	main.match_seed = 12345

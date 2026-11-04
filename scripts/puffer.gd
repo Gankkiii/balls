@@ -7,7 +7,10 @@ const IMMUNE_DURATION := 2.5
 const HIT_DAMAGE := 36.0
 var gas := 0.0
 var immune_left := 0.0
+# Per-target cooldowns; the scalar reports the largest remaining cooldown for
+# existing diagnostics but is not used to decide whether a target can be hit.
 var impact_cooldown := 0.0
+var impact_cooldowns: Dictionary = {}
 var burst_base_speed := 180.0
 
 func _init() -> void:
@@ -18,7 +21,17 @@ func _init() -> void:
 func advance(dt: float) -> void:
 	super.advance(dt)
 	immune_left = maxf(0, immune_left - dt)
-	impact_cooldown = maxf(0, impact_cooldown - dt)
+	impact_cooldown = 0.0
+	for target in impact_cooldowns.keys():
+		if not is_instance_valid(target):
+			impact_cooldowns.erase(target)
+			continue
+		var remaining: float = maxf(0.0, float(impact_cooldowns[target]) - dt)
+		if remaining <= 0.0:
+			impact_cooldowns.erase(target)
+		else:
+			impact_cooldowns[target] = remaining
+			impact_cooldown = maxf(impact_cooldown, remaining)
 	if action == "burst":
 		gas = maxf(0, gas - DEFLATE_RATE * dt)
 		if gas <= 0:
@@ -64,9 +77,10 @@ func hit(damage: float, self_blast: bool = false) -> void:
 	queue_redraw()
 
 func _on_contact(other: Ball) -> void:
-	if action == "burst" and impact_cooldown <= 0 and other is Fighter and (not world is BattleArena or world.is_enemy_body(self,other)):
+	if action == "burst" and other is Fighter and not impact_cooldowns.has(other) and (not world is BattleArena or world.is_enemy_body(self,other)):
 		other.hit(HIT_DAMAGE)
 		if world is BattleArena: world.present("puffer_contact")
+		impact_cooldowns[other] = 0.35
 		impact_cooldown = 0.35
 
 func skill_names() -> Array[String]:

@@ -17,6 +17,11 @@ func snapshot(a: BattleArena) -> Array:
 			var value = f.get(prop)
 			if value != null:
 				data.append(value.duplicate() if value is Array else value)
+		if f is Puffer:
+			var target_cooldowns: Array = []
+			for body in a.balls:
+				if f.impact_cooldowns.has(body): target_cooldowns.append([a.balls.find(body), f.impact_cooldowns[body]])
+			data.append(target_cooldowns)
 		if f is UnluckyDuck:
 			data.append(a.heroes.find(f.cloud_holder))
 	for b in a.bubbles:

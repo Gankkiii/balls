@@ -49,6 +49,7 @@ func make_arena() -> Arena:
 
 func make_main():
 	var main = load("res://scenes/main.tscn").instantiate()
+	main.page_save_path_override = "user://readonly_test_%d_%d.jsonl" % [OS.get_process_id(), Time.get_ticks_usec()]
 	root.add_child(main)
 	main.set_process(false)
 	reset_main(main)

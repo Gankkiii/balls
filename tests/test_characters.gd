@@ -21,6 +21,10 @@ func snapshot(a: BattleArena) -> Array:
 		data.append_array([f.position, f.velocity, f.health, f.cd_one, f.cd_two, f.action, f.action_left, f.stored_velocity, f.rng.state])
 		if f is Puffer:
 			data.append_array([f.gas, f.immune_left, f.impact_cooldown, f.burst_base_speed, f.visual_radius()])
+			var independent_cooldowns: Array = []
+			for target in a.balls:
+				if f.impact_cooldowns.has(target): independent_cooldowns.append([a.balls.find(target), f.impact_cooldowns[target]])
+			data.append(independent_cooldowns)
 		else:
 			data.append_array([f.egg_timer, f.turn_timer, f.run_base_speed])
 	for egg in a.eggs:
@@ -156,6 +160,7 @@ func run() -> void:
 	var reference: Array = []
 	for shown_rate in [1, 2, 3]:
 		var main = load("res://scenes/main.tscn").instantiate()
+		main.page_save_path_override = "user://readonly_test_%d_%d.jsonl" % [OS.get_process_id(), Time.get_ticks_usec()]
 		root.add_child(main)
 		main.set_process(false)
 		main.arena.free()
@@ -193,6 +198,8 @@ func run() -> void:
 		check(main.arena.simulation_time > 0, "C42 restarted match advances")
 		main.free()
 	load("res://tests/page_cases.gd").new().run(self)
+	load("res://tests/hatching_cases.gd").new().run(self)
+	load("res://tests/gameplay_cases.gd").new().run(self)
 	await extended_checks()
 	await load("res://tests/new_roster_cases.gd").new().run(self)
 	load("res://tests/hud_physics_cases.gd").new().run(self)
@@ -215,6 +222,7 @@ func run() -> void:
 
 func new_main():
 	var main = load("res://scenes/main.tscn").instantiate()
+	main.page_save_path_override = "user://readonly_test_%d_%d.jsonl" % [OS.get_process_id(), Time.get_ticks_usec()]
 	root.add_child(main)
 	main.set_process(false)
 	main.arena.free()

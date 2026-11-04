@@ -16,6 +16,8 @@ var active_sounds: Array[AudioStreamPlayer] = []
 var last_cue_time := {}
 var sound_button: Button
 var info_button: Button
+# Used to isolate saves in automated tests; blank uses the normal game save.
+var page_save_path_override := ""
 
 func _ready() -> void:
 	var bg := ColorRect.new()
@@ -97,6 +99,7 @@ func _ready() -> void:
 	refresh_hud()
 	var pages = load("res://scripts/game_pages.gd").new()
 	pages.game = self
+	if not page_save_path_override.is_empty(): pages.save_path = page_save_path_override
 	add_child(pages)
 
 func restart_battle(same_seed: bool = false) -> void:
