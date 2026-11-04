@@ -16,7 +16,6 @@ var active_sounds: Array[AudioStreamPlayer] = []
 var last_cue_time := {}
 var sound_button: Button
 var info_button: Button
-var return_button: Button
 
 func _ready() -> void:
 	var bg := ColorRect.new()
@@ -94,12 +93,6 @@ func _ready() -> void:
 	info_button.expand_icon=true
 	info_button.pressed.connect(toggle_info)
 	add_child(info_button)
-	return_button=Button.new()
-	return_button.position=Vector2(896,711); return_button.size=Vector2(48,48)
-	return_button.icon=load("res://assets/r04/ui/icon_roster.png")
-	return_button.expand_icon=true
-	return_button.pressed.connect(return_showcase)
-	add_child(return_button)
 	set_rate(0)
 	refresh_hud()
 
@@ -252,10 +245,6 @@ func toggle_info() -> void:
 
 func toggle_pause() -> void:
 	set_rate(selected_rate if rate==0 else 0)
-
-func return_showcase() -> void:
-	stop_sounds()
-	get_tree().change_scene_to_file("res://scenes/showcase.tscn")
 
 func _sound_finished(player: AudioStreamPlayer) -> void:
 	active_sounds.erase(player)
