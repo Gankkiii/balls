@@ -28,6 +28,8 @@ jobs:
           grep -q 'failed=0.*manual_not_run=2.*failures=0' test-results.txt
           Godot_v4.6.3-stable_linux.x86_64 --headless --script tests/test_characters.gd | tee character-test-results.txt
           grep -q 'ROLE RESULT.*failures=0' character-test-results.txt
+          Godot_v4.6.3-stable_linux.x86_64 --headless --script tests/independent_gameplay_cases.gd | tee independent-gameplay-results.txt
+          grep -q 'INDEPENDENT RESULT cases=25 passed=25 failed=0.*failures=0' independent-gameplay-results.txt
       - name: Configure debug signing and Android export
         shell: bash
         run: |
@@ -55,4 +57,5 @@ jobs:
             build/SHA256SUMS.txt
             test-results.txt
             character-test-results.txt
+            independent-gameplay-results.txt
           retention-days: 14

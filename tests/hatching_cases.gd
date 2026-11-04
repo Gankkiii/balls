@@ -65,9 +65,14 @@ func run(runner) -> void:
 	var mother: Dictionary = p.samples[0].duplicate(true)
 	var father: Dictionary = p.samples[3].duplicate(true)
 	p.switch_page(3)
-	var hatch = find_button(p.detail, "孵蛋")
+	var hatch = find_button(p.detail, "确认孵蛋")
 	ck(hatch != null, "real hatch button exists")
 	if hatch != null: hatch.pressed.emit()
+	var confirmation = null
+	for node in p.root.get_children():
+		if node is ConfirmationDialog and not node.is_queued_for_deletion(): confirmation = node
+	ck(confirmation != null and p.samples.size() == 20, "confirm screen opens before actual hatch")
+	if confirmation != null: confirmation.confirmed.emit()
 	ck(p.samples.size() == 21 and p.selected == 20, "button adds and selects exactly one child")
 	if p.samples.size() != 21:
 		game.free(); return

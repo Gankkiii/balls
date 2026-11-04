@@ -87,3 +87,7 @@ godot --headless --export-debug Android build/balls-v0.3.apk
 GitHub Actions为**仅手动触发**。在Actions中运行`Test and build Android APK`，成功后下载`smooth-arena-android-apk`产物，解压得到APK。产物保留14天。工作流每次生成临时调试签名，因此不同次构建可能无法覆盖安装旧包，正式发行前应配置稳定签名；卸载旧包会清除本地数据。
 
 当前状态和实际检查见TEST_RESULTS.md；构建和验签成功不代表已在真实手机上测试。
+
+### R06 界面接入
+
+四页采用统一浅色顶部导航；竞技场展示真实战斗，仓库展示真实个体数据及待定项，孵蛋使用真实随机和本地存档，主线为占位。亲本需确认后才替换，孵蛋需再次确认。未设计的技能、特性、基础和最终属性不会伪造。四个角色缺少专属技能图标，暂以数字占位。UI 资源来自 R06 美术交付，中文字体为 Noto Sans CJK SC，许可见 `assets/r06/fonts/`。尚未开展 Android 真机、手机布局与触摸验收。

@@ -1,6 +1,6 @@
 extends Control
 ## Presentation only. Reads authoritative combat state, never changes simulation.
-const ORIGIN := Vector2(200,90)
+const ORIGIN := Vector2(450,180)
 const ROOT := "res://assets/r04/"
 const OLD := "res://assets/r02/"
 var game: Control
@@ -17,7 +17,7 @@ var last_position := {}
 func _ready() -> void:
 	mouse_filter=Control.MOUSE_FILTER_IGNORE
 	texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
-	font=load("res://assets/arena-ui.otf")
+	font=load("res://assets/r06/fonts/regular.otf")
 
 func reset() -> void:
 	previous_hp.clear()
@@ -86,9 +86,9 @@ func _draw() -> void:
 	if not is_instance_valid(game) or not is_instance_valid(game.arena): return
 	var arena: BattleArena=game.arena
 	if arena.heroes.size()!=2: return
-	img(ROOT+"ui/environment/screen_surround.png",Rect2(0,0,1100,780))
-	img(ROOT+"ui/environment/arena_wood_frame.png",Rect2(190,80,720,620))
-	img(ROOT+"ui/environment/arena_floor.png",Rect2(200,90,700,600))
+	draw_rect(Rect2(0,0,1600,900),Color("e8dec8"))
+	img(ROOT+"ui/environment/arena_wood_frame.png",Rect2(440,170,720,620))
+	img(ROOT+"ui/environment/arena_floor.png",Rect2(450,180,700,600))
 	for egg in arena.eggs:
 		if egg.exploded:
 			draw_circle(ORIGIN+egg.position,egg.blast_radius,Color(1,0.55,0.22,maxf(0.0,egg.blast_left)*1.2))
@@ -137,24 +137,16 @@ func _draw() -> void:
 			for rod in actor.rods: centered(OLD+"characters/props/lightning_rod.png",ORIGIN+rod,0.75,Vector2(48,82))
 			if actor.cloud_holder:
 				var cloud: Vector2=ORIGIN+actor.cloud_holder.position+Vector2(0,-45)
-				cloud.x=clampf(cloud.x,238,862); cloud.y=maxf(110,cloud.y)
+				cloud.x=clampf(cloud.x,488,1112); cloud.y=maxf(200,cloud.y)
 				var t:=tex(OLD+"vfx/cloud_idle_strip.png")
 				if t: draw_texture_rect_region(t,Rect2(cloud-Vector2(64,68),Vector2(128,80)),Rect2((int(arena.simulation_time/0.16)%6)*128,0,128,80))
 				label("%.1f"%actor.storm_left,cloud+Vector2(-15,-20),16)
 			if actor.lightning_flash>0: draw_line(ORIGIN+actor.strike_position-Vector2(0,90),ORIGIN+actor.strike_position,Color("efc65b"),5)
 	for actor in arena.heroes:
 		draw_actor(actor,arena.simulation_time)
-	img(ROOT+"ui/control_strip.png",Rect2(480,706,600,58))
+	
 	for i in 2: draw_panel(arena.heroes[i],i)
-	if arena.finished: label(arena.result,Vector2(210,741),18)
-	if info_open:
-		draw_rect(Rect2(280,210,540,280),Color("f7ebcd"))
-		draw_rect(Rect2(280,210,540,280),Color("243746"),false,3)
-		label("种子 %d   时间 %.1f 秒"%[game.match_seed,arena.simulation_time],Vector2(305,255),20)
-		for i in 2:
-			var a:=arena.heroes[i]
-			var names:=a.skill_names()
-			label("%s   %s / %s"%[a.title,names[0],names[1]],Vector2(305,305+i*55),16)
+	if arena.finished: label(arena.result,Vector2(450,868),18)
 
 func draw_actor(actor: Fighter,time: float) -> void:
 	if actor is ShellTurtle and actor.action=="hidden": return
@@ -203,28 +195,28 @@ func draw_actor(actor: Fighter,time: float) -> void:
 	centered(path,at,scale_value,pivot,flip)
 
 func draw_panel(actor: Fighter,index: int) -> void:
-	var x:=10 if index==0 else 930
+	var x:=165 if index==0 else 1200
 	var id:=actor_id(actor)
-	img(ROOT+"ui/status_panel.png",Rect2(x,90,160,600))
+	img("res://assets/r06/ui/arena_status_panel.png",Rect2(x,180,235,606))
 	var image_path: String=(OLD+"characters/"+id+"/default.png") if actor is UnluckyDuck or actor is ForgeRabbit else (ROOT+"characters/"+id+"/idle.png")
-	img(image_path,Rect2(x+56,110,48,48))
-	img(ROOT+"ui/icon_heart_display20.png",Rect2(x+14,195,20,20))
-	label("%d"%ceili(actor.health),Vector2(x+42,212),20)
-	img(ROOT+"ui/hp_track.png",Rect2(x+14,226,132,9))
-	draw_rect(Rect2(x+16,228,128*clampf(actor.health/actor.max_health,0,1),5),Color("efc65b") if index==0 else Color("b89acf"))
+	img(image_path,Rect2(x+70,208,96,96))
+	img(ROOT+"ui/icon_heart_display20.png",Rect2(x+26,330,24,24))
+	label("%d"%ceili(actor.health),Vector2(x+60,352),20)
+	img("res://assets/r06/ui/arena_hp_track.png",Rect2(x+26,365,176,10))
+	draw_rect(Rect2(x+28,367,172*clampf(actor.health/actor.max_health,0,1),6),Color("efc65b") if index==0 else Color("b89acf"))
 	var icon_pairs: Dictionary={"bubble_fish":["icon_vacuum_28.png","icon_eight_28.png"],"electric_sheep":["icon_wall_28.png","icon_wool_28.png"],"shell_turtle":["icon_shell_28.png","icon_spin_28.png"],"crow":["icon_swap_28.png","icon_feather_28.png"]}
 	var cds: Array=[actor.cd_one,actor.cd_two]
 	for j in 2:
-		var pos:=Vector2(x+14+j*70,414)
-		img(ROOT+("ui/auto_skill_slot_ready.png" if cds[j]<=0 else "ui/auto_skill_slot.png"),Rect2(pos,Vector2(56,56)))
+		var pos:=Vector2(x+40+j*88,535)
+		img("res://assets/r06/ui/arena_auto_skill_slot.png",Rect2(pos,Vector2(69,70)))
 		if icon_pairs.has(id): img(ROOT+"ui/"+icon_pairs[id][j],Rect2(pos+Vector2(14,14),Vector2(28,28)))
 		elif id=="duck" or id=="rabbit":
 			var icon: String=(["icon_skill_timer.png","icon_skill_rod.png"] if id=="duck" else ["icon_skill_forge.png","icon_skill_temper.png"])[j]
 			img(ROOT+"ui/retained/r02/"+icon,Rect2(pos+Vector2(12,12),Vector2(32,32)))
 		else: label(str(j+1),pos+Vector2(21,35),20)
 		if cds[j]>0: label("%.1f"%cds[j],pos+Vector2(12,76),15)
-	if actor is Puffer: label("%d%%"%actor.gas,Vector2(x+52,305),20)
-	elif actor is ElectricSheep: label("%d%%"%actor.charge,Vector2(x+52,305),20)
-	elif actor is ForgeRabbit: label("%d"%actor.stored_damage,Vector2(x+52,305),20)
-	elif actor is Crow: label("%d / 2"%actor.dummies.size(),Vector2(x+52,305),20)
-	elif actor is UnluckyDuck: label("%.1f"%actor.storm_left,Vector2(x+52,305),20)
+	if actor is Puffer: label("%d%%"%actor.gas,Vector2(x+65,445),20)
+	elif actor is ElectricSheep: label("%d%%"%actor.charge,Vector2(x+65,445),20)
+	elif actor is ForgeRabbit: label("%d"%actor.stored_damage,Vector2(x+65,445),20)
+	elif actor is Crow: label("%d / 2"%actor.dummies.size(),Vector2(x+65,445),20)
+	elif actor is UnluckyDuck: label("%.1f"%actor.storm_left,Vector2(x+65,445),20)

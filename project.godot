@@ -10,10 +10,10 @@ run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 
 [display]
-window/size/viewport_width=1100
-window/size/viewport_height=780
-window/size/window_width_override=990
-window/size/window_height_override=702
+window/size/viewport_width=1600
+window/size/viewport_height=900
+window/size/window_width_override=1280
+window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep"
 window/handheld/orientation=0

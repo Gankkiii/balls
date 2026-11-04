@@ -16,6 +16,7 @@ var active_sounds: Array[AudioStreamPlayer] = []
 var last_cue_time := {}
 var sound_button: Button
 var info_button: Button
+var info_dialog: AcceptDialog
 # Used to isolate saves in automated tests; blank uses the normal game save.
 var page_save_path_override := ""
 
@@ -37,7 +38,7 @@ func _ready() -> void:
 	title.visible=false
 	arena = BattleArena.new()
 	arena.arena_size = Vector2(700, 600)
-	arena.position = Vector2(200, 90)
+	arena.position = Vector2(450, 180)
 	add_child(arena)
 	match_seed = randi()
 	arena.setup(match_seed)
@@ -60,13 +61,13 @@ func _ready() -> void:
 	for i in 6:
 		var button := Button.new()
 		button.text = captions[i]
-		button.position = Vector2(480 + i * 52, 711)
-		button.size = Vector2(48, 48)
+		button.position = Vector2(550 if i == 3 else (614 + i * 64 if i < 3 else 806 + (i-4)*64), 811)
+		button.size = Vector2(54, 54)
 		button.add_theme_font_size_override("font_size", 16)
 		button.add_theme_color_override("font_color",Color("243746"))
 		for style_name in ["normal","hover","pressed","disabled"]:
 			var style := StyleBoxTexture.new()
-			style.texture=load("res://assets/r04/ui/retained/r02/button_"+style_name+".png")
+			style.texture=load("res://assets/r06/ui/arena_control_button.png")
 			style.texture_margin_left=12; style.texture_margin_right=12
 			style.texture_margin_top=12; style.texture_margin_bottom=12
 			button.add_theme_stylebox_override(style_name,style)
@@ -84,17 +85,24 @@ func _ready() -> void:
 		add_child(button)
 		buttons.append(button)
 	sound_button=Button.new()
-	sound_button.position=Vector2(792,711); sound_button.size=Vector2(48,48)
+	sound_button.position=Vector2(934,811); sound_button.size=Vector2(54,54)
 	sound_button.icon=load("res://assets/r04/ui/icon_sound_on.png")
 	sound_button.expand_icon=true
 	sound_button.pressed.connect(toggle_sound)
 	add_child(sound_button)
 	info_button=Button.new()
-	info_button.position=Vector2(844,711); info_button.size=Vector2(48,48)
+	info_button.position=Vector2(998,811); info_button.size=Vector2(54,54)
 	info_button.icon=load("res://assets/r04/ui/icon_info.png")
 	info_button.expand_icon=true
 	info_button.pressed.connect(toggle_info)
 	add_child(info_button)
+	for x in [259,1295]:
+		var side_info := Button.new()
+		side_info.position = Vector2(x,699); side_info.size = Vector2(40,40)
+		side_info.text = "i"
+		side_info.add_theme_font_size_override("font_size",24)
+		side_info.pressed.connect(toggle_info)
+		add_child(side_info)
 	set_rate(0)
 	refresh_hud()
 	var pages = load("res://scripts/game_pages.gd").new()
@@ -109,7 +117,7 @@ func restart_battle(same_seed: bool = false) -> void:
 	var old_arena := arena
 	arena = BattleArena.new()
 	arena.arena_size = Vector2(700, 600)
-	arena.position = Vector2(200, 90)
+	arena.position = Vector2(450, 180)
 	add_child(arena)
 	if not same_seed:
 		match_seed = randi()
@@ -247,7 +255,29 @@ func toggle_sound() -> void:
 	sound_button.icon=load("res://assets/r04/ui/"+("icon_sound_on.png" if sound_enabled else "retained/r02/icon_sound_off.png"))
 
 func toggle_info() -> void:
-	visual.info_open=not visual.info_open
+	if is_instance_valid(info_dialog):
+		info_dialog.queue_free()
+		info_dialog = null
+		visual.info_open = false
+		return
+	info_dialog = AcceptDialog.new()
+	var info_theme := Theme.new()
+	info_theme.default_font = load("res://assets/r06/fonts/regular.otf")
+	info_theme.default_font_size = 20
+	info_dialog.theme = info_theme
+	info_dialog.title = "竞技场详情"
+	var rows: Array[String] = ["种子 %d  ·  时间 %.1f 秒" % [match_seed,arena.simulation_time]]
+	for actor in arena.heroes:
+		var names := actor.skill_names()
+		rows.append("%s  ·  %s / %s" % [actor.title,names[0],names[1]])
+	info_dialog.dialog_text = "\n".join(rows)
+	info_dialog.size = Vector2i(540,360)
+	var modal := info_dialog
+	add_child(modal)
+	modal.confirmed.connect(func(): info_dialog = null; visual.info_open = false; modal.queue_free())
+	modal.canceled.connect(func(): info_dialog = null; visual.info_open = false; modal.queue_free())
+	modal.popup_centered()
+	visual.info_open = true
 
 func toggle_pause() -> void:
 	set_rate(selected_rate if rate==0 else 0)
