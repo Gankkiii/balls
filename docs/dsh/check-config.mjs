@@ -46,6 +46,15 @@ const skillMeta = yaml.load(frontmatter[1]);
 assert.equal(skillMeta.name, 'ball-art-review');
 assert(typeof skillMeta.description === 'string' && skillMeta.description.trim());
 
+const handoffDocs = [skill,
+  readFileSync(join(docs, 'README.md'), 'utf8'),
+  readFileSync(join(docs, 'TASK.template.md'), 'utf8'),
+  readFileSync(web, 'utf8'), readFileSync(headless, 'utf8')];
+for (const content of handoffDocs) {
+  assert(content.includes('游戏总指挥'), 'Every handoff must name the game director.');
+  assert(!content.includes('总指挥（美术总负责人）'), 'Game director must not be mislabeled as art director.');
+}
+
 const temp = mkdtempSync(join(tmpdir(), 'balls-dsh-config-'));
 try {
   for (const folder of ['os-home', 'state', 'agents', 'work']) {
@@ -101,10 +110,16 @@ try {
     requireDsh.resolve(`@deepseek-ai/${name}`);
   }
   assert(!plugins.some((p) => /subagent/.test(p.name)), 'Web worker must not expose child-agent tools.');
-  assert(plugins.find((p) => p.name === '@deepseek-ai/dsh-persona').config.prefix.includes('ball-art-review'));
+  const webPersona = plugins.find((p) => p.name === '@deepseek-ai/dsh-persona').config.prefix;
+  assert(webPersona.includes('ball-art-review'));
+  assert(webPersona.includes('游戏总指挥（游戏总策划）'));
+  assert(!webPersona.includes('美术总负责人'));
   const headlessEntries = compose('headless', headless);
   assert(!headlessEntries.has('preset-webpage-worker'), 'Headless is not the Web preset.');
-  assert(headlessEntries.get('system-prompt')?.config?.personaPrefix?.includes('ball-art-review'));
+  const headlessPersona = headlessEntries.get('system-prompt')?.config?.personaPrefix;
+  assert(headlessPersona?.includes('ball-art-review'));
+  assert(headlessPersona.includes('游戏总指挥（游戏总策划）'));
+  assert(!headlessPersona.includes('美术总负责人'));
   assert.equal(headlessEntries.get('credentials')?.disabled, true, 'Headless credential behavior changed.');
   for (const id of ['tool-subagent', 'tool-subagent-fork', 'tool-subagent-control', 'tool-subagent-list-agents']) {
     assert.equal(headlessEntries.get(id)?.disabled, true, `${id} must be disabled.`);
@@ -113,6 +128,7 @@ try {
     assert(headlessEntries.has(id), `Missing headless ${id}`);
     assert.notEqual(headlessEntries.get(id).disabled, true);
   }
+  console.log('PASS: game-director identity across both profiles, skill and handoff docs.');
   console.log('PASS: pinned DSH version, package sample, YAML and skill frontmatter.');
   console.log('PASS: Web webpage-worker composition and installed plugin resolution.');
   console.log('PASS: headless persona, skill support, disabled child-agent tools and credential distinction.');
