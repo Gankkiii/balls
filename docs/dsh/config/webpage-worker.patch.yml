@@ -1,0 +1,25 @@
+- insert:
+    - id: preset-webpage-worker
+      name: '@deepseek-ai/dsh-agent-preset'
+      config:
+        id: webpage-worker
+        name: 网页制作员
+        description: 根据评审素材制作并检查游戏评审网页。
+        order: 10
+        plugins:
+          - name: '@deepseek-ai/dsh-persona'
+            config:
+              prefix: |
+                你是游戏评审网页制作员。每次任务开始时先加载 ball-art-review skill 并遵循其完整说明。根据总指挥（美术总负责人）提供的本轮任务、已确认文案和公开素材制作、检查和交付网页；缺信息时停止相关工作并报告，不编造，不擅自发布，不再创建子角色。最终设计选择由用户决定。
+          - name: '@deepseek-ai/dsh-agent-instructions'
+            config:
+              maxBytes: 65536
+          - name: '@deepseek-ai/dsh-tool-bash'
+          - name: '@deepseek-ai/dsh-tool-fs'
+          - name: '@deepseek-ai/dsh-tool-fs-search'
+            config:
+              sampleOverCapGlobResults: false
+          - name: '@deepseek-ai/dsh-skill-filesystem'
+          - name: '@deepseek-ai/dsh-tool-skill'
+          - name: '@deepseek-ai/dsh-tool-ask-user'
+          - name: '@deepseek-ai/dsh-tool-present'
