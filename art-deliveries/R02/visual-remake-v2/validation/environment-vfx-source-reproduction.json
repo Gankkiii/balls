@@ -1,8 +1,0 @@
-{
-  "scope": "environment/VFX generator outputs including two composed QA previews and both manifests, not gameplay",
-  "checked_utc": "2026-11-03T13:36:43.889655+00:00",
-  "script_sha256": "5c2de890f22393f820f26362b8545572b2a81e858e070630496b7f9833ad0ae2",
-  "isolated_output": "/tmp/r02-env-vfx-final-repro-_nj9x7zg",
-  "files_byte_identical": 110,
-  "result": "PASS"
-}

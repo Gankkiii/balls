@@ -1,7 +1,0 @@
-{
-  "result": "PASS",
-  "generated_files": 132,
-  "all_byte_equal": true,
-  "command": "python3 source/characters/export_characters.py --output <new empty directory>",
-  "scope": "131 native PNG/strip plus metadata, original source geometry; no GIF extraction"
-}

@@ -1,4 +1,0 @@
-# Project-scoped Codex configuration. Requires a trusted local project.
-# Keep the current session's model, provider, permissions and concurrency limits.
-[agents]
-enabled = true

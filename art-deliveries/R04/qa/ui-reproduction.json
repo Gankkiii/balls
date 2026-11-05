@@ -1,9 +1,0 @@
-{
-  "result": "PASS",
-  "pngs": 65,
-  "generated_metadata_files": 2,
-  "all_generated_png_and_metadata_byte_equal": true,
-  "all_source_svg_and_inputs_unchanged_after_regeneration": true,
-  "scope": "Copied only source/ui into new empty root with no assets or metadata, then ran exporter",
-  "corrected_issue": "Initial exporter lacked environment output mkdir; maker added directory creation only; this result uses new source and a second fresh empty output root"
-}
