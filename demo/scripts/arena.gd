@@ -25,6 +25,7 @@ func remove_ball(ball: Ball) -> void:
 	balls.erase(ball)
 
 func initialize(seed_value: int) -> void:
+	# 初始化每个球的位置和速度，并重置竞技场的模拟时间、事件上限命中次数和求解失败次数。
 	# 先验证所有配置，错误时不重置任何球或模拟计数器。
 	var configs: Array[BallConfig] = []
 	for ball in balls:
