@@ -1,3 +1,4 @@
+## 职责边界：一局演示的组织者：调用工厂创建球、绑定渲染器、调度时间；不实现物理算法。
 class_name DemoScenario
 extends Control
 
@@ -8,6 +9,7 @@ const FIXED_DT := 1.0 / 120.0
 const FRAME_BUDGET_USEC := 12000
 @export_range(1, 100) var ball_count := 1
 @export var ball_config: BallConfig
+var combat_system := CombatSystem.new()
 var arena: Arena
 var ball_renderer: BallRenderer
 var rate := 0
@@ -18,6 +20,7 @@ var budget_limited := false
 
 func _ready() -> void:
 	arena = $Arena
+	arena.combat_resolver = combat_system.resolve
 	resized.connect(_fit_arena)
 	ball_renderer = BallRenderer.new()
 	ball_renderer.balls = arena.balls

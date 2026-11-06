@@ -1,6 +1,7 @@
+## 职责边界：页面入口：创建控件、切换和重开场景、展示状态；不创建球或推进物理算法。
 extends Control
 
-# 页面外壳：只负责选择场景、共用按钮、状态和手机布局。
+# 页面外壳：只负责选择场景、共用按钮、状态和自适应布局。
 const SCENARIO_COUNTS := [1, 2, 5, 20, 100]
 const SCENES := {
 	1: preload("res://scenes/balls_1.tscn"),
@@ -18,8 +19,10 @@ var restart_button: Button
 var arena_host: Control
 var error_panel: PanelContainer
 var error_message: Label
+var choices: GridContainer
 
 func _ready() -> void:
+	_fit_desktop_window()
 	var bg := ColorRect.new()
 	bg.color = Color("09111f")
 	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -42,7 +45,7 @@ func _ready() -> void:
 	subtitle.add_theme_font_size_override("font_size", 20)
 	subtitle.modulate = Color("9daec6")
 	layout.add_child(subtitle)
-	var choices := GridContainer.new()
+	choices = GridContainer.new()
 	choices.columns = 3
 	choices.add_theme_constant_override("h_separation", 12)
 	choices.add_theme_constant_override("v_separation", 12)
@@ -75,6 +78,8 @@ func _ready() -> void:
 		button.pressed.connect(set_rate.bind(rates[i]))
 		controls.add_child(button)
 		buttons.append(button)
+	resized.connect(_update_layout)
+	_update_layout()
 	select_scenario(1)
 
 # Android 安全区按窗口到逻辑画布的比例转换，给刘海和系统导航留空间。
@@ -84,6 +89,29 @@ func _update_safe_area() -> void:
 		insets = safe_area_insets(Vector2(DisplayServer.window_get_size()), Vector2(DisplayServer.window_get_position()), Rect2(DisplayServer.get_display_safe_area()), size)
 	for i in 4:
 		outer_margin.add_theme_constant_override("margin_" + ["left", "top", "right", "bottom"][i], 24 + ceili(insets[i]))
+
+# 桌面启动使用当前显示器可用区域的 85%，保留普通窗口边框。
+func _fit_desktop_window() -> void:
+	if OS.has_feature("mobile") or DisplayServer.get_name() == "headless":
+		return
+	var window := get_window()
+	var usable := DisplayServer.screen_get_usable_rect(window.current_screen)
+	if usable.size.x <= 0 or usable.size.y <= 0:
+		return
+	window.mode = Window.MODE_WINDOWED
+	window.size = Vector2i(Vector2(usable.size) * 0.85)
+	window.position = usable.position + (usable.size - window.size) / 2
+
+func _update_layout() -> void:
+	var wide := size.x >= 1000 and size.x > size.y
+	choices.columns = 6 if wide else 3
+	var height := 48.0 if wide else 100.0
+	var all_buttons: Array = scenario_buttons.duplicate()
+	all_buttons.append(restart_button)
+	all_buttons.append_array(buttons)
+	for button in all_buttons:
+		button.custom_minimum_size.y = height
+		button.add_theme_font_size_override("font_size", 20 if wide else 26)
 
 func safe_area_insets(window_size: Vector2, window_position: Vector2, safe_area: Rect2, logical_size: Vector2) -> Vector4:
 	if window_size.x <= 0 or window_size.y <= 0:
@@ -98,7 +126,7 @@ func safe_area_insets(window_size: Vector2, window_position: Vector2, safe_area:
 func _make_button(caption: String) -> Button:
 	var button := Button.new()
 	button.text = caption
-	# 320px 宽竖屏上约 44px 高，选择和播放控件均可直接触摸。
+	# 初始采用竖屏按钮尺寸；_update_layout 根据窗口形状调整。
 	button.custom_minimum_size = Vector2(0, 100)
 	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	button.add_theme_font_size_override("font_size", 26)
@@ -150,7 +178,7 @@ func set_rate(value: int) -> void:
 func _refresh_status() -> void:
 	for i in buttons.size():
 		buttons[i].modulate = Color("50e0bd") if [1, 2, 0][i] == current_scenario.rate else Color.WHITE
-	status.text = "%s · %d ball%s · %.2f s" % ["Paused" if current_scenario.rate == 0 else "Running %d×" % current_scenario.rate, current_scenario.ball_count, "" if current_scenario.ball_count == 1 else "s", current_scenario.arena.simulation_time]
+	status.text = "%s · %d ball%s · %.2f s" % ["Paused" if current_scenario.rate == 0 else "Running %d×" % current_scenario.rate, current_scenario.arena.balls.size(), "" if current_scenario.arena.balls.size() == 1 else "s", current_scenario.arena.simulation_time]
 	status.tooltip_text = current_scenario.arena.last_error
 	if not current_scenario.arena.last_error.is_empty():
 		status.text = "Stopped: simulation error · Choose a scene or Restart"

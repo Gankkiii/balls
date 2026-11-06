@@ -1,3 +1,4 @@
+## 职责边界：创建及初始化球；只管理球的出生数据，不管理场景、模拟时间或竞技场错误计数。
 class_name BallFactory
 extends RefCounted
 ## 负责创建球、生成初始位置和速度；整批验证后才写回状态。
@@ -8,7 +9,20 @@ static func create_demo(configs: Array[BallConfig], arena_size: Vector2, seed_va
 	var balls: Array[Ball] = []
 	for definition in configs:
 		var config: BallConfig = definition if definition != null else DefaultConfig
+		var error := BallValidation.combat_config_error(config)
+		if not error.is_empty():
+			push_error(error)
+			return _failure(error)
 		var ball := Ball.new()
+		ball.max_health = config.max_health
+		ball.current_health = config.max_health
+		ball.attack = config.attack
+		ball.defense = config.defense
+		if config.impact_skill != null:
+			var skill := BallSkillState.new()
+			skill.skill_id = &"impact"
+			skill.skill_definition = config.impact_skill
+			ball.skills.append(skill)
 		ball.character_definition = definition
 		ball.radius = config.radius
 		ball.mass = config.mass

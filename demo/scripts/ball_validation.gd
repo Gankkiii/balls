@@ -110,3 +110,46 @@ static func solver_velocities_are_representable(values: PackedFloat64Array) -> b
 ## 构造检查失败结果，由调用方决定是否记录或输出错误。
 static func _failure(error: String) -> Dictionary:
 	return {"ok": false, "error": error}
+
+## 战斗校验与提交校验只读，不负责公式或状态写入。
+static func impact_config_error(config: ImpactSkillConfig) -> String:
+	if config == null:
+		return "Missing impact skill configuration"
+	for value in [config.reference_mass, config.reference_speed, config.defense_scale]:
+		if not is_finite(value) or value <= 0.0:
+			return "Impact parameters must be finite and positive"
+	return ""
+
+static func combat_config_error(config: BallConfig) -> String:
+	if not is_finite(config.max_health) or config.max_health <= 0.0 or not is_finite(config.attack) or config.attack < 0.0 or not is_finite(config.defense) or config.defense < 0.0:
+		return "Combat configuration requires positive finite health and nonnegative finite attack/defense"
+	return impact_config_error(config.impact_skill) if config.impact_skill != null else ""
+
+static func combat_ball_error(ball: Ball) -> String:
+	if not is_finite(ball.attack) or ball.attack < 0.0 or not is_finite(ball.defense) or ball.defense < 0.0:
+		return "Invalid runtime attack or defense"
+	if ball.current_health == null and ball.max_health == null:
+		return ""
+	if not (ball.current_health is float or ball.current_health is int) or not (ball.max_health is float or ball.max_health is int):
+		return "Runtime health must be numeric or both unset"
+	if not is_finite(float(ball.current_health)) or not is_finite(float(ball.max_health)) or ball.max_health <= 0.0 or ball.current_health < 0.0 or ball.current_health > ball.max_health:
+		return "Invalid runtime health range"
+	return ""
+
+static func combat_result_error(result: CombatResult, balls: Array[Ball]) -> String:
+	if not result.error.is_empty():
+		return result.error
+	for ball: Ball in result.health:
+		if not balls.has(ball) or ball.current_health == null or not combat_ball_error(ball).is_empty():
+			return "Combat result references invalid ball state"
+		var health: float = result.health[ball]
+		if not is_finite(health) or health < 0.0 or health > ball.current_health:
+			return "Combat result contains invalid candidate health"
+		if (health == 0.0) != result.dead.has(ball):
+			return "Combat death list disagrees with candidate health"
+	var seen: Dictionary = {}
+	for ball in result.dead:
+		if seen.has(ball) or not result.health.has(ball) or result.health[ball] != 0.0:
+			return "Invalid combat death list"
+		seen[ball] = true
+	return ""

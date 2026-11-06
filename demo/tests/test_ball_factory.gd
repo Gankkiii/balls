@@ -27,7 +27,7 @@ func run() -> void:
 		var b: Ball = result.balls[1]
 		check(a.radius == 10.0 and b.radius == 20.0 and a.mass == 1.0 and b.mass == 3.0, "each ball reads its own size and mass")
 		check(a.character_definition == small and b.character_definition == large, "config references retained")
-		check(a.current_health == null and a.max_health == null and b.current_health == null and b.max_health == null, "health is untouched")
+		check(a.current_health == small.max_health and a.max_health == small.max_health and b.current_health == large.max_health, "factory initializes full health")
 		check(a.skills.is_empty() and b.skills.is_empty(), "no skills initialized")
 		var arena := Arena.new()
 		arena.register_ball(a)

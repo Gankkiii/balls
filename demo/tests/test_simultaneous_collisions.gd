@@ -400,14 +400,14 @@ func test_solver_failure_is_atomic() -> void:
 		make_ball(Vector2(120, 100), Vector2.ZERO),
 		make_ball(Vector2(140, 100), Vector2(-1, 0), 1e12),
 	]
-	var contacts: Array = [{"a": 0, "b": 1, "normal": Vector2.LEFT}, {"a": 1, "b": 2, "normal": Vector2.LEFT}]
+	var contacts: Array = [CollisionEvent.create(items, 0, 1, 0.0, Vector2.LEFT), CollisionEvent.create(items, 1, 2, 0.0, Vector2.LEFT)]
 	var result := CollisionSolver.resolve(items, contacts)
 	check(not result.ok, "ill-conditioned system reports nonconvergence instead of accepting invalid impulses")
 	check(items[0].velocity == Vector2(1, 0) and items[1].velocity == Vector2.ZERO and items[2].velocity == Vector2(-1, 0), "failed solve does not change any Ball velocity")
 	check(not result.has("velocities"), "failed solve exposes no partial velocity commit")
 	cases += 1
 	var pair: Array[Ball] = [make_ball(Vector2(100, 100), Vector2(10, 0)), make_ball(Vector2(120, 100), Vector2(-10, 0))]
-	var duplicate: Array = [{"a": 0, "b": 1, "normal": Vector2.LEFT}, {"a": 0, "b": 1, "normal": Vector2.LEFT}]
+	var duplicate: Array = [CollisionEvent.create(pair, 0, 1, 0.0, Vector2.LEFT), CollisionEvent.create(pair, 0, 1, 0.0, Vector2.LEFT)]
 	result = CollisionSolver.resolve(pair, duplicate)
 	check(result.ok and absf(result.velocities[0] + 10) < 0.001 and absf(result.velocities[2] - 10) < 0.001, "redundant singular constraints are supported")
 

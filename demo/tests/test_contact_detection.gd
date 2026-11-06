@@ -40,7 +40,12 @@ func check_event(arena: Arena, seeds: Array, expected: Array, label: String) -> 
 	cases += 1
 	var before := snapshot(arena)
 	var seeds_before := seeds.duplicate(true)
-	var actual := arena._contacts_at_event(seeds)
+	var typed: Array = []
+	for seed in seeds:
+		typed.append(seed if seed is CollisionEvent else CollisionEvent.create(arena.balls, seed.a, seed.b, seed.get("time", 0.0), seed.get("normal", Vector2.ZERO)))
+	var actual: Array = []
+	for event: CollisionEvent in arena._contacts_at_event(typed):
+		actual.append({"a": event.a, "b": event.b, "normal": event.normal})
 	check(actual == expected, label + " expected contacts and order")
 	check(actual == original_contacts_at_event(arena, seeds), label + " original equality")
 	check(snapshot(arena) == before and seeds == seeds_before, label + " state and seeds unchanged")
@@ -199,13 +204,13 @@ func original_contacts_at_event(arena: Arena, seeds: Array) -> Array:
 				var normal := Vector2.ZERO
 				normal[axis] = side
 				var edge: float = ball.radius if side > 0.0 else arena.arena_size[axis] - ball.radius
-				var seeded := seeds.any(func(event: Dictionary) -> bool: return event.a == i and event.b == -1 and event.normal == normal)
+				var seeded := seeds.any(func(event) -> bool: return event.a == i and event.b == -1 and event.normal == normal)
 				var gap: float = (ball.position[axis] - edge) * side
 				if seeded or gap <= 0.0:
 					contacts.append({"a": i, "b": -1, "normal": normal})
 		for j in range(i + 1, arena.balls.size()):
 			var delta := ball.position - arena.balls[j].position
-			var seeded := seeds.any(func(event: Dictionary) -> bool: return event.a == i and event.b == j)
+			var seeded := seeds.any(func(event) -> bool: return event.a == i and event.b == j)
 			var gap := sqrt(float(delta.x) * delta.x + float(delta.y) * delta.y) - ball.radius - arena.balls[j].radius
 			var normal := delta.normalized()
 			# 正间隙不算已有接触，只能通过显式的同刻 CCD 种子进入本批。

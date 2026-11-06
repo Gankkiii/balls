@@ -4,7 +4,7 @@ extends Node2D
 
 ## 没有指定展示配色时使用的默认颜色，只属于渲染层。
 const DEFAULT_DISPLAY_COLOR := Color("55d6be")
-## Arena 共享的球状态列表；渲染器只读取各球的位置和半径。
+## Arena 共享的球状态列表；渲染器只读取各球的位置、半径和生命。
 var balls: Array[Ball] = []
 ## Demo 配色记录，以 Godot 对象 ID 为键，不使用 Ball 的业务 instance_id。
 ## 每条记录只保存球的弱引用和展示颜色，不阻止已移除且无人持有的球释放。
@@ -46,4 +46,10 @@ func _draw() -> void:
 		draw_circle(Vector2.ZERO, ball.radius, display_color)
 		draw_arc(Vector2.ZERO, ball.radius - 1, 0, TAU, 64, display_color.lightened(0.4), 2, true)
 		draw_circle(Vector2(-ball.radius * 0.3, -ball.radius * 0.3), ball.radius * 0.2, Color(1, 1, 1, 0.45))
+		if ball.current_health != null and ball.max_health != null and ball.max_health > 0:
+			var width := ball.radius * 2.0
+			var bar := Rect2(-ball.radius, -ball.radius - 10, width, 4)
+			draw_rect(bar, Color(0.1, 0.1, 0.15, 0.9))
+			bar.size.x *= clampf(float(ball.current_health) / float(ball.max_health), 0.0, 1.0)
+			draw_rect(bar, Color("50e0bd"))
 	draw_set_transform(Vector2.ZERO)

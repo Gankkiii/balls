@@ -71,9 +71,9 @@ func run() -> void:
 	var renderer := BallRenderer.new()
 	renderer.balls = arena.balls
 	var shared_list := arena.balls
-	check(arena.initialize_demo(7).ok, "compatibility entry initializes")
-	check(is_same(shared_list, arena.balls) and is_same(renderer.balls, arena.balls), "compatibility entry preserves renderer list")
-	check(arena.balls[0] == a and arena.balls[1] == b, "compatibility entry preserves ball objects")
+	check(BallFactory.initialize_demo(arena.balls, arena.arena_size, 7).ok, "factory initialization initializes")
+	check(is_same(shared_list, arena.balls) and is_same(renderer.balls, arena.balls), "factory initialization preserves renderer list")
+	check(arena.balls[0] == a and arena.balls[1] == b, "factory initialization preserves ball objects")
 	check(a.current_health == null and a.max_health == null and a.skills.is_empty(), "initialization does not add combat state")
 	renderer.free()
 	arena.free()

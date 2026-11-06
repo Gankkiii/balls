@@ -27,7 +27,7 @@ func verify_failure(items: Array[Ball], label: String) -> void:
 		before.append(items[i].velocity)
 		arena.register_ball(items[i])
 		if i > 0:
-			contacts.append({"a": i - 1, "b": i, "normal": Vector2.LEFT})
+			contacts.append(CollisionEvent.create(items, i - 1, i, 0.0, Vector2.LEFT))
 	var result := CollisionSolver.resolve(items, contacts)
 	check(not result.ok and not result.has("velocities"), label + " solver refuses to expose unsafe output")
 	var groups: Array = []

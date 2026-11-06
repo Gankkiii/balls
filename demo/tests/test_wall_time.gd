@@ -24,7 +24,7 @@ func check_hit(arena: Arena, ball: Ball, horizon: float, time: float, normals: A
 	check(result.time == time, label + " earliest time")
 	check(result.contacts.size() == normals.size(), label + " contact count")
 	for normal in normals:
-		check(result.contacts.any(func(contact: Dictionary) -> bool: return contact.normal == normal), label + " wall normal")
+		check(result.contacts.any(func(contact) -> bool: return contact.normal == normal), label + " wall normal")
 	for contact in result.contacts:
 		check(contact.time >= result.time and contact.time <= result.time + Arena.TIME_EPS, label + " individual time")
 	check(ball.position == position_before and ball.velocity == velocity_before, label + " does not change ball")
@@ -120,12 +120,21 @@ func test_global_time_tolerance() -> void:
 		check(result.time == 20.25 / 1e9, "global earliest time")
 		check(result.contacts.size() == 2, "global batch excludes chained near-equal wall")
 		var corner_index := arena.balls.find(corner)
-		check(result.contacts.any(func(contact: Dictionary) -> bool: return contact.a == corner_index and contact.b == -1 and contact.normal == Vector2.LEFT), "global batch retains near wall")
-		check(not result.contacts.any(func(contact: Dictionary) -> bool: return contact.a == corner_index and contact.b == -1 and contact.normal == Vector2.UP), "global batch rejects distant wall")
-		check(result == original_next_event(arena, 1.0), "global result matches original")
+		check(result.contacts.any(func(contact) -> bool: return contact.a == corner_index and contact.b == -1 and contact.normal == Vector2.LEFT), "global batch retains near wall")
+		check(not result.contacts.any(func(contact) -> bool: return contact.a == corner_index and contact.b == -1 and contact.normal == Vector2.UP), "global batch rejects distant wall")
+		check(flatten_event(result) == original_next_event(arena, 1.0), "global result matches original")
 		arena.free()
 
 # 保留抽取前的事件收集算法，逐项比较时间、索引、法线和列表顺序。
+func flatten_event(result: Dictionary) -> Dictionary:
+	var contacts: Array = []
+	for event: CollisionEvent in result.contacts:
+		var item := {"time": event.time, "a": event.a, "b": event.b}
+		if event.b == -1:
+			item["normal"] = event.normal
+		contacts.append(item)
+	return {"time": result.time, "contacts": contacts}
+
 func original_next_event(arena: Arena, horizon: float) -> Dictionary:
 	var earliest := INF
 	var candidates: Array = []
@@ -172,7 +181,15 @@ func test_randomized_equivalence() -> void:
 				ball.position[axis] = ball.radius if ball.velocity[axis] < 0.0 else arena.arena_size[axis] - ball.radius
 			arena.register_ball(ball)
 		for horizon in [0.0, 1e-9, 1e-6, 1.0 / 120.0, 10.0]:
-			check(arena._next_event(horizon) == original_next_event(arena, horizon), "original event equality scenario %d horizon %s" % [scenario, horizon])
+			var actual := arena._next_event(horizon)
+			var flattened: Array = []
+			for event: CollisionEvent in actual.contacts:
+				var record := {"time": event.time, "a": event.a, "b": event.b}
+				if event.b == -1:
+					record["normal"] = event.normal
+				flattened.append(record)
+			actual.contacts = flattened
+			check(actual == original_next_event(arena, horizon), "original event equality scenario %d horizon %s" % [scenario, horizon])
 		arena.free()
 
 func _initialize() -> void:

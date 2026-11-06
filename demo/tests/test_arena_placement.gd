@@ -53,9 +53,7 @@ func reject_initialize(arena: Arena, input: Array, label: String) -> void:
 	arena.position_failures = 5
 	var before := snapshot(arena)
 	var input_before := var_to_bytes(input)
-	expected_errors += 1
-	print("EXPECTED PLACEMENT ERROR: ", label)
-	var result := arena.initialize(42, input)
+	var result := BallFactory.initialize_positions(arena.balls, arena.arena_size, 42, input)
 	check(not result.ok and not result.error.is_empty(), label + " explicit error")
 	check(snapshot(arena) == before, label + " all motion/configs/counters unchanged")
 	check(var_to_bytes(input) == input_before, label + " placement input unchanged")
@@ -64,14 +62,14 @@ func test_explicit_positions() -> void:
 	var arena := make_arena(3, 10)
 	var requested: Array = [Vector2(10, 10), Vector2(30, 10), Vector2(60, 10)]
 	var input_before := requested.duplicate()
-	check(arena.initialize(42, requested).ok, "valid explicit touching positions accepted")
+	check(BallFactory.initialize_positions(arena.balls, arena.arena_size, 42, requested).ok, "valid explicit touching positions accepted")
 	check(positions(arena) == input_before and requested == input_before, "explicit positions preserved exactly")
 	valid_geometry(arena, "explicit")
 	var stationary := BallConfig.new()
 	stationary.min_initial_speed = 0
 	stationary.max_initial_speed = 0
 	arena.balls[2].character_definition = stationary
-	check(arena.initialize(43, requested).ok and arena.balls[2].velocity == Vector2.ZERO, "explicit path retains per-ball speed config")
+	check(BallFactory.initialize_positions(arena.balls, arena.arena_size, 43, requested).ok and arena.balls[2].velocity == Vector2.ZERO, "explicit path retains per-ball speed config")
 	reject_initialize(arena, [Vector2(100, 100), Vector2(120, 100), Vector2(139, 100)], "overlapping final ball")
 	reject_initialize(arena, [Vector2(100, 100), Vector2(120, 100), Vector2(640, 100)], "outside final ball")
 	for bad in [Vector2(NAN, 100), Vector2(INF, 100), "invalid", null]:
@@ -103,13 +101,13 @@ func test_tolerance() -> void:
 	var arena := make_arena(2, 1)
 	for gap in [-Arena.POSITION_EPS * 0.5, Arena.POSITION_EPS * 0.5, Arena.POSITION_EPS * 2]:
 		var requested: Array = [Vector2(1, 1), Vector2(3 + gap, 1)]
-		check(arena.initialize(1, requested).ok, "pair tolerance accepts contact and tiny overlap")
+		check(BallFactory.initialize_positions(arena.balls, arena.arena_size, 1, requested).ok, "pair tolerance accepts contact and tiny overlap")
 		check(positions(arena) == requested, "tolerated overlap not moved")
-	var rejected := arena.validate_positions([Vector2(1, 1), Vector2(3 - Arena.POSITION_EPS * 2, 1)])
+	var rejected := BallValidation.validate_positions(arena.balls, arena.arena_size, [Vector2(1, 1), Vector2(3 - Arena.POSITION_EPS * 2, 1)])
 	check(not rejected.ok and "0 and 1" in rejected.error, "pair violation names both balls")
 	var requested: Array = [Vector2(1 - Arena.POSITION_EPS * 0.5, 1), Vector2(5, 1)]
-	check(arena.initialize(2, requested).ok and positions(arena) == requested, "wall tolerance accepts tiny boundary residual unchanged")
-	check(not arena.validate_positions([Vector2(1 - Arena.POSITION_EPS * 2, 1), Vector2(5, 1)]).ok, "wall violation beyond tolerance rejected")
+	check(BallFactory.initialize_positions(arena.balls, arena.arena_size, 2, requested).ok and positions(arena) == requested, "wall tolerance accepts tiny boundary residual unchanged")
+	check(not BallValidation.validate_positions(arena.balls, arena.arena_size, [Vector2(1 - Arena.POSITION_EPS * 2, 1), Vector2(5, 1)]).ok, "wall violation beyond tolerance rejected")
 	var before := snapshot(arena)
 	for i in 20:
 		check(arena._correct_positions().ok, "valid position correction succeeds")
@@ -120,14 +118,14 @@ func test_demo_grid() -> void:
 	var arena := make_arena(100)
 	for seed_value in 100:
 		var before := snapshot(arena)
-		var generated := arena.generate_demo_positions(seed_value)
+		var generated := BallFactory.generate_demo_positions(arena.balls, arena.arena_size, seed_value)
 		check(generated.ok, "grid finds 100 default balls without random retries")
 		check(snapshot(arena) == before, "placement generation is read-only")
-		check(arena.initialize_demo(seed_value).ok, "100-ball initialization succeeds")
+		check(BallFactory.initialize_demo(arena.balls, arena.arena_size, seed_value).ok, "100-ball initialization succeeds")
 		valid_geometry(arena, "100 balls seed %d" % seed_value)
 		check(positions(arena) == generated.positions, "demo commits validated generated positions")
 		var initialized := snapshot(arena)
-		check(arena.initialize_demo(seed_value).ok and snapshot(arena) == initialized, "seed reproduces positions and velocities")
+		check(BallFactory.initialize_demo(arena.balls, arena.arena_size, seed_value).ok and snapshot(arena) == initialized, "seed reproduces positions and velocities")
 		for ball in arena.balls:
 			check(ball.velocity.length() >= 139.9999 and ball.velocity.length() <= 230.0001, "100 balls preserve configured speed range")
 	for i in 120:
@@ -138,15 +136,13 @@ func test_demo_grid() -> void:
 	arena = make_arena(3, 10)
 	arena.arena_size = Vector2(40, 20)
 	var before := snapshot(arena)
-	var result := arena.generate_demo_positions(1)
+	var result := BallFactory.generate_demo_positions(arena.balls, arena.arena_size, 1)
 	check(not result.ok and "not a packing impossibility proof" in result.error, "grid failure states search limitation")
 	check(snapshot(arena) == before, "failed grid changes no state")
-	expected_errors += 1
-	print("EXPECTED PLACEMENT ERROR: impossible demo grid")
-	check(not arena.initialize_demo(1).ok and snapshot(arena) == before, "failed auto initialization is atomic")
+	check(not BallFactory.initialize_demo(arena.balls, arena.arena_size, 1).ok and snapshot(arena) == before, "failed auto initialization is atomic")
 	arena.free()
 	arena = make_arena(0)
-	check(arena.initialize(1, []).ok and arena.initialize_demo(1).ok, "empty arena initialization succeeds")
+	check(BallFactory.initialize_positions(arena.balls, arena.arena_size, 1, []).ok and BallFactory.initialize_demo(arena.balls, arena.arena_size, 1).ok, "empty arena initialization succeeds")
 	arena.free()
 
 func test_correction() -> void:
@@ -250,7 +246,8 @@ func test_main_stops() -> void:
 	main.set_rate(2)
 	check(main.current_scenario.rate == 0, "UI cannot accidentally resume unresolved failure")
 	main.current_scenario.arena.balls[1].radius = 24
-	check(main.current_scenario.arena.initialize_demo(42).ok, "corrected setup can reinitialize")
+	check(main.select_scenario(2, 42), "new scenario recovers from failure")
+	check(main.current_scenario.arena.simulation_time == 0.0 and main.current_scenario.arena.position_failures == 0, "new scenario resets simulation state")
 	main.set_rate(2)
 	check(main.current_scenario.rate == 2 and main.status.tooltip_text.is_empty(), "successful reinitialization clears UI stop")
 	main.free()

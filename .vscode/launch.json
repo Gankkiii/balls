@@ -1,0 +1,13 @@
+﻿{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "运行球竞技场",
+      "type": "godot",
+      "request": "launch",
+      "project": "${workspaceFolder}/demo",
+      "scene": "main",
+      "editor_path": "${config:godotTools.editorPath.godot4}"
+    }
+  ]
+}

@@ -70,7 +70,7 @@ func run() -> void:
 	var worst := 0.0
 	for seed_value in 20:
 		a = make_arena()
-		a.initialize_demo(seed_value)
+		BallFactory.initialize_demo(a.balls, a.arena_size, seed_value)
 		energy = a.kinetic_energy()
 		check(a.balls[0].position.distance_to(a.balls[1].position) > 20, "legal initial seed %d" % seed_value)
 		for tick in 72000:
@@ -90,13 +90,15 @@ func run() -> void:
 	main.select_scenario(2)
 	main.set_process(false)
 	main.current_scenario.set_process(false)
-	main.current_scenario.arena.initialize_demo(42)
+	main.select_scenario(2, 42)
+	main.current_scenario.set_process(false)
 	main.set_rate(1)
 	for i in 600:
 		main.advance_real_time(1.0 / 60)
 	var first: Vector2 = main.current_scenario.arena.balls[0].position
 	var second: Vector2 = main.current_scenario.arena.balls[1].position
-	main.current_scenario.arena.initialize_demo(42)
+	main.select_scenario(2, 42)
+	main.current_scenario.set_process(false)
 	main.set_rate(2)
 	for i in 300:
 		main.advance_real_time(1.0 / 60)

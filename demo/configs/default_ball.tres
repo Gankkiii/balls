@@ -1,10 +1,13 @@
-[gd_resource type="Resource" script_class="BallConfig" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="BallConfig" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/ball_config.gd" id="1"]
+
+[ext_resource type="Resource" path="res://configs/default_impact_skill.tres" id="2"]
 
 [resource]
 resource_name = "Default Ball"
 script = ExtResource("1")
+impact_skill = ExtResource("2")
 max_health = 100.0
 attack = 10.0
 defense = 0.0

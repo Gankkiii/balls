@@ -76,6 +76,8 @@ func test_all_seeds_and_motion() -> void:
 			check(main.select_scenario(count, seed_value) and snapshot(main.current_scenario.arena) == before, "fixed seed replays exactly")
 		for seed_value in [7, 42, 99]:
 			main.select_scenario(count, seed_value)
+			# 守恒验证保持纯物理；战斗死亡会带走被移除球的能量。
+			main.current_scenario.arena.combat_resolver = Callable()
 			var energy: float = main.current_scenario.arena.kinetic_energy()
 			var start_usec := Time.get_ticks_usec()
 			for tick in 60:
@@ -202,6 +204,29 @@ func test_portrait_layout() -> void:
 	check(main.current_scenario.arena.simulation_time == 0 and main.current_scenario.rate == 1, "synthetic touch restarts")
 	main.free()
 
+func test_desktop_layout() -> void:
+	var main = make_main(20)
+	main.current_scenario.set_process(false)
+	var before := snapshot(main.current_scenario.arena)
+	for viewport_size in [Vector2i(1280, 720), Vector2i(1920, 1080), Vector2i(2560, 1440), Vector2i(3440, 1440), Vector2i(1024, 768)]:
+		root.size = viewport_size
+		await process_frame
+		await process_frame
+		check(main.choices.columns == 6, "desktop choices fit on one row")
+		var viewport := Rect2(Vector2.ZERO, Vector2(viewport_size))
+		var all_buttons: Array = main.scenario_buttons.duplicate()
+		all_buttons.append(main.restart_button)
+		all_buttons.append_array(main.buttons)
+		for button in all_buttons:
+			check(viewport.encloses(button.get_global_rect()), "desktop button remains visible")
+			check(button.size.y >= 48, "desktop button remains usable")
+		check(main.arena_host.size.y >= 360, "desktop arena receives remaining height")
+		var arena: Arena = main.current_scenario.arena
+		check(main.arena_host.get_global_rect().grow(0.01).encloses(Rect2(arena.global_position, arena.arena_size * arena.scale)), "desktop arena fits host")
+		check(is_equal_approx(arena.scale.x, arena.scale.y), "desktop balls retain aspect ratio")
+		check(snapshot(arena) == before, "resizing does not mutate simulation")
+	main.free()
+
 func _initialize() -> void:
 	call_deferred("run")
 
@@ -210,6 +235,7 @@ func run() -> void:
 	test_all_seeds_and_motion()
 	test_controls_and_lifetimes()
 	test_budget_and_error_recovery()
+	await test_desktop_layout()
 	await test_portrait_layout()
 	print("SCENARIO RESULT checks=%d failures=%d expected_errors=%d" % [checks, failures, expected_errors])
 	quit(1 if failures else 0)

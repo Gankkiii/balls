@@ -1,3 +1,4 @@
+## 职责边界：管理已初始化的球列表、模拟时间、运行错误、运动和碰撞；不创建球或安排出生状态。
 class_name Arena
 extends Node2D
 ## Frictionless disks in an immovable box. Analytic time-of-impact (CCD).
@@ -18,6 +19,10 @@ var event_limit_hits := 0
 var solver_failures := 0
 var position_failures := 0
 var last_error := ""
+## 由场景注入的纯计算回调；空回调保持纯物理模式。
+var combat_resolver: Callable
+var combat_failures := 0
+signal combat_committed(result: CombatResult)
 
 func register_ball(ball: Ball) -> void:
 	if not balls.has(ball):
@@ -26,36 +31,8 @@ func register_ball(ball: Ball) -> void:
 func remove_ball(ball: Ball) -> void:
 	balls.erase(ball)
 
-## 保留手动位置入口；初始化细节交给 BallFactory。
-func initialize(seed_value: int, initial_positions: Array) -> Dictionary:
-	return _finish_initialization(BallFactory.initialize_positions(balls, arena_size, seed_value, initial_positions))
-
-## 保留演示初始化入口，不替换场景和渲染器共享的球列表。
-func initialize_demo(seed_value: int) -> Dictionary:
-	return _finish_initialization(BallFactory.initialize_demo(balls, arena_size, seed_value))
-
-func generate_demo_positions(seed_value: int) -> Dictionary:
-	return BallFactory.generate_demo_positions(balls, arena_size, seed_value)
-
-## 初始化成功后重置模拟计数；失败只记录错误。
-func _finish_initialization(result: Dictionary) -> Dictionary:
-	if not result.ok:
-		last_error = result.error
-		push_error(result.error + "; initialization cancelled, runtime state preserved")
-		return result
-	simulation_time = 0.0
-	event_limit_hits = 0
-	solver_failures = 0
-	position_failures = 0
-	last_error = ""
-	queue_redraw()
-	return result
-
 func _failure(error: String) -> Dictionary:
 	return {"ok": false, "error": error}
-
-func validate_positions(positions: Array) -> Dictionary:
-	return BallValidation.validate_positions(balls, arena_size, positions)
 
 func kinetic_energy() -> float:
 	var energy := 0.0
@@ -160,13 +137,13 @@ func _next_event(horizon: float) -> Dictionary:
 	for i in balls.size():
 		var wall := _wall_time(balls[i], horizon)
 		for contact in wall.contacts:
-			candidates.append({"time": contact.time, "a": i, "b": -1, "normal": contact.normal})
+			candidates.append(CollisionEvent.create(balls, i, -1, contact.time, contact.normal))
 		earliest = minf(earliest, wall.time)
 	for i in balls.size():
 		for j in range(i + 1, balls.size()):
 			var time := _pair_time(balls[i], balls[j], horizon)
 			if is_finite(time):
-				candidates.append({"time": time, "a": i, "b": j})
+				candidates.append(CollisionEvent.create(balls, i, j, time))
 				earliest = minf(earliest, time)
 	var contacts: Array = []
 	# 先找到真正最小值，再按同一基准分批，避免“近似相等”链依赖遍历顺序。
@@ -195,6 +172,20 @@ func _pair_contact(a: Ball, b: Ball, seeded: bool = false) -> Dictionary:
 	# 正间隙只接纳显式的同刻 CCD 种子；法线从 b 指向 a。
 	return {"normal": normal} if seeded or gap <= 0.0 else {}
 
+## 复用预测事件；接触链只为尚未出现的球对创建记录。
+func _complete_contact(seeds: Array, a: int, b: int, normal: Vector2) -> CollisionEvent:
+	var event: CollisionEvent
+	for seed: CollisionEvent in seeds:
+		if seed.a == a and seed.b == b and (b >= 0 or seed.normal == normal):
+			event = seed
+			break
+	if event == null:
+		event = CollisionEvent.create(balls, a, b, seeds[0].time if not seeds.is_empty() else 0.0)
+	event.normal = normal
+	event.velocity_a_before = event.ball_a.velocity
+	event.velocity_b_before = event.ball_b.velocity if event.ball_b != null else Vector2.ZERO
+	return event
+
 func _contacts_at_event(seeds: Array) -> Array:
 	var contacts: Array = []
 	for i in balls.size():
@@ -203,12 +194,12 @@ func _contacts_at_event(seeds: Array) -> Array:
 			if seed.a == i and seed.b == -1:
 				seeded_normals.append(seed.normal)
 		for normal in _wall_contacts(balls[i], seeded_normals):
-			contacts.append({"a": i, "b": -1, "normal": normal})
+			contacts.append(_complete_contact(seeds, i, -1, normal))
 		for j in range(i + 1, balls.size()):
-			var seeded := seeds.any(func(event: Dictionary) -> bool: return event.a == i and event.b == j)
+			var seeded := seeds.any(func(event: CollisionEvent) -> bool: return event.a == i and event.b == j)
 			var contact := _pair_contact(balls[i], balls[j], seeded)
 			if not contact.is_empty():
-				contacts.append({"a": i, "b": j, "normal": contact.normal})
+				contacts.append(_complete_contact(seeds, i, j, contact.normal))
 	# 只扩展本批碰撞接触到的链，避免把远处“很快才撞”的独立近接触提前合并。
 	var involved: Dictionary = {}
 	for seed in seeds:
@@ -220,7 +211,7 @@ func _contacts_at_event(seeds: Array) -> Array:
 	while expanded:
 		expanded = false
 		for index in contacts.size():
-			var contact: Dictionary = contacts[index]
+			var contact: CollisionEvent = contacts[index]
 			if selected.has(index) or not (involved.has(contact.a) or involved.has(contact.b)):
 				continue
 			selected[index] = true
@@ -238,11 +229,11 @@ func _emit_collisions(contacts: Array, affected: Array) -> void:
 	var participants: Array[Ball] = []
 	var wall_events: Array = []
 	for index in affected:
-		var contact: Dictionary = contacts[index]
+		var contact: CollisionEvent = contacts[index]
 		if contact.b < 0:
-			wall_events.append([balls[contact.a], contact.normal])
+			wall_events.append([contact.ball_a, contact.normal])
 			continue
-		for ball in [balls[contact.a], balls[contact.b]]:
+		for ball in [contact.ball_a, contact.ball_b]:
 			if not participants.has(ball):
 				participants.append(ball)
 	# 列表表达“同一时刻的参与者”，不表示列表中的任意两球都相撞。
@@ -303,10 +294,33 @@ func step(dt: float) -> bool:
 			last_error = "Collision result cannot be stored as finite Vector2 state; velocities unchanged, remaining substep discarded"
 			push_error(last_error)
 			break
-		# 所有组/墙面均完成求解后再写回，任一通知都不会观察到半算完的状态。
+		var confirmed: Array = []
+		for index in result.contacts:
+			contacts[index].confirmed = true
+			confirmed.append(contacts[index])
+		var combat := CombatResult.new()
+		if combat_resolver.is_valid():
+			var candidate: Variant = combat_resolver.call(confirmed)
+			if candidate is CombatResult:
+				combat = candidate
+			else:
+				combat.error = "Combat resolver returned an invalid result"
+		var combat_error := BallValidation.combat_result_error(combat, balls)
+		if not combat_error.is_empty():
+			combat_failures += 1
+			last_error = combat_error + "; velocity and health batch not committed"
+			push_error(last_error)
+			break
+		# 物理与战斗全部通过后一次提交；通知前不调用任何外部代码。
 		for i in balls.size():
 			balls[i].velocity = next_velocities[i]
+		for ball: Ball in combat.health:
+			ball.current_health = combat.health[ball]
+		for ball in combat.dead:
+			remove_ball(ball)
 		_emit_collisions(contacts, result.contacts)
+		if not combat.health.is_empty():
+			combat_committed.emit(combat)
 		events += 1
 		if events >= MAX_EVENTS and remaining > TIME_EPS:
 			event_limit_hits += 1

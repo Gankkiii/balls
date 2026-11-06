@@ -24,7 +24,7 @@ static func resolve(balls: Array[Ball], contacts: Array) -> Dictionary:
 		var speeds := PackedFloat64Array()
 		var has_impact := false
 		for index in contacts.size():
-			var contact: Dictionary = contacts[index]
+			var contact: CollisionEvent = contacts[index]
 			var speed := _normal_speed(contact, velocities)
 			var tolerance := velocity_tolerance(contact.normal, velocities[2 * contact.a], velocities[2 * contact.a + 1], velocities[2 * contact.b] if contact.b >= 0 else 0.0, velocities[2 * contact.b + 1] if contact.b >= 0 else 0.0)
 			if not is_finite(speed) or not is_finite(tolerance):
@@ -50,7 +50,7 @@ static func resolve(balls: Array[Ball], contacts: Array) -> Dictionary:
 			if impulse <= 0.0:
 				continue
 			var index: int = incoming[i]
-			var contact: Dictionary = contacts[index]
+			var contact: CollisionEvent = contacts[index]
 			affected[index] = true
 			_accumulate(changes, contact.a, contact.normal, impulse / balls[contact.a].mass)
 			if contact.b >= 0:
@@ -73,7 +73,7 @@ static func _accumulate(values: PackedFloat64Array, index: int, normal: Vector2,
 	values[2 * index] += normal.x * amount
 	values[2 * index + 1] += normal.y * amount
 
-static func _normal_speed(contact: Dictionary, velocities: PackedFloat64Array) -> float:
+static func _normal_speed(contact: CollisionEvent, velocities: PackedFloat64Array) -> float:
 	var a: int = contact.a
 	var b: int = contact.b
 	var normal: Vector2 = contact.normal
@@ -84,7 +84,7 @@ static func _normal_speed(contact: Dictionary, velocities: PackedFloat64Array) -
 		y -= velocities[2 * b + 1]
 	return x * normal.x + y * normal.y
 
-static func _coupling(left: Dictionary, right: Dictionary, balls: Array[Ball]) -> float:
+static func _coupling(left: CollisionEvent, right: CollisionEvent, balls: Array[Ball]) -> float:
 	var weight := 0.0
 	if left.a == right.a:
 		weight += 1.0 / balls[left.a].mass
@@ -110,7 +110,7 @@ static func _solve_impulses(balls: Array[Ball], contacts: Array, incoming: Array
 	var matrix: Array[PackedFloat64Array] = []
 	var magnitude := 1.0
 	for i in count:
-		var contact: Dictionary = contacts[incoming[i]]
+		var contact: CollisionEvent = contacts[incoming[i]]
 		var diagonal := _coupling(contact, contact, balls)
 		if not is_finite(diagonal) or diagonal <= 0.0:
 			return PackedFloat64Array()

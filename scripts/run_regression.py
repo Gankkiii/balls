@@ -28,7 +28,7 @@ def main():
         command = [GODOT, "--headless", "--path", str(PROJECT), *arguments]
         try:
             result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
-                                    text=True, timeout=180, check=False)
+                                    text=True, encoding="utf-8", errors="replace", timeout=180, check=False)
             output, exit_code = result.stdout, result.returncode
         except subprocess.TimeoutExpired as error:
             output = error.stdout or b""

@@ -3,7 +3,7 @@ extends RefCounted
 ## 保存一颗球的身份、配置关联，以及战斗中需要记录的状态。
 ## 只保存一个球的运行状态，不执行初始化、碰撞、技能或绘制。
 ## Arena 修改运动数据；BallRenderer 读取位置和半径，配色由渲染层保存。
-## 玩法字段只是数据接口，不代表已经实现对应规则。
+## 战斗规则由 CombatSystem / ImpactSkill 计算，Arena 统一提交；其他玩法字段仍可为空。
 
 ## 球心位置（竞技场局部坐标，像素）。
 var position: Vector2 = Vector2.ZERO
@@ -37,3 +37,7 @@ var skills: Array[BallSkillState] = []
 var skin_id: StringName = &""
 ## 外观配置资源引用。
 var appearance_definition: Resource = null
+
+## 当前攻击和防御，由工厂从配置复制。
+var attack := 0.0
+var defense := 0.0

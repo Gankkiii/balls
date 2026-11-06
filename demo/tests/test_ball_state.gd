@@ -185,7 +185,8 @@ func test_external_system_boundaries() -> void:
 	main.current_scenario.set_process(false)
 	var first: Ball = main.current_scenario.arena.balls[0]
 	var second: Ball = main.current_scenario.arena.balls[1]
-	check(first.current_health == null and first.skills.is_empty(), "demo does not invent gameplay configuration")
+	check(first.current_health == first.max_health and first.skills.size() == 1, "demo equips configured combat state")
+	main.current_scenario.arena.combat_resolver = Callable()
 	first.character_id = &"fixture_character"
 	first.character_definition = BallConfig.new()
 	first.instance_id = &"fixture_instance"
@@ -205,8 +206,8 @@ func test_external_system_boundaries() -> void:
 	skill.runtime[&"nested"] = {&"values": [5, null]}
 	first.skills.append(skill)
 	var before := gameplay_snapshot(first)
-	main.current_scenario.arena.initialize_demo(42)
-	check(gameplay_snapshot(first) == before, "Arena initialization leaves gameplay data untouched")
+	BallFactory.initialize_demo(main.current_scenario.arena.balls, main.current_scenario.arena.arena_size, 42)
+	check(gameplay_snapshot(first) == before, "Factory initialization leaves gameplay data untouched")
 	# Force both a wall and a pair collision without adding gameplay listeners.
 	first.position = Vector2(first.radius + 1, 100)
 	first.velocity = Vector2(-100, 0)
