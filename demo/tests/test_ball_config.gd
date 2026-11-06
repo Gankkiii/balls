@@ -162,6 +162,7 @@ func test_shared_range() -> void:
 func test_main_configuration() -> void:
 	var main = load("res://scenes/main.tscn").instantiate()
 	root.add_child(main)
+	main.select_scenario(2)
 	main.set_process(false)
 	check(main.arena.balls.size() == 2, "main still creates two balls")
 	for ball in main.arena.balls:

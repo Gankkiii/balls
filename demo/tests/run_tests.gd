@@ -87,6 +87,7 @@ func run() -> void:
 	# Exercise actual scene controller, not a duplicate test implementation.
 	var main = load("res://scenes/main.tscn").instantiate()
 	root.add_child(main)
+	main.select_scenario(2)
 	main.set_process(false)
 	main.arena.initialize_demo(42)
 	main.set_rate(1)

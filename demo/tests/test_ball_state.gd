@@ -180,6 +180,7 @@ func gameplay_snapshot(ball: Ball) -> Dictionary:
 func test_external_system_boundaries() -> void:
 	var main = load("res://scenes/main.tscn").instantiate()
 	root.add_child(main)
+	main.select_scenario(2)
 	main.set_process(false)
 	var first: Ball = main.arena.balls[0]
 	var second: Ball = main.arena.balls[1]
@@ -294,6 +295,7 @@ func test_collision_notifications() -> void:
 func test_renderer_binding() -> void:
 	var main = load("res://scenes/main.tscn").instantiate()
 	root.add_child(main)
+	main.select_scenario(2)
 	main.set_process(false)
 	var arena: Arena = main.arena
 	var renderer: BallRenderer = main.ball_renderer

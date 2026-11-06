@@ -234,6 +234,7 @@ func test_nonfinite_step() -> void:
 func test_main_stops() -> void:
 	var main = load("res://scenes/main.tscn").instantiate()
 	root.add_child(main)
+	main.select_scenario(2)
 	main.set_process(false)
 	main.set_rate(1)
 	main.arena.balls[1].radius = 1000

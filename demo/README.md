@@ -1,10 +1,37 @@
 # 精简竞技场 Demo
 
-Godot **4.6.3 stable** / GDScript。一个竞技场、两个球、1× / 2× / Pause 三个按钮；启动时暂停。这个 Demo 只展示状态、模拟和渲染的职责划分。角色、生命、临时状态、技能和外观已有数据字段与关联，但没有接入实际玩法，不包含伤害、技能执行或胜负规则。
+Godot **4.6.3 stable** / GDScript。一个竞技场、**1 / 2 / 5 / 20 / 100 球**五个可选场景，保留 1× / 2× / Pause，增加 Restart；启动默认进入 1 球并按 1× 运动。这个 Demo 只展示状态、模拟和渲染的职责划分。角色、生命、临时状态、技能和外观已有数据字段与关联，但没有接入实际玩法，不包含伤害、技能执行或胜负规则。
 
 ## 运行
 
-用 Godot 导入本目录的 `project.godot`，按 F5。点击 1× 或 2× 开始，Pause 暂停。切换倍率不改变速度向量，暂停后继续不会重新随机。
+用 Godot **4.6.3** 导入本目录的 `project.godot`，按 F5。顶部点选球数即可切换场景，下方用 1× / 2× / Pause 控制。鼠标和触摸使用同一组按钮。
+
+- 入口为 `scenes/balls_1.tscn`；另有 `balls_2.tscn`、`balls_5.tscn`、`balls_20.tscn`、`balls_100.tscn`，可分别打开按 F6。五者继承 `main.tscn`，只声明数量，共用控制器与同一套物理。
+- 选场景会重新创建准确数量的球、生成新种子、重置模拟时间与错误，并从 1× 开始。重复点选也会重开，不会叠加球。
+- Restart 使用当前种子重现初始位置和速度，并回到 1×；1× / 2× / Pause 只改变推进速率，不改变球的速度向量，不会重新随机。
+- 100 球是重载演示，明确提示可能慢于真实时间；**不保证手机或电脑实时运行**。控制器每帧在完整的 1/120 秒物理步之间检查 12 ms 墙钟预算，超时丢弃积压，不缩小物理步长、不偷偷降低球速。单个物理步仍可能超过预算，所以这不是严格帧时上限，2× 也不保证在重载时达到真实时间两倍。
+- 初始化/运行失败会暂停，在场地区显示可滚动的完整原因；不依赖鼠标悬停。仍可选择其他场景或 Restart 恢复。
+- 以 Android **竖屏**为目标，720×1120 逻辑画布使用 expand 缩放，场地在剩余空间内等比适配。9 个按钮最小高度为 100 逻辑像素，320×568 竖屏约 44.4 像素。Android 安全区会转换成逻辑边距，避免刘海/系统栏遮住按钮。窄矮窗口和横屏不是触摸尺寸保证范围。
+
+## Android 手机导出
+
+`export_presets.cfg` 包含 **Android** 预设：普通 APK 导出、ARM64 + ARMv7、包名 `org.gankkiii.ballsdemo`、竖屏、不申请网络权限。没有签名密码、机器本地 SDK 路径或密钥写入仓库。构建输出 `build/` 已忽略。
+
+1. 安装 Godot **4.6.3 stable**，在编辑器的“管理导出模板”安装**相同版本**的导出模板。
+2. 安装完整 **OpenJDK 17**（不是只有 Java runtime）与 Android SDK，包括 Platform Tools、Build Tools 和对应 Android 平台。SDK 版本和组件以 [Godot 4.6 Android 导出文档](https://docs.godotengine.org/en/4.6/tutorials/export/exporting_for_android.html) 为准。
+3. 在 Godot 的 Editor Settings → Export → Android 设置 Java SDK Path 和 Android SDK Path。需要 `adb`、`apksigner` 和可用的调试签名配置；这些属于本机环境，不提交到仓库。
+4. **打开 `demo/project.godot`**，选择 Project → Export → Android → Export Project，勾选 Export With Debug，导出 `.apk`。也可从仓库根目录执行：
+
+```bash
+mkdir -p demo/build
+godot --headless --path demo --export-debug Android build/balls-demo.apk
+```
+
+5. 将调试 APK 安装到允许安装该来源应用的 Android 手机上，或在已授权的 USB 调试设备上用 `adb install -r demo/build/balls-demo.apk`。打开后即可点选五个场景；先验证 1/2/5 球，再测 20/100 球、暂停/继续、重开和切后台恢复。
+
+这是开发调试 APK 流程，不是应用商店发布配置。正式发布需自己的 release 签名和商店要求，不要把私钥或密码放进仓库。
+
+本次环境缺 Android SDK、导出模板与完整 JDK，实际尝试导出后被这些缺项阻挡，**没有生成或验证 APK，也没有做 Android 真机测试**。已有预设不等于构建已成功。
 
 ## 职责
 
@@ -59,7 +86,7 @@ ID 与配置引用不会自动同步或互相查找，是否匹配由外部配�
 - `min_initial_speed`：随机初始速率下限，单位像素/秒。
 - `max_initial_speed`：随机初始速率上限。上下限相同表示固定速率，均为 0 表示静止出场。
 
-默认资源仍为 **140–230**。`initialize_demo` 保留原两球 Demo 合法布局的位置、随机方向、采样顺序和同种子的初始结果；更多球使用网格位置。`Main` 为两个球的 `character_definition` 显式关联这份资源；要逐球配置，可给不同的球关联不同 `BallConfig`。未关联（`null`）时 Arena 读取默认资源，但不会反向填写 Ball 的字段。
+默认资源仍为 **140–230**。`initialize_demo` 保留原两球 Demo 合法布局的位置、随机方向、采样顺序和同种子的初始结果；更多球使用网格位置。`Main` 为场景内每个球的 `character_definition` 显式关联这份资源；要逐球配置，可给不同的球关联不同 `BallConfig`。未关联（`null`）时 Arena 读取默认资源，但不会反向填写 Ball 的字段。
 
 配置必须满足有限数值 `0 <= min_initial_speed <= max_initial_speed`，并且速率范围能转换为有限的单精度 `Vector2`、长度平方不溢出，正速率不下溢为零。这是数值表示边界，不是额外玩法限速。非空但不是 `BallConfig` 的角色配置，或不合法、不可表示的速率范围，会报错并取消整次初始化。Arena 先生成所有球的位置和速度并验证有限性，全部成功后才统一写回、重置计数；生成阶段失败同样不留下部分初始化的球。配置可以共享，Arena 只读取、不修改；修改配置只影响下次 `initialize` 或 `initialize_demo`，不会追溯改变运行中的 `Ball.velocity`。本次未增加配置界面、方向配置或额外玩法规则。
 
@@ -68,7 +95,7 @@ ID 与配置引用不会自动同步或互相查找，是否匹配由外部配�
 - `initialize(seed_value, initial_positions)` 接收与 `balls` 顺序对应的位置数组，返回 `{ok, error}`。只验证玩家指定的位置，不自动调整。通过后一起写入位置、按各球 `BallConfig` 采样的速度，并重置时间和计数；失败保留全部球状态、配置引用和计数，仅更新 `last_error` 并输出错误。
 - `validate_positions(positions)` 是只读检查，返回 `{ok, error}`。场地尺寸必须有限且为正；球不能为空或重复引用，半径必须有限、为正、可表示且直径不超过场地，质量必须有限且为正。位置必须是有限 `Vector2`。越界和两球重叠深度不得超过 `POSITION_EPS = 1e-4` 像素；容差内的位置原样保留，错误标明从 0 开始的球索引。初始化还验证速度配置与生成结果。
 - `generate_demo_positions(seed_value)` 只生成位置，不修改球，返回 `{ok, positions}` 或 `{ok: false, error}`。原两球随机位置合法时保留；否则在有限数量的矩形网格中选择每格都能容纳最大球的一种。默认 640×680 场地可放置 100 个半径 24 的球。网格是保守的自动放置方法，失败不代表任意排列都不可能，尤其是半径差异很大时；可改用显式合法位置。
-- `initialize_demo(seed_value)` 组合自动放置和整批初始化。现有 Demo 和原随机初始化测试改用此入口，主场景仍是两个球，没有增加玩法或改动默认速度。
+- `initialize_demo(seed_value)` 组合自动放置和整批初始化。五个 Demo 场景和原随机初始化测试共用此入口，没有增加玩法或改动默认速度。
 - `_correct_positions()` 在临时位置数组中交替处理墙和球对，每轮复查全部约束，最多 512 轮。成功后才一次性提交，返回 `{ok, error, iterations}`；失败返回 `{ok: false, error}`，不写回任何尝试位置，也不改变速度。已经合法的状态不会漂移。质量权重先缩放，避免直接求倒数或质量和溢出。
 - `step(dt)` 返回是否成功；位置、速度或时间无效、位置纠正不收敛时停止该次推进，增加 `position_failures` 并记录 `last_error`。在步首纠正失败时不会进入 CCD、推进时间或发出碰撞通知。碰撞求解和事件次数失败也返回 `false`；已经完成的碰撞和时间不回滚。主场景收到失败后暂停并显示原因，不反复推进失败状态。
 
@@ -112,7 +139,7 @@ func _on_ball_collided(colliding_balls: Array[Ball]) -> void:
 - Godot 的 `Vector2` 为单精度。求解和 CCD 标量使用双精度，检测与求解共用随速度大小调整的容差，避免双精度结果写回后产生的微小负法向残差被误当成反复新碰撞。低于该容差的接近视为静止接触，不承诺任意微小速度或任意量级数据的精确表现。
 - 初始化拒绝超出 `1e-4` 像素容差的重叠或越界。运行中的位置纠正采用上述有限迭代和原子提交，不承诺密集穿插状态的唯一结果或必然收敛。
 - 每个子步最多处理 128 个碰撞时刻；每批最多 128 轮同刻冲击，每轮求解最多 4096 次迭代。极端质量比、长接触链或密集病态布局可能不收敛；中间量和最终结果也需保持有限、可写回单精度状态。失败会显式报错，记录 `solver_failures`，不提交部分速度或发送该批通知，并丢弃剩余子步；`event_limit_hits` 单独记录 CCD 事件超限。失败前已经推进到的撞击位置和模拟时间仍保留。
-- 后台/失焦停止推进，单次渲染回调最多接收 0.1 秒，长卡顿不会补算大量时间。
+- 后台/失焦停止推进，单次渲染回调最多接收 0.1 秒，长卡顿不会补算大量时间；超出上述帧预算时也丢弃积压，保留每个已完成物理步的结果。
 - 使用浮点运算，不承诺跨 CPU 或引擎版本位级一致。
 
 ## 自动测试
@@ -123,6 +150,7 @@ func _on_ball_collided(colliding_balls: Array[Ball]) -> void:
 godot --headless --path . --editor --import --quit
 godot --headless --path . --script tests/test_ball_state.gd
 godot --headless --path . --script tests/test_ball_config.gd
+godot --headless --path . --script tests/test_demo_scenarios.gd
 godot --headless --path . --script tests/test_arena_placement.gd
 godot --headless --path . --script tests/test_wall_time.gd
 godot --headless --path . --script tests/test_contact_detection.gd
@@ -132,8 +160,8 @@ godot --headless --path . --script tests/run_tests.gd
 godot --headless --path . --quit-after 5
 ```
 
-状态测试验证纯状态对象、字段与生命周期；配置测试验证默认兼容、逐球配置与原子拒绝；位置测试覆盖 100 球放置和推进、显式位置、容差、非法数据、连锁/墙面纠正及不可行布局的原子失败；撞墙预测测试覆盖四面墙、角落、零时刻、速度与时间容差，并与抽取前的事件算法进行随机逐项对照；接触检测测试覆盖球墙/球球接触、正间隙种子、法线顺序、连通链和独立组，并与抽取前算法进行随机逐项对照；同刻碰撞测试覆盖对称三球、不同质量、静止链、独立组、墙与角落、时间容差、排列一致性、随机旋转接触链及守恒；原回归保留长时间二球物理与主场景控制。
+场景测试覆盖五个独立入口、32 个种子的初始化、每种数量 3 个种子的短时推进、全部球对的独立几何检查、真实按钮信号/合成触摸派发、重开/切换/暂停、资源释放、帧预算和错误恢复，以及竖屏布局和安全区换算；状态测试验证纯状态对象、字段与生命周期；配置测试验证默认兼容、逐球配置与原子拒绝；位置测试覆盖 100 球放置和推进、显式位置、容差、非法数据、连锁/墙面纠正及不可行布局的原子失败；撞墙预测测试覆盖四面墙、角落、零时刻、速度与时间容差，并与抽取前的事件算法进行随机逐项对照；接触检测测试覆盖球墙/球球接触、正间隙种子、法线顺序、连通链和独立组，并与抽取前算法进行随机逐项对照；同刻碰撞测试覆盖对称三球、不同质量、静止链、独立组、墙与角落、时间容差、排列一致性、随机旋转接触链及守恒；原回归保留长时间二球物理与主场景控制。
 
-配置测试故意触发 15 次错误日志，位置测试故意触发 33 次错误日志，求解失败路径测试故意触发 4 次错误日志，分别有 `EXPECTED CONFIG ERROR` / `EXPECTED PLACEMENT ERROR` / `EXPECTED ERROR` 标记；它们用来确认错误配置、不收敛及数值溢出不会部分修改状态。其他测试不应有引擎/脚本错误。检查退出码、最终失败数和日志，不要仅看退出码。最新执行结果见 `TEST_RESULTS.md`。
+配置测试故意触发 15 次错误日志，位置测试故意触发 33 次错误日志，求解失败路径测试故意触发 4 次错误日志，场景测试故意触发 1 次错误日志，分别有 `EXPECTED CONFIG ERROR` / `EXPECTED PLACEMENT ERROR` / `EXPECTED ERROR` / `EXPECTED SCENARIO ERROR` 标记；它们用来确认错误配置、不收敛及数值溢出不会部分修改状态。其他测试不应有引擎/脚本错误。检查退出码、最终失败数和日志，不要仅看退出码。最新执行结果见 `TEST_RESULTS.md`。
 
-此目录不包含 Android 构建、旧战斗工程或自动 CI 配置。无界面测试不等于画面、触屏或真机验证。
+此目录包含 Android 导出预设和操作说明，不包含构建产物、旧战斗工程或自动 CI 配置。无界面布局和合成触摸测试不等于画面、真实触屏或手机验证。
