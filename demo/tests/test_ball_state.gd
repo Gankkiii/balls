@@ -203,7 +203,7 @@ func test_external_system_boundaries() -> void:
 	skill.runtime[&"nested"] = {&"values": [5, null]}
 	first.skills.append(skill)
 	var before := gameplay_snapshot(first)
-	main.arena.initialize(42)
+	main.arena.initialize_demo(42)
 	check(gameplay_snapshot(first) == before, "Arena initialization leaves gameplay data untouched")
 	# Force both a wall and a pair collision without adding gameplay listeners.
 	first.position = Vector2(first.radius + 1, 100)

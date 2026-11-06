@@ -70,7 +70,7 @@ func run() -> void:
 	var worst := 0.0
 	for seed_value in 20:
 		a = make_arena()
-		a.initialize(seed_value)
+		a.initialize_demo(seed_value)
 		energy = a.kinetic_energy()
 		check(a.balls[0].position.distance_to(a.balls[1].position) > 20, "legal initial seed %d" % seed_value)
 		for tick in 72000:
@@ -88,13 +88,13 @@ func run() -> void:
 	var main = load("res://scenes/main.tscn").instantiate()
 	root.add_child(main)
 	main.set_process(false)
-	main.arena.initialize(42)
+	main.arena.initialize_demo(42)
 	main.set_rate(1)
 	for i in 600:
 		main.advance_real_time(1.0 / 60)
 	var first: Vector2 = main.arena.balls[0].position
 	var second: Vector2 = main.arena.balls[1].position
-	main.arena.initialize(42)
+	main.arena.initialize_demo(42)
 	main.set_rate(2)
 	for i in 300:
 		main.advance_real_time(1.0 / 60)

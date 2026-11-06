@@ -38,9 +38,11 @@ func _ready() -> void:
 		# 两球的展示配色属于渲染层，不存入 Ball 运行状态。
 		ball_renderer.set_display_color(ball, Color("50e0bd") if i == 0 else Color("ffb45f"))
 		arena.register_ball(ball)
-	arena.initialize(randi())
+	arena.initialize_demo(randi())
 	status = Label.new()
 	status.position = Vector2(40, 845)
+	status.size = Vector2(640, 40)
+	status.clip_text = true
 	status.add_theme_font_size_override("font_size", 22)
 	add_child(status)
 	var captions := ["1×", "2×", "Pause"]
@@ -57,9 +59,12 @@ func _ready() -> void:
 	set_rate(0)
 
 func set_rate(value: int) -> void:
-	rate = value
+	rate = value if arena.last_error.is_empty() else 0
 	accumulator = 0.0
 	status.text = "Paused" if rate == 0 else "Running · %d×" % rate
+	status.tooltip_text = arena.last_error
+	if not arena.last_error.is_empty():
+		status.text = "Stopped: " + arena.last_error
 	for i in buttons.size():
 		buttons[i].modulate = Color("50e0bd") if [1, 2, 0][i] == rate else Color.WHITE
 
@@ -69,7 +74,9 @@ func advance_real_time(delta: float) -> void:
 	# Drop long background stalls; never catch up minutes of elapsed wall time.
 	accumulator += minf(delta, 0.1) * rate
 	while accumulator + 1e-12 >= FIXED_DT:
-		arena.step(FIXED_DT)
+		if not arena.step(FIXED_DT):
+			set_rate(0)
+			return
 		accumulator -= FIXED_DT
 
 func _process(delta: float) -> void:

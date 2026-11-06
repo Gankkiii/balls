@@ -37,7 +37,7 @@ func test_default_seed_compatibility() -> void:
 	var arena := make_arena()
 	# 未配置的球沿用默认配置，不改写未分配的关联。
 	for seed_value in 20:
-		arena.initialize(seed_value)
+		arena.initialize_demo(seed_value)
 		var rng := RandomNumberGenerator.new()
 		rng.seed = seed_value
 		for i in arena.balls.size():
@@ -65,7 +65,7 @@ func verify_rejected_config(config: Resource, label: String, second_radius: floa
 	arena.event_limit_hits = 2
 	arena.solver_failures = 1
 	print("EXPECTED CONFIG ERROR: ", label)
-	arena.initialize(42)
+	arena.initialize_demo(42)
 	check(arena.balls[0].position == Vector2(80, 90) and arena.balls[0].velocity == Vector2(10, 20), "invalid second config prevents partial initialization of the first ball")
 	check(arena.balls[1].position == Vector2(400, 500) and arena.balls[1].velocity == Vector2(30, 40), "invalid config preserves that ball's runtime motion")
 	check(arena.simulation_time == 3.5 and arena.event_limit_hits == 2 and arena.solver_failures == 1, "invalid config preserves arena counters")
@@ -109,7 +109,7 @@ func test_representation_and_atomic_generation() -> void:
 	arena.event_limit_hits = 2
 	arena.solver_failures = 1
 	for seed_value in 8:
-		arena.initialize(seed_value)
+		arena.initialize_demo(seed_value)
 		for ball in arena.balls:
 			check(ball.velocity.is_finite() and is_finite(ball.velocity.length_squared()), "large representable speed initializes finite vector and magnitude")
 			check(absf(ball.velocity.length() / 1e18 - 1.0) < 1e-6, "large representable fixed speed is not silently clamped")
@@ -127,14 +127,14 @@ func test_per_ball_configuration() -> void:
 	arena.balls[0].character_definition = fixed
 	arena.balls[1].character_definition = stationary
 	for seed_value in 8:
-		arena.initialize(seed_value)
+		arena.initialize_demo(seed_value)
 		check(absf(arena.balls[0].velocity.length() - 375.0) < 0.0001, "per-ball fixed speed comes from its config")
 		check(arena.balls[1].velocity == Vector2.ZERO, "zero-speed config is supported")
 	var previous := arena.balls[0].velocity
 	fixed.min_initial_speed = 150.0
 	fixed.max_initial_speed = 150.0
 	check(arena.balls[0].velocity == previous, "editing config does not retroactively change runtime velocity")
-	arena.initialize(42)
+	arena.initialize_demo(42)
 	check(absf(arena.balls[0].velocity.length() - 150.0) < 0.0001, "next initialization reads the current config")
 	check(arena.balls[0].character_definition == fixed, "initialization retains per-ball config reference")
 	check(stationary.min_initial_speed == 0.0 and stationary.max_initial_speed == 0.0, "initialization does not mutate config values")
@@ -149,7 +149,7 @@ func test_shared_range() -> void:
 		ball.character_definition = config
 	var unique_speeds: Dictionary = {}
 	for seed_value in 32:
-		arena.initialize(seed_value)
+		arena.initialize_demo(seed_value)
 		for ball in arena.balls:
 			var speed := ball.velocity.length()
 			check(speed >= 31.4999 and speed <= 92.2501, "custom range is honored for both balls")

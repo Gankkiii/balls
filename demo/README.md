@@ -10,7 +10,7 @@ Godot **4.6.3 stable** / GDScript。一个竞技场、两个球、1× / 2× / Pa
 
 - `scripts/ball.gd`：`Ball extends RefCounted`，保存运动、身份、生命、临时状态、技能和外观数据。没有初始化方法、碰撞方法、信号、绘制或逐帧回调，也不依赖场景树。
 - `scripts/ball_temporary_state.gd` / `scripts/ball_skill_state.gd`：同样只含字段的 `RefCounted`，分别表示一个临时状态记录和一个技能关联及其运行态，不执行效果或技能。
-- `scripts/arena.gd`：注册/移除球、设置初始状态、推进位置、处理碰撞，并发出 `wall_collided(ball, normal)` 和 `ball_collided(colliding_balls: Array[Ball])` 信号。同一时刻的球间碰撞只发一次去重列表通知，见下文。
+- `scripts/arena.gd`：注册/移除球、验证并设置初始状态、为 Demo 自动放置、推进位置、处理碰撞，并发出 `wall_collided(ball, normal)` 和 `ball_collided(colliding_balls: Array[Ball])` 信号。同一时刻的球间碰撞只发一次去重列表通知，见下文。
 - `scripts/collision_solver.gd`：从同一份速度快照联立求同刻接触冲量，返回整批结果，不直接修改 Ball。
 - `scripts/ball_config.gd` / `configs/default_ball.tres`：简单球配置及 Demo 默认资源，当前只定义初始速率范围。
 - `scripts/ball_renderer.gd`：只读取竞技场共享的球列表并绘制，包含球的颜色、阴影和高光，不修改模拟状态。Demo 配色通过渲染器的 `set_display_color` 设置，`Ball` 不再定义 `color`。
@@ -59,9 +59,20 @@ ID 与配置引用不会自动同步或互相查找，是否匹配由外部配�
 - `min_initial_speed`：随机初始速率下限，单位像素/秒。
 - `max_initial_speed`：随机初始速率上限。上下限相同表示固定速率，均为 0 表示静止出场。
 
-默认资源仍为 **140–230**，没有改变原 Demo 的位置、随机方向、随机采样顺序或同种子的初始结果。`Main` 为两个球的 `character_definition` 显式关联这份资源；要逐球配置，可给不同的球关联不同 `BallConfig`。未关联（`null`）时 Arena 读取默认资源，但不会反向填写 Ball 的字段。
+默认资源仍为 **140–230**。`initialize_demo` 保留原两球 Demo 合法布局的位置、随机方向、采样顺序和同种子的初始结果；更多球使用网格位置。`Main` 为两个球的 `character_definition` 显式关联这份资源；要逐球配置，可给不同的球关联不同 `BallConfig`。未关联（`null`）时 Arena 读取默认资源，但不会反向填写 Ball 的字段。
 
-配置必须满足有限数值 `0 <= min_initial_speed <= max_initial_speed`，并且速率范围能转换为有限的单精度 `Vector2`、长度平方不溢出，正速率不下溢为零。这是数值表示边界，不是额外玩法限速。非空但不是 `BallConfig` 的角色配置，或不合法、不可表示的速率范围，会报错并取消整次初始化。Arena 先生成所有球的位置和速度并验证有限性，全部成功后才统一写回、重置计数；生成阶段失败同样不留下部分初始化的球。配置可以共享，Arena 只读取、不修改；修改配置只影响下次 `initialize`，不会追溯改变运行中的 `Ball.velocity`。本次未增加配置界面、方向配置或额外玩法规则。
+配置必须满足有限数值 `0 <= min_initial_speed <= max_initial_speed`，并且速率范围能转换为有限的单精度 `Vector2`、长度平方不溢出，正速率不下溢为零。这是数值表示边界，不是额外玩法限速。非空但不是 `BallConfig` 的角色配置，或不合法、不可表示的速率范围，会报错并取消整次初始化。Arena 先生成所有球的位置和速度并验证有限性，全部成功后才统一写回、重置计数；生成阶段失败同样不留下部分初始化的球。配置可以共享，Arena 只读取、不修改；修改配置只影响下次 `initialize` 或 `initialize_demo`，不会追溯改变运行中的 `Ball.velocity`。本次未增加配置界面、方向配置或额外玩法规则。
+
+## 初始位置与运行中纠正
+
+- `initialize(seed_value, initial_positions)` 接收与 `balls` 顺序对应的位置数组，返回 `{ok, error}`。只验证玩家指定的位置，不自动调整。通过后一起写入位置、按各球 `BallConfig` 采样的速度，并重置时间和计数；失败保留全部球状态、配置引用和计数，仅更新 `last_error` 并输出错误。
+- `validate_positions(positions)` 是只读检查，返回 `{ok, error}`。场地尺寸必须有限且为正；球不能为空或重复引用，半径必须有限、为正、可表示且直径不超过场地，质量必须有限且为正。位置必须是有限 `Vector2`。越界和两球重叠深度不得超过 `POSITION_EPS = 1e-4` 像素；容差内的位置原样保留，错误标明从 0 开始的球索引。初始化还验证速度配置与生成结果。
+- `generate_demo_positions(seed_value)` 只生成位置，不修改球，返回 `{ok, positions}` 或 `{ok: false, error}`。原两球随机位置合法时保留；否则在有限数量的矩形网格中选择每格都能容纳最大球的一种。默认 640×680 场地可放置 100 个半径 24 的球。网格是保守的自动放置方法，失败不代表任意排列都不可能，尤其是半径差异很大时；可改用显式合法位置。
+- `initialize_demo(seed_value)` 组合自动放置和整批初始化。现有 Demo 和原随机初始化测试改用此入口，主场景仍是两个球，没有增加玩法或改动默认速度。
+- `_correct_positions()` 在临时位置数组中交替处理墙和球对，每轮复查全部约束，最多 512 轮。成功后才一次性提交，返回 `{ok, error, iterations}`；失败返回 `{ok: false, error}`，不写回任何尝试位置，也不改变速度。已经合法的状态不会漂移。质量权重先缩放，避免直接求倒数或质量和溢出。
+- `step(dt)` 返回是否成功；位置、速度或时间无效、位置纠正不收敛时停止该次推进，增加 `position_failures` 并记录 `last_error`。在步首纠正失败时不会进入 CCD、推进时间或发出碰撞通知。碰撞求解和事件次数失败也返回 `false`；已经完成的碰撞和时间不回滚。主场景收到失败后暂停并显示原因，不反复推进失败状态。
+
+这不是通用圆形装箱求解器，也不保证任意密集穿插布局都能纠正。`POSITION_EPS` 是绝对像素容差，不随球半径缩放；远小于该容差的球无法据此获得有意义的分离精度。迭代次数有上限不等于实时性能保证，密集非法布局可能用满预算。没有新增玩家摆球 UI；显式位置入口可供以后接入。
 
 ## 同一时刻的碰撞
 
@@ -99,7 +110,7 @@ func _on_ball_collided(colliding_balls: Array[Ball]) -> void:
 - 无重力、摩擦或阻尼，保留解析连续碰撞检测（CCD），不同时使用刚体引擎。
 - 固定步长为 1/120 秒，倍率仅决定推进的步数；碰固定墙不保持球系统总动量。
 - Godot 的 `Vector2` 为单精度。求解和 CCD 标量使用双精度，检测与求解共用随速度大小调整的容差，避免双精度结果写回后产生的微小负法向残差被误当成反复新碰撞。低于该容差的接近视为静止接触，不承诺任意微小速度或任意量级数据的精确表现。
-- 初始位置应合法。已有轻微数值重叠不超过 `1e-4` 像素时不做顺序位置修正；较大的非法初始重叠仍沿用原修正，不承诺密集穿插状态的唯一结果。当前随机初始化仍只保证两个球合法放置；多球测试显式提供合法接触布局。
+- 初始化拒绝超出 `1e-4` 像素容差的重叠或越界。运行中的位置纠正采用上述有限迭代和原子提交，不承诺密集穿插状态的唯一结果或必然收敛。
 - 每个子步最多处理 128 个碰撞时刻；每批最多 128 轮同刻冲击，每轮求解最多 4096 次迭代。极端质量比、长接触链或密集病态布局可能不收敛；中间量和最终结果也需保持有限、可写回单精度状态。失败会显式报错，记录 `solver_failures`，不提交部分速度或发送该批通知，并丢弃剩余子步；`event_limit_hits` 单独记录 CCD 事件超限。失败前已经推进到的撞击位置和模拟时间仍保留。
 - 后台/失焦停止推进，单次渲染回调最多接收 0.1 秒，长卡顿不会补算大量时间。
 - 使用浮点运算，不承诺跨 CPU 或引擎版本位级一致。
@@ -112,6 +123,7 @@ func _on_ball_collided(colliding_balls: Array[Ball]) -> void:
 godot --headless --path . --editor --import --quit
 godot --headless --path . --script tests/test_ball_state.gd
 godot --headless --path . --script tests/test_ball_config.gd
+godot --headless --path . --script tests/test_arena_placement.gd
 godot --headless --path . --script tests/test_wall_time.gd
 godot --headless --path . --script tests/test_contact_detection.gd
 godot --headless --path . --script tests/test_simultaneous_collisions.gd
@@ -120,8 +132,8 @@ godot --headless --path . --script tests/run_tests.gd
 godot --headless --path . --quit-after 5
 ```
 
-状态测试验证纯状态对象、字段与生命周期；配置测试验证默认兼容、逐球配置与原子拒绝；撞墙预测测试覆盖四面墙、角落、零时刻、速度与时间容差，并与抽取前的事件算法进行随机逐项对照；接触检测测试覆盖球墙/球球接触、正间隙种子、法线顺序、连通链和独立组，并与抽取前算法进行随机逐项对照；同刻碰撞测试覆盖对称三球、不同质量、静止链、独立组、墙与角落、时间容差、排列一致性、随机旋转接触链及守恒；原回归保留长时间二球物理与主场景控制。
+状态测试验证纯状态对象、字段与生命周期；配置测试验证默认兼容、逐球配置与原子拒绝；位置测试覆盖 100 球放置和推进、显式位置、容差、非法数据、连锁/墙面纠正及不可行布局的原子失败；撞墙预测测试覆盖四面墙、角落、零时刻、速度与时间容差，并与抽取前的事件算法进行随机逐项对照；接触检测测试覆盖球墙/球球接触、正间隙种子、法线顺序、连通链和独立组，并与抽取前算法进行随机逐项对照；同刻碰撞测试覆盖对称三球、不同质量、静止链、独立组、墙与角落、时间容差、排列一致性、随机旋转接触链及守恒；原回归保留长时间二球物理与主场景控制。
 
-配置测试故意触发 15 次错误日志，求解失败路径测试故意触发 4 次错误日志，分别有 `EXPECTED CONFIG ERROR` / `EXPECTED ERROR` 标记；它们用来确认错误配置、不收敛及数值溢出不会部分修改状态。其他测试不应有引擎/脚本错误。检查退出码、最终失败数和日志，不要仅看退出码。最新执行结果见 `TEST_RESULTS.md`。
+配置测试故意触发 15 次错误日志，位置测试故意触发 33 次错误日志，求解失败路径测试故意触发 4 次错误日志，分别有 `EXPECTED CONFIG ERROR` / `EXPECTED PLACEMENT ERROR` / `EXPECTED ERROR` 标记；它们用来确认错误配置、不收敛及数值溢出不会部分修改状态。其他测试不应有引擎/脚本错误。检查退出码、最终失败数和日志，不要仅看退出码。最新执行结果见 `TEST_RESULTS.md`。
 
 此目录不包含 Android 构建、旧战斗工程或自动 CI 配置。无界面测试不等于画面、触屏或真机验证。
