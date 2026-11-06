@@ -163,27 +163,40 @@ func _next_event(horizon: float) -> Dictionary:
 			contacts.append(candidate)
 	return {"time": earliest, "contacts": contacts}
 
+func _wall_contacts(ball: Ball, seeded_normals: Array[Vector2] = []) -> Array[Vector2]:
+	# 返回接触墙面的法线；同刻 CCD 种子允许仍有正间隙。
+	var normals: Array[Vector2] = []
+	for axis in 2:
+		for side in [-1.0, 1.0]:
+			var normal := Vector2.ZERO
+			normal[axis] = side
+			var edge: float = ball.radius if side > 0.0 else arena_size[axis] - ball.radius
+			var gap: float = (ball.position[axis] - edge) * side
+			if seeded_normals.has(normal) or gap <= 0.0:
+				normals.append(normal)
+	return normals
+
+func _pair_contact(a: Ball, b: Ball, seeded: bool = false) -> Dictionary:
+	var delta := a.position - b.position
+	var gap := sqrt(float(delta.x) * delta.x + float(delta.y) * delta.y) - a.radius - b.radius
+	var normal := delta.normalized()
+	# 正间隙只接纳显式的同刻 CCD 种子；法线从 b 指向 a。
+	return {"normal": normal} if seeded or gap <= 0.0 else {}
+
 func _contacts_at_event(seeds: Array) -> Array:
 	var contacts: Array = []
 	for i in balls.size():
-		var ball := balls[i]
-		for axis in 2:
-			for side in [-1.0, 1.0]:
-				var normal := Vector2.ZERO
-				normal[axis] = side
-				var edge: float = ball.radius if side > 0.0 else arena_size[axis] - ball.radius
-				var seeded := seeds.any(func(event: Dictionary) -> bool: return event.a == i and event.b == -1 and event.normal == normal)
-				var gap: float = (ball.position[axis] - edge) * side
-				if seeded or gap <= 0.0:
-					contacts.append({"a": i, "b": -1, "normal": normal})
+		var seeded_normals: Array[Vector2] = []
+		for seed in seeds:
+			if seed.a == i and seed.b == -1:
+				seeded_normals.append(seed.normal)
+		for normal in _wall_contacts(balls[i], seeded_normals):
+			contacts.append({"a": i, "b": -1, "normal": normal})
 		for j in range(i + 1, balls.size()):
-			var delta := ball.position - balls[j].position
 			var seeded := seeds.any(func(event: Dictionary) -> bool: return event.a == i and event.b == j)
-			var gap := sqrt(float(delta.x) * delta.x + float(delta.y) * delta.y) - ball.radius - balls[j].radius
-			var normal := delta.normalized()
-			# 正间隙不算已有接触，只能通过显式的同刻 CCD 种子进入本批。
-			if seeded or gap <= 0.0:
-				contacts.append({"a": i, "b": j, "normal": normal})
+			var contact := _pair_contact(balls[i], balls[j], seeded)
+			if not contact.is_empty():
+				contacts.append({"a": i, "b": j, "normal": contact.normal})
 	# 只扩展本批碰撞接触到的链，避免把远处“很快才撞”的独立近接触提前合并。
 	var involved: Dictionary = {}
 	for seed in seeds:

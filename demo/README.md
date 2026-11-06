@@ -69,6 +69,8 @@ CCD 先找真正的最早碰撞时间，再把与它相差不超过 `TIME_EPS = 
 
 `Arena._wall_time(ball, horizon)` 负责预测单个球在时间窗口内最早撞墙的时间，返回 `time` 和 `contacts`。每个墙接触保留自己的 `time` 和朝向场内的 `normal`，角落可以同时返回两面墙；窗口内不撞墙时为 `INF` 和空列表。`_next_event` 汇总墙与球对预测，再按全场最早时刻筛选，保持原有时间容差和碰撞行为。
 
+到达事件时刻后，`_wall_contacts(ball, seeded_normals)` 检查单球与四面墙的接触，返回朝场内的法线；`_pair_contact(a, b, seeded)` 检查两球接触，返回从 b 指向 a 的 `normal`，未接触时返回空字典。默认只接受零间隙或重叠；显式同刻 CCD 种子允许仍有正间隙。`_contacts_at_event` 负责调用这两个函数、补上球索引，再筛选本批种子连通的接触链，保持原有顺序和行为。
+
 这批接触从同一份碰撞前速度计算耦合冲量，全部算完后一次性写回速度，再发送通知。互不相连的碰撞在方程中彼此独立，但它们处于同一时刻，所以仍合并到一个通知列表。不能将独立二球公式逐对套用，也不能将独立冲量简单相加。
 
 ### 通知接口
@@ -111,13 +113,14 @@ godot --headless --path . --editor --import --quit
 godot --headless --path . --script tests/test_ball_state.gd
 godot --headless --path . --script tests/test_ball_config.gd
 godot --headless --path . --script tests/test_wall_time.gd
+godot --headless --path . --script tests/test_contact_detection.gd
 godot --headless --path . --script tests/test_simultaneous_collisions.gd
 godot --headless --path . --script tests/test_collision_solver_failure.gd
 godot --headless --path . --script tests/run_tests.gd
 godot --headless --path . --quit-after 5
 ```
 
-状态测试验证纯状态对象、字段与生命周期；配置测试验证默认兼容、逐球配置与原子拒绝；撞墙预测测试覆盖四面墙、角落、零时刻、速度与时间容差，并与抽取前的事件算法进行随机逐项对照；同刻碰撞测试覆盖对称三球、不同质量、静止链、独立组、墙与角落、时间容差、排列一致性、随机旋转接触链及守恒；原回归保留长时间二球物理与主场景控制。
+状态测试验证纯状态对象、字段与生命周期；配置测试验证默认兼容、逐球配置与原子拒绝；撞墙预测测试覆盖四面墙、角落、零时刻、速度与时间容差，并与抽取前的事件算法进行随机逐项对照；接触检测测试覆盖球墙/球球接触、正间隙种子、法线顺序、连通链和独立组，并与抽取前算法进行随机逐项对照；同刻碰撞测试覆盖对称三球、不同质量、静止链、独立组、墙与角落、时间容差、排列一致性、随机旋转接触链及守恒；原回归保留长时间二球物理与主场景控制。
 
 配置测试故意触发 15 次错误日志，求解失败路径测试故意触发 4 次错误日志，分别有 `EXPECTED CONFIG ERROR` / `EXPECTED ERROR` 标记；它们用来确认错误配置、不收敛及数值溢出不会部分修改状态。其他测试不应有引擎/脚本错误。检查退出码、最终失败数和日志，不要仅看退出码。最新执行结果见 `TEST_RESULTS.md`。
 
