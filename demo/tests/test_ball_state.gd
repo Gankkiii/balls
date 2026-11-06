@@ -185,7 +185,7 @@ func test_external_system_boundaries() -> void:
 	var second: Ball = main.arena.balls[1]
 	check(first.current_health == null and first.skills.is_empty(), "demo does not invent gameplay configuration")
 	first.character_id = &"fixture_character"
-	first.character_definition = Resource.new()
+	first.character_definition = BallConfig.new()
 	first.instance_id = &"fixture_instance"
 	first.team_id = &"fixture_team"
 	first.current_health = 7
@@ -283,9 +283,9 @@ func test_collision_notifications() -> void:
 	second.velocity = Vector2(-100, 0)
 	arena.register_ball(second)
 	var pair_events: Array = []
-	arena.ball_collided.connect(func(a: Ball, b: Ball): pair_events.append([a, b]))
+	arena.ball_collided.connect(func(group: Array[Ball]): pair_events.append(group))
 	arena.step(0.2)
-	check(pair_events.size() == 1, "Arena emits one notification per ball pair")
+	check(pair_events.size() == 1, "Arena emits one list notification for the collision group")
 	if pair_events.size() == 1:
 		check(is_same(pair_events[0][0], first) and is_same(pair_events[0][1], second), "pair notification identifies both balls")
 	check(first.velocity == Vector2(-100, 0) and second.velocity == Vector2(100, 0), "notifications preserve elastic collision response")
