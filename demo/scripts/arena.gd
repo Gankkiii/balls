@@ -8,10 +8,9 @@ signal ball_collided(colliding_balls: Array[Ball])
 
 const TIME_EPS := 1e-9
 const VEL_EPS := 1e-7
-const POSITION_EPS := 1e-4
+const POSITION_EPS := BallValidation.POSITION_EPS
 const MAX_EVENTS := 128
 const MAX_POSITION_ITERATIONS := 512
-const DefaultBallConfig := preload("res://configs/default_ball.tres")
 @export var arena_size := Vector2(640, 680)
 var balls: Array[Ball] = []
 var simulation_time := 0.0
@@ -27,156 +26,36 @@ func register_ball(ball: Ball) -> void:
 func remove_ball(ball: Ball) -> void:
 	balls.erase(ball)
 
+## 保留手动位置入口；初始化细节交给 BallFactory。
 func initialize(seed_value: int, initial_positions: Array) -> Dictionary:
-	# 玩家位置只验证，不悄悄搬动；所有数据通过后才一起提交。
-	return _initialize_positions(seed_value, initial_positions, false)
+	return _finish_initialization(BallFactory.initialize_positions(balls, arena_size, seed_value, initial_positions))
 
+## 保留演示初始化入口，不替换场景和渲染器共享的球列表。
 func initialize_demo(seed_value: int) -> Dictionary:
-	var placement := generate_demo_positions(seed_value)
-	if not placement.ok:
-		return _initialization_failure(placement.error)
-	return _initialize_positions(seed_value, placement.positions, true)
+	return _finish_initialization(BallFactory.initialize_demo(balls, arena_size, seed_value))
 
 func generate_demo_positions(seed_value: int) -> Dictionary:
-	var error := _geometry_error()
-	if not error.is_empty():
-		return _failure(error)
-	var positions: Array[Vector2] = []
-	if balls.is_empty():
-		return {"ok": true, "positions": positions}
-	# 保留原两球 Demo 的种子和采样顺序；不合法时再尝试网格。
-	if balls.size() <= 2:
-		var rng := RandomNumberGenerator.new()
-		rng.seed = seed_value
-		for i in balls.size():
-			var ball := balls[i]
-			positions.append(Vector2(arena_size.x * (0.28 if i == 0 else 0.72), rng.randf_range(ball.radius + 40, arena_size.y - ball.radius - 40)))
-			rng.randf()
-			rng.randf()
-		if validate_positions(positions).ok:
-			return {"ok": true, "positions": positions}
-	positions.clear()
-	var diameter := 0.0
-	for ball in balls:
-		diameter = maxf(diameter, 2.0 * ball.radius)
-	var columns := 0
-	var rows := 0
-	var best_shape := INF
-	for candidate_columns in range(1, balls.size() + 1):
-		var candidate_rows := ceili(float(balls.size()) / candidate_columns)
-		var cell_width := float(arena_size.x) / candidate_columns
-		var cell_height := float(arena_size.y) / candidate_rows
-		if cell_width < diameter or cell_height < diameter:
-			continue
-		var shape := absf(cell_width - cell_height)
-		if shape < best_shape:
-			columns = candidate_columns
-			rows = candidate_rows
-			best_shape = shape
-	if columns == 0:
-		return _failure("Demo grid could not place %d balls; try a larger arena, smaller radii, or explicit positions (this is not a packing impossibility proof)" % balls.size())
-	for i in balls.size():
-		positions.append(Vector2((i % columns + 0.5) * float(arena_size.x) / columns, (i / columns + 0.5) * float(arena_size.y) / rows))
-	var validation := validate_positions(positions)
-	if not validation.ok:
-		return _failure("Demo grid did not produce representable valid positions: " + validation.error)
-	return {"ok": true, "positions": positions}
+	return BallFactory.generate_demo_positions(balls, arena_size, seed_value)
 
-func _initialize_positions(seed_value: int, initial_positions: Array, demo_sampling: bool) -> Dictionary:
-	var validation := validate_positions(initial_positions)
-	if not validation.ok:
-		return _initialization_failure(validation.error)
-	var configs: Array[BallConfig] = []
-	for i in balls.size():
-		var ball := balls[i]
-		var config: BallConfig = DefaultBallConfig
-		if ball.character_definition != null:
-			if not ball.character_definition is BallConfig:
-				return _initialization_failure("Ball %d: character_definition must be a BallConfig or null" % i)
-			config = ball.character_definition as BallConfig
-		if not is_finite(config.min_initial_speed) or not is_finite(config.max_initial_speed) or config.min_initial_speed < 0.0 or config.max_initial_speed < config.min_initial_speed:
-			return _initialization_failure("Ball %d: BallConfig requires finite 0 <= min_initial_speed <= max_initial_speed" % i)
-		var minimum := Vector2(config.min_initial_speed, 0.0)
-		var maximum := Vector2(config.max_initial_speed, 0.0)
-		if not maximum.is_finite() or not is_finite(maximum.length_squared()) or (config.min_initial_speed > 0.0 and minimum.x == 0.0) or (config.max_initial_speed > 0.0 and maximum.x == 0.0):
-			return _initialization_failure("Ball %d: speed range is not representable with finite Vector2 speed and squared length" % i)
-		configs.append(config)
-	var rng := RandomNumberGenerator.new()
-	rng.seed = seed_value
-	var velocities: Array[Vector2] = []
-	for i in balls.size():
-		if demo_sampling:
-			rng.randf()
-		var angle := rng.randf_range(0.0, TAU)
-		var velocity := Vector2.from_angle(angle) * rng.randf_range(configs[i].min_initial_speed, configs[i].max_initial_speed)
-		if not velocity.is_finite() or not is_finite(velocity.length_squared()):
-			return _initialization_failure("Ball %d: generated velocity or squared speed is not finite" % i)
-		velocities.append(velocity)
-	for i in balls.size():
-		balls[i].position = initial_positions[i]
-		balls[i].velocity = velocities[i]
+## 初始化成功后重置模拟计数；失败只记录错误。
+func _finish_initialization(result: Dictionary) -> Dictionary:
+	if not result.ok:
+		last_error = result.error
+		push_error(result.error + "; initialization cancelled, runtime state preserved")
+		return result
 	simulation_time = 0.0
 	event_limit_hits = 0
 	solver_failures = 0
 	position_failures = 0
 	last_error = ""
 	queue_redraw()
-	return {"ok": true, "error": ""}
+	return result
 
 func _failure(error: String) -> Dictionary:
 	return {"ok": false, "error": error}
 
-func _initialization_failure(error: String) -> Dictionary:
-	last_error = error
-	push_error(error + "; initialization cancelled, runtime state preserved")
-	return _failure(error)
-
-func _geometry_error() -> String:
-	if not arena_size.is_finite() or arena_size.x <= 0.0 or arena_size.y <= 0.0:
-		return "Arena dimensions must be finite and positive"
-	var seen: Dictionary = {}
-	for i in balls.size():
-		var ball := balls[i]
-		if ball == null:
-			return "Ball %d is null" % i
-		if seen.has(ball):
-			return "Ball %d duplicates an already registered object" % i
-		seen[ball] = true
-		if not is_finite(ball.radius) or ball.radius <= 0.0 or Vector2(ball.radius, 0.0).x == 0.0:
-			return "Ball %d: radius must be finite, positive, and representable" % i
-		if ball.radius > minf(arena_size.x, arena_size.y) * 0.5:
-			return "Ball %d: diameter exceeds the arena dimensions" % i
-		if not is_finite(ball.mass) or ball.mass <= 0.0:
-			return "Ball %d: mass must be finite and positive" % i
-	return ""
-
 func validate_positions(positions: Array) -> Dictionary:
-	var error := _geometry_error()
-	if not error.is_empty():
-		return _failure(error)
-	if positions.size() != balls.size():
-		return _failure("Expected %d positions, received %d" % [balls.size(), positions.size()])
-	for i in positions.size():
-		if not positions[i] is Vector2 or not positions[i].is_finite():
-			return _failure("Ball %d: position must be a finite Vector2" % i)
-	return _check_position_constraints(positions)
-
-func _check_position_constraints(positions: Array) -> Dictionary:
-	var errors: PackedStringArray = []
-	for i in balls.size():
-		var at: Vector2 = positions[i]
-		var radius := balls[i].radius
-		if not at.is_finite():
-			return _failure("Ball %d: position is not finite" % i)
-		if at.x < radius - POSITION_EPS or at.y < radius - POSITION_EPS or at.x > float(arena_size.x) - radius + POSITION_EPS or at.y > float(arena_size.y) - radius + POSITION_EPS:
-			errors.append("Ball %d is outside the arena" % i)
-		for j in range(i + 1, balls.size()):
-			var other: Vector2 = positions[j]
-			var dx := float(other.x) - at.x
-			var dy := float(other.y) - at.y
-			if balls[i].radius + balls[j].radius - sqrt(dx * dx + dy * dy) > POSITION_EPS:
-				errors.append("Balls %d and %d overlap" % [i, j])
-	return {"ok": errors.is_empty(), "error": "; ".join(errors)}
+	return BallValidation.validate_positions(balls, arena_size, positions)
 
 func kinetic_energy() -> float:
 	var energy := 0.0
@@ -233,7 +112,7 @@ func _pair_time(a: Ball, b: Ball, horizon: float) -> float:
 	return hit if hit >= -TIME_EPS and hit <= horizon + TIME_EPS else INF
 
 func _correct_positions() -> Dictionary:
-	var error := _geometry_error()
+	var error := BallValidation.geometry_error(balls, arena_size)
 	if not error.is_empty():
 		return _failure(error)
 	var positions: Array[Vector2] = []
@@ -243,7 +122,7 @@ func _correct_positions() -> Dictionary:
 		positions.append(balls[i].position)
 	# 只在副本上迭代；每轮同时复查墙和球，成功后整批提交。
 	for iteration in range(MAX_POSITION_ITERATIONS + 1):
-		var validation := _check_position_constraints(positions)
+		var validation := BallValidation.position_constraints(balls, arena_size, positions)
 		if validation.ok:
 			for i in balls.size():
 				balls[i].position = positions[i]
@@ -374,13 +253,14 @@ func _emit_collisions(contacts: Array, affected: Array) -> void:
 		wall_collided.emit(event[0], event[1])
 
 func step(dt: float) -> bool:
-	if not is_finite(dt) or not is_finite(simulation_time) or not is_finite(simulation_time + dt):
-		return _position_failure("Simulation time and step duration must be finite")
+	var time_error := BallValidation.time_error(simulation_time, dt)
+	if not time_error.is_empty():
+		return _position_failure(time_error)
 	if dt <= 0.0:
 		return true
-	for i in balls.size():
-		if balls[i] == null or not balls[i].velocity.is_finite() or not is_finite(balls[i].velocity.length_squared()):
-			return _position_failure("Ball %d: runtime velocity and squared speed must be finite" % i)
+	var velocity_error := BallValidation.runtime_velocity_error(balls)
+	if not velocity_error.is_empty():
+		return _position_failure(velocity_error)
 	var correction := _correct_positions()
 	if not correction.ok:
 		return _position_failure(correction.error)
@@ -414,7 +294,7 @@ func step(dt: float) -> bool:
 		var representable := true
 		for i in balls.size():
 			var velocity := Vector2(result.velocities[2 * i], result.velocities[2 * i + 1])
-			if not velocity.is_finite() or not is_finite(velocity.length_squared()):
+			if not BallValidation.velocity_is_representable(velocity):
 				representable = false
 				break
 			next_velocities.append(velocity)

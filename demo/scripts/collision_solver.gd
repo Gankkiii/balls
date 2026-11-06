@@ -11,16 +11,13 @@ const MAX_ITERATIONS := 4096
 const MAX_WAVES := 128
 
 static func resolve(balls: Array[Ball], contacts: Array) -> Dictionary:
+	var input_error := BallValidation.solver_input_error(balls, contacts)
+	if not input_error.is_empty():
+		return {"ok": false, "error": input_error}
 	var velocities := PackedFloat64Array()
 	for ball in balls:
-		if not is_finite(ball.mass) or ball.mass <= 0.0 or not ball.velocity.is_finite():
-			return {"ok": false, "error": "Contact solver requires finite velocities and positive finite masses"}
 		velocities.append(ball.velocity.x)
 		velocities.append(ball.velocity.y)
-	for contact in contacts:
-		var normal: Vector2 = contact.normal
-		if not normal.is_finite() or normal.length_squared() <= 0.0:
-			return {"ok": false, "error": "Contact solver requires finite nonzero normals"}
 	var affected: Dictionary = {}
 	for wave in MAX_WAVES:
 		var incoming: Array = []
@@ -39,7 +36,7 @@ static func resolve(balls: Array[Ball], contacts: Array) -> Dictionary:
 				incoming.append(index)
 				speeds.append(speed)
 		if not has_impact:
-			if not _representable_velocities(velocities):
+			if not BallValidation.solver_velocities_are_representable(velocities):
 				return {"ok": false, "error": "Contact result is not representable as finite Vector2 velocities and squared speeds"}
 			return {"ok": true, "velocities": velocities, "contacts": affected.keys()}
 		var impulses := _solve_impulses(balls, contacts, incoming, speeds)
@@ -65,15 +62,6 @@ static func resolve(balls: Array[Ball], contacts: Array) -> Dictionary:
 		# 原本分离的接触可能被整组冲击重新压紧，在同一时刻继续联立。
 		# 外部在所有轮次结束前看不到中间态，也不会收到重复通知。
 	return {"ok": false, "error": "Simultaneous contact wave safety limit reached"}
-
-static func _representable_velocities(values: PackedFloat64Array) -> bool:
-	for i in range(0, values.size(), 2):
-		if not is_finite(values[i]) or not is_finite(values[i + 1]):
-			return false
-		var velocity := Vector2(values[i], values[i + 1])
-		if not velocity.is_finite() or not is_finite(velocity.length_squared()):
-			return false
-	return true
 
 static func velocity_tolerance(normal: Vector2, ax: float, ay: float, bx: float = 0.0, by: float = 0.0) -> float:
 	# Ball.velocity 是 float32 Vector2；double 解写回会产生几个 ULP 的法向残差。
