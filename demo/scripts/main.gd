@@ -33,7 +33,8 @@ func _ready() -> void:
 	arena.add_child(ball_renderer)
 	for i in 2:
 		var ball := Ball.new()
-		ball.color = Color("50e0bd") if i == 0 else Color("ffb45f")
+		# 两球的展示配色属于渲染层，不存入 Ball 运行状态。
+		ball_renderer.set_display_color(ball, Color("50e0bd") if i == 0 else Color("ffb45f"))
 		arena.register_ball(ball)
 	arena.initialize(randi())
 	status = Label.new()

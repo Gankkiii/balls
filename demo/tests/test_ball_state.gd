@@ -26,7 +26,8 @@ func test_defaults() -> void:
 	check(ball.velocity == Vector2.ZERO, "default velocity")
 	check(ball.radius == 24.0, "default radius")
 	check(ball.mass == 1.0, "default mass")
-	check(ball.color == Color("55d6be"), "default color")
+	var properties: Array = ball.get_script().get_script_property_list()
+	check(not properties.any(func(property: Dictionary) -> bool: return property["name"] == "color"), "Ball does not store renderer colors")
 
 func test_gameplay_defaults() -> void:
 	var ball := Ball.new()
@@ -73,7 +74,6 @@ func test_instance_isolation() -> void:
 	first.velocity = Vector2(10, -20)
 	first.radius = 10
 	first.mass = 2
-	first.color = Color.RED
 	first.character_id = &"fixture_character"
 	first.character_definition = Resource.new()
 	first.instance_id = &"fixture_instance"
@@ -86,7 +86,6 @@ func test_instance_isolation() -> void:
 	check(second.velocity == Vector2.ZERO, "velocities are independent")
 	check(second.radius == 24.0, "radii are independent")
 	check(second.mass == 1.0, "masses are independent")
-	check(second.color == Color("55d6be"), "colors are independent")
 	check(second.character_id == &"" and second.character_definition == null, "character associations are independent")
 	check(second.instance_id == &"" and second.team_id == &"", "identity and team are independent")
 	check(second.current_health == null and second.max_health == null, "health values are independent")
@@ -302,20 +301,73 @@ func test_renderer_binding() -> void:
 	check(is_same(renderer.balls, arena.balls), "renderer reads the live state list")
 	check(renderer.balls.size() == 2, "main scene creates two visible states")
 	var first := arena.balls[0]
-	check(first.color == Color("50e0bd") and arena.balls[1].color == Color("ffb45f"), "main preserves ball colors")
+	check(renderer.display_color_for(first) == Color("50e0bd") and renderer.display_color_for(arena.balls[1]) == Color("ffb45f"), "renderer preserves demo ball colors")
 	var at := first.position
 	var motion := first.velocity
 	renderer._process(1000)
 	check(first.position == at and first.velocity == motion, "render updates do not advance simulation")
 	arena.remove_ball(first)
+	renderer._process(0)
 	check(renderer.balls.size() == 1 and not renderer.balls.has(first), "renderer observes removal")
 	arena.register_ball(first)
 	check(renderer.balls.size() == 2 and is_same(renderer.balls[1], first), "renderer observes re-registration")
+	check(renderer.display_color_for(first) == Color("50e0bd") and renderer.display_color_for(arena.balls[0]) == Color("ffb45f"), "renderer colors stay with balls after reordering")
 	main.free()
 	check(is_instance_valid(first), "state can outlive the main scene")
 
+func test_renderer_color_isolation() -> void:
+	var ball := Ball.new()
+	var first := BallRenderer.new()
+	var second := BallRenderer.new()
+	check(first._display_colors.is_empty(), "renderer starts without per-ball colors")
+	check(first.display_color_for(ball) == Color("55d6be"), "unconfigured ball uses renderer fallback color")
+	check(first._display_colors.is_empty(), "reading fallback color does not mutate presentation state")
+	first.set_display_color(ball, Color.RED)
+	check(first.display_color_for(ball) == Color.RED, "renderer accepts a per-ball display color")
+	first.set_display_color(ball, Color.BLUE)
+	check(first.display_color_for(ball) == Color.BLUE, "renderer can replace an existing display color")
+	check(first._display_colors.size() == 1, "replacing a display color does not accumulate records")
+	check(second._display_colors.is_empty() and second.display_color_for(ball) == Color("55d6be"), "two views of the same ball have independent colors")
+	check(ball.position == Vector2.ZERO and ball.velocity == Vector2.ZERO, "display colors do not alter ball motion")
+	first.free()
+	second.free()
+
+func test_renderer_color_lifecycle() -> void:
+	var arena := Arena.new()
+	var renderer := BallRenderer.new()
+	renderer.balls = arena.balls
+	var survivor := Ball.new()
+	var survivor_ref: WeakRef = weakref(survivor)
+	arena.register_ball(survivor)
+	renderer.set_display_color(survivor, Color.GREEN)
+	arena.remove_ball(survivor)
+	renderer._process(0)
+	check(renderer.display_color_for(survivor) == Color.GREEN, "externally held removed ball keeps its presentation association")
+	arena.register_ball(survivor)
+	var released: Array[WeakRef] = []
+	for i in 1000:
+		var transient := Ball.new()
+		released.append(weakref(transient))
+		arena.register_ball(transient)
+		renderer.set_display_color(transient, Color.RED)
+		arena.remove_ball(transient)
+		transient = null
+	check(released.all(func(reference: WeakRef) -> bool: return reference.get_ref() == null), "renderer does not keep any of 1000 removed balls alive")
+	check(renderer._display_colors.size() <= 2, "setting colors prunes expired records even without frame callbacks")
+	renderer._process(0)
+	check(renderer._display_colors.size() == 1, "frame cleanup removes expired records after repeated registration and removal")
+	check(is_same(survivor_ref.get_ref(), survivor), "live registered ball survives presentation cleanup")
+	check(renderer.display_color_for(survivor) == Color.GREEN, "live ball keeps its color during repeated registration and removal")
+	arena.remove_ball(survivor)
+	survivor = null
+	check(survivor_ref.get_ref() == null, "final removed ball releases without waiting for presentation cleanup")
+	renderer._process(0)
+	check(renderer._display_colors.is_empty(), "renderer retains no color records after all balls are destroyed")
+	renderer.free()
+	arena.free()
+
 func run() -> void:
-	for test in [test_defaults, test_gameplay_defaults, test_gameplay_storage, test_instance_isolation, test_temporary_state_isolation, test_skill_state_isolation, test_shared_definitions, test_state_only, test_registration, test_external_motion, test_collision_notifications, test_renderer_binding]:
+	for test in [test_defaults, test_gameplay_defaults, test_gameplay_storage, test_instance_isolation, test_temporary_state_isolation, test_skill_state_isolation, test_shared_definitions, test_state_only, test_registration, test_external_motion, test_collision_notifications, test_renderer_binding, test_renderer_color_isolation, test_renderer_color_lifecycle]:
 		run_case(test)
 	# The renderer boundary test awaits a frame, so record it after completion.
 	cases += 1

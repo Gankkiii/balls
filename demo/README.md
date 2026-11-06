@@ -11,7 +11,7 @@ Godot **4.6.3 stable** / GDScript。一个竞技场、两个球、1× / 2× / Pa
 - `scripts/ball.gd`：`Ball extends RefCounted`，保存运动、身份、生命、临时状态、技能和外观数据。没有初始化方法、碰撞方法、信号、绘制或逐帧回调，也不依赖场景树。
 - `scripts/ball_temporary_state.gd` / `scripts/ball_skill_state.gd`：同样只含字段的 `RefCounted`，分别表示一个临时状态记录和一个技能关联及其运行态，不执行效果或技能。
 - `scripts/arena.gd`：注册/移除球、设置初始状态、推进位置、处理碰撞，并发出 `wall_collided(ball, normal)` 和 `ball_collided(first, second)` 信号。球与球碰撞每对发一次通知。
-- `scripts/ball_renderer.gd`：只读取竞技场共享的球列表并绘制，包含球的颜色、阴影和高光，不修改模拟状态。
+- `scripts/ball_renderer.gd`：只读取竞技场共享的球列表并绘制，包含球的颜色、阴影和高光，不修改模拟状态。Demo 配色通过渲染器的 `set_display_color` 设置，`Ball` 不再定义 `color`。
 - `scripts/main.gd`：组合 Arena 和 BallRenderer，创建两个 Ball，处理按钮及固定时间步。
 
 `Ball.position` 是唯一权威位置，坐标相对于竞技场；位置和半径单位为逻辑像素，速度单位为像素/秒。Ball 不再是 Node2D，无需 `ball.tscn`，用 `Ball.new()` 创建。默认场地 640×680，球半径 24、质量 1、初始速率 140–230。
@@ -20,7 +20,7 @@ Ball 不做合法性修正，初始化和修改它的规则负责提供有效状
 
 ## 新增的数据字段
 
-这些字段是存储接口，不是已实现的战斗功能。`Main` 不为它们虚构初始值；`Arena.initialize`、移动和碰撞只处理原有模拟数据，`BallRenderer` 仍只按 `position`、`radius`、`color` 绘制，不解析皮肤。
+这些字段是存储接口，不是已实现的战斗功能。`Main` 不为它们虚构初始值；`Arena.initialize`、移动和碰撞只处理原有模拟数据，`BallRenderer` 只从 Ball 读取 `position`、`radius`，颜色由渲染器自己的展示配置提供，暂不解析皮肤。
 
 - `character_id: StringName`：角色类型/配置标识；`character_definition: Resource`：对应的配置引用。多个球可以引用同一份角色配置。
 - `instance_id: StringName`：这一个球的业务实例标识，与角色类型和 Godot 的 `Object.get_instance_id()` 不同；唯一性和分配由外部创建流程负责，`Ball.new()` 不自动生成。
@@ -28,9 +28,19 @@ Ball 不做合法性修正，初始化和修改它的规则负责提供有效状
 - `current_health: Variant` / `max_health: Variant`：当前/最大生命。默认都是 `null`，表示尚未配置，**不等于 0 生命或死亡**。外部规则决定使用整数或浮点数、有效范围、初始值及变更；这里只原样存储，不钳制、不自动补满、不推导存活状态。`Variant` 本身不会阻止写入其他类型，正确类型也由外部提供。
 - `temporary_states: Array[BallTemporaryState]`：当前关联的临时状态记录。每条含 `state_id: StringName`、`state_definition: Resource` 和 `runtime: Dictionary`。外部系统决定是否有持续时间、层数等字段，负责添加、更新和移除；这里不定义效果、叠加或过期规则。
 - `skills: Array[BallSkillState]`：技能关联列表。每条含 `skill_id: StringName`、`skill_definition: Resource` 和 `runtime: Dictionary`，把一个关联与其运行态放在同一条记录中，不需要维护平行数组。相同技能定义可以有多条独立记录；记录对象代表本球的这一次关联。外部系统决定运行态是否包含冷却、次数等字段，这里不指定数值、不计时、不触发技能。
-- `skin_id: StringName` / `appearance_definition: Resource`：皮肤标识与外观配置引用。与已有 `color` 并存，只保存关联，不加载资源、不改变画面，也不规定颜色与皮肤的优先级。
+- `skin_id: StringName` / `appearance_definition: Resource`：皮肤标识与外观配置引用。只保存关联，不加载资源、不改变画面。`Ball` 不再保存 `color`；当前 Demo 配色仍由渲染器单独管理，尚未接入皮肤解析。
 
 所有新增标识默认 `&""`（未分配），所有配置引用默认 `null`（未关联），两个数组和各记录的 `runtime` 默认空。空运行态表示没有提供运行数据，不等于技能已就绪、被禁用或状态已过期。`Resource` 是无具体配置结构的引用占位；标识与引用如何解析、匹配及校验由外部配置层负责。原始出场位置、初始方向/角度属于开战配置，未在球里重复保存第二份权威状态。
+
+### `character_id` 和 `character_definition` 的区别
+
+- `character_id` 是角色配置的“名字/编号”，回答“这个球是哪种角色”。例如两个球都属于同一种角色，它们可以有相同的 `character_id`。
+- `character_definition` 是实际角色配置对象的引用。可以理解为前者是“配置的名字”，后者是“配置内容的入口”。当前只声明为通用 `Resource`，尚未设计具体有哪些配置项。
+- `instance_id` 才是“场上具体哪一个球”的业务标识，由外部创建流程分配并保证唯一，不是角色类型标识。
+
+ID 与配置引用不会自动同步或互相查找，是否匹配由外部配置层保证。两者不是必须同时存在的设计要求：保留 ID 可以用于后续配置查找或存档，保留引用可以直接访问配置，但这些用途现在还没有实现。本次保留这两个字段，只添加说明，未擅自增加配置加载逻辑。
+
+`Ball`、`BallTemporaryState`、`BallSkillState` 中的每个字段均有紧邻声明的中文注释，说明含义、单位或未配置值。`color` 不参与物理模拟，已从 Ball 移至渲染层的 Demo 配色；渲染器按 Godot 对象 ID 保存“弱引用＋颜色”记录，并检查弱引用仍指向同一个球，不依赖列表顺序或业务 `instance_id`。外部仍持有的球移除后再注册会保留原配色；配色记录不强持有球，无其他引用时球会正常释放。设置配色和每帧更新都会清理已销毁球的记录，避免反复增删后累积。配色不作为玩法状态或皮肤配置。
 
 ### 可变状态的归属
 
