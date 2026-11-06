@@ -6,7 +6,7 @@ Godot **4.6.3 stable** / GDScript。一个竞技场、**1 / 2 / 5 / 20 / 100 球
 
 用 Godot **4.6.3** 导入本目录的 `project.godot`，按 F5。顶部点选球数即可切换场景，下方用 1× / 2× / Pause 控制。鼠标和触摸使用同一组按钮。
 
-- 入口为 `scenes/balls_1.tscn`；另有 `balls_2.tscn`、`balls_5.tscn`、`balls_20.tscn`、`balls_100.tscn`，可分别打开按 F6。五者继承 `main.tscn`，只声明数量，共用控制器与同一套物理。
+- 入口为 `scenes/main.tscn`，默认加载 1 球场景。`balls_1.tscn`、`balls_2.tscn`、`balls_5.tscn`、`balls_20.tscn`、`balls_100.tscn` 是独立内容场景，各自声明球数、配置资源和 Arena 子节点，不再继承 main。可分别打开按 F6 预览自动运动；完整选择器和播放按钮在 F5 主页面中。选择按钮实际加载对应场景文件。
 - 选场景会重新创建准确数量的球、生成新种子、重置模拟时间与错误，并从 1× 开始。重复点选也会重开，不会叠加球。
 - Restart 使用当前种子重现初始位置和速度，并回到 1×；1× / 2× / Pause 只改变推进速率，不改变球的速度向量，不会重新随机。
 - 100 球是重载演示，明确提示可能慢于真实时间；**不保证手机或电脑实时运行**。控制器每帧在完整的 1/120 秒物理步之间检查 12 ms 墙钟预算，超时丢弃积压，不缩小物理步长、不偷偷降低球速。单个物理步仍可能超过预算，所以这不是严格帧时上限，2× 也不保证在重载时达到真实时间两倍。
@@ -41,7 +41,9 @@ godot --headless --path demo --export-debug Android build/balls-demo.apk
 - `scripts/collision_solver.gd`：从同一份速度快照联立求同刻接触冲量，返回整批结果，不直接修改 Ball。
 - `scripts/ball_config.gd` / `configs/default_ball.tres`：简单球配置及 Demo 默认资源，当前只定义初始速率范围。
 - `scripts/ball_renderer.gd`：只读取竞技场共享的球列表并绘制，包含球的颜色、阴影和高光，不修改模拟状态。Demo 配色通过渲染器的 `set_display_color` 设置，`Ball` 不再定义 `color`。
-- `scripts/main.gd`：组合 Arena 和 BallRenderer，创建两个 Ball，处理按钮及固定时间步。
+- `scripts/main.gd`：页面外壳，加载和释放当前场景，处理选择、重启、播放按钮、错误提示和手机安全区布局。
+- `scripts/demo_scenario.gd`：五个内容场景共用的脚本，负责创建球与渲染器、初始化种子、固定时间步、倍率、后台暂停和帧预算；不依赖 main，物理算法仍在 Arena 中。
+- `scenes/balls_*.tscn`：每个场景自己的内容入口。修改某个场景的球数、配置或增加节点，在对应文件中完成；相同播放行为只维护一份 `demo_scenario.gd`。新增同类场景后，将它加入 main 的 `SCENES` 和 `SCENARIO_COUNTS` 即可加入选择器。
 
 `Ball.position` 是唯一权威位置，坐标相对于竞技场；位置和半径单位为逻辑像素，速度单位为像素/秒。Ball 不再是 Node2D，无需 `ball.tscn`，用 `Ball.new()` 创建。默认场地 640×680，球半径 24、质量 1、初始速率 140–230。
 

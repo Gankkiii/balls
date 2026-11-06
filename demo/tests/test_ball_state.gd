@@ -182,8 +182,9 @@ func test_external_system_boundaries() -> void:
 	root.add_child(main)
 	main.select_scenario(2)
 	main.set_process(false)
-	var first: Ball = main.arena.balls[0]
-	var second: Ball = main.arena.balls[1]
+	main.current_scenario.set_process(false)
+	var first: Ball = main.current_scenario.arena.balls[0]
+	var second: Ball = main.current_scenario.arena.balls[1]
 	check(first.current_health == null and first.skills.is_empty(), "demo does not invent gameplay configuration")
 	first.character_id = &"fixture_character"
 	first.character_definition = BallConfig.new()
@@ -204,30 +205,30 @@ func test_external_system_boundaries() -> void:
 	skill.runtime[&"nested"] = {&"values": [5, null]}
 	first.skills.append(skill)
 	var before := gameplay_snapshot(first)
-	main.arena.initialize_demo(42)
+	main.current_scenario.arena.initialize_demo(42)
 	check(gameplay_snapshot(first) == before, "Arena initialization leaves gameplay data untouched")
 	# Force both a wall and a pair collision without adding gameplay listeners.
 	first.position = Vector2(first.radius + 1, 100)
 	first.velocity = Vector2(-100, 0)
 	second.position = Vector2(500, 500)
 	second.velocity = Vector2.ZERO
-	main.arena.step(0.02)
+	main.current_scenario.arena.step(0.02)
 	check(first.velocity.x > 0, "boundary fixture exercises a wall collision")
 	check(gameplay_snapshot(first) == before, "wall collisions do not apply damage or alter gameplay state")
 	first.position = Vector2(100, 100)
 	first.velocity = Vector2(100, 0)
 	second.position = Vector2(150, 100)
 	second.velocity = Vector2(-100, 0)
-	main.arena.step(0.02)
+	main.current_scenario.arena.step(0.02)
 	check(first.velocity.x < 0, "boundary fixture exercises a pair collision")
 	check(gameplay_snapshot(first) == before, "pair collisions do not trigger skill or temporary-state rules")
-	main.ball_renderer._process(1000)
+	main.current_scenario.ball_renderer._process(1000)
 	# Let the queued drawing callback run while simulation is disabled.
 	await process_frame
 	check(gameplay_snapshot(first) == before, "renderer callbacks leave all gameplay data untouched")
-	main.arena.remove_ball(first)
-	main.arena.register_ball(first)
-	check(is_same(main.arena.balls.back(), first), "re-registration preserves the same gameplay state object")
+	main.current_scenario.arena.remove_ball(first)
+	main.current_scenario.arena.register_ball(first)
+	check(is_same(main.current_scenario.arena.balls.back(), first), "re-registration preserves the same gameplay state object")
 	check(gameplay_snapshot(first) == before, "removal and re-registration preserve gameplay data")
 	main.free()
 	check(gameplay_snapshot(first) == before, "gameplay data can outlive the scene")
@@ -297,8 +298,9 @@ func test_renderer_binding() -> void:
 	root.add_child(main)
 	main.select_scenario(2)
 	main.set_process(false)
-	var arena: Arena = main.arena
-	var renderer: BallRenderer = main.ball_renderer
+	main.current_scenario.set_process(false)
+	var arena: Arena = main.current_scenario.arena
+	var renderer: BallRenderer = main.current_scenario.ball_renderer
 	check(renderer.get_parent() == arena, "renderer uses arena-local coordinates")
 	check(is_same(renderer.balls, arena.balls), "renderer reads the live state list")
 	check(renderer.balls.size() == 2, "main scene creates two visible states")

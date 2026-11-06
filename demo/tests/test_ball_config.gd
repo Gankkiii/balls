@@ -164,8 +164,9 @@ func test_main_configuration() -> void:
 	root.add_child(main)
 	main.select_scenario(2)
 	main.set_process(false)
-	check(main.arena.balls.size() == 2, "main still creates two balls")
-	for ball in main.arena.balls:
+	main.current_scenario.set_process(false)
+	check(main.current_scenario.arena.balls.size() == 2, "main still creates two balls")
+	for ball in main.current_scenario.arena.balls:
 		check(ball.character_definition == DefaultConfig, "main explicitly associates each ball with the default config")
 		check(ball.velocity.length() >= 139.9999 and ball.velocity.length() <= 230.0001, "main starts with the configured speed range")
 	main.free()

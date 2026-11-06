@@ -89,26 +89,27 @@ func run() -> void:
 	root.add_child(main)
 	main.select_scenario(2)
 	main.set_process(false)
-	main.arena.initialize_demo(42)
+	main.current_scenario.set_process(false)
+	main.current_scenario.arena.initialize_demo(42)
 	main.set_rate(1)
 	for i in 600:
 		main.advance_real_time(1.0 / 60)
-	var first: Vector2 = main.arena.balls[0].position
-	var second: Vector2 = main.arena.balls[1].position
-	main.arena.initialize_demo(42)
+	var first: Vector2 = main.current_scenario.arena.balls[0].position
+	var second: Vector2 = main.current_scenario.arena.balls[1].position
+	main.current_scenario.arena.initialize_demo(42)
 	main.set_rate(2)
 	for i in 300:
 		main.advance_real_time(1.0 / 60)
-	check(close_vec(main.arena.balls[0].position, first) and close_vec(main.arena.balls[1].position, second), "1x10s equals 2x5s")
+	check(close_vec(main.current_scenario.arena.balls[0].position, first) and close_vec(main.current_scenario.arena.balls[1].position, second), "1x10s equals 2x5s")
 	main.set_rate(0)
 	main.advance_real_time(1000)
-	check(close_vec(main.arena.balls[0].position, first), "pause preserves state")
+	check(close_vec(main.current_scenario.arena.balls[0].position, first), "pause preserves state")
 	for i in 100:
 		main.set_rate(i % 3)
-	check(main.arena.balls.size() == 2, "repeated control no extra balls")
-	main.suspended = true
+	check(main.current_scenario.arena.balls.size() == 2, "repeated control no extra balls")
+	main.current_scenario.suspended = true
 	main.advance_real_time(1000)
-	check(close_vec(main.arena.balls[0].position, first), "background preserves state")
+	check(close_vec(main.current_scenario.arena.balls[0].position, first), "background preserves state")
 	main.free()
 	print("RESULT checks=%d failures=%d worst_relative_energy_error=%.9f" % [checks, failures, worst])
 	quit(1 if failures else 0)

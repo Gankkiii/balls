@@ -236,22 +236,23 @@ func test_main_stops() -> void:
 	root.add_child(main)
 	main.select_scenario(2)
 	main.set_process(false)
+	main.current_scenario.set_process(false)
 	main.set_rate(1)
-	main.arena.balls[1].radius = 1000
-	var before := snapshot(main.arena)
+	main.current_scenario.arena.balls[1].radius = 1000
+	var before := snapshot(main.current_scenario.arena)
 	expected_errors += 1
 	print("EXPECTED PLACEMENT ERROR: UI pauses on invalid runtime geometry")
 	main.advance_real_time(0.1)
-	check(main.rate == 0 and main.accumulator == 0, "main stops fixed-step loop after failure")
+	check(main.current_scenario.rate == 0 and main.current_scenario.accumulator == 0, "main stops fixed-step loop after failure")
 	check("Stopped:" in main.status.text, "main displays failure")
-	main.arena.position_failures = 0
-	check(snapshot(main.arena) == before, "UI failure preserves motion")
+	main.current_scenario.arena.position_failures = 0
+	check(snapshot(main.current_scenario.arena) == before, "UI failure preserves motion")
 	main.set_rate(2)
-	check(main.rate == 0, "UI cannot accidentally resume unresolved failure")
-	main.arena.balls[1].radius = 24
-	check(main.arena.initialize_demo(42).ok, "corrected setup can reinitialize")
+	check(main.current_scenario.rate == 0, "UI cannot accidentally resume unresolved failure")
+	main.current_scenario.arena.balls[1].radius = 24
+	check(main.current_scenario.arena.initialize_demo(42).ok, "corrected setup can reinitialize")
 	main.set_rate(2)
-	check(main.rate == 2 and main.status.tooltip_text.is_empty(), "successful reinitialization clears UI stop")
+	check(main.current_scenario.rate == 2 and main.status.tooltip_text.is_empty(), "successful reinitialization clears UI stop")
 	main.free()
 
 func _initialize() -> void:

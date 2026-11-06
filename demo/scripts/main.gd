@@ -1,19 +1,15 @@
 extends Control
-const FIXED_DT := 1.0 / 120.0
-# 检查发生在完整物理步之间；单个昂贵物理步仍可能超过此预算。
-const FRAME_BUDGET_USEC := 12000
+
+# 页面外壳：只负责选择场景、共用按钮、状态和手机布局。
 const SCENARIO_COUNTS := [1, 2, 5, 20, 100]
-const ArenaScene := preload("res://scenes/arena.tscn")
-const DefaultBallConfig := preload("res://configs/default_ball.tres")
-@export_enum("1 ball:1", "2 balls:2", "5 balls:5", "20 balls:20", "100 balls:100") var initial_ball_count := 1
-var arena: Arena
-var ball_renderer: BallRenderer
-var rate := 0
-var accumulator := 0.0
-var suspended := false
-var selected_ball_count := 1
-var scenario_seed := 0
-var budget_limited := false
+const SCENES := {
+	1: preload("res://scenes/balls_1.tscn"),
+	2: preload("res://scenes/balls_2.tscn"),
+	5: preload("res://scenes/balls_5.tscn"),
+	20: preload("res://scenes/balls_20.tscn"),
+	100: preload("res://scenes/balls_100.tscn"),
+}
+var current_scenario: DemoScenario
 var status: Label
 var outer_margin: MarginContainer
 var buttons: Array[Button] = []
@@ -63,7 +59,6 @@ func _ready() -> void:
 	arena_host = Control.new()
 	arena_host.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	arena_host.custom_minimum_size = Vector2(0, 180)
-	arena_host.resized.connect(_fit_arena)
 	layout.add_child(arena_host)
 	_build_error_panel()
 	status = Label.new()
@@ -80,7 +75,7 @@ func _ready() -> void:
 		button.pressed.connect(set_rate.bind(rates[i]))
 		controls.add_child(button)
 		buttons.append(button)
-	select_scenario(initial_ball_count)
+	select_scenario(1)
 
 # Android 安全区按窗口到逻辑画布的比例转换，给刘海和系统导航留空间。
 func _update_safe_area() -> void:
@@ -127,91 +122,49 @@ func _build_error_panel() -> void:
 	scroll.add_child(error_message)
 	error_panel.hide()
 
-# 五个独立场景与屏幕选择器共用这条入口，不复制或替换物理算法。
-# seed_value < 0 时生成新种子；Restart 复现当前种子。
+# 选择器实际加载对应场景；Restart 使用相同种子重新创建该场景。
 func select_scenario(count: int, seed_value: int = -1) -> bool:
-	if count not in SCENARIO_COUNTS:
+	if not SCENES.has(count):
 		return false
-	if is_instance_valid(arena):
-		arena.free()
-	arena = ArenaScene.instantiate()
-	arena_host.add_child(arena)
+	var was_suspended := false
+	if is_instance_valid(current_scenario):
+		was_suspended = current_scenario.suspended
+		current_scenario.free()
+	current_scenario = SCENES[count].instantiate()
+	current_scenario.scenario_seed = seed_value
+	current_scenario.suspended = was_suspended
+	arena_host.add_child(current_scenario)
 	arena_host.move_child(error_panel, -1)
-	ball_renderer = BallRenderer.new()
-	ball_renderer.balls = arena.balls
-	arena.add_child(ball_renderer)
-	for i in count:
-		var ball := Ball.new()
-		ball.character_definition = DefaultBallConfig
-		# 展示配色留在渲染层；两球仍使用原来的青绿与橙色。
-		var color := Color.from_hsv(fmod(i * 0.61803398875, 1.0), 0.57, 0.95)
-		if i < 2:
-			color = Color("50e0bd") if i == 0 else Color("ffb45f")
-		ball_renderer.set_display_color(ball, color)
-		arena.register_ball(ball)
-	selected_ball_count = count
-	scenario_seed = randi() if seed_value < 0 else seed_value
-	budget_limited = false
-	var result := arena.initialize_demo(scenario_seed)
-	_fit_arena()
 	for i in scenario_buttons.size():
 		scenario_buttons[i].modulate = Color("50e0bd") if SCENARIO_COUNTS[i] == count else Color.WHITE
-	set_rate(1)
-	return result.ok
+	_refresh_status()
+	return current_scenario.arena.last_error.is_empty()
 
 func restart_scenario() -> void:
-	select_scenario(selected_ball_count, scenario_seed)
-
-func _fit_arena() -> void:
-	if not is_instance_valid(arena):
-		return
-	var fit := minf(arena_host.size.x / arena.arena_size.x, arena_host.size.y / arena.arena_size.y)
-	arena.scale = Vector2.ONE * fit
-	arena.position = (arena_host.size - arena.arena_size * fit) * 0.5
+	select_scenario(current_scenario.ball_count, current_scenario.scenario_seed)
 
 func set_rate(value: int) -> void:
-	rate = value if value in [0, 1, 2] and arena.last_error.is_empty() else 0
-	accumulator = 0.0
+	current_scenario.set_rate(value)
 	_refresh_status()
-	for i in buttons.size():
-		buttons[i].modulate = Color("50e0bd") if [1, 2, 0][i] == rate else Color.WHITE
 
 func _refresh_status() -> void:
-	status.text = "%s · %d ball%s · %.2f s" % ["Paused" if rate == 0 else "Running %d×" % rate, selected_ball_count, "" if selected_ball_count == 1 else "s", arena.simulation_time]
-	status.tooltip_text = arena.last_error
-	if not arena.last_error.is_empty():
+	for i in buttons.size():
+		buttons[i].modulate = Color("50e0bd") if [1, 2, 0][i] == current_scenario.rate else Color.WHITE
+	status.text = "%s · %d ball%s · %.2f s" % ["Paused" if current_scenario.rate == 0 else "Running %d×" % current_scenario.rate, current_scenario.ball_count, "" if current_scenario.ball_count == 1 else "s", current_scenario.arena.simulation_time]
+	status.tooltip_text = current_scenario.arena.last_error
+	if not current_scenario.arena.last_error.is_empty():
 		status.text = "Stopped: simulation error · Choose a scene or Restart"
-		error_message.text = "Simulation stopped\n\n" + arena.last_error + "\n\nChoose another scene or tap Restart to reset."
+		error_message.text = "Simulation stopped\n\n" + current_scenario.arena.last_error + "\n\nChoose another scene or tap Restart to reset."
 		error_panel.show()
 	else:
 		error_panel.hide()
-		if selected_ball_count == 100 or budget_limited:
+		if current_scenario.ball_count == 100 or current_scenario.budget_limited:
 			status.text += "\nHeavy load: simulation may run slower than real time."
 
+# 测试及外部调用可显式推进；正常逐帧推进由场景自己负责。
 func advance_real_time(delta: float) -> void:
-	if rate == 0 or suspended:
-		return
-	# 长卡顿不补算；完整步之间检查墙钟预算，避免大量积压阻挡触摸。
-	accumulator += minf(delta, 0.1) * rate
-	var start_usec := Time.get_ticks_usec()
-	while accumulator + 1e-12 >= FIXED_DT:
-		if not arena.step(FIXED_DT):
-			set_rate(0)
-			return
-		accumulator -= FIXED_DT
-		if Time.get_ticks_usec() - start_usec >= FRAME_BUDGET_USEC:
-			budget_limited = true
-			accumulator = 0.0
-			break
+	current_scenario.advance_real_time(delta)
 	_refresh_status()
 
-func _process(delta: float) -> void:
-	advance_real_time(delta)
-
-func _notification(what: int) -> void:
-	if what == NOTIFICATION_APPLICATION_FOCUS_OUT or what == NOTIFICATION_APPLICATION_PAUSED:
-		suspended = true
-		accumulator = 0.0
-	elif what == NOTIFICATION_APPLICATION_FOCUS_IN or what == NOTIFICATION_APPLICATION_RESUMED:
-		suspended = false
-		accumulator = 0.0
+func _process(_delta: float) -> void:
+	_refresh_status()
