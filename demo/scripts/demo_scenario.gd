@@ -22,17 +22,24 @@ func _ready() -> void:
 	ball_renderer = BallRenderer.new()
 	ball_renderer.balls = arena.balls
 	arena.add_child(ball_renderer)
-	for i in ball_count:
-		var ball := Ball.new()
-		ball.character_definition = ball_config
+	var configs: Array[BallConfig] = []
+	configs.resize(ball_count)
+	configs.fill(ball_config)
+	scenario_seed = randi() if scenario_seed < 0 else scenario_seed
+	var creation := BallFactory.create_demo(configs, arena.arena_size, scenario_seed)
+	if not creation.ok:
+		arena.last_error = creation.error
+		_fit_arena()
+		set_rate(0)
+		return
+	for i in creation.balls.size():
+		var ball: Ball = creation.balls[i]
 		# 展示配色留在渲染层；两球仍使用原来的青绿与橙色。
 		var color := Color.from_hsv(fmod(i * 0.61803398875, 1.0), 0.57, 0.95)
 		if i < 2:
 			color = Color("50e0bd") if i == 0 else Color("ffb45f")
 		ball_renderer.set_display_color(ball, color)
 		arena.register_ball(ball)
-	scenario_seed = randi() if scenario_seed < 0 else scenario_seed
-	arena.initialize_demo(scenario_seed)
 	_fit_arena()
 	set_rate(1)
 

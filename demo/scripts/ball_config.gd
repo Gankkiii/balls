@@ -11,9 +11,9 @@ extends Resource
 @export_range(0.0, 1000.0, 1.0, "or_greater") var attack: float = 10.0
 ## 基础防御力，暂未接入伤害规则。
 @export_range(0.0, 1000.0, 1.0, "or_greater") var defense: float = 0.0
-## 大小采用半径（像素），暂未写入 Ball.radius。
+## 大小采用半径（像素），创建球时写入 Ball.radius。
 @export_range(0.1, 1000.0, 0.1, "or_greater") var radius: float = 24.0
-## 重量采用相对质量，暂未写入 Ball.mass。
+## 重量采用相对质量，创建球时写入 Ball.mass。
 @export_range(0.1, 1000.0, 0.1, "or_greater") var mass: float = 1.0
 
 ## 初始化时随机速率的下限（像素/秒），不包含方向。
