@@ -164,4 +164,12 @@ godot --headless --path . --quit-after 5
 
 配置测试故意触发 15 次错误日志，位置测试故意触发 33 次错误日志，求解失败路径测试故意触发 4 次错误日志，场景测试故意触发 1 次错误日志，分别有 `EXPECTED CONFIG ERROR` / `EXPECTED PLACEMENT ERROR` / `EXPECTED ERROR` / `EXPECTED SCENARIO ERROR` 标记；它们用来确认错误配置、不收敛及数值溢出不会部分修改状态。其他测试不应有引擎/脚本错误。检查退出码、最终失败数和日志，不要仅看退出码。最新执行结果见 `TEST_RESULTS.md`。
 
-此目录包含 Android 导出预设和操作说明，不包含构建产物、旧战斗工程或自动 CI 配置。无界面布局和合成触摸测试不等于画面、真实触屏或手机验证。
+此目录包含 Android 导出预设和操作说明，不提交构建产物或旧战斗工程。无界面布局和合成触摸测试不等于画面、真实触屏或手机验证。
+
+### GitHub Actions 构建 APK
+
+仓库根目录的 `.github/workflows/android-demo.yml` 使用 Godot 4.6.3、JDK 17 和 Android SDK 35，先运行全部回归，再导出 `balls-demo.apk`。在 Actions 中选择 **Build Balls demo Android APK**，点击 **Run workflow** 可手动构建所选分支；只有该工作流文件在 `main` 上变化时会自动构建，普通游戏代码提交不会自动运行，没有定时任务。
+
+成功运行的 `balls-demo-android-apk` artifact 保留 14 天，包含 APK、SHA256 校验值、构建提交号、签名检查和回归日志。APK 包名为 `org.gankkiii.ballsdemo`，支持 ARMv7 和 ARM64，包含 1、2、5、20、100 球场景。它使用每次构建临时生成的调试签名，仅供测试；同包名旧版本可能需要先卸载才能安装新包，卸载会清除应用数据。没有发布到应用商店，也没有正式发行签名。
+
+在仓库根目录运行 `python3 scripts/run_regression.py` 可执行与构建相同的导入、9 套测试及启动冒烟，日志位于 `build/test-logs/`。可用环境变量 `GODOT_BIN` 指定 Godot 可执行文件。脚本同时检查退出码、结果失败数和预期错误标记，任何阶段失败都会阻止 APK 导出；真机安装、触控和性能仍需单独验证。
