@@ -84,6 +84,29 @@ func momentum() -> Vector2:
 		total += ball.mass * ball.velocity
 	return total
 
+func _wall_time(ball: Ball, horizon: float) -> Dictionary:
+	# 预测这个球最早撞墙的时间和墙面；无碰撞返回 INF 和空列表。
+	var earliest := INF
+	var candidates: Array = []
+	for axis in 2:
+		var speed: float = ball.velocity[axis]
+		var axis_normal := Vector2.RIGHT if axis == 0 else Vector2.DOWN
+		if absf(speed) <= CollisionSolver.velocity_tolerance(axis_normal, ball.velocity.x, ball.velocity.y):
+			continue
+		var edge: float = arena_size[axis] - ball.radius if speed > 0.0 else ball.radius
+		var time: float = maxf(0.0, (edge - ball.position[axis]) / speed)
+		if time <= horizon + TIME_EPS:
+			var normal := Vector2.ZERO
+			normal[axis] = -signf(speed)
+			candidates.append({"time": time, "normal": normal})
+			earliest = minf(earliest, time)
+	var contacts: Array = []
+	# 角落可保留两面墙；保留各自时间，供全场按真正最早时刻分批。
+	for candidate in candidates:
+		if candidate.time <= earliest + TIME_EPS:
+			contacts.append(candidate)
+	return {"time": earliest, "contacts": contacts}
+
 func _pair_time(a: Ball, b: Ball, horizon: float) -> float:
 	var p := b.position - a.position
 	var v := b.velocity - a.velocity
@@ -123,19 +146,10 @@ func _next_event(horizon: float) -> Dictionary:
 	var earliest := INF
 	var candidates: Array = []
 	for i in balls.size():
-		var ball := balls[i]
-		for axis in 2:
-			var speed: float = ball.velocity[axis]
-			var axis_normal := Vector2.RIGHT if axis == 0 else Vector2.DOWN
-			if absf(speed) <= CollisionSolver.velocity_tolerance(axis_normal, ball.velocity.x, ball.velocity.y):
-				continue
-			var edge: float = arena_size[axis] - ball.radius if speed > 0.0 else ball.radius
-			var time: float = maxf(0.0, (edge - ball.position[axis]) / speed)
-			if time <= horizon + TIME_EPS:
-				var normal := Vector2.ZERO
-				normal[axis] = -signf(speed)
-				candidates.append({"time": time, "a": i, "b": -1, "normal": normal})
-				earliest = minf(earliest, time)
+		var wall := _wall_time(balls[i], horizon)
+		for contact in wall.contacts:
+			candidates.append({"time": contact.time, "a": i, "b": -1, "normal": contact.normal})
+		earliest = minf(earliest, wall.time)
 	for i in balls.size():
 		for j in range(i + 1, balls.size()):
 			var time := _pair_time(balls[i], balls[j], horizon)
