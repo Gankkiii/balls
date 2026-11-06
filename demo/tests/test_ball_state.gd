@@ -28,6 +28,44 @@ func test_defaults() -> void:
 	check(ball.mass == 1.0, "default mass")
 	check(ball.color == Color("55d6be"), "default color")
 
+func test_gameplay_defaults() -> void:
+	var ball := Ball.new()
+	check(ball.character_id == &"" and ball.character_definition == null, "character is unassigned")
+	check(ball.instance_id == &"", "instance ID is assigned externally")
+	check(ball.team_id == &"", "team is unassigned")
+	check(ball.current_health == null and ball.max_health == null, "health has no invented initial value")
+	check(ball.temporary_states.is_empty(), "no default temporary states")
+	check(ball.skills.is_empty(), "no default skill associations")
+	check(ball.skin_id == &"" and ball.appearance_definition == null, "appearance is unassigned")
+	var temporary := BallTemporaryState.new()
+	check(temporary.state_id == &"" and temporary.state_definition == null, "temporary-state definition is unassigned")
+	check(temporary.runtime.is_empty(), "temporary-state runtime has no invented schema or values")
+	var skill := BallSkillState.new()
+	check(skill.skill_id == &"" and skill.skill_definition == null, "skill definition is unassigned")
+	check(skill.runtime.is_empty(), "skill runtime has no invented schema or values")
+
+func test_gameplay_storage() -> void:
+	# These numbers/IDs are test fixtures, not gameplay defaults or decisions.
+	var ball := Ball.new()
+	ball.character_id = &"fixture_character"
+	ball.character_definition = Resource.new()
+	ball.instance_id = &"fixture_instance"
+	ball.team_id = &"fixture_team"
+	ball.skin_id = &"fixture_skin"
+	ball.appearance_definition = Resource.new()
+	ball.current_health = 0
+	ball.max_health = 12.5
+	check(ball.current_health != null and ball.current_health == 0, "zero health is distinct from unconfigured health")
+	check(ball.max_health == 12.5, "external fractional health is stored exactly")
+	ball.current_health = 20
+	check(ball.current_health == 20 and ball.max_health == 12.5, "state does not clamp or invent health rules")
+	check(ball.character_id == &"fixture_character" and ball.character_definition != null, "character association can be supplied")
+	check(ball.instance_id == &"fixture_instance" and ball.team_id == &"fixture_team", "identity and team can be supplied")
+	check(ball.skin_id == &"fixture_skin" and ball.appearance_definition != null, "appearance association can be supplied")
+	ball.current_health = null
+	ball.max_health = null
+	check(ball.current_health == null and ball.max_health == null, "external owner can clear health back to unconfigured")
+
 func test_instance_isolation() -> void:
 	var first := Ball.new()
 	var second := Ball.new()
@@ -36,18 +74,163 @@ func test_instance_isolation() -> void:
 	first.radius = 10
 	first.mass = 2
 	first.color = Color.RED
+	first.character_id = &"fixture_character"
+	first.character_definition = Resource.new()
+	first.instance_id = &"fixture_instance"
+	first.team_id = &"fixture_team"
+	first.current_health = 7
+	first.max_health = 11
+	first.skin_id = &"fixture_skin"
+	first.appearance_definition = Resource.new()
 	check(second.position == Vector2.ZERO, "positions are independent")
 	check(second.velocity == Vector2.ZERO, "velocities are independent")
 	check(second.radius == 24.0, "radii are independent")
 	check(second.mass == 1.0, "masses are independent")
 	check(second.color == Color("55d6be"), "colors are independent")
+	check(second.character_id == &"" and second.character_definition == null, "character associations are independent")
+	check(second.instance_id == &"" and second.team_id == &"", "identity and team are independent")
+	check(second.current_health == null and second.max_health == null, "health values are independent")
+	check(second.skin_id == &"" and second.appearance_definition == null, "appearance associations are independent")
+
+func test_temporary_state_isolation() -> void:
+	var first := Ball.new()
+	var second := Ball.new()
+	check(not is_same(first.temporary_states, second.temporary_states), "balls own separate temporary-state arrays")
+	var definition := Resource.new()
+	var left := BallTemporaryState.new()
+	var right := BallTemporaryState.new()
+	check(not is_same(left.runtime, right.runtime), "temporary-state records own separate runtime dictionaries")
+	for state in [left, right]:
+		state.state_id = &"fixture_state"
+		state.state_definition = definition
+		state.runtime[&"nested"] = {&"events": []}
+	first.temporary_states.append(left)
+	check(second.temporary_states.is_empty(), "appending a temporary state does not affect another ball")
+	second.temporary_states.append(right)
+	left.runtime[&"nested"][&"events"].append(&"fixture_event")
+	left.runtime[&"fixture_value"] = 3
+	check(right.runtime[&"nested"][&"events"].is_empty(), "nested temporary-state runtime does not leak across balls")
+	check(not right.runtime.has(&"fixture_value"), "temporary-state runtime keys do not leak")
+	check(is_same(left.state_definition, right.state_definition), "temporary-state definition may be shared read-only")
+	first.temporary_states.clear()
+	check(second.temporary_states.size() == 1, "clearing one temporary-state array leaves another intact")
+
+func test_skill_state_isolation() -> void:
+	var first := Ball.new()
+	var second := Ball.new()
+	check(not is_same(first.skills, second.skills), "balls own separate skill arrays")
+	var definition := Resource.new()
+	var left := BallSkillState.new()
+	var repeated := BallSkillState.new()
+	var right := BallSkillState.new()
+	check(not is_same(left.runtime, repeated.runtime) and not is_same(left.runtime, right.runtime), "skill occurrences own separate runtime dictionaries")
+	for skill in [left, repeated, right]:
+		skill.skill_id = &"fixture_skill"
+		skill.skill_definition = definition
+		skill.runtime[&"nested"] = {&"events": []}
+	first.skills.append(left)
+	first.skills.append(repeated)
+	check(second.skills.is_empty(), "appending skills does not affect another ball")
+	second.skills.append(right)
+	left.runtime[&"nested"][&"events"].append(&"fixture_event")
+	left.runtime[&"fixture_value"] = 5
+	check(repeated.runtime[&"nested"][&"events"].is_empty(), "repeated skill on the same ball has separate nested runtime")
+	check(right.runtime[&"nested"][&"events"].is_empty(), "nested skill runtime does not leak across balls")
+	check(not repeated.runtime.has(&"fixture_value") and not right.runtime.has(&"fixture_value"), "skill runtime keys do not leak")
+	check(is_same(left.skill_definition, repeated.skill_definition) and is_same(left.skill_definition, right.skill_definition), "skill definitions may be shared read-only")
+	first.skills.clear()
+	check(second.skills.size() == 1, "clearing one skill array leaves another intact")
+
+func test_shared_definitions() -> void:
+	var first := Ball.new()
+	var second := Ball.new()
+	var character := Resource.new()
+	var appearance := Resource.new()
+	first.character_definition = character
+	second.character_definition = character
+	first.appearance_definition = appearance
+	second.appearance_definition = appearance
+	check(is_same(first.character_definition, second.character_definition), "balls may share read-only character definitions")
+	check(is_same(first.appearance_definition, second.appearance_definition), "balls may share read-only appearance definitions")
+	first.character_definition = null
+	first.appearance_definition = null
+	check(is_same(second.character_definition, character) and is_same(second.appearance_definition, appearance), "reassigning one ball's definition references does not affect another")
 
 func test_state_only() -> void:
-	var ball := Ball.new()
-	check(ball is RefCounted, "state uses reference-counted lifetime")
-	check(not is_instance_of(ball, Node), "state does not require a scene node")
-	check(ball.get_script().get_script_method_list().is_empty(), "state defines no behavior")
-	check(ball.get_script().get_script_signal_list().is_empty(), "collision notifications belong to Arena")
+	for state in [Ball.new(), BallTemporaryState.new(), BallSkillState.new()]:
+		check(state is RefCounted, "state uses reference-counted lifetime")
+		check(not is_instance_of(state, Node), "state does not require a scene node")
+		check(state.get_script().get_script_method_list().is_empty(), "state defines no behavior")
+		check(state.get_script().get_script_signal_list().is_empty(), "collision notifications belong to Arena")
+
+func gameplay_snapshot(ball: Ball) -> Dictionary:
+	var states: Array = []
+	for state in ball.temporary_states:
+		states.append([state, state.state_id, state.state_definition, state.runtime.duplicate(true)])
+	var skills: Array = []
+	for skill in ball.skills:
+		skills.append([skill, skill.skill_id, skill.skill_definition, skill.runtime.duplicate(true)])
+	return {
+		&"character_id": ball.character_id, &"character_definition": ball.character_definition,
+		&"instance_id": ball.instance_id, &"team_id": ball.team_id,
+		&"current_health": ball.current_health, &"max_health": ball.max_health,
+		&"states": states, &"skills": skills,
+		&"skin_id": ball.skin_id, &"appearance_definition": ball.appearance_definition,
+	}
+
+func test_external_system_boundaries() -> void:
+	var main = load("res://scenes/main.tscn").instantiate()
+	root.add_child(main)
+	main.set_process(false)
+	var first: Ball = main.arena.balls[0]
+	var second: Ball = main.arena.balls[1]
+	check(first.current_health == null and first.skills.is_empty(), "demo does not invent gameplay configuration")
+	first.character_id = &"fixture_character"
+	first.character_definition = Resource.new()
+	first.instance_id = &"fixture_instance"
+	first.team_id = &"fixture_team"
+	first.current_health = 7
+	first.max_health = 11
+	first.skin_id = &"fixture_skin"
+	first.appearance_definition = Resource.new()
+	var temporary := BallTemporaryState.new()
+	temporary.state_id = &"fixture_state"
+	temporary.state_definition = Resource.new()
+	temporary.runtime[&"nested"] = {&"values": [3, null]}
+	first.temporary_states.append(temporary)
+	var skill := BallSkillState.new()
+	skill.skill_id = &"fixture_skill"
+	skill.skill_definition = Resource.new()
+	skill.runtime[&"nested"] = {&"values": [5, null]}
+	first.skills.append(skill)
+	var before := gameplay_snapshot(first)
+	main.arena.initialize(42)
+	check(gameplay_snapshot(first) == before, "Arena initialization leaves gameplay data untouched")
+	# Force both a wall and a pair collision without adding gameplay listeners.
+	first.position = Vector2(first.radius + 1, 100)
+	first.velocity = Vector2(-100, 0)
+	second.position = Vector2(500, 500)
+	second.velocity = Vector2.ZERO
+	main.arena.step(0.02)
+	check(first.velocity.x > 0, "boundary fixture exercises a wall collision")
+	check(gameplay_snapshot(first) == before, "wall collisions do not apply damage or alter gameplay state")
+	first.position = Vector2(100, 100)
+	first.velocity = Vector2(100, 0)
+	second.position = Vector2(150, 100)
+	second.velocity = Vector2(-100, 0)
+	main.arena.step(0.02)
+	check(first.velocity.x < 0, "boundary fixture exercises a pair collision")
+	check(gameplay_snapshot(first) == before, "pair collisions do not trigger skill or temporary-state rules")
+	main.ball_renderer._process(1000)
+	# Let the queued drawing callback run while simulation is disabled.
+	await process_frame
+	check(gameplay_snapshot(first) == before, "renderer callbacks leave all gameplay data untouched")
+	main.arena.remove_ball(first)
+	main.arena.register_ball(first)
+	check(is_same(main.arena.balls.back(), first), "re-registration preserves the same gameplay state object")
+	check(gameplay_snapshot(first) == before, "removal and re-registration preserve gameplay data")
+	main.free()
+	check(gameplay_snapshot(first) == before, "gameplay data can outlive the scene")
 
 func test_registration() -> void:
 	var arena := Arena.new()
@@ -132,7 +315,13 @@ func test_renderer_binding() -> void:
 	check(is_instance_valid(first), "state can outlive the main scene")
 
 func run() -> void:
-	for test in [test_defaults, test_instance_isolation, test_state_only, test_registration, test_external_motion, test_collision_notifications, test_renderer_binding]:
+	for test in [test_defaults, test_gameplay_defaults, test_gameplay_storage, test_instance_isolation, test_temporary_state_isolation, test_skill_state_isolation, test_shared_definitions, test_state_only, test_registration, test_external_motion, test_collision_notifications, test_renderer_binding]:
 		run_case(test)
+	# The renderer boundary test awaits a frame, so record it after completion.
+	cases += 1
+	var before := failures
+	await test_external_system_boundaries()
+	if failures != before:
+		failed_cases += 1
 	print("RESULT cases=%d passed=%d failed=%d checks=%d failures=%d" % [cases, cases - failed_cases, failed_cases, checks, failures])
 	quit(1 if failures else 0)
