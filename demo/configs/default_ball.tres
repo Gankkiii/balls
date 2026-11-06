@@ -5,5 +5,10 @@
 [resource]
 resource_name = "Default Ball"
 script = ExtResource("1")
+max_health = 100.0
+attack = 10.0
+defense = 0.0
+radius = 24.0
+mass = 1.0
 min_initial_speed = 140.0
 max_initial_speed = 230.0

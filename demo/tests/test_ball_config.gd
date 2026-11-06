@@ -33,6 +33,39 @@ func test_resource() -> void:
 		check(not properties.any(func(property: Dictionary) -> bool: return property["name"] == name), "Arena no longer owns " + name)
 	arena.free()
 
+func test_reserved_attributes() -> void:
+	var defaults := {"max_health": 100.0, "attack": 10.0, "defense": 0.0, "radius": 24.0, "mass": 1.0}
+	var custom := BallConfig.new()
+	for field in defaults:
+		check(DefaultConfig.get(field) == defaults[field], "default resource defines " + field)
+		check(custom.get(field) == defaults[field], "new config agrees with resource for " + field)
+		custom.set(field, defaults[field] + 7.5)
+	# 序列化往返确认新增导出字段可被配置文件保存。
+	var path := "user://test_ball_attributes.tres"
+	check(ResourceSaver.save(custom, path) == OK, "custom attributes can be saved")
+	var restored := ResourceLoader.load(path, "", ResourceLoader.CACHE_MODE_IGNORE) as BallConfig
+	check(restored != null, "custom attributes can be loaded")
+	if restored != null:
+		for field in defaults:
+			check(restored.get(field) == defaults[field] + 7.5, "serialized custom value survives for " + field)
+			check(DefaultConfig.get(field) == defaults[field], "custom config leaves shared default unchanged for " + field)
+	check(DirAccess.remove_absolute(path) == OK, "temporary config is removed")
+	var arena := make_arena()
+	var ball := arena.balls[0]
+	ball.character_definition = custom
+	ball.radius = 18.0
+	ball.mass = 2.0
+	ball.current_health = 37.0
+	ball.max_health = 80.0
+	arena.initialize_demo(42)
+	check(arena.last_error.is_empty(), "reserved attributes do not prevent initialization")
+	check(ball.radius == 18.0 and ball.mass == 2.0, "Arena preserves explicitly assigned runtime radius and mass")
+	check(ball.current_health == 37.0 and ball.max_health == 80.0, "Arena does not initialize combat health")
+	check(arena.balls[1].current_health == null and arena.balls[1].max_health == null, "unconfigured health remains unset")
+	for field in defaults:
+		check(custom.get(field) == defaults[field] + 7.5, "initialization leaves reserved config unchanged for " + field)
+	arena.free()
+
 func test_default_seed_compatibility() -> void:
 	var arena := make_arena()
 	# 未配置的球沿用默认配置，不改写未分配的关联。
@@ -173,6 +206,7 @@ func test_main_configuration() -> void:
 
 func run() -> void:
 	test_resource()
+	test_reserved_attributes()
 	test_default_seed_compatibility()
 	test_invalid_configuration()
 	test_representation_and_atomic_generation()
