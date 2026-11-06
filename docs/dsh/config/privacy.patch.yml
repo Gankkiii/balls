@@ -1,7 +1,0 @@
-- id: session-log-deepseek
-  config:
-    enabled: false
-    maxBytes: 8388608
-- id: session-telemetry-otel
-  config:
-    mode: DISABLED
